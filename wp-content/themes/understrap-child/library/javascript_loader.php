@@ -10,9 +10,9 @@ function renegade_scripts() {
 	
 	global $wp_query;
 	
-	$scriptdir = get_template_directory_uri();
+	$scriptdir = get_stylesheet_directory();
 	$scriptdir .= '/library/js/';
-	$functiondir = get_template_directory_uri();
+	$functiondir = get_stylesheet_directory();
 	$functiondir .='/library/functions/';
 	
 	// Load jQuery

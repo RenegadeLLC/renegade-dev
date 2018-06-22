@@ -30,9 +30,9 @@ function theme_enqueue_styles() {
 
 // define('TEMPLATEPATH', get_template_directory_uri());
 
-define('LIBRARY', TEMPLATEPATH . '/library');
-define('IMAGES', TEMPLATEPATH . '/library/images');
-define('FUNCTIONS', TEMPLATEPATH . '/library/functions');
+// define('LIBRARY', TEMPLATEPATH . '/library');
+// define('IMAGES', TEMPLATEPATH . '/library/images');
+define('FUNCTIONS', get_stylesheet_directory() . '/library/functions');
 
 /*****ADD FILES THAT LOAD JAVASCRIPT AND CSS *****/
 require_once( get_stylesheet_directory() . '/library/javascript_loader.php' );
