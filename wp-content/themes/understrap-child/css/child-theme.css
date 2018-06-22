@@ -22339,3 +22339,14 @@ ul.social-icons li:last-of-type {
     width: 100% !important; }
   .post-feed-grid .w-50 {
     width: 100% !important; } }
+
+#newsletter-posts .card-columns {
+  column-count: 2; }
+  #newsletter-posts .card-columns .card {
+    border-radius: 0;
+    border: none; }
+    #newsletter-posts .card-columns .card .card-body .post-label-ct {
+      margin-right: -1.25rem;
+      margin-top: -1.25rem;
+      position: unset;
+      float: right; }

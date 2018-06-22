@@ -8,4 +8,5 @@
 @import "assets/underscores"; // <------- Underscores media styles
 
 // Any additional imported files //
-@import "theme/child_theme";  // <--------- Add your styles into this file
+@import "theme/child_theme";  // <--------- Still using original theme with Anne's additons
+@import "theme/child_theme_vince";  // <--------- Vince's theme updates
