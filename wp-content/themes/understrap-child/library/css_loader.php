@@ -5,7 +5,7 @@ add_action('wp_enqueue_scripts', 'renegade_stylesheets');
 
 function renegade_stylesheets() {
 	
-	$scriptdirCSS = get_template_directory_uri() . '/library/css/';
+	$scriptdirCSS = get_stylesheet_directory() . '/library/css/';
 	
 	wp_register_style('renegade', $scriptdirCSS . 'renegade.css');
 	//wp_enqueue_style('renegade');

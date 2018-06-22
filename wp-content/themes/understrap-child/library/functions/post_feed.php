@@ -9,7 +9,7 @@ function build_feed(){
     
     ob_start();
     
-    $theme = get_template_directory();
+    $theme = get_stylesheet_directory();
     $loop_templates = $theme . '/loop-templates/';
     
    
