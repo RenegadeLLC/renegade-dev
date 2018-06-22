@@ -22350,3 +22350,10 @@ ul.social-icons li:last-of-type {
       margin-top: -1.25rem;
       position: unset;
       float: right; }
+
+@media (max-width: 576px) {
+  #newsletter-posts .card-columns {
+    -webkit-column-count: 1;
+    column-count: 1;
+    -webkit-column-gap: 1.25rem;
+    column-gap: 1.25rem; } }
