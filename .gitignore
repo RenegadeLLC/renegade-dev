@@ -106,4 +106,5 @@ wp-content/mysql.sql
 *.wmv
 *.avi
 
+.htaccess
 node_modules/
