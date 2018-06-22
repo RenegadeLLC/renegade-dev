@@ -10,8 +10,8 @@ function renegade_scripts() {
 	
 	global $wp_query;
 	
-	$scriptdir = get_stylesheet_directory() . '/library/js/';
-	$functiondir = get_stylesheet_directory() . '/library/functions/';
+	$scriptdir = get_stylesheet_directory_uri() . '/library/js/';
+	$functiondir = get_stylesheet_directory_uri() . '/library/functions/';
 	
 	// Load jQuery
 	if ( !is_admin() ) {

@@ -68,7 +68,7 @@ function change_date( $post_id ) {
 // enqueue_scripts: make sure to include ajaxurl, so we know where to send the post request
 function dt_add_main_js(){
     
-    wp_register_script( 'main-js', get_stylesheet_directory() . '/library/js/load-more-script.js', array( 'jquery' ), '1.0', false );
+    wp_register_script( 'main-js', get_stylesheet_directory_uri() . '/library/js/load-more-script.js', array( 'jquery' ), '1.0', false );
     wp_enqueue_script( 'main-js' );
     wp_localize_script( 'main-js', 'headJS', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'templateurl' => get_stylesheet_directory(), 'posts_per_page' => get_option('posts_per_page') ) );
     
@@ -144,7 +144,7 @@ add_action( 'init', 'register_my_menus' );
 /***** ADD ACF STYLING ********/
 
 function load_custom_wp_admin_style() {
-    wp_register_style( 'custom_wp_admin_css', get_stylesheet_directory() . '/admin-style.css', false, '1.0.0' );
+    wp_register_style( 'custom_wp_admin_css', get_stylesheet_directory_uri() . '/admin-style.css', false, '1.0.0' );
     wp_enqueue_style( 'custom_wp_admin_css' );
 }
 add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
