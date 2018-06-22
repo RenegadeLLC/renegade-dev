@@ -17,7 +17,7 @@ function theme_enqueue_styles() {
 	$the_theme = wp_get_theme();
     wp_enqueue_style( 'child-understrap-styles', get_stylesheet_directory_uri() . '/css/child-theme.min.css', array(), $the_theme->get( 'Version' ) );
     wp_enqueue_script( 'jquery');
-	wp_enqueue_script( 'popper-scripts', get_template_directory_uri() . '/js/popper.min.js', array(), false);
+	wp_enqueue_script( 'popper-scripts', get_stylesheet_directory_uri() . '/js/popper.min.js', array(), false);
     wp_enqueue_script( 'child-understrap-scripts', get_stylesheet_directory_uri() . '/js/child-theme.min.js', array(), $the_theme->get( 'Version' ), true );
     if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
         wp_enqueue_script( 'comment-reply' );
@@ -28,15 +28,15 @@ function theme_enqueue_styles() {
 
 /********  DEFINE FILE PATHS ********/
 
-// define('TEMPLATEPATH', get_template_directory_uri());
+define('TEMPLATEPATH', get_stylesheet_directory());
 
-// define('LIBRARY', TEMPLATEPATH . '/library');
-// define('IMAGES', TEMPLATEPATH . '/library/images');
+define('LIBRARY', TEMPLATEPATH . '/library');
+define('IMAGES', TEMPLATEPATH . '/library/images');
 define('FUNCTIONS', get_stylesheet_directory() . '/library/functions');
 
 /*****ADD FILES THAT LOAD JAVASCRIPT AND CSS *****/
 require_once( get_stylesheet_directory() . '/library/javascript_loader.php' );
-require_once( get_stylesheet_directory() . '/library/css_loader.php' );
+// require_once( get_stylesheet_directory() . '/library/css_loader.php' );
 require_once( get_stylesheet_directory() . '/library/functions_loader.php' );
 
 // require_once( get_stylesheet_directory() . '/includes/theme-styles.php' );
@@ -68,9 +68,9 @@ function change_date( $post_id ) {
 // enqueue_scripts: make sure to include ajaxurl, so we know where to send the post request
 function dt_add_main_js(){
     
-    wp_register_script( 'main-js', get_template_directory_uri() . '/library/js/load-more-script.js', array( 'jquery' ), '1.0', false );
+    wp_register_script( 'main-js', get_stylesheet_directory() . '/library/js/load-more-script.js', array( 'jquery' ), '1.0', false );
     wp_enqueue_script( 'main-js' );
-    wp_localize_script( 'main-js', 'headJS', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'templateurl' => get_template_directory_uri(), 'posts_per_page' => get_option('posts_per_page') ) );
+    wp_localize_script( 'main-js', 'headJS', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'templateurl' => get_stylesheet_directory(), 'posts_per_page' => get_option('posts_per_page') ) );
     
 }
 add_action( 'wp_enqueue_scripts', 'dt_add_main_js', 90);
@@ -144,7 +144,7 @@ add_action( 'init', 'register_my_menus' );
 /***** ADD ACF STYLING ********/
 
 function load_custom_wp_admin_style() {
-    wp_register_style( 'custom_wp_admin_css', get_template_directory_uri() . '/admin-style.css', false, '1.0.0' );
+    wp_register_style( 'custom_wp_admin_css', get_stylesheet_directory() . '/admin-style.css', false, '1.0.0' );
     wp_enqueue_style( 'custom_wp_admin_css' );
 }
 add_action( 'admin_enqueue_scripts', 'load_custom_wp_admin_style' );
