@@ -1,0 +1,96 @@
+// helpful mixins for sass
+
+// vendor prefixes
+// @include css3-prefix(transform, scale3d(2.5, 2, 1.5));
+@mixin css3-prefix($prop, $value) {
+    -webkit-#{$prop}: #{$value};
+    -moz-#{$prop}: #{$value};
+    -ms-#{$prop}: #{$value};
+    -o-#{$prop}: #{$value};
+    #{$prop}: #{$value};
+}
+
+// vertical centering
+// @include vertical-center();
+@mixin vertical-center {
+    position: relative;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+ }
+
+// font face rule
+// @include font-face("My Font", my-font);
+ @mixin font-face($name, $file) {
+    @font-face {
+    font-family: "#{$name}";
+    src: url("../fonts/#{$file}.eot");
+    src: url("../fonts/#{$file}.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/#{$file}.woff") format("woff"),
+    url("../fonts/#{$file}.ttf") format("truetype"),
+    url("../fonts/#{$file}.svg?#webfont") format("svg");
+  }
+ }
+
+ // keyframe animations
+//  @include keyframes(background) {
+//     0% {
+//       background: white;
+//     }
+//     50% {
+//       background: lightblue;
+//     }
+//     100% {
+//       background: royalblue;
+//     } 
+//  }
+ @mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+      @content;
+    }
+    @-moz-keyframes #{$name} {
+      @content;
+    }
+    @keyframes #{$name} {
+      @content;
+    }
+}
+
+// absolute positioning
+// @include abs-position(100px, 100px, auto, auto);
+@mixin abs-position ($top, $right, $bottom, $left) {
+    position: absolute; 
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+}
+
+// text shortening
+// @include text-shorten();
+@mixin text-shorten {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+ }
+
+// mobile-first 
+// @include breakpoint(large) {}
+@mixin breakpoint($point) {
+    @if $point == large {
+       @media only screen and (min-width: 1366px) {
+          @content;
+       }
+    } 
+    @else if $point == desktop {
+       @media only screen and (min-width: 1024px) {
+          @content;
+       }
+    } 
+    @else if $point == tablet {
+       @media only screen and (min-width: 600px) {
+          @content;
+       }
+    }
+ }
