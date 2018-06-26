@@ -1,0 +1,95 @@
+
+//** PODCAST GRID STYLES
+
+.podcast-inset {
+	width: 100%;
+	border: 1px solid #dedede;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	margin: 24px 0;
+	background: #f2f2f2;
+}
+
+.podcast-details {
+	padding: 16px;
+}
+
+.podcast-details,
+.podcast-details a {
+	color: #000;
+}
+
+.red {
+	color: #da5127;
+}
+
+.semibold {
+	font-weight: 700;
+}
+
+@media all and (max-width: 768px) {
+	.navbar-nav .nav-link {
+		border-top: 3px solid #fff;
+		border-bottom: 1px solid #dedede;
+	}
+}
+
+.w-25 {
+	width: 50% !important;
+}
+
+.post-feed-grid .w-50 {
+	width: 44% !important;
+}
+
+@media (min-width: 640px) {
+	.fleft {
+		float: none;
+	}
+	.bio-image-ct {
+		float: none;
+		margin: 0 auto !important;
+	}
+	.w-25 {
+		width: 100% !important;
+	}
+	.w-50 {
+		width: 100% !important;
+	}
+	.post-feed-grid .w-50 {
+		width: 100% !important;
+	}
+}
+
+
+//** Resources - Newsletter
+#newsletter-posts {
+    .card-columns {
+      column-count: 2;
+      .card {
+        border-radius: 0;
+        border: none; // margin: .65rem;
+        .card-body {
+          .post-label-ct {
+            margin-right: -1.25rem;
+            margin-top: -1.25rem;
+            position: unset;
+            float: right;
+          }
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 576px) {
+    #newsletter-posts {
+      .card-columns {
+        -webkit-column-count: 1;
+        column-count: 1;
+        -webkit-column-gap: 1.25rem;
+        column-gap: 1.25rem;
+      }
+    }
+  }
+  
