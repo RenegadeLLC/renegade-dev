@@ -20,16 +20,15 @@ $container   = get_theme_mod( 'understrap_container_type' );
 	<?php get_template_part( 'global-templates/hero' ); ?>
 <?php endif; ?>
 
-<div class="wrapper" id="index-wrapper">
+<div class="wrapper main-content" id="full-width-page-wrapper">
 
-	<div class="<?php echo esc_attr( $container ); ?>" id="content" tabindex="-1">
+<div class="<?php echo esc_attr( $container ); ?>" id="content">
 
-		<div class="row">
+	<div class="row">
 
-			<!-- Do the left sidebar check and opens the primary div -->
-			<?php get_template_part( 'global-templates/left-sidebar-check' ); ?>
+		<div class="col-md-12 content-area" id="primary">
 
-			<main class="site-main" id="main">
+			<main class="site-main" id="main" role="main">
 
 				<?php if ( have_posts() ) : ?>
 
@@ -38,7 +37,6 @@ $container   = get_theme_mod( 'understrap_container_type' );
                     <div class="card-columns">
 					<?php while ( have_posts() ) : the_post(); ?>
 							<div class="card">
-								<div class="card-body">
 
 						<?php
 
@@ -47,10 +45,9 @@ $container   = get_theme_mod( 'understrap_container_type' );
 						 * If you want to override this in a child theme, then include a file
 						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 						 */
-						get_template_part( 'loop-templates/content', get_post_format() );
+						get_template_part( 'loop-templates/content', 'post' );
 						?>
 
-                        </div>
                         </div>
 
 					<?php endwhile; ?>
@@ -64,14 +61,7 @@ $container   = get_theme_mod( 'understrap_container_type' );
 
 			</main><!-- #main -->
 
-			<!-- The pagination component -->
-			<?php understrap_pagination(); ?>
-
 		</div><!-- #primary -->
-
-		<!-- Do the right sidebar check -->
-		<?php get_template_part( 'global-templates/right-sidebar-check' ); ?>
-		
 
 	</div><!-- .row -->
 
