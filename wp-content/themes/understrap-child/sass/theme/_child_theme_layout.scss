@@ -128,7 +128,7 @@ a.nav-link {
 	-webkit-box-pack: justify;
 	-ms-flex-pack: justify;
 	justify-content: space-between;
-	padding: 0.5rem 0rem .5rem 1rem;
+	// padding: 0.5rem 0rem .5rem 1rem;
 }
 
 .navbar>.container,
@@ -153,11 +153,23 @@ a.nav-link {
 	font-size: 1.25rem;
 	line-height: inherit;
 	white-space: nowrap;
+	max-width: 18rem;
 }
 
 .navbar-brand:hover,
 .navbar-brand:focus {
 	text-decoration: none;
+}
+
+@media (max-width: 990px) {
+	.navbar-brand {
+		max-width: 140px;
+	}
+}
+@media (max-width: 768px) {
+	.navbar-brand {
+		width: 140px;
+	}
 }
 
 .navbar-nav {
