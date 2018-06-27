@@ -1,7 +1,32 @@
 //** WRAPPER
 .wrapper {
-	padding: 0px 0;
+	padding-top: 2.5rem;
+	padding-bottom: 0;
 	background: #000;
+	.container {
+		padding-top: 1.25rem; 
+		background-color: white;
+	}
+}
+#main {
+	#content.container {
+		padding: 0;
+	}
+}
+#wrapper-footer {
+	padding-top: 0;
+	.container {
+		padding: 0;
+		background-color: #414042;
+	}
+}
+@media only screen and (max-width: 576px) {
+	.wrapper, #main {
+		padding-top: 0 !important;
+	}
+	.wrapper-navbar {
+		border-bottom: 1px solid #eee;
+	}
 }
 
 //** TABLES
@@ -271,6 +296,7 @@ ul.dropdown-menu.show {
 
 //** CARDS
 .card {
+	border: 1px solid #eee !important;
 	border-radius: 0;
 	border: none; // margin: .65rem;
 	.card-body {
@@ -302,3 +328,4 @@ ul.dropdown-menu.show {
 		column-gap: 1.25rem;
 	}
 }
+
