@@ -267,3 +267,38 @@ ul.dropdown-menu.show {
         box-shadow: none
     }
 }
+
+
+//** CARDS
+.card {
+	border-radius: 0;
+	border: none; // margin: .65rem;
+	.card-body {
+		.post-label-ct {
+			margin-right: -1.25rem;
+			margin-top: -1.25rem;
+			position: unset;
+			float: right;
+		}
+	}
+}
+
+.card-img-top {
+    width: 100%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.card-columns {
+	-webkit-column-count: 2;
+	column-count: 2;
+}
+
+@media only screen and (max-width: 768px) {
+	.card-columns {
+		-webkit-column-count: 1;
+		column-count: 1;
+		-webkit-column-gap: 1.25rem;
+		column-gap: 1.25rem;
+	}
+}
