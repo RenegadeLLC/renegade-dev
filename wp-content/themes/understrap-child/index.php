@@ -61,6 +61,9 @@ $container   = get_theme_mod( 'understrap_container_type' );
 
 			</main><!-- #main -->
 
+			<!-- The pagination component -->
+			<?php understrap_pagination(); ?>
+
 		</div><!-- #primary -->
 
 	</div><!-- .row -->

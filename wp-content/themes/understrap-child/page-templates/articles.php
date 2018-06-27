@@ -12,7 +12,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 $paged = get_query_var('paged');
 
-$rn_args = array( 'post_type' => 'articles', 'posts_per_page' => 4, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged  );
+$rn_args = array( 'post_type' => 'articles', 'posts_per_page' => 8, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged  );
 
 $wp_query = new WP_Query( $rn_args );
 

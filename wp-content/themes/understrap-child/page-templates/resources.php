@@ -9,7 +9,7 @@
 get_header();
 $container = get_theme_mod('understrap_container_type');
 $paged = get_query_var('paged');
-$rpd_args = array('post_type' => array('newsletters', 'articles', 'podcasts'), 'posts_per_page' => 25, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged);
+$rpd_args = array('post_type' => array('newsletters', 'articles', 'podcasts'), 'posts_per_page' => 8, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged);
 $wp_query = new WP_Query($rpd_args);
 ?>
 
@@ -36,6 +36,10 @@ $wp_query = new WP_Query($rpd_args);
 				
 			</div>
 		</main>
+
+		<!-- The pagination component -->
+		<?php understrap_pagination(); ?>
+		
 	</div>
 </div><!-- Wrapper end -->
 
