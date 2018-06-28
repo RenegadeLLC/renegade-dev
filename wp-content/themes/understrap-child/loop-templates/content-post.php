@@ -25,8 +25,8 @@
 	$post_html .= '<div class="card-body">';
 	$post_html .= '<h3 class="card-title">' . $title . '</h3>';
 	$post_html .= '<p class="card-text">';
-	$post_html .= '<span class="date">' . $date . '</span><br>';
-	$post_html .= '<span class="excerpt">' . $excerpt . '</span>';
+	$post_html .= '<span class="card-date">' . $date . '</span><br>';
+	$post_html .= '<span class="card-excerpt">' . $excerpt . '</span>';
 	$post_html .= '</p></a>';	
 	$post_html .= '<a href="' . $post_edit_link  . '">' . 'Edit'  . '</a>';
 	$post_html .= '</div>';

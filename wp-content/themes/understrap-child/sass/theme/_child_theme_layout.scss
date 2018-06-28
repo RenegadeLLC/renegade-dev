@@ -349,7 +349,7 @@ ul.dropdown-menu.show {
 	column-count: 2;
 }
 
-@include breakpoint(sm) {
+@media (max-width:767px) {
 	.card-columns {
 		-webkit-column-count: 1;
 		column-count: 1;

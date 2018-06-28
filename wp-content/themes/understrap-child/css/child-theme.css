@@ -9866,12 +9866,16 @@ ul.dropdown-menu.show {
   -webkit-column-count: 2;
   column-count: 2; }
 
-@media (min-width: 768px) {
+@media (max-width: 767px) {
   .card-columns {
     -webkit-column-count: 1;
     column-count: 1;
     -webkit-column-gap: 1.25rem;
     column-gap: 1.25rem; } }
+
+@media (max-width: 767px) {
+  #testimonials .col-sm-12 {
+    padding: 1.25rem 0; } }
 
 /******************************  GENERAL LAYOUT STYLES  ******************************/
 .fleft {

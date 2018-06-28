@@ -70,7 +70,7 @@ else:
     }
 
     if ($ra_blurb) {
-        $article_html .= '<div class="excerpt">' . $ra_blurb . '</div><div style="clear:both"></div>';
+        $article_html .= '<div class="card-excerpt">' . $ra_blurb . '</div><div style="clear:both"></div>';
     }
 
     $article_html .= '</a>';

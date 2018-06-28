@@ -47,7 +47,7 @@
 		
 		$newsletter_info .= '<h3>' . $rn_title . '</h3>';
 		//$newsletter_info .= '<div class="date">' . $rn_date . '</div>';
-		$newsletter_info .= '<div class="excerpt">' . $rn_introduction . '</div>';
+		$newsletter_info .= '<div class="card-excerpt">' . $rn_introduction . '</div>';
 		
 		$newsletter_html .= '<div class="post-label-ct">NEWSLETTER</div>';
 		$newsletter_html .= '<a href="' . $rn_link . '">';

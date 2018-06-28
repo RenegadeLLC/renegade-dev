@@ -5,6 +5,14 @@
 // fullwidthpage
 // left-sidebarpage
 // right-sidebarpage
+// landing page
+@media (max-width:767px) {
+	#testimonials {
+		.col-sm-12 {
+			padding: 1.25rem 0;
+		}
+	}
+}
 
 //** POST
 // blog
