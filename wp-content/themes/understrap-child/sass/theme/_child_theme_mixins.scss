@@ -143,22 +143,33 @@ $orientation) {
     }
 }
 
-// mobile-first 
-// @include breakpoint(large) {}
-@mixin breakpoint($point) {
-    @if $point==large {
-        @media only screen and (min-width: 1366px) {
+// breakpoints based on bootstrap
+// @include breakpoint(sm) {
+//     float: none;
+//     width: 100%;
+// }
+@mixin breakpoint($class) {
+    @if $class==xs {
+        @media (max-width: 767px) {
             @content;
         }
     }
-    @else if $point==desktop {
-        @media only screen and (min-width: 1024px) {
+    @else if $class==sm {
+        @media (min-width: 768px) {
             @content;
         }
     }
-    @else if $point==tablet {
-        @media only screen and (min-width: 600px) {
+    @else if $class==md {
+        @media (min-width: 992px) {
             @content;
         }
+    }
+    @else if $class==lg {
+        @media (min-width: 1200px) {
+            @content;
+        }
+    }
+    @else {
+        @warn "Breakpoint mixin supports: xs, sm, md, lg";
     }
 }

@@ -132,7 +132,7 @@ h2.podcast, h2.podcast a{
 	border-right:1px solid #dedede;
 }
 
-@media all and (max-width: 768px){
+@include breakpoint(sm) {
 	.grid-item-w-50{
 	width:100%;
 }
@@ -179,7 +179,7 @@ h2.podcast, h2.podcast a{
 	font-weight: 700;
 }
 
-@media all and (max-width: 768px) {
+@include breakpoint(sm) {
 	.navbar-nav .nav-link {
 		border-top: 3px solid #fff;
 		border-bottom: 1px solid #dedede;
@@ -194,7 +194,7 @@ h2.podcast, h2.podcast a{
 	width: 44% !important;
 }
 
-@media (min-width: 640px) {
+@include breakpoint(sm) {
 	.fleft {
 		float: none;
 	}

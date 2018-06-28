@@ -23,7 +23,7 @@
 	}
 }
 
-@media only screen and (max-width: 576px) {
+@include breakpoint(sm) {
 	.wrapper,
 	#main {
 		padding-top: 0 !important;
@@ -195,13 +195,13 @@ a.nav-link {
 	text-decoration: none;
 }
 
-@media (max-width: 990px) {
+@include breakpoint(md) {
 	.navbar-brand {
 		max-width: 140px;
 	}
 }
 
-@media (max-width: 768px) {
+@include breakpoint(sm) {
 	.navbar-brand {
 		width: 140px;
 	}
@@ -349,7 +349,7 @@ ul.dropdown-menu.show {
 	column-count: 2;
 }
 
-@media only screen and (max-width: 768px) {
+@include breakpoint(sm) {
 	.card-columns {
 		-webkit-column-count: 1;
 		column-count: 1;
