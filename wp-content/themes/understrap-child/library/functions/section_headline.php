@@ -9,7 +9,7 @@ if( have_rows('section_headline_items') ):
     $headline_background_image = get_sub_field('headline_background_image');
     $text_align = get_sub_field('text_align');
     
-    $headlineHTML .= '<div class="section-headline-ct" style="text-align:' . $text_align . ';';
+    $headlineHTML .= '<div class="section-headline-ct row" style="text-align:' . $text_align . ';';
      if($headline_background_image):
         $headlineHTML .= ' background-image:url(' . $headline_background_image . ');';
      endif;

@@ -4,7 +4,7 @@ function build_testimonials(){
     
     $testimonialHTML = '<br>';
     
-    $testimonialHTML .= '<div class="grid row post-grid"><div class="grid-gutter"></div>';
+    $testimonialHTML .= '<div class="row">';
     
     if( have_rows('client_testimonial_items') ):  
         while ( have_rows('client_testimonial_items') ) : the_row();
@@ -35,7 +35,7 @@ function build_testimonials(){
                         $job_title = get_sub_field('job_title');
                         $quote_text = get_sub_field('quote_text');
 
-                        $testimonialHTML .= '<div class="grid-item col-lg-6 col-md-6 col-sm-12">';
+                        $testimonialHTML .= '<div class="col-lg-6 col-md-6 col-sm-12">';
                        
                         $testimonialHTML .= '<div class="testimonial-ct">';
                         $testimonialHTML .=  '<div class="open-quote"></div>';
@@ -48,7 +48,7 @@ function build_testimonials(){
                             
                         $testimonialHTML .= $client_name  . '</div><!-- .quote-attrib -->';
                         $testimonialHTML .=  '<div class="close-quote"></div>';
-                        $testimonialHTML .= '</div><!-- . testimonial-ct --></div><!-- .grid-item -->';
+                        $testimonialHTML .= '</div><!-- . testimonial-ct --></div>';
             
                     endwhile;
                 endif;
@@ -75,7 +75,7 @@ function build_testimonials(){
                             $job_title = get_sub_field('job_title');
                             $quote_text = get_sub_field('quote_text');
                             
-                            $testimonialHTML .= '<div class="grid-item col-lg-6 col-md-6 col-sm-12"><div class="testimonial-ct">';
+                            $testimonialHTML .= '<div class="col-lg-6 col-md-6 col-sm-12"><div class="testimonial-ct">';
                             $testimonialHTML .=  '<div class="open-quote"></div>';
                             $testimonialHTML .=  '<div class="quote-text">' . $quote_text . '</div><!-- .quote-text -->';
                             $testimonialHTML .=  '<div class="quote-attrib">' . $first_name . ' ' . $last_name . ',<br>';
@@ -85,7 +85,7 @@ function build_testimonials(){
                                 endif;
                             
                             $testimonialHTML .= $client_name  . '</div><!-- .quote-attrib -->';
-                            $testimonialHTML .= '</div><!-- . testimonial-ct --></div><!-- .grid-item -->';
+                            $testimonialHTML .= '</div><!-- . testimonial-ct --></div>';
                             
                         endwhile;
                       
@@ -96,7 +96,7 @@ function build_testimonials(){
         
         endif;//end if numTestimonials is Select
         
-        $testimonialHTML .= '</div><!-- .grid .row -->';//end grid
+        $testimonialHTML .= '</div><!-- .row -->';//end grid
         
     endwhile;
 endif;//end client testimonial items group

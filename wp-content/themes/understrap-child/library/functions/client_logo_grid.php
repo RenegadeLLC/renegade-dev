@@ -3,7 +3,7 @@
 function make_logo_grid(){  
     $clientsHTML = '';
     $clientsHTML .= '<div class="wrapper" style="background:#fff;">';
-    $clientsHTML .= '<div class="client-logo-grid grid row" style="background-color:#fff;"><div class="grid-gutter"></div>';
+    $clientsHTML .= '<div class="client-logo-grid row" style="background-color:#fff;">';
     
     if( have_rows('client_logo_grid') ):
     $i=1;

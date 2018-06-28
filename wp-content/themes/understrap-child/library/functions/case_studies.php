@@ -3,7 +3,7 @@
 function build_case_studies(){  
     
     $caseHTML = '';
-    $caseHTML .= '<div class="grid row post-grid"><div class="grid-gutter"></div>';
+    $caseHTML .= '<div class="row">';
     
     
     if( have_rows('case_study_items') ):  
@@ -33,7 +33,7 @@ function build_case_studies(){
                         $summary_headline = get_field('summary_headline');
                         $summary_text = get_field('summary_text');
                    
-                        $caseHTML .= '<div class="grid-item post-item col-lg-4 col-md-4 col-sm-12 case-ct">';
+                        $caseHTML .= '<div class="col-lg-4 col-md-4 col-sm-12 case-ct">';
                         $caseHTML .= '<a href="' . $case_url . '">';
                         $caseHTML .= '<div class="case-thumb-ct"><img src="'. $project_thumbnail_image . '" title="' . $client . ': ' . $project_title . '"></div><!-- .case-image-ct -->';
                         $caseHTML .= '<div class="case-info">' . $client . '<br>' . $project_title . '</div><!-- .case-info -->';
@@ -67,7 +67,7 @@ function build_case_studies(){
                         $summary_headline = get_field('summary_headline', $post -> ID);
                         $summary_text = get_field('summary_text', $post -> ID);
                         
-                        $caseHTML .= '<div class="grid-item col-lg-4 col-md-4 col-sm-12 case-ct">';
+                        $caseHTML .= '<div class="col-lg-4 col-md-4 col-sm-12 case-ct">';
                         $caseHTML .= '<a href="' . $case_url . '">';
                         $caseHTML .= '<div class="case-thumb-ct"><img src="'. $project_thumbnail_image . '" title="' . $client . ': ' . $project_title . '"></div><!-- .case-image-ct -->';
                         $caseHTML .= '<div class="case-info"><h4>' . $client . ' <span class="light-grey">' . $project_title . '</span></h4></div><!-- .case-info -->';

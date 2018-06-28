@@ -1,10 +1,10 @@
 <?php
 
 $section_layout = get_sub_field('section_layout');
-    
+$pageHTML .= '<div class="row">';
+
 //DO ONE COLUMN LAYOUT
 if($section_layout == 'One Column'):
-
     $columnHTML = get_column_content('column_one_content', 'col-md-12');
     $pageHTML .= $columnHTML;
 
@@ -91,7 +91,8 @@ $columnHTML = get_column_content('column_four_content', 'col-lg-3 col-md-6 col-s
 $pageHTML .= $columnHTML;
 
 endif;//END FOUR COLUMN LAYOUT
-    
+
+$pageHTML .= '</div>';
 
 
 ?>

@@ -5,7 +5,7 @@
 function build_feed(){  
     
     $feedHTML = '';
-    $feedHTML .= '<div class="grid row post-grid"><div class="grid-gutter"></div>';
+    $feedHTML .= '<div class="row"><div class="card-columns">';
     
     ob_start();
     
@@ -32,13 +32,17 @@ function build_feed(){
                     setup_postdata( $post ); 
                     
                     $post_type = get_post_type($post -> ID);
-                    echo '<div class="grid-item col-lg-6 col-md-6 col-sm-12 col-xs-12 newsletter-excerpt resource-excerpt"><div class="post-item">';	
+                    echo '<div class="card">';	
                     if($post_type == 'podcasts'):
+                        echo '<div class="card-body">';	
                         //get_template_part( '/loop-templates/content', 'podcast' );
                         include($loop_templates.'content-podcast.php');
+                        echo '</div>';	
                     elseif($post_type == 'newsletters'):
+                        echo '<div class="card-body">';	
                         //get_template_part( '/loop-templates/content', 'newsletter' );
                         include($loop_templates.'content-newsletter.php');
+                        echo '</div>';	
                     elseif($post_type == 'post'):
                         //get_template_part( '/loop-templates/content', 'post' );
                         include($loop_templates.'content-post.php');
@@ -46,7 +50,7 @@ function build_feed(){
                         //get_template_part( '/loop-templates/content', 'video' );
                         include($loop_templates.'content-video.php');
                     endif;
-                    echo '</div><!-- .post-item --></div><!-- .grid-item -->';
+                    echo '</div>';
                     wp_reset_postdata();
                 endwhile;
                
@@ -82,17 +86,21 @@ function build_feed(){
             //use buffering to capture HTML
             
             $post_type = get_post_type();
-            echo '<div class="grid-sizer grid-item post-item col-lg-6 col-md-6 col-sm-12 newsletter-excerpt resource-excerpt">';	
+            echo '<div class="card">';	
             if($post_type == 'podcasts'):   
+                echo '<div class="card-body">';	
                 get_template_part( '/loop-templates/content', 'podcast' );
+                echo '</div>';	
             elseif($post_type == 'newsletters'):
+                echo '<div class="card-body">';	
                 get_template_part( '/loop-templates/content', 'newsletter' );
+                echo '</div>';	
             elseif($post_type == 'post'):
                 get_template_part( '/loop-templates/content', 'post' );
             elseif($post_type == 'videos'):
                 get_template_part( '/loop-templates/content', 'video' );
             endif;
-            echo '</div><!-- .grid-item -->';
+            echo '</div>';
             // If comments are open or we have at least one comment, load up the comment template.
             if ( comments_open() || get_comments_number() ) :
             
@@ -108,12 +116,10 @@ function build_feed(){
         $feedHTML .= $feed_content;
         //End buffering
         
-        
-        
     endwhile;   
     endif;
     ob_end_clean();
-    $feedHTML .= '</div><!-- .grid .row -->';
+    $feedHTML .= '</div></div><!-- .row -->';
     return $feedHTML;
 }
 

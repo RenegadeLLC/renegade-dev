@@ -24,10 +24,10 @@
 	$post_html .= $thumbail;
 	$post_html .= '<div class="card-body">';
 	$post_html .= '<h3 class="card-title">' . $title . '</h3>';
-	$post_html .= '<p class="card-text>"';
+	$post_html .= '<p class="card-text">';
 	$post_html .= '<span class="date">' . $date . '</span><br>';
 	$post_html .= '<span class="excerpt">' . $excerpt . '</span>';
-	$post_html .= '</a>';	
+	$post_html .= '</p></a>';	
 	$post_html .= '<a href="' . $post_edit_link  . '">' . 'Edit'  . '</a>';
 	$post_html .= '</div>';
 	//$post_html .= '</div><!-- .post-item -->';
