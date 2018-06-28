@@ -4,15 +4,17 @@
 	padding-bottom: 0;
 	background: #000;
 	.container {
-		padding-top: 1.25rem; 
+		padding-top: 1.25rem;
 		background-color: white;
 	}
 }
+
 #main {
 	#content.container {
 		padding: 0;
 	}
 }
+
 #wrapper-footer {
 	padding-top: 0;
 	.container {
@@ -20,8 +22,10 @@
 		background-color: #414042;
 	}
 }
+
 @media only screen and (max-width: 576px) {
-	.wrapper, #main {
+	.wrapper,
+	#main {
 		padding-top: 0 !important;
 	}
 	.wrapper-navbar {
@@ -55,6 +59,11 @@
 .nav-link:hover,
 .nav-link:focus {
 	text-decoration: none;
+}
+
+.nav-link.disabled {
+	color: #000;
+	text-transform: uppercase;
 }
 
 .nav-link.disabled {
@@ -153,7 +162,7 @@ a.nav-link {
 	-webkit-box-pack: justify;
 	-ms-flex-pack: justify;
 	justify-content: space-between;
-	// padding: 0.5rem 0rem .5rem 1rem;
+	padding: 0.5rem 0rem .5rem 1rem;
 }
 
 .navbar>.container,
@@ -191,6 +200,7 @@ a.nav-link {
 		max-width: 140px;
 	}
 }
+
 @media (max-width: 768px) {
 	.navbar-brand {
 		width: 140px;
@@ -278,21 +288,40 @@ ul.dropdown-menu.show {
 }
 
 //** BUTTONS
-
 .btn-secondary {
 	font-family: 'Playfair Display', serif !important;
 	color: #fff !important;
-    background-color: #000;
-    &:hover {
-        color: #000;
-        background-color: #f2f2f2;
-    }
-    &:focus, &.focus {
-        -webkit-box-shadow: none;
-        box-shadow: none
-    }
+	background-color: #000;
+	&:hover {
+		color: #000;
+		background-color: #f2f2f2;
+	}
+	&:focus,
+	&.focus {
+		-webkit-box-shadow: none;
+		box-shadow: none
+	}
 }
 
+.dropdown-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	display: none;
+	float: left;
+	min-width: 10rem;
+	padding: 0;
+	margin: 0 0;
+	font-size: 1rem;
+	color: #212529;
+	text-align: left;
+	list-style: none;
+	background-color: #f2f2f2;
+	background-clip: padding-box;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 0.25rem;
+}
 
 //** CARDS
 .card {
@@ -310,9 +339,9 @@ ul.dropdown-menu.show {
 }
 
 .card-img-top {
-    width: 100%;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+	width: 100%;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
 }
 
 .card-columns {
@@ -328,4 +357,3 @@ ul.dropdown-menu.show {
 		column-gap: 1.25rem;
 	}
 }
-

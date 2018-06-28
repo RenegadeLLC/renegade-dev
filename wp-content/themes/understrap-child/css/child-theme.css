@@ -5,6 +5,7 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display:400,700|Raleway:400,500,600,700");
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -9503,16 +9504,51 @@ a.skip-link {
 .gallery-caption {
   display: block; }
 
+/*
+// keyframe animations
+// Define animation name, and 
+@include keyframes(fade-out) {
+    0% { opacity: 1; }
+    90% { opacity: 0; }
+}
+// Add animation to element
+.element {
+    width: 100px;
+    height: 100px;
+    background: black;
+    @include animation('fade-out 5s 3');
+}
+*/
+/* @import must be at top of file, otherwise CSS will not work */
+@font-face {
+  font-family: 'TrendSlabFour';
+  src: url("../fonts/TrendSlabFour.eot");
+  /* IE9 Compat Modes */
+  src: url("../fonts/TrendSlabFour.eot?#iefix") format("embedded-opentype"), url("../fonts/TrendSlabFour.woff") format("woff"), url("../fonts/TrendSlabFour.ttf") format("truetype"), url("../fonts/TrendSlabFour.svg#TrendSlabFour") format("svg");
+  /* Legacy iOS */
+  font-style: normal;
+  font-weight: lighter;
+  text-rendering: optimizeLegibility; }
+
+:root {
+  --font-family-sans-serif: Raleway, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; }
+
+html {
+  font-family: Raleway, sans-serif; }
+
+body {
+  font-family: Raleway, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: .9rem; }
+
 a {
   color: #212529;
   font-weight: 500;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects; }
-
-a:hover {
-  color: inherit;
-  text-decoration: none; }
+  a:hover {
+    color: inherit;
+    text-decoration: none; }
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -9566,7 +9602,8 @@ h6, .h6 {
     background-color: #414042; }
 
 @media only screen and (max-width: 576px) {
-  .wrapper, #main {
+  .wrapper,
+  #main {
     padding-top: 0 !important; }
   .wrapper-navbar {
     border-bottom: 1px solid #eee; } }
@@ -9591,6 +9628,10 @@ h6, .h6 {
 
 .nav-link:hover, .nav-link:focus {
   text-decoration: none; }
+
+.nav-link.disabled {
+  color: #000;
+  text-transform: uppercase; }
 
 .nav-link.disabled {
   color: #000;
@@ -9671,7 +9712,8 @@ a.nav-link {
   align-items: center;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between; }
+  justify-content: space-between;
+  padding: 0.5rem 0rem .5rem 1rem; }
 
 .navbar > .container,
 .navbar > .container-fluid {
@@ -9786,6 +9828,25 @@ ul.dropdown-menu.show {
     -webkit-box-shadow: none;
     box-shadow: none; }
 
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 10rem;
+  padding: 0;
+  margin: 0 0;
+  font-size: 1rem;
+  color: #212529;
+  text-align: left;
+  list-style: none;
+  background-color: #f2f2f2;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem; }
+
 .card {
   border: 1px solid #eee !important;
   border-radius: 0;
@@ -9812,21 +9873,93 @@ ul.dropdown-menu.show {
     -webkit-column-gap: 1.25rem;
     column-gap: 1.25rem; } }
 
-/*
-// keyframe animations
-// Define animation name, and 
-@include keyframes(fade-out) {
-    0% { opacity: 1; }
-    90% { opacity: 0; }
-}
-// Add animation to element
-.element {
-    width: 100px;
-    height: 100px;
-    background: black;
-    @include animation('fade-out 5s 3');
-}
-*/
+/******************************  GENERAL LAYOUT STYLES  ******************************/
+.fleft {
+  float: left; }
+
+.red {
+  color: #db4f26; }
+
+a, a:hover {
+  text-decoration: none !important; }
+
+.semibold {
+  font-family: 'MuseoSans-700', sans-serif !important; }
+
+/******************************  MASONRY PACKERY GRID STYLES  ******************************/
+.grid, .client-logo-grid {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  margin: 0px auto; }
+
+.grid-item img {
+  width: 100%;
+  display: block; }
+
+.grid-item-w-25 {
+  width: 25%;
+  float: left; }
+
+.grid-item-w-33 {
+  width: 33.33%; }
+
+.grid-item-w-40 {
+  width: 40%; }
+
+.grid-item-w-50 {
+  width: 48.5%; }
+
+.grid-item-w-67 {
+  width: 66.7%; }
+
+.grid-item-w-75 {
+  width: 75%;
+  float: left; }
+
+.grid-item-w-100 {
+  width: 96%; }
+
+/******************************  NEWSLETTER GRID STYLES  ******************************/
+h2.newsletter, h2.newsletter a {
+  color: #00a3d6; }
+
+/******************************  ARTICLE GRID STYLES  ******************************/
+h2.article, h2.article a {
+  color: #c4bd06; }
+
+/******************************  PODCAST GRID STYLES  ******************************/
+.podcast-inset {
+  width: 100%;
+  border: 1px solid #dedede;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 24px 0;
+  background: #f2f2f2; }
+
+.podcast-details {
+  padding: 16px; }
+
+.podcast-details, podcast-details a {
+  color: #000; }
+
+h2.podcast, h2.podcast a {
+  color: #db4f26; }
+
+.podcast-image {
+  border-right: 1px solid #dedede; }
+
+@media all and (max-width: 768px) {
+  .grid-item-w-50 {
+    width: 100%; }
+  .excerpt, .excerpt a {
+    color: #666 !important;
+    font-size: 1.2em; }
+  .date, .date a {
+    font-size: 1.2em; } }
+
 .podcast-inset {
   width: 100%;
   border: 1px solid #dedede;
@@ -10019,8 +10152,7 @@ img.heightSet {
   font-size: .5rem;
   padding: 2px 8px; }
 
-.date,
-.date a {
+.date, .date a {
   color: #000;
   font-size: 1em;
   margin-bottom: 12px;

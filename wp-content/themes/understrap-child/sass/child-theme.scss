@@ -7,11 +7,13 @@
 @import "assets/font-awesome"; // Font Awesome Icon font
 @import "assets/underscores"; // Underscores media styles
 
-//** CORE - Understrap Child
+//** CORE FUNCTIONS- Understrap Child
 @import "theme/child_theme_variables"; // Core Variables
+@import "theme/child_theme_mixins"; // Core Mixins
+
+//** BASE STYLES
 @import "theme/child_theme_typography"; // Core Typogrpahy
 @import "theme/child_theme_layout"; // Core Layout
-@import "theme/child_theme_mixins"; // Core Mixins
 @import "theme/child_theme_content"; // Main Theme File for Content
 
 //** ADDITIONAL - Dev and other files we want to isolate from core theme files 
