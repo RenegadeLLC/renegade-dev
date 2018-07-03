@@ -9601,7 +9601,7 @@ h6, .h6 {
     padding: 0;
     background-color: #414042; }
 
-@media (min-width: 768px) {
+@media (max-width: 767px) {
   .wrapper,
   #main {
     padding-top: 0 !important; }
@@ -9741,11 +9741,11 @@ a.nav-link {
 .navbar-brand:hover, .navbar-brand:focus {
   text-decoration: none; }
 
-@media (min-width: 992px) {
+@media (max-width: 767px) {
   .navbar-brand {
     max-width: 140px; } }
 
-@media (min-width: 768px) {
+@media (max-width: 767px) {
   .navbar-brand {
     width: 140px; } }
 
@@ -9955,7 +9955,7 @@ h2.podcast, h2.podcast a {
 .podcast-image {
   border-right: 1px solid #dedede; }
 
-@media (min-width: 768px) {
+@media (max-width: 767px) {
   .grid-item-w-50 {
     width: 100%; }
   .excerpt, .excerpt a {
@@ -9986,7 +9986,7 @@ h2.podcast, h2.podcast a {
 .semibold {
   font-weight: 700; }
 
-@media (min-width: 768px) {
+@media (max-width: 767px) {
   .navbar-nav .nav-link {
     border-top: 3px solid #fff;
     border-bottom: 1px solid #dedede; } }
@@ -9997,7 +9997,7 @@ h2.podcast, h2.podcast a {
 .post-feed-grid .w-50 {
   width: 44% !important; }
 
-@media (min-width: 768px) {
+@media (max-width: 767px) {
   .fleft {
     float: none; }
   .bio-image-ct {

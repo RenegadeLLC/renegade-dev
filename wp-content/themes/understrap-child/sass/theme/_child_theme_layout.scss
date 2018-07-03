@@ -23,7 +23,7 @@
 	}
 }
 
-@include breakpoint(sm) {
+@media (max-width:767px) {
 	.wrapper,
 	#main {
 		padding-top: 0 !important;
@@ -195,13 +195,13 @@ a.nav-link {
 	text-decoration: none;
 }
 
-@include breakpoint(md) {
+@media (max-width:767px) {
 	.navbar-brand {
 		max-width: 140px;
 	}
 }
 
-@include breakpoint(sm) {
+@media (max-width:767px) {
 	.navbar-brand {
 		width: 140px;
 	}
