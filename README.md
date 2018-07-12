@@ -1,6 +1,5 @@
-Renegade Dev Build
+Renegade Dev Build 
 ==================
-# renegade-dev
 
 This contains theme and plugins for building a local dev environment for Renegade website.
 
