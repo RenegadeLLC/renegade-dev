@@ -1,7 +1,4 @@
-# renegade-dev
-Basic Child Theme for UnderStrap Theme Framework: https://github.com/holger1411/understrap
-
-Renegade Dev Build
+Renegade Dev Build 
 ==================
 
 This contains theme and plugins for building a local dev environment for Renegade website.
