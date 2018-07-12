@@ -22,7 +22,16 @@ $container   = get_theme_mod( 'understrap_container_type' );
 
 				<?php while ( have_posts() ) : the_post(); ?>
 
-					<?php get_template_part( 'loop-templates/content', 'single' ); ?>
+                    <?php 
+                    $single_type = get_post_type( get_the_ID() );
+                    printf( __( 'The post type is: %s', 'textdomain' ), get_post_type( get_the_ID() ) );
+                    
+                    if( $single_type == 'people' ) {
+                        get_template_part( 'loop-templates/content', 'people' ); 
+                    } else {
+                        get_template_part( 'loop-templates/content', 'single' ); 
+                    };
+                    ?>
 
 						<?php understrap_post_nav(); ?>
 
