@@ -1,3 +1,6 @@
+// VARS
+$red: #db5228;
+
 //** PAGE
 // blank
 // both-sidebarspage
@@ -13,13 +16,116 @@
 		}
 	}
 }
+// leadership
+body.page-template-people {
+	.row.leadership-team {
+		background-color: $red;
+		.leadership-team-title {
+			color: white;
+			text-align: center;
+			margin-top: 30px;
+		}
+		article {
+			.entry-content {
+				text-align: center;
+				background-color: white;
+				margin: 15px 0;
+				padding: 30px;
+			}
+			.people-bio-image {
+				text-align: center;
+				img {
+					border-radius: 50%;
+				}
+			}
+		}
+	}
+}
 
 //** POST
 // blog
-// newsletters
 // downloads
-// videos
+// newsletters
+
+// people
+body.people-template-default {
+	header.row.people-title {
+		text-align: center;
+		h2 {
+			color: #a2a1a6;
+			span {
+				color: #231f20;
+				font-weight: 600;
+			}
+		}
+	}
+	section.row {
+		// margin-bottom: 50px;
+		padding: 3rem;
+	}
+
+	section.row.people-intro {
+		background-color: $red;
+		.people-image {
+			text-align: right;
+			img {
+				height: 325px;
+				width: 325px;
+				border-radius: 50%;
+			}
+		}
+		.people-intro-bio p {
+			font-family: 'Playfair Display',serif !important;
+			color: white;
+			font-size: 2rem;
+			font-weight: 500;
+			line-height: 1.25;
+			margin-right: 30px;
+		}
+	}
+
+	section.row.people-content {
+		aside {
+			div {
+				margin-bottom: 15px;
+				a {
+					color: $red;
+					font-family: "Playfair Display";
+					font-size: 1.5rem;
+					font-weight: 600;
+					&:before {
+						background: $red;
+						color: white;
+						display: inline-block;
+						font-family: 'FontAwesome';
+						font-size: 1.5rem;
+						width: 40px;
+						height: 40px;
+						border-radius: 50%;
+						line-height: 1;
+						padding: 8px 10px;
+					}
+				}
+			}
+			div.email a:before {
+				content: "\f0e0";
+				font-size: 1.25rem;
+				padding: 9px 11px;
+			}
+			div.social a:before {
+				content: "\f099";
+			}
+		}
+		p:first-child {
+			font-family: 'Playfair Display',serif !important;
+			font-size: 2rem;
+			font-weight: 500;
+			line-height: 1.25;
+		}
+	}
+}
 // podcasts
+// videos
 
 /******************************  GENERAL LAYOUT STYLES  ******************************/
 

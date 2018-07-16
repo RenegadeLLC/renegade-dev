@@ -25,7 +25,7 @@ $rp_contact_link = get_field('rp_contact_link');
 ?>
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
-	<div class="entry-content card-columns">
+	<div class="entry-content">
 
 		<?php 
 
@@ -33,15 +33,12 @@ $rp_contact_link = get_field('rp_contact_link');
 
 		$people_html = '';
 		
-		$people_info= '';		
-		$people_info .= '<h3>' . $rp_first_name . ' ' . $rp_last_name .'</h3>';
-		$people_info .= '<div class="card-excerpt"><strong>' . $rp_job_title . '</strong><br>' . $rp_bio_intro . '</div>';
 		
-		$people_html .= '<div class="post-label-ct">PEOPLE</div>';
+		// $people_html .= '<div class="post-label-ct">PEOPLE</div>';
 		$people_html .= '<a href="' . $rp_link . '">';
-		$people_html .= '<div class="people-bio-image"><img src="' . $rp_bio_image . '" alt="' .  $rp_first_name . ' ' . $rp_last_name .'"></div>';
-	
-		$people_html .= '<div>' . $people_info . '</div></a>';
+		$people_html .= '<div class="people-bio-image"><img src="' . $rp_bio_image . '" alt="' .  $rp_first_name . ' ' . $rp_last_name .'"></div>';	
+		$people_html .= '<div><h2>' . $rp_first_name . ' ' . $rp_last_name .'</h2>';
+		$people_html .= '<h3>' . $rp_job_title . '</h3></div></a>';
 
 		echo $people_html;
 		?>
@@ -52,13 +49,8 @@ $rp_contact_link = get_field('rp_contact_link');
 			'after'  => '</div>',
 		) );
 		?>
-
+		
 	</div><!-- .entry-content -->
 
-	<footer class="entry-footer">
-
-		<?php edit_post_link( __( 'Edit', 'understrap' ), '<span class="edit-link">', '</span>' ); ?>
-
-	</footer><!-- .entry-footer -->
 
 </article><!-- #post-## -->

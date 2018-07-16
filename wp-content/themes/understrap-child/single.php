@@ -19,7 +19,7 @@ $container   = get_theme_mod( 'understrap_container_type' );
 
                     <?php 
                     $single_type = get_post_type( get_the_ID() );
-                    printf( __( 'The post type is: %s', 'textdomain' ), get_post_type( get_the_ID() ) );
+                    // printf( __( 'The post type is: %s', 'textdomain' ), get_post_type( get_the_ID() ) );
                     
                     if( $single_type == 'people' ) {
 						get_template_part( 'post-templates/single', 'people' );

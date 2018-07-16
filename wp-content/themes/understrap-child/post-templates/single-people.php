@@ -33,16 +33,23 @@ $rp_contact_link = get_field('rp_contact_link');
 
 		$people_html = '';
 		
-		$people_info= '';
-		$people_info .= '<div>'. $rp_social_channel . '</div>';
-		$people_info .= '<div>'. $rp_email_address . '</div>';
-		$people_info .= '<h3>' . $rp_first_name . ' ' . $rp_last_name .'</h3>';
-		$people_info .= '<div><strong>' . $rp_job_title . '</strong><br>' . $rp_bio_intro . '</div>';
-		$people_info .= '<div>'. $rp_biography . '</div>';
-		$people_info .= '<div>'. $rp_fun_fact . '</div>';
-		
-		$people_html .= '<div class="people-bio-image"><img src="' . $rp_bio_image . '" alt="' .  $rp_first_name . ' ' . $rp_last_name .'"></div>';
-		$people_html .= '<div>' . $people_info . '</div>';
+		$people_html .= '<header class="row people-title"><div class="col"><h2><span>' . $rp_first_name . ' ' . $rp_last_name .'</span><br>' . $rp_job_title . '</h2></header>';
+
+		$people_html .= '<section class="row people-intro">';
+		$people_html .= '<div class="col-md-6 people-image"><img src="' . $rp_bio_image . '" alt="' .  $rp_first_name . ' ' . $rp_last_name .'"></div>';
+		$people_html .= '<div class="col-md-6 people-intro-bio">' . $rp_bio_intro . '</div>';
+		$people_html .= '</section>';
+
+		$people_html .= '<section class="row people-content">';
+		$people_html .= '<aside class="col-md-4">';
+		$people_html .= '<div class="email" ><a href='. $rp_email_address . '> Contact ' . $rp_first_name . '</a></div>';
+		$people_html .= '<div class="social" ><a href='. $rp_email_address . '> Follow ' . $rp_first_name . '</a></div>';
+		$people_html .= '</aside>';
+		$people_html .= '<article class="col-md-8">';
+		$people_html .= '<div>'. $rp_biography . '</div>';
+		// $people_html .= '<div>'. $rp_fun_fact . '</div>';
+		$people_html .= '</article>';
+		$people_html .= '</section>';
 
 		echo $people_html;
 		?>

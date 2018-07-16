@@ -9877,6 +9877,82 @@ ul.dropdown-menu.show {
   #testimonials .col-sm-12 {
     padding: 1.25rem 0; } }
 
+body.page-template-people .row.leadership-team {
+  background-color: #db5228; }
+  body.page-template-people .row.leadership-team .leadership-team-title {
+    color: white;
+    text-align: center;
+    margin-top: 30px; }
+  body.page-template-people .row.leadership-team article .entry-content {
+    text-align: center;
+    background-color: white;
+    margin: 15px 0;
+    padding: 30px; }
+  body.page-template-people .row.leadership-team article .people-bio-image {
+    text-align: center; }
+    body.page-template-people .row.leadership-team article .people-bio-image img {
+      border-radius: 50%; }
+
+body.people-template-default header.row.people-title {
+  text-align: center; }
+  body.people-template-default header.row.people-title h2 {
+    color: #a2a1a6; }
+    body.people-template-default header.row.people-title h2 span {
+      color: #231f20;
+      font-weight: 600; }
+
+body.people-template-default section.row {
+  padding: 3rem; }
+
+body.people-template-default section.row.people-intro {
+  background-color: #db5228; }
+  body.people-template-default section.row.people-intro .people-image {
+    text-align: right; }
+    body.people-template-default section.row.people-intro .people-image img {
+      height: 325px;
+      width: 325px;
+      border-radius: 50%; }
+  body.people-template-default section.row.people-intro .people-intro-bio p {
+    font-family: 'Playfair Display',serif !important;
+    color: white;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.25;
+    margin-right: 30px; }
+
+body.people-template-default section.row.people-content aside div {
+  margin-bottom: 15px; }
+  body.people-template-default section.row.people-content aside div a {
+    color: #db5228;
+    font-family: "Playfair Display";
+    font-size: 1.5rem;
+    font-weight: 600; }
+    body.people-template-default section.row.people-content aside div a:before {
+      background: #db5228;
+      color: white;
+      display: inline-block;
+      font-family: 'FontAwesome';
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      line-height: 1;
+      padding: 8px 10px; }
+
+body.people-template-default section.row.people-content aside div.email a:before {
+  content: "\f0e0";
+  font-size: 1.25rem;
+  padding: 9px 11px; }
+
+body.people-template-default section.row.people-content aside div.social a:before {
+  content: "\f099"; }
+
+body.people-template-default section.row.people-content p:first-child {
+  font-family: 'Playfair Display',serif !important;
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.25; }
+
 /******************************  GENERAL LAYOUT STYLES  ******************************/
 .fleft {
   float: left; }
