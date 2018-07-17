@@ -5,6 +5,12 @@
  * @package understrap-child
  */
 
+$client_name = get_the_title();
+$client_id = get_the_ID();
+$client_logo = get_field('clientLogo');
+$industry_vertical = get_field('industry_vertical');
+$case_study = get_field('case_study');
+$case_study_url = get_field('case_study_url');
 ?>
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
