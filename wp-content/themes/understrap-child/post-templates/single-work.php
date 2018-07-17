@@ -1,8 +1,8 @@
 <?php
 /**
- * Partial template for content in .php
+ * Single post partial template for case studies.
  *
- * @package understrap
+ * @package understrap-child
  */
 
 ?>
@@ -12,11 +12,17 @@
 
 		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 
+		<div class="entry-meta">
+
+			<?php understrap_posted_on(); ?>
+
+		</div><!-- .entry-meta -->
+
 	</header><!-- .entry-header -->
 
 	<?php echo get_the_post_thumbnail( $post->ID, 'large' ); ?>
 
-	<div class="entry-content card-columns">
+	<div class="entry-content">
 
 		<?php the_content(); ?>
 
@@ -31,7 +37,7 @@
 
 	<footer class="entry-footer">
 
-		<?php edit_post_link( __( 'Edit', 'understrap' ), '<span class="edit-link">', '</span>' ); ?>
+		<?php understrap_entry_footer(); ?>
 
 	</footer><!-- .entry-footer -->
 

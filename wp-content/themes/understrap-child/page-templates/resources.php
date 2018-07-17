@@ -9,7 +9,7 @@
 get_header();
 $container = get_theme_mod('understrap_container_type');
 $paged = get_query_var('paged');
-$rpd_args = array('post_type' => array('newsletters', 'articles', 'podcasts'), 'posts_per_page' => 8, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged);
+$rpd_args = array('post_type' => array('newsletters', 'downloads', 'video'), 'posts_per_page' => 8, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged);
 $wp_query = new WP_Query($rpd_args);
 ?>
 
@@ -22,12 +22,12 @@ $wp_query = new WP_Query($rpd_args);
 				<div class="card">
 					<div class="card-body">
 						<?php $post_type = get_post_type();
-							if ($post_type == 'podcasts'):
-								get_template_part('loop-templates/content', 'podcast');
-							elseif ($post_type == 'newsletters'):
+							if ($post_type == 'newsletters'):
 								get_template_part('loop-templates/content', 'newsletter');
-							elseif ($post_type == 'articles'):
-								get_template_part('loop-templates/content', 'article');
+							elseif ($post_type == 'downloads'):
+								get_template_part('loop-templates/content', 'download');
+							elseif ($post_type == 'videos'):
+								get_template_part('loop-templates/content', 'video');
 							endif;
 						?>
 					</div>

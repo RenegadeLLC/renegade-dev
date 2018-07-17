@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Archive Page
+ * Template Name: Blog List Page
  *
  * Template for an archive page without sidebar even if a sidebar widget is published.
  *
@@ -23,7 +23,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 					<?php while ( have_posts() ) : the_post(); ?>
 
-						<?php get_template_part( 'loop-templates/content', 'archive' ); ?>
+						<?php get_template_part( 'loop-templates/content', 'blog' ); ?>
 
 						<?php
 						// If comments are open or we have at least one comment, load up the comment template.

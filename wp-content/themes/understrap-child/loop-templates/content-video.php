@@ -1,6 +1,6 @@
 <?php
 /**
- * Default post rendering content according to caller of get_template_part.
+ * Video post rendering content according to caller of get_template_part.
  *
  * @package understrap
  */
