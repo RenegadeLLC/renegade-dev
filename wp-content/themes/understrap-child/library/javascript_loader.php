@@ -71,6 +71,11 @@ function renegade_scripts() {
 	//IMAGES LOADED
 	wp_register_script('imagesLoaded', $scriptdir . 'imagesloaded.pkgd.min.js');
 	wp_enqueue_script('imagesLoaded');
+
+
+	//CUSTOM SCRIPTS
+	wp_register_script('my-custom', $scriptdir . 'my-custom.js');
+	wp_enqueue_script('my-custom');
 	
 	//LAYOUT EXTENSION TO ISOTOPE
 	//wp_register_script('DHF', $scriptdir . 'Draggable.js');
