@@ -37,7 +37,7 @@ $rp_contact_link = get_field('rp_contact_link');
 		// $people_html .= '<div class="post-label-ct">PEOPLE</div>';
 		$people_html .= '<a href="' . $rp_link . '">';
 		$people_html .= '<div class="people-bio-image"><img src="' . $rp_bio_image . '" alt="' .  $rp_first_name . ' ' . $rp_last_name .'"></div>';	
-		$people_html .= '<div><h2>' . $rp_first_name . ' ' . $rp_last_name .'</h2>';
+		$people_html .= '<div class="people-bio-info"><h2>' . $rp_first_name . ' ' . $rp_last_name .'</h2>';
 		$people_html .= '<h3>' . $rp_job_title . '</h3></div></a>';
 
 		echo $people_html;

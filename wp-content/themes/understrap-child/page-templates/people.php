@@ -34,7 +34,7 @@ $wp_query = new WP_Query( $rn_args );
 				<div class="row leadership-team">
 					<div class="col-md-12 leadership-team-title"><h2>Leadership Team</h2></div>
 					<?php while ( have_posts() ) : the_post(); ?>
-						<div class="col-md-6">
+						<div class="col-md-4">
 								<?php get_template_part( 'loop-templates/content', 'people' ); ?>
 						</div>
 					<?php endwhile; // end of the loop. ?>
