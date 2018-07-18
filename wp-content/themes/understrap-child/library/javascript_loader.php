@@ -28,8 +28,8 @@ function renegade_scripts() {
 		)
 	);
 	
-	wp_register_script('infinitescroll', '//cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.1.0/jquery.infinitescroll.min.js', [ 'jquery' ], null, true );
-	wp_enqueue_script( 'infinitescroll');
+	// wp_register_script('infinitescroll', '//cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.1.0/jquery.infinitescroll.min.js', [ 'jquery' ], null, true );
+	// wp_enqueue_script( 'infinitescroll');
 	
 	
 
@@ -57,16 +57,16 @@ function renegade_scripts() {
 	
 
 	//ISOTOPE PLUGIN (FOR LAYOUTS)
-	wp_register_script('isotope', $scriptdir . 'isotope.pkgd.min.js');
-	wp_enqueue_script('isotope');
+	// wp_register_script('isotope', $scriptdir . 'isotope.pkgd.min.js');
+	// wp_enqueue_script('isotope');
 	
-	//ADD PACKERY LAYOUT TO ISOTOPE
+	//PACKERY
 	wp_register_script('packery', $scriptdir . 'packery-mode.pkgd.min.js');
 	wp_enqueue_script('packery');
 	
 	//LAYOUT EXTENSION TO ISOTOPE
-	wp_register_script('layoutModes', $scriptdir . 'layout-mode.js');
-	wp_enqueue_script('layoutModes');
+	// wp_register_script('layoutModes', $scriptdir . 'layout-mode.js');
+	// wp_enqueue_script('layoutModes');
 	
 	//IMAGES LOADED
 	wp_register_script('imagesLoaded', $scriptdir . 'imagesloaded.pkgd.min.js');
@@ -78,8 +78,8 @@ function renegade_scripts() {
 	wp_enqueue_script('jquery-touch-events');
 
 	//CUSTOM SCRIPTS
-	wp_register_script('my-custom', $scriptdir . 'my-custom.js');
-	wp_enqueue_script('my-custom');
+	wp_register_script('renegade-custom', $scriptdir . 'renegade-custom.js');
+	wp_enqueue_script('renegade-custom');
 	
 	//LAYOUT EXTENSION TO ISOTOPE
 	//wp_register_script('DHF', $scriptdir . 'Draggable.js');
