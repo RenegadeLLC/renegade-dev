@@ -224,12 +224,18 @@ a.nav-link {
 	padding-right: 0;
 	padding-left: 16px;
 }
+.navbar-nav .nav-item {
+	color: black;
+	font-size: .8rem;
+	font-weight: 500;
+	text-transform: uppercase;
+}
 
-// .dropdown:hover {
-// 	.dropdown-menu {
-// 		display: block;
-// 	}
-// }
+.navbar-nav .dropdown:hover {
+	.dropdown-menu {
+		display: block;
+	}
+}
 
 .navbar-nav .dropdown-menu {
 	position: static;

@@ -73,6 +73,10 @@ function renegade_scripts() {
 	wp_enqueue_script('imagesLoaded');
 
 
+	//TOUCH EVENTS
+	wp_register_script('jquery-touch-events', $scriptdir . 'jquery.mobile-events.min.js');
+	wp_enqueue_script('jquery-touch-events');
+
 	//CUSTOM SCRIPTS
 	wp_register_script('my-custom', $scriptdir . 'my-custom.js');
 	wp_enqueue_script('my-custom');
