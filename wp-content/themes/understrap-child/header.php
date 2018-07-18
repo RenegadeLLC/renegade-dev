@@ -89,13 +89,17 @@ endif;
 						'theme_location'  => 'primary',
 						'container_class' => 'collapse navbar-collapse',
 						'container_id'    => 'navbarNavDropdown',
-						'menu_class'      => 'navbar-nav',
+						'menu_class'      => 'navbar-nav ml-auto',
 						'fallback_cb'     => '',
 						'menu_id'         => 'main-menu',
-						'walker'          => new understrap_WP_Bootstrap_Navwalker(),
+						'depth'           => 2,
+						'walker'          => new Understrap_WP_Bootstrap_Navwalker(),
 					)
 				); ?>
 
+			<?php if ( 'container' == $container ) : ?>
+			</div><!-- .container -->
+			<?php endif; ?>
 
 		</nav><!-- .site-navigation -->
 </div><!--  .container -->
