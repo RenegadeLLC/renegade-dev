@@ -235,6 +235,9 @@ a.nav-link {
 	.dropdown-menu {
 		display: block;
 	}
+	> a {
+		background-color: #f2f2f2;
+	}
 }
 
 .navbar-nav .dropdown-menu {
