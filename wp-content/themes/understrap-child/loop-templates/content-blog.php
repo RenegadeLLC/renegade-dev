@@ -16,9 +16,9 @@
 
 	<?php echo get_the_post_thumbnail( $post->ID, 'large' ); ?>
 
-	<div class="entry-content card-columns">
+	<div class="entry-content">
 
-		<?php the_content(); ?>
+		<?php the_excerpt(  ); ?>
 
 		<?php
 		wp_link_pages( array(

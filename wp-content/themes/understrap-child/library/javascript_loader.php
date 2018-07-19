@@ -28,10 +28,8 @@ function renegade_scripts() {
 		)
 	);
 	
-	// wp_register_script('infinitescroll', '//cdnjs.cloudflare.com/ajax/libs/jquery-infinitescroll/2.1.0/jquery.infinitescroll.min.js', [ 'jquery' ], null, true );
-	// wp_enqueue_script( 'infinitescroll');
-	
-	
+	wp_register_script('infinitescroll', 'https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js' );
+	wp_enqueue_script( 'infinitescroll');	
 
 	//EASING EQUATIONS FOR GREENSOCK PLUGIN	
 	wp_register_script('easing', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/easing/EasePack.min.js');
@@ -57,8 +55,8 @@ function renegade_scripts() {
 	
 
 	//ISOTOPE PLUGIN (FOR LAYOUTS)
-	// wp_register_script('isotope', $scriptdir . 'isotope.pkgd.min.js');
-	// wp_enqueue_script('isotope');
+	wp_register_script('isotope', $scriptdir . 'isotope.pkgd.min.js');
+	wp_enqueue_script('isotope');
 	
 	//PACKERY
 	wp_register_script('packery', $scriptdir . 'packery-mode.pkgd.min.js');

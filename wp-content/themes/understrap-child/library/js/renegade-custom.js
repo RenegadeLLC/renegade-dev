@@ -30,9 +30,36 @@ jQuery(document).ready(function ($) {
     }
 
     // post pages masonry (packery) grids in rows
-    // var $container = $('.row');
-    // init
-    // $container.packery({
+    // var $container = $('.grid').packery({
     //     itemSelector: 'div[class*="col-"',
+    // });
+    // with Packery & jQuery
+    // init Packery
+    var $grid = $('.grid').isotope({
+        // Packery options...
+        itemSelector: 'div[class*="grid__item"',
+    });
+    
+    // get Packery instance
+    var iso = $grid.data('isotope');
+    
+    // init Infinite Scroll
+    $grid.infiniteScroll({
+        // Infinite Scroll options...
+        path: 'a.page-link',
+        append: 'div[class*="grid__item"',
+        status: '.infinite-scroll-request',
+        outlayer: iso,
+        // debug: true,
+    });
+
+    // $grid.on( 'scrollThreshold.infiniteScroll', function( event ) {
+    //     console.log('Scroll at bottom');
+    // });
+    
+    // filter items on button click
+    // $('.filter-button-group').on('click', 'button', function () {
+    //     var filterValue = $(this).attr('data-filter');
+    //     $grid.isotope({filter: filterValue});
     // });
 });

@@ -9,38 +9,57 @@
 
 get_header();
 $container = get_theme_mod( 'understrap_container_type' );
+				//loop for paged blog posts
+				if ( get_query_var( 'paged' ) ) { $paged = get_query_var( 'paged' ); }
+				elseif ( get_query_var( 'page' ) ) { $paged = get_query_var( 'page' ); }
+				else { $paged = 1; }
+
+// $paged = get_query_var('paged');
+$rb_args = array( 'post_type' => 'post', 'posts_per_page' => 6, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged  );
+$wp_query = new WP_Query( $rb_args );
 ?>
 
-<div class="wrapper" id="full-width-page-wrapper">
+<div class="wrapper main-content" id="full-width-page-wrapper">
 
-	<div class="<?php echo esc_attr( $container ); ?>" id="content">
+<div class="<?php echo esc_attr( $container ); ?>" id="blog-posts">
 
-		<div class="row">
+		<main class="site-main" id="main" role="main">
 
-			<div class="col-md-12 content-area" id="primary">
 
-				<main class="site-main" id="main" role="main">
+			<div class="row hero">
+				<div class="col-md-12">
+					<!-- Placehoder for hero area -->
+					<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+				</div>
+			</div>
+			<!-- scroller status -->
+			<div class="grid row">
+		
+				<?php while ( have_posts() ) : the_post(); ?>
+				<div class="col-lg-4 col-md-6 .grid__item">
+					<?php 
+						// $postnum++;
+						// echo "<h2>" . $postnum . "</h2>";
+						get_template_part( 'loop-templates/content', 'blog' ); 
+					?>
+				</div>
+				
+				<?php endwhile; // end of the loop. ?>
+			</div>
 
-					<?php while ( have_posts() ) : the_post(); ?>
-
-						<?php get_template_part( 'loop-templates/content', 'blog' ); ?>
-
-						<?php
-						// If comments are open or we have at least one comment, load up the comment template.
-						if ( comments_open() || get_comments_number() ) :
-
-							comments_template();
-
-						endif;
-						?>
-
-					<?php endwhile; // end of the loop. ?>
-
-				</main><!-- #main -->
-
-			</div><!-- #primary -->
-
-		</div><!-- .row end -->
+			<div class="row">
+				<div class="col-md-12" style="text-align:center; color:red">
+					<!-- TODO: insert loading status here -->
+					<h1 class="infinite-scroll-request">Loading more...</h1>
+				</div>
+			</div>
+			<!-- The pagination component -->
+			<div class="row" style="visibility: hidden">
+				<div class="col-md-12">
+					<?php understrap_pagination(); ?>
+				</div>
+			</div>
+		</main><!-- #main -->
 
 	</div><!-- Container end -->
 
