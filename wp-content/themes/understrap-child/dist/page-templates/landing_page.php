@@ -185,5 +185,4 @@ echo $pageHTML;
 
 </div><!-- Wrapper end -->
 
-
 <?php get_footer();?>

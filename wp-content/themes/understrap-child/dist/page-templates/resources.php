@@ -8,19 +8,32 @@
  */
 get_header();
 $container = get_theme_mod('understrap_container_type');
-$paged = get_query_var('paged');
-$rpd_args = array('post_type' => array('newsletters', 'downloads', 'video'), 'posts_per_page' => 8, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged);
+//loop for paged posts
+if (get_query_var('paged')) {$paged = get_query_var('paged');} elseif (get_query_var('page')) {$paged = get_query_var('page');} else { $paged = 1;}
+
+$rpd_args = array('post_type' => array('newsletters', 'downloads', 'video'),  'posts_per_page' => 6, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged);
 $wp_query = new WP_Query($rpd_args);
 ?>
 
-<div class="wrapper main-content" id="full-width-page-wrapper">
-	<div class="<?php echo esc_attr($container); ?>" id="newsletter-posts">
-		<main class="site-main" id="main" role="main">
-			<div class="card-columns">
-			
-				<?php while ($wp_query->have_posts()): $wp_query->the_post();?>
-				<div class="card">
-					<div class="card-body">
+<div class="wrapper" id="full-width-page-wrapper">
+
+<div class="<?php echo esc_attr( $container ); ?>" id="content">
+
+	<div class="content-section row hero">
+			<!-- Placehoder for hero area -->
+			<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+	</div>
+
+	<div class="row">
+
+		<div class="col-md-12 content-area" id="primary">
+
+			<main class="site-main" id="main" role="main">
+
+				<!-- blog grid -->
+				<div class="grid row">
+					<?php while (have_posts()): the_post();?>
+					<div class="col-lg-4 col-md-6 .grid__item">
 						<?php $post_type = get_post_type();
 							if ($post_type == 'newsletters'):
 								get_template_part('loop-templates/content', 'newsletter');
@@ -31,17 +44,35 @@ $wp_query = new WP_Query($rpd_args);
 							endif;
 						?>
 					</div>
+					<?php endwhile; // end of the loop. ?>
 				</div>
-				<?php endwhile; // end of the loop. ?>
-				
-			</div>
-		</main>
 
-		<!-- The pagination component -->
-		<?php understrap_pagination(); ?>
-		
-	</div>
+				<!-- scroller status -->
+				<div class="row">
+					<div class="col">
+						<div class="loader-wheel .infinite-scroll-request">
+							<i><i><i><i><i><i><i><i><i><i><i><i>
+							</i></i></i></i></i></i></i></i></i></i></i></i>
+						</div>
+						<!-- <p><button class="view-more-button">View some more</button></p> -->
+					</div>
+				</div>
+				
+				<!-- The pagination component -->
+				<div class="row" style="visibility: hidden">
+					<div class="col">
+						<?php understrap_pagination();?>
+					</div>
+				</div>
+
+			</main><!-- #main -->
+
+		</div><!-- #primary -->
+
+	</div><!-- .row end -->
+
+</div><!-- Container end -->
+
 </div><!-- Wrapper end -->
 
-
-<?php get_footer();?>
+<?php get_footer(); ?>

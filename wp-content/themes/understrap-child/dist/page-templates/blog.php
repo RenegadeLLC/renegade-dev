@@ -8,62 +8,68 @@
  */
 
 get_header();
-$container = get_theme_mod( 'understrap_container_type' );
-				//loop for paged blog posts
-				if ( get_query_var( 'paged' ) ) { $paged = get_query_var( 'paged' ); }
-				elseif ( get_query_var( 'page' ) ) { $paged = get_query_var( 'page' ); }
-				else { $paged = 1; }
+$container = get_theme_mod('understrap_container_type');
+//loop for paged blog posts
+if (get_query_var('paged')) {$paged = get_query_var('paged');} elseif (get_query_var('page')) {$paged = get_query_var('page');} else { $paged = 1;}
 
 // $paged = get_query_var('paged');
-$rb_args = array( 'post_type' => 'post', 'posts_per_page' => 6, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged  );
-$wp_query = new WP_Query( $rb_args );
+$rb_args = array('post_type' => 'post', 'posts_per_page' => 6, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged);
+$wp_query = new WP_Query($rb_args);
 ?>
 
-<div class="wrapper main-content" id="full-width-page-wrapper">
+<div class="wrapper" id="full-width-page-wrapper">
 
-<div class="<?php echo esc_attr( $container ); ?>" id="blog-posts">
+	<div class="<?php echo esc_attr( $container ); ?>" id="content">
 
-		<main class="site-main" id="main" role="main">
+		<div class="content-section row hero">
+				<!-- Placehoder for hero area -->
+				<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+		</div>
 
+		<div class="row">
 
-			<div class="row hero">
-				<div class="col-md-12">
-					<!-- Placehoder for hero area -->
-					<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
-				</div>
-			</div>
-			<!-- scroller status -->
-			<div class="grid row">
-		
-				<?php while ( have_posts() ) : the_post(); ?>
-				<div class="col-lg-4 col-md-6 .grid__item">
-					<?php 
-						// $postnum++;
-						// echo "<h2>" . $postnum . "</h2>";
-						get_template_part( 'loop-templates/content', 'blog' ); 
-					?>
-				</div>
-				
-				<?php endwhile; // end of the loop. ?>
-			</div>
+			<div class="col-md-12 content-area" id="primary">
 
-			<div class="row">
-				<div class="col-md-12" style="text-align:center; color:red">
-					<!-- TODO: insert loading status here -->
-					<div class="loader-wheel">
-						<i><i><i><i><i><i><i><i><i><i><i><i>
-						</i></i></i></i></i></i></i></i></i></i></i></i>
+				<main class="site-main" id="main" role="main">
+
+					<?php if(have_posts($wp_query)): ?>
+					<!-- infinite scroll grid -->
+					<div class="grid row">
+						<?php while (have_posts()): the_post();?>
+						<div class="col-lg-4 col-md-6 .grid__item">
+							<?php
+								// $postnum++;
+								// echo "<h2>" . $postnum . "</h2>";
+								get_template_part('loop-templates/content', 'blog');
+								?>
+						</div>
+						<?php endwhile; // end of the loop. ?>
 					</div>
-					<!-- <p><button class="view-more-button">View some more</button></p> -->
-				</div>
-			</div>
-			<!-- The pagination component -->
-			<div class="row" style="visibility: hidden">
-				<div class="col-md-12">
-					<?php understrap_pagination(); ?>
-				</div>
-			</div>
-		</main><!-- #main -->
+
+					<!-- scroller status -->
+					<div class="row">
+						<div class="col">
+							<div class="loader-wheel .infinite-scroll-request">
+								<i><i><i><i><i><i><i><i><i><i><i><i>
+								</i></i></i></i></i></i></i></i></i></i></i></i>
+							</div>
+							<!-- <p><button class="view-more-button">View some more</button></p> -->
+						</div>
+					</div>
+					
+					<!-- The pagination component -->
+					<div class="row" style="visibility: hidden">
+						<div class="col">
+							<?php understrap_pagination();?>
+						</div>
+					</div>
+					<?php endif; ?>
+
+				</main><!-- #main -->
+
+			</div><!-- #primary -->
+
+		</div><!-- .row end -->
 
 	</div><!-- Container end -->
 
