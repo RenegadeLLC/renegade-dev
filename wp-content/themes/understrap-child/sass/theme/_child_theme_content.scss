@@ -1,5 +1,4 @@
 // VARS
-$red: #db5228;
 
 //** PAGE
 // blank
@@ -19,7 +18,7 @@ $red: #db5228;
 // leadership
 body.page-template-people {
 	.row.leadership-team {
-		background-color: $red;
+		background-color: $orangered;
 		.leadership-team-title {
 			color: white;
 			text-align: center;
@@ -49,9 +48,56 @@ body.page-template-people {
 		}
 	}
 }
+// About Pages
+body.page-template-about,
+body.page-template-clients,
+body.page-template-projects {
+	.content-section.hero {
+		background: $orangered;
+	}
+}
+
+// Services Pages
+body.page-template-services {
+	.content-section.hero {
+		background: $yellow;
+	}
+}
+
+// Resource Pages
+body.page-template-resources,
+body.page-template-newsletters,
+body.page-template-downloads,
+body.page-template-videos, {
+	.content-section.hero {
+		background: $blue;
+	}
+}
+
+// Podcasts
+body.page-template-podcasts, {
+	.content-section.hero {
+		background: $orangered;
+	}
+}
+
+// Blog 
+body.page-template-blog, {
+	.content-section.hero {
+		background: $blue;
+	}
+}
+
+// Blog 
+body.page-template-contact, {
+	.content-section.hero {
+		background: $blue;
+	}
+}
 
 //** POST
 // blog
+
 // downloads
 // newsletters
 body.page-template-newsletters {
@@ -81,7 +127,7 @@ body.people-template-default {
 	}
 
 	section.row.people-intro {
-		background-color: $red;
+		background-color: $orangered;
 		.people-image {
 			text-align: right;
 			img {
@@ -105,12 +151,12 @@ body.people-template-default {
 			div {
 				margin-bottom: 15px;
 				a {
-					color: $red;
+					color: $orangered;
 					font-family: "Playfair Display";
 					font-size: 1.5rem;
 					font-weight: 600;
 					&:before {
-						background: $red;
+						background: $orangered;
 						color: white;
 						display: inline-block;
 						font-family: 'FontAwesome';
@@ -150,7 +196,7 @@ body.people-template-default {
 }
 
 .red{
-	color:#db4f26;
+	color:$orangered;
 }
 
 a, a:hover{
@@ -219,7 +265,7 @@ a, a:hover{
 
 
 h2.newsletter,  h2.newsletter a{
-	color:#00a3d6;
+	color:$blue;
 }
 
 
@@ -228,7 +274,7 @@ h2.newsletter,  h2.newsletter a{
 
 
 h2.article, h2.article a{
-	color:#c4bd06;
+	color:$yellowgreen;
 }
 
 
@@ -255,7 +301,7 @@ h2.article, h2.article a{
 }
 
 h2.podcast, h2.podcast a{
-	color:#db4f26;
+	color:$orangered;
 }
 
 .podcast-image{
@@ -302,7 +348,7 @@ h2.podcast, h2.podcast a{
 }
 
 .red {
-	color: #da5127;
+	color: $orangered;
 }
 
 .semibold {

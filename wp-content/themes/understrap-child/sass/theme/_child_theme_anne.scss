@@ -252,7 +252,7 @@ a .excerpt {
 }
 
 .green {
-	color: #c4bd06;
+	color: $yellowgreen;
 }
 
 .light-grey {
@@ -331,7 +331,7 @@ a .excerpt {
 .open-quote {
 	display: block;
 	background: url("../img/quote_open.png");
-	background-color: #c4bd06;
+	background-color: $yellowgreen;
 	background-repeat: no-repeat;
 	background-size: 100%;
 	width: 37px;
@@ -345,7 +345,7 @@ a .excerpt {
 .close-quote {
 	display: block;
 	background: url("../img/quote_close.png");
-	background-color: #c4bd06;
+	background-color: $yellowgreen;
 	background-repeat: no-repeat;
 	background-size: 100%;
 	width: 37px;
