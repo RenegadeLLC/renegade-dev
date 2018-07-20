@@ -41,7 +41,11 @@ $wp_query = new WP_Query( $rn_args );
 				<div class="row">
 					<div class="col-md-12" style="text-align:center; color:red">
 						<!-- TODO: insert loading status here -->
-						<h1 class="infinite-scroll-request">Loading more...</h1>
+						<div class="loader-wheel">
+							<i><i><i><i><i><i><i><i><i><i><i><i>
+							</i></i></i></i></i></i></i></i></i></i></i></i>
+						</div>
+						<!-- <p><button class="view-more-button">View some more</button></p> -->
 					</div>
 				</div>
 				<!-- The pagination component -->

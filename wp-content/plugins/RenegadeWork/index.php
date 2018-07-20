@@ -61,8 +61,8 @@ function init_projects() {
 	wp_register_script('jqueryUI', 'https://code.jquery.com/ui/1.11.3/jquery-ui.js');
 	wp_enqueue_script('jqueryUI');
 	
-	wp_register_script('isotope', $GLOBALS['RenegadePluginPath'] . 'js/isotope.pkgd.min.js');
-	wp_enqueue_script('isotope');
+	// wp_register_script('isotope', $GLOBALS['RenegadePluginPath'] . 'js/isotope.pkgd.min.js');
+	// wp_enqueue_script('isotope');
 
 }
 

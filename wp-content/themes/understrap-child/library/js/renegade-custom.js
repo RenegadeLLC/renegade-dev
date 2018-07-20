@@ -1,4 +1,6 @@
 // Custom scripts
+
+// Mobile specific scripts
 jQuery(document).ready(function ($) {
     // check if mobile
     // TODO: consider making this global
@@ -29,15 +31,12 @@ jQuery(document).ready(function ($) {
         });
     }
 
-    // post pages masonry (packery) grids in rows
-    // var $container = $('.grid').packery({
-    //     itemSelector: 'div[class*="col-"',
-    // });
-    // with Packery & jQuery
-    // init Packery
+    // Inifinite using Isotope, Packery & jQuery
+
+    // init
     var $grid = $('.grid').isotope({
-        // Packery options...
-        itemSelector: 'div[class*="grid__item"',
+        // options...
+        itemSelector: 'div[class*="grid__item"]',
     });
     
     // get Packery instance
@@ -47,12 +46,31 @@ jQuery(document).ready(function ($) {
     $grid.infiniteScroll({
         // Infinite Scroll options...
         path: 'a.page-link',
-        append: 'div[class*="grid__item"',
-        status: '.infinite-scroll-request',
-        outlayer: iso,
+        append: 'div[class*="grid__item"]',
+        loadOnScroll: true,
+        status: '.loader-wheel',
+        outlayer: iso
         // debug: true,
     });
 
+    // layout Isotope after each image loads
+    $grid.imagesLoaded().progress( function() {
+        $grid.isotope('layout');
+    });
+
+    // fixes for  mobile loading
+
+    // $grid.on( 'append.infiniteScroll', function( event, response, path, items ) {
+    //     $grid.isotope({
+    //         // Packery options...
+    //         itemSelector: 'div[class*="grid__item"]',
+    //     });
+    //     $grid.find('img[srcset]').each( function( i, img ) {
+    //         img.outerHTML = img.outerHTML;
+    //     });
+    // });
+
+    // show console message when scroll has reached bottom
     // $grid.on( 'scrollThreshold.infiniteScroll', function( event ) {
     //     console.log('Scroll at bottom');
     // });

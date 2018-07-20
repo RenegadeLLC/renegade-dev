@@ -4,7 +4,6 @@ global $ajax_vars;
 global $ra_loop;
 
 add_action('wp_enqueue_scripts', 'renegade_scripts');
-//Making jQuery Google API
 
 function renegade_scripts() {
 	
@@ -28,48 +27,21 @@ function renegade_scripts() {
 		)
 	);
 	
-	wp_register_script('infinitescroll', 'https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js' );
+	//PACKERY PLUGIN (FOR LAYOUTS)
+	wp_register_script('infinitescroll', $scriptdir . 'infinite-scroll.pkgd.min.js');
 	wp_enqueue_script( 'infinitescroll');	
-
-	//EASING EQUATIONS FOR GREENSOCK PLUGIN	
-	wp_register_script('easing', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/easing/EasePack.min.js');
-	//wp_register_script('easing', $scriptdir . 'EasePack.min.js');
-	wp_enqueue_script('easing');
 	
-	//CSS FOR GREENSOCK PLUGIN	
-	wp_register_script('css', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js');
-	//wp_register_script('css',$scriptdir .  'CSSPlugin.min.js');
-	wp_enqueue_script('css');
-
-	//GREENSOCK TWEENLITE PLUGIN
-	wp_register_script('tweenLite', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js');
-	//wp_register_script('tweenLite', $scriptdir . 'TweenLite.min.js');
-	wp_enqueue_script('tweenLite');
-	
-	//SCROLLTO FOR GREENSOCK PLUGIN
-	wp_register_script('scrollTo', $scriptdir . 'ScrollToPlugin.min.js');
-	wp_enqueue_script('scrollTo');
-	
-	wp_register_script('lazyLoad', $scriptdir . 'jquery.bttrlazyloading.js');
-	wp_enqueue_script('lazyLoad');
-	
-
 	//ISOTOPE PLUGIN (FOR LAYOUTS)
 	wp_register_script('isotope', $scriptdir . 'isotope.pkgd.min.js');
 	wp_enqueue_script('isotope');
 	
 	//PACKERY
-	wp_register_script('packery', $scriptdir . 'packery-mode.pkgd.min.js');
+	wp_register_script('packery', $scriptdir . 'packery.pkgd.min.js');
 	wp_enqueue_script('packery');
-	
-	//LAYOUT EXTENSION TO ISOTOPE
-	// wp_register_script('layoutModes', $scriptdir . 'layout-mode.js');
-	// wp_enqueue_script('layoutModes');
 	
 	//IMAGES LOADED
 	wp_register_script('imagesLoaded', $scriptdir . 'imagesloaded.pkgd.min.js');
 	wp_enqueue_script('imagesLoaded');
-
 
 	//TOUCH EVENTS
 	wp_register_script('jquery-touch-events', $scriptdir . 'jquery.mobile-events.min.js');
@@ -78,9 +50,24 @@ function renegade_scripts() {
 	//CUSTOM SCRIPTS
 	wp_register_script('renegade-custom', $scriptdir . 'renegade-custom.js');
 	wp_enqueue_script('renegade-custom');
+
+	//EASING EQUATIONS FOR GREENSOCK PLUGIN	
+	// wp_register_script('easing', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/easing/EasePack.min.js');
+	//wp_register_script('easing', $scriptdir . 'greensock/EasePack.min.js');
+	// wp_enqueue_script('easing');
 	
-	//LAYOUT EXTENSION TO ISOTOPE
-	//wp_register_script('DHF', $scriptdir . 'Draggable.js');
-	//wp_enqueue_script('DHF');
+	//CSS FOR GREENSOCK PLUGIN	
+	// wp_register_script('css', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js');
+	//wp_register_script('css',$scriptdir .  'greensock/CSSPlugin.min.js');
+	// wp_enqueue_script('css');
+
+	//GREENSOCK TWEENLITE PLUGIN
+	// wp_register_script('tweenLite', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js');
+	//wp_register_script('tweenLite', $scriptdir . 'greensock/TweenLite.min.js');
+	// wp_enqueue_script('tweenLite');
+	
+	//SCROLLTO FOR GREENSOCK PLUGIN
+	// wp_register_script('scrollTo', $scriptdir . 'greensock/ScrollToPlugin.min.js');
+	// wp_enqueue_script('scrollTo');
 }
 ?>
