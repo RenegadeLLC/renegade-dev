@@ -10,9 +10,6 @@
 get_header();
 $container = get_theme_mod( 'understrap_container_type' );
 
-get_header();
-$container = get_theme_mod( 'understrap_container_type' );
-
 $paged = get_query_var('paged');
 $rn_args = array( 'post_type' => 'people', 'post_status' => 'publish', 'order' => 'ASC', 'orderby' => 'date', 'paged' => $paged  );
 $wp_query = new WP_Query( $rn_args );
