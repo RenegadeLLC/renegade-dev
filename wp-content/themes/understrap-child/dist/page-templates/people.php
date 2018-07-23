@@ -10,9 +10,6 @@
 get_header();
 $container = get_theme_mod( 'understrap_container_type' );
 
-get_header();
-$container = get_theme_mod( 'understrap_container_type' );
-
 $paged = get_query_var('paged');
 $rn_args = array( 'post_type' => 'people', 'post_status' => 'publish', 'order' => 'ASC', 'orderby' => 'date', 'paged' => $paged  );
 $wp_query = new WP_Query( $rn_args );
@@ -23,9 +20,11 @@ $wp_query = new WP_Query( $rn_args );
 
 	<div class="<?php echo esc_attr( $container ); ?>" id="content">
 
-		<div class="content-section row hero">
-				<!-- Placehoder for hero area -->
+		<div class="row jumbotron jumbotron-fluid">
+			<!-- Placehoder -->
+			<div class="col">
 				<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+			</div>
 		</div>
 
 		<div class="row">
