@@ -22,10 +22,12 @@ $wp_query = new WP_Query( $rn_args );
 
 	<div class="<?php echo esc_attr( $container ); ?>" id="content">
 
-		<div class="content-section row hero">
-				<!-- Placehoder for hero area -->
-				<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+	<div class="row jumbotron jumbotron-fluid">
+		<!-- Placehoder -->
+		<div class="col">
+			<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
 		</div>
+	</div>
 
 		<div class="row">
 

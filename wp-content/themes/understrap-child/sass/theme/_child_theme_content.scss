@@ -52,14 +52,14 @@ body.page-template-people {
 body.page-template-about,
 body.page-template-clients,
 body.page-template-projects {
-	.content-section.hero {
+	.jumbotron {
 		background: $orangered;
 	}
 }
 
 // Services Pages
 body.page-template-services {
-	.content-section.hero {
+	.jumbotron {
 		background: $yellow;
 	}
 }
@@ -69,28 +69,28 @@ body.page-template-resources,
 body.page-template-newsletters,
 body.page-template-downloads,
 body.page-template-videos, {
-	.content-section.hero {
+	.jumbotron {
 		background: $blue;
 	}
 }
 
 // Podcasts
 body.page-template-podcasts, {
-	.content-section.hero {
+	.jumbotron {
 		background: $orangered;
 	}
 }
 
 // Blog 
 body.page-template-blog, {
-	.content-section.hero {
-		background: $blue;
+	.jumbotron {
+		background: $yellowgreen;
 	}
 }
 
 // Blog 
 body.page-template-contact, {
-	.content-section.hero {
+	.jumbotron {
 		background: $blue;
 	}
 }
