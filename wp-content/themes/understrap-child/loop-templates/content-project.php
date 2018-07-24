@@ -25,7 +25,7 @@ $caseHTML .= '</a>';
 
 ?>
 
-<article <?php post_class();?> id="post-<?php the_ID();?>" style="background-color:white;">
+<article <?php post_class();?> id="post-<?php the_ID();?>">
 
 	<header class="entry-header">
 

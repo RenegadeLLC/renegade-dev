@@ -58,6 +58,31 @@ body.page-template-people {
 	}
 }
 
+// About 
+body.page-template-about {
+	.about-contact {
+		background: $yellowgreen;
+	}
+	.about-leadership {
+		background: $orangered;
+		text-align: center;
+		img {
+			border-radius: 50%;
+		}
+	}
+	.about-projects {
+		background: $white;
+	}
+	.about-clients {
+		background: $gray-200;
+		.client-logo {
+			background: none;
+		}
+	}
+}
+
+
+
 // Services Pages
 body.page-template-services {
 	.jumbotron {

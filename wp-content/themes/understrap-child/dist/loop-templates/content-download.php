@@ -7,7 +7,7 @@
 
 ?>
 
-<article <?php post_class();?> id="post-<?php the_ID();?>" style="background-color:white;">
+<article <?php post_class();?> id="post-<?php the_ID();?>">
 
 	<header class="entry-header">
 		<?php if ('post' == get_post_type()): ?>

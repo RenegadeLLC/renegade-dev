@@ -14,7 +14,7 @@ $case_study_url = get_field('case_study_url', $post -> ID);
 $clientsHTML = '';
 ?>
 
-<article <?php post_class();?> id="post-<?php the_ID();?>" style="background-color:white;">
+<article <?php post_class();?> id="post-<?php the_ID();?>">
 
 	<header class="entry-header">
 

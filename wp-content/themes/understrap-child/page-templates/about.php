@@ -37,13 +37,21 @@ $container = get_theme_mod('understrap_container_type');
 					</div>
 				</div>
 
+				<!-- example of a content section -->
+				<div class="row about-contact">
+					<div class="column col-md-4"></div>
+					<div class="column col-md-8">
+						<h2 style="text-align: center;">Give us a holler <br><small>and together let's tell your story.</small></h2>
+					</div>
+				</div>
+
 				<!-- secondary content grids -->
 				<!-- CASE STUDIES -->
 				<?php
 $ra_args = array('post_type' => 'projects', 'posts_per_page' => 3, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date');
 $wp_query = new WP_Query($ra_args);
 ?>
-				<div class="row">
+				<div class="row about-projects">
 					<div class="col-md-12"><h2>Case Studies</h2></div>
 					<?php while (have_posts()): the_post();?>
 						<div class="col-lg-4 col-md-6">
@@ -62,7 +70,7 @@ $wp_query = new WP_Query($ra_args);
 $ra_args = array('post_type' => 'clients', 'posts_per_page' => 16, 'post__not_in' => array(6274), 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date');
 $wp_query = new WP_Query($ra_args);
 ?>
-				<div class="row">
+				<div class="row about-clients">
 					<div class="col-md-12"><h2>Clients</h2></div>
 					<?php while (have_posts()): the_post();?>
 							<div class="col-lg-3 col-md-4">
@@ -80,7 +88,7 @@ $wp_query = new WP_Query($ra_args);
 $ra_args = array('post_type' => 'people', 'posts_per_page' => 6, 'post_status' => 'publish', 'order' => 'ASC', 'orderby' => 'date');
 $wp_query = new WP_Query($ra_args);
 ?>
-				<div class="row">
+				<div class="row about-leadership">
 					<div class="col-md-12"><h2>Leadership Team</h2></div>
 					<?php while (have_posts()): the_post();?>
 						<div class="col-lg-4 col-md-6">
