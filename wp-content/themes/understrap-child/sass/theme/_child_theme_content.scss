@@ -96,6 +96,21 @@ body.page-template-contact, {
 	}
 }
 
+//** PAGES
+
+body.page-template-clients {
+	#testimonials {
+		background: $yellowgreen;
+		.entry-content {
+			padding: 32px;
+			border: 1px solid white;
+		}
+		.quote-text {
+			color: white;
+		}
+	}
+}
+
 //** POST
 // blog
 

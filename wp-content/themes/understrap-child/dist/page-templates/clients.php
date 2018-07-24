@@ -12,6 +12,7 @@ get_header();
 
 $container   = get_theme_mod( 'understrap_container_type' );
 
+$pageHTML = '';
 ?>
 
 <div class="wrapper" id="full-width-page-wrapper">
@@ -44,6 +45,7 @@ $container   = get_theme_mod( 'understrap_container_type' );
 					<div class="col-md-3"></div>
 				</div>
 
+					<!-- CLIENT LOGO GRID -->
 					<?php
 						// make sure to exclude renegade client post by ID number: 6274
 						$rc_args = array('post_type' => 'clients', 'posts_per_page' => 16, 'post__not_in' => array(6274),  'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date');
@@ -71,6 +73,32 @@ $container   = get_theme_mod( 'understrap_container_type' );
 
 					<?php endwhile; // end of the loop. ?>
 					</div>
+
+					<!-- TESTIMONIALS -->
+					<?php
+						$testimonial_args = array( 'post_type' => 'clients', 'posts_per_page' => -1 , 'orderby' => 'menu_order', /*'meta_key' => $meta_key,*/ 'order' => 'ASC'); 
+						$testimonial_loop = new WP_Query( $testimonial_args );
+					?>
+					<div class="row" id="testimonials">
+						<div class="col-md-12">
+							<h2 class="aligncenter">Recent Praise for Renegade</h2>
+						</div>
+						<?php
+							$testimonial_args = array( 'post_type' => 'clients', 'posts_per_page' => -1 , 'orderby' => 'menu_order', /*'meta_key' => $meta_key,*/ 'order' => 'ASC'); 
+							$testimonial_loop = new WP_Query( $testimonial_args );
+							if(have_posts($testimonial_loop)):			
+								while ( $testimonial_loop->have_posts() ) : $testimonial_loop->the_post();               
+									if(have_rows('client_testimonial')):
+										while(have_rows('client_testimonial')) : the_row();
+											echo '<div class="col-md-6">';
+											echo get_template_part( 'loop-templates/content', 'testimonial' );
+											echo '</div>';
+										endwhile;
+									endif;
+								endwhile;
+							endif;
+						?>
+					</div><!-- .row -->
 
 				</main><!-- #main -->
 
