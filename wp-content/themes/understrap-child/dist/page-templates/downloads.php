@@ -52,25 +52,39 @@ $wp_query = new WP_Query( $rn_args );
 					<?php endwhile; // end of the loop. ?>
 				</div>
 
-				<!-- scroller status -->
+				<!-- scroller button -->
 				<div class="row">
-					<div class="col">
+					<div class="col-lg-3"></div>
+					<div class="col-lg-6">
+						<div><button type="button" class="btn btn-primary btn-block view-more-button">VIEW MORE</button></div>
 						<div class="loader-wheel .infinite-scroll-request">
 							<i><i><i><i><i><i><i><i><i><i><i><i>
 							</i></i></i></i></i></i></i></i></i></i></i></i>
 						</div>
-						<!-- <p><button class="view-more-button">View some more</button></p> -->
 					</div>
+					<div class="col-lg-3"></div>
 				</div>
 				
 				<!-- The pagination component -->
-				<div class="row" style="visibility: hidden">
+				<div class="row">
 					<div class="col">
 						<?php understrap_pagination();?>
 					</div>
 				</div>
 				<?php endif; ?>
 
+				<!-- SUBSCRIBE FORM -->
+				<div class="row form-subscribe">
+					<div class="col-lg-6 col-sm-12">
+						<h2>Subscribe</h2>
+						<h4>to the Latest in</h4>
+						<h4> Renegade Thinking</h4>
+					</div>
+					<div class="col-lg-6 col-sm-12">
+						<?php echo do_shortcode('[mc4wp_form id="5405"]') ?>
+					</div>';
+				</div>
+				
 			</main><!-- #main -->
 
 		</div><!-- #primary -->

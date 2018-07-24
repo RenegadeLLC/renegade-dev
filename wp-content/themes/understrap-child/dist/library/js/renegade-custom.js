@@ -47,8 +47,13 @@ jQuery(document).ready(function ($) {
         // Infinite Scroll options...
         path: 'a.page-link',
         append: 'div[class*="grid__item"]',
-        loadOnScroll: true,
+        loadOnScroll: false,
+        button: '.view-more-button',
+        // load pages on button click
+        scrollThreshold: false,
+        // disable loading on scroll
         status: '.loader-wheel',
+        hideNav: '.pagination',
         outlayer: iso
         // debug: true,
     });
