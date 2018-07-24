@@ -24,8 +24,11 @@ $wp_query = new WP_Query( $rn_args );
 
 	<div class="row jumbotron jumbotron-fluid">
 		<!-- Placehoder -->
-		<div class="col">
-			<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+		<div class="col-md-6">
+			<h2>The Cut</h2>
+			<h4>Excepteur sint occaecat cupidatat non proident, in culpa qui officia deserunt mollit anim.</h4>
+		</div>
+		<div class="col-md-6">
 		</div>
 	</div>
 
@@ -65,6 +68,18 @@ $wp_query = new WP_Query( $rn_args );
 						</div>
 					</div>
 					<?php endif; ?>
+
+				<!-- SUBSCRIBE FORM -->
+				<div class="row form-subscribe">
+					<div class="col-lg-6 col-sm-12">
+						<h2>Subscribe</h2>
+						<h4>to the Latest in</h4>
+						<h4> Renegade Thinking</h4>
+					</div>
+					<div class="col-lg-6 col-sm-12">
+						<?php echo do_shortcode('[mc4wp_form id="5405"]') ?>
+					</div>';
+				</div>
 
 				</main><!-- #main -->
 

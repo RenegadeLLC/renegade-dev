@@ -21,10 +21,12 @@ $wp_query = new WP_Query($rpd_args);
 
 	<div class="row jumbotron jumbotron-fluid">
 		<!-- Placehoder -->
-		<div class="col">
+		<div class="col-md-8">
 			<h2>Regade Thinking</h2>
-			<p>Excepteur sint occaecat cupidatat non proident, in
-culpa qui officia deserunt mollit anim.</p>
+			<h4>Excepteur sint occaecat cupidatat non proident, in
+culpa qui officia deserunt mollit anim.</h4>
+		</div>
+		<div class="col-md-4">
 		</div>
 	</div>
 
@@ -67,6 +69,18 @@ culpa qui officia deserunt mollit anim.</p>
 					<div class="col">
 						<?php understrap_pagination();?>
 					</div>
+				</div>
+
+				<!-- SUBSCRIBE FORM -->
+				<div class="row form-subscribe">
+					<div class="col-lg-6 col-sm-12">
+						<h2>Subscribe</h2>
+						<h4>to the Latest in</h4>
+						<h4> Renegade Thinking</h4>
+					</div>
+					<div class="col-lg-6 col-sm-12">
+						<?php echo do_shortcode('[mc4wp_form id="5405"]') ?>
+					</div>';
 				</div>
 
 			</main><!-- #main -->

@@ -94,11 +94,11 @@ $wp_query = new WP_Query($ra_args);
 				</div>
 
 				<!-- SUBSCRIBE FORM -->
-				<div class="row">
+				<div class="row form-subscribe">
 					<div class="col-lg-6 col-sm-12">
-						<h1>Subscribe</h1>
-						<h3>to the Latest in</h3>
-						<h3> Renegade Thinking</h3>
+						<h2>Subscribe</h2>
+						<h4>to the Latest in</h4>
+						<h4> Renegade Thinking</h4>
 					</div>
 					<div class="col-lg-6 col-sm-12">
 						<?php echo do_shortcode('[mc4wp_form id="5405"]') ?>

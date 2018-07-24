@@ -16,8 +16,10 @@ $container = get_theme_mod('understrap_container_type');
 
 		<div class="row jumbotron jumbotron-fluid">
 			<!-- Placehoder -->
-			<div class="col-md-12 hero">
+			<div class="col-md-8">
 				<h2>At Renegade we help courageous marketers cut through their content nightmares.</h2>
+			</div>
+			<div class="col-md-4">
 			</div>
 		</div>
 
@@ -92,12 +94,11 @@ $wp_query = new WP_Query($ra_args);
 				</div>
 
 				<!-- SUBSCRIBE FORM -->
-				
-				<div class="row">
+				<div class="row form-subscribe">
 					<div class="col-lg-6 col-sm-12">
-						<h1 style="color:#000000;">Subscribe</h1>
-						<h3 style="color:#000000;">to the Latest in</h3>
-						<h3 style="color:;"> Renegade Thinking</h3>
+						<h2>Subscribe</h2>
+						<h4>to the Latest in</h4>
+						<h4> Renegade Thinking</h4>
 					</div>
 					<div class="col-lg-6 col-sm-12">
 						<?php echo do_shortcode('[mc4wp_form id="5405"]') ?>

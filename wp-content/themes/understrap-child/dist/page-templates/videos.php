@@ -24,8 +24,11 @@ $wp_query = new WP_Query( $rn_args );
 
 	<div class="row jumbotron jumbotron-fluid">
 		<!-- Placehoder -->
-		<div class="col">
-			<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+		<div class="col-md-6">
+			<h2>Videos</h2>
+			<h4>Excepteur sint occaecat cupidatat non proident, in culpa qui officia deserunt mollit anim.</h4>
+		</div>
+		<div class="col-md-6">
 		</div>
 	</div>
 
