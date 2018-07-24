@@ -16,8 +16,11 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 		<div class="row jumbotron jumbotron-fluid">
 			<!-- Placehoder -->
-			<div class="col">
-				<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+			<div class="col-md-8">
+				<h2>Renegade Services</h2>
+				<h4>In theory, content is king. In practice, it is more like an ungainly prince, teasing you with his promise but ultimately failing to live up to his potential. We solve for that and let your content reign supreme.</h4>
+			</div>
+			<div class="col-md-4">
 			</div>
 		</div>
 
@@ -29,7 +32,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 
                 <?php while ( have_posts() ) : the_post(); ?>
 
-                    <?php get_template_part( 'loop-templates/content', 'page' ); ?>
+                    <?php get_template_part( 'loop-templates/content', 'services' ); ?>
 
                     <?php
                     // If comments are open or we have at least one comment, load up the comment template.
