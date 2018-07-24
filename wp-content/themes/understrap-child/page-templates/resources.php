@@ -22,7 +22,9 @@ $wp_query = new WP_Query($rpd_args);
 	<div class="row jumbotron jumbotron-fluid">
 		<!-- Placehoder -->
 		<div class="col">
-			<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+			<h2>Regade Thinking</h2>
+			<p>Excepteur sint occaecat cupidatat non proident, in
+culpa qui officia deserunt mollit anim.</p>
 		</div>
 	</div>
 

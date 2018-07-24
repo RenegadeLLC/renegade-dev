@@ -13,7 +13,7 @@ get_header();
 $container = get_theme_mod( 'understrap_container_type' );
 
 $paged = get_query_var('paged');
-$rn_args = array( 'post_type' => 'projects', 'posts_per_page' => 8, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged  );
+$rn_args = array( 'post_type' => 'projects', 'posts_per_page' => 6, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged  );
 $wp_query = new WP_Query( $rn_args );
 
 ?>
@@ -24,8 +24,11 @@ $wp_query = new WP_Query( $rn_args );
 
 	<div class="row jumbotron jumbotron-fluid">
 		<!-- Placehoder -->
-		<div class="col">
-			<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+		<div class="col-md-6">
+			<h2>Case Studies</h2>
+			<h4>Excepteur sint occaecat cupidatat non proident, in culpa qui officia deserunt mollit anim. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed.</h4>
+		</div>
+		<div class="col-md-6">
 		</div>
 	</div>
 

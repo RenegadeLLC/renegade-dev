@@ -16,8 +16,8 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 		<div class="row jumbotron jumbotron-fluid">
 			<!-- Placehoder -->
-			<div class="col">
-				<h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+			<div class="col-md-12 hero">
+				<h2>At Renegade we help courageous marketers cut through their content nightmares.</h2>
 			</div>
 		</div>
 
@@ -27,20 +27,69 @@ $container = get_theme_mod( 'understrap_container_type' );
 
 				<main class="site-main" id="main" role="main">
 
-                <?php while ( have_posts() ) : the_post(); ?>
+				<div class="row">
+					<div class="col-md-12">
+						<?php while ( have_posts() ) : the_post(); ?>
+						<?php the_content(); ?> <!-- Page Content -->
+						<?php endwhile; // end of the loop. ?>
+					</div>
+				</div>
 
-                    <?php get_template_part( 'loop-templates/content', 'page' ); ?>
+				<!-- secondary content grids -->
+				<!-- CASE STUDIES -->
+				<?php
+					$ra_args = array('post_type' => 'projects', 'posts_per_page' => 3,  'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date');
+					$wp_query = new WP_Query($ra_args); 
+				?>
+				<div class="row">
+					<div class="col-md-12"><h2>Case Studies</h2></div>
+					<?php while (have_posts()): the_post();?>
+					<div class="col-lg-4 col-md-6">
+						<?php $post_type = get_post_type();
+							if ($post_type == 'projects'):
+								get_template_part('loop-templates/content', 'project');
+							endif;
+						?>
+					</div>
+					<?php endwhile; // end of the loop. ?>
+				</div>
 
-                    <?php
-                    // If comments are open or we have at least one comment, load up the comment template.
-                    if ( comments_open() || get_comments_number() ) :
+				<!-- CLIENTS -->
+				<?php
+					// make sure to exclude renegade client post by ID number: 6274
+					$ra_args = array('post_type' => 'clients', 'posts_per_page' => 16, 'post__not_in' => array(6274),  'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date');
+					$wp_query = new WP_Query($ra_args); 
+				?>
+				<div class="row">
+					<div class="col-md-12"><h2>Clients</h2></div>
+					<?php while (have_posts()): the_post(); ?>
+						<div class="col-lg-3 col-md-4">
+						<?php $post_type = get_post_type();
+							if ($post_type == 'clients'):
+								get_template_part('loop-templates/content', 'client');
+							endif;
+						?>
+						</div>
+					<?php endwhile; // end of the loop. ?>
+				</div>
 
-                        comments_template();
-
-                    endif;
-                    ?>
-
-                <?php endwhile; // end of the loop. ?>
+				<!-- LEADERSHIP -->
+				<?php
+					$ra_args = array('post_type' => 'people', 'posts_per_page' => 6,  'post_status' => 'publish', 'order' => 'ASC', 'orderby' => 'date');
+					$wp_query = new WP_Query($ra_args); 
+				?>
+				<div class="row">
+					<div class="col-md-12"><h2>Leadership Team</h2></div>
+					<?php while (have_posts()): the_post();?>
+					<div class="col-lg-4 col-md-6">
+						<?php $post_type = get_post_type();
+							if ($post_type == 'people'):
+								get_template_part('loop-templates/content', 'people');
+							endif;
+						?>
+					</div>
+					<?php endwhile; // end of the loop. ?>
+				</div>
 
                 </main><!-- #main -->
 

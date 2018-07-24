@@ -18,7 +18,7 @@
 // leadership
 body.page-template-people {
 	.row.leadership-team {
-		background-color: $orangered;
+		// background-color: $orangered;
 		.leadership-team-title {
 			color: white;
 			text-align: center;
@@ -51,7 +51,8 @@ body.page-template-people {
 // About Pages
 body.page-template-about,
 body.page-template-clients,
-body.page-template-projects {
+body.page-template-projects,
+body.page-template-people {
 	.jumbotron {
 		background: $orangered;
 	}
