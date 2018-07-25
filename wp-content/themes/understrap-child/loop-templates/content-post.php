@@ -1,12 +1,10 @@
 <?php
 /**
- * Partial template for content 
+ * Partial template for blog content list item
  *
  * @package understrap
  */
-
-
-	$title = get_the_title( $post -> ID);
+$title = get_the_title( $post -> ID);
 	$date = get_the_date('F j, Y', $post -> ID);
 	$excerpt= get_the_excerpt();
 	$link = get_permalink($post -> ID);
@@ -17,7 +15,7 @@
 	$post_html = '';
 	
 
-	//$post_html .= '<div class="feed-item post-item col-lg-4 col-md-6 col-sm-12 newsletter-excerpt resource-excerpt">';	
+	$post_html .= '<div class="card">';	
 	
 	$post_html .= '<a href="' . $link . '">';
 	// $post_html .= '<div class="post-label-ct">BLOG</div>';
@@ -30,16 +28,56 @@
 	$post_html .= '</p></a>';	
 	$post_html .= '<a href="' . $post_edit_link  . '">' . 'Edit'  . '</a>';
 	$post_html .= '</div>';
-	//$post_html .= '</div><!-- .post-item -->';
-		
-    echo($post_html);
-		
-		/*wp_link_pages( array(
-			'before' => '<div class="page-links">' . __( 'Pages:', 'understrap' ),
-			'after'  => '</div>',
-		) );*/
-		?>
+?>
 
+<article <?php post_class();?> id="post-<?php the_ID();?>">
 
+<header class="entry-header">
 
+	<?php 
+		// the_title(sprintf('<h3 class="entry-title"><a href="%s" rel="bookmark">', esc_url(get_permalink())),
+// '</a></h3>');
+	?>
 
+	<?php if ('post' == get_post_type()): ?>
+
+		<!-- <div class="entry-meta"> -->
+			<?php 
+			// understrap_posted_on();
+			?>
+		<!-- </div> -->
+		<!-- .entry-meta -->
+
+	<?php endif;?>
+
+</header><!-- .entry-header -->
+
+<?php 
+	// echo get_the_post_thumbnail($post->ID, 'large'); 
+?>
+
+<div class="entry-content">
+
+	<?php
+// the_excerpt();
+	echo $post_html;
+?>
+
+	<?php
+wp_link_pages(array(
+'before' => '<div class="page-links">' . __('Pages:', 'understrap'),
+'after' => '</div>',
+));
+?>
+
+</div><!-- .entry-content -->
+
+<footer class="entry-footer">
+
+	<?php 
+	// understrap_entry_footer();
+	?>
+
+</footer><!-- .entry-footer -->
+
+</article><!-- #post-## -->

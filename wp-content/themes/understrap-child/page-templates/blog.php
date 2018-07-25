@@ -44,7 +44,7 @@ $wp_query = new WP_Query($rb_args);
 							<?php
 								// $postnum++;
 								// echo "<h2>" . $postnum . "</h2>";
-								get_template_part('loop-templates/content', 'blog');
+								get_template_part('loop-templates/content', 'post');
 								?>
 						</div>
 						<?php endwhile; // end of the loop. ?>

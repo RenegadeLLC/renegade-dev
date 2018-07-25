@@ -13,12 +13,17 @@ $rn_introduction= get_field('rn_introduction' , $post -> ID);
 $rn_banner = get_field('rn_banner', $post -> ID);
 $rn_size = "half";
 
-$newsletter_html = '';
-$newsletter_html .= '';
+$newsletter_html = '<div class="card">';
 $newsletter_html .= '<a href="' . $rn_link . '">';
-$newsletter_html .= '<div class="date">' . $rn_date . '</div>';
-$newsletter_html .= '<div>' . wp_get_attachment_image($rn_banner, $rn_size ) . '</div>';
-$newsletter_html .= '<div class="card-excerpt">' . $rn_introduction . '</div>';
+$newsletter_html .= '<div class="card-img-top">' . wp_get_attachment_image($rn_banner, $rn_size ) . '</div>';
+$newsletter_html .= '<div class="card-body">';
+$newsletter_html .= '<h5 class="card-title">' . $rn_title . '</h5>';
+$newsletter_html .= '<p class="card-text">';
+$newsletter_html .= '<span class="date">' . $rn_date . '</span><br>';
+$newsletter_html .= '<span class="card-excerpt">' . $rn_introduction . '</span>';
+$newsletter_html .= '</p>';
+$newsletter_html .= '</div><!-- .card-body -->';
+$newsletter_html .= '</div><!-- .card -->';
 
 ?>
 
@@ -26,13 +31,17 @@ $newsletter_html .= '<div class="card-excerpt">' . $rn_introduction . '</div>';
 
 <header class="entry-header">
 	<div class="post-label-ct">NEWSLETTER</div>
-	<?php the_title(sprintf('<h3 class="entry-title"><a href="%s" rel="bookmark">', esc_url(get_permalink())),
-'</a></h3>');?>
+	<?php 
+	// the_title(sprintf('<h3 class="entry-title"><a href="%s" rel="bookmark">', esc_url(get_permalink())),
+// '</a></h3>');
+	?>
 
 	<?php if ('post' == get_post_type()): ?>
 
 		<div class="entry-meta">
-			<?php understrap_posted_on();?>
+			<?php 
+				// understrap_posted_on();
+			?>
 		</div><!-- .entry-meta -->
 
 	<?php endif;?>
@@ -55,7 +64,9 @@ $newsletter_html .= '<div class="card-excerpt">' . $rn_introduction . '</div>';
 
 <footer class="entry-footer">
 
-	<?php understrap_entry_footer();?>
+	<?php 
+	// understrap_entry_footer();
+	?>
 
 </footer><!-- .entry-footer -->
 
