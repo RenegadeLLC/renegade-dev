@@ -37,8 +37,9 @@ $clientsHTML = '';
 // if($client_name != 'Renegade'):
 
 	
-	if($case_study == 'Yes'):
+	if($case_study == 'Yes' && $case_study_url):
 		$clientsHTML .= '<a href="' . $case_study_url . '">';
+		// $clientsHTML .= '<p>' . $case_study_url . '</p>';
 	endif;
 	
 	// $clientsHTML .= '<div>CLIENT ID: ' . $client_id . '</div>';
