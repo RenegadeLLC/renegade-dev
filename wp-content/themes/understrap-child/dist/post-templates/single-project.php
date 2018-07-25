@@ -21,6 +21,7 @@ $caseHTML .= '';
 $caseHTML .= '<a href="' . $case_url . '">';
 $caseHTML .= '<div><img src="'. $project_thumbnail_image . '" title="' . $client . ': ' . $project_title . '"></div>';
 $caseHTML .= '<div>' . $client . '<br>' . $project_title . '</div>';
+$caseHTML .= '<div><h2>' . $summary_headline . '</h2><p>' . $summary_text . '</p></div>';
 $caseHTML .= '</a>';
 
 ?>

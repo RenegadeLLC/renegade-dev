@@ -23,10 +23,10 @@ $caseHTML .= '<a href="' . $case_url . '">';
 $caseHTML .= '<div class="card-img-top"><img src="'. $project_thumbnail_image . '" title="' . $client . ': ' . $project_title . '"></div>';
 $caseHTML .= '<div class="card-body">';
 $caseHTML .= '<h5 class="card-title">' . $client . '</h5>';
-$caseHTML .= '<p class="card-text">';
-$caseHTML .= '<span class="card-excerpt">' . $project_title . '</span>';
-$caseHTML .= '</p></a>';
-$caseHTML .= '</div><!-- .card-body -->';
+// $caseHTML .= '<p class="card-text">';
+// $caseHTML .= '<span class="card-excerpt">' . $project_title . '</span>';
+// $caseHTML .= '</p>';
+$caseHTML .= '</a></div><!-- .card-body -->';
 $caseHTML .= '</div><!-- .card -->';
 
 ?>

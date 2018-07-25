@@ -39,6 +39,7 @@ $wp_query = new WP_Query( $rn_args );
 				<main class="site-main" id="main" role="main">
 
 					<div class="row">
+					
 					<?php while ( have_posts() ) : the_post(); ?>
 
 						<div class="col-lg-4 col-md-6">
