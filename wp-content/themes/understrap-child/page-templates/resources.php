@@ -11,7 +11,7 @@ $container = get_theme_mod('understrap_container_type');
 //loop for paged posts
 if (get_query_var('paged')) {$paged = get_query_var('paged');} elseif (get_query_var('page')) {$paged = get_query_var('page');} else { $paged = 1;}
 
-$rpd_args = array('post_type' => array('newsletters', 'downloads', 'video'),  'posts_per_page' => 6, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged);
+$rpd_args = array('post_type' => array('newsletters', 'downloads', 'video','podcasts','post'),  'posts_per_page' => 10, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged);
 $wp_query = new WP_Query($rpd_args);
 ?>
 
@@ -47,6 +47,10 @@ culpa qui officia deserunt mollit anim.</h4>
 								get_template_part('loop-templates/content', 'download');
 							elseif ($post_type == 'videos'):
 								get_template_part('loop-templates/content', 'video');
+								elseif ($post_type == 'podcasts'):
+									get_template_part('loop-templates/content', 'podcast');
+							elseif ($post_type == 'post'):
+								get_template_part('loop-templates/content', 'post');
 							endif;
 						?>
 					</div>
