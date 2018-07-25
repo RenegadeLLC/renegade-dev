@@ -1,8 +1,8 @@
 <?php
 /**
- * Single post partial template for case studies.
+ * Single post partial template for blog posts.
  *
- * @package understrap-child
+ * @package understrap
  */
 
 ?>
