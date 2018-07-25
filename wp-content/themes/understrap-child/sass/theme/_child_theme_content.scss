@@ -82,6 +82,14 @@ body.page-template-about {
 }
 
 
+body.page-template-projects {
+	.card {
+		border: none !important;
+		.card-title {
+			text-align: center;
+		}
+	}
+}
 
 // Services Pages
 body.page-template-services {

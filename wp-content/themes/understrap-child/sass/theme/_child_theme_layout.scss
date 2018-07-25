@@ -345,6 +345,7 @@ ul.dropdown-menu.show {
 
 //** CARDS
 .card {
+	margin-top: 2rem;
 	border: 1px solid #eee !important;
 	border-radius: 0;
 	border: none; // margin: .65rem;
@@ -384,6 +385,10 @@ ul.dropdown-menu.show {
 // 	display: flex;
 // 	flex-wrap: wrap;
 // }
+
+.view-more-button {
+	margin: 2rem 0;
+}
 
 .loader-wheel {
 	display: none;

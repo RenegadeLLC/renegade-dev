@@ -18,10 +18,16 @@ $summary_headline = get_field('summary_headline', $post -> ID);
 $summary_text = get_field('summary_text', $post -> ID);
 
 $caseHTML .= '';
+$caseHTML .= '<div class="card">';	
 $caseHTML .= '<a href="' . $case_url . '">';
-$caseHTML .= '<div><img src="'. $project_thumbnail_image . '" title="' . $client . ': ' . $project_title . '"></div>';
-$caseHTML .= '<div>' . $client . '<br>' . $project_title . '</div>';
-$caseHTML .= '</a>';
+$caseHTML .= '<div class="card-img-top"><img src="'. $project_thumbnail_image . '" title="' . $client . ': ' . $project_title . '"></div>';
+$caseHTML .= '<div class="card-body">';
+$caseHTML .= '<h5 class="card-title">' . $client . '</h5>';
+// $caseHTML .= '<p class="card-text">';
+// $caseHTML .= '<span class="card-excerpt">' . $project_title . '</span>';
+// $caseHTML .= '</p>';
+$caseHTML .= '</a></div><!-- .card-body -->';
+$caseHTML .= '</div><!-- .card -->';
 
 ?>
 
@@ -52,7 +58,9 @@ $caseHTML .= '</a>';
 
 	<footer class="entry-footer">
 
-		<?php understrap_entry_footer();?>
+		<?php 
+			// understrap_entry_footer();
+		?>
 
 	</footer><!-- .entry-footer -->
 

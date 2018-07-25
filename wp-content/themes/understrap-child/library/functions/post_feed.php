@@ -80,7 +80,7 @@ function build_feed(){
             //use buffering to capture HTML
             
             $post_type = get_post_type();
-            echo '<div class="card">';	
+            echo '<div class="card-deck">';	
             if($post_type == 'podcasts'):   
                 echo '<div class="card-body">';	
                 get_template_part( '/loop-templates/content', 'podcast' );

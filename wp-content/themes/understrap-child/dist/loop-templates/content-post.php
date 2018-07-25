@@ -9,8 +9,8 @@ $title = get_the_title( $post -> ID);
 	$excerpt= get_the_excerpt();
 	$link = get_permalink($post -> ID);
 	$post_edit_link = get_edit_post_link();
-	$thumbail = get_the_post_thumbnail($post->ID, 'large', array('class' => 'card-img-top'));
-
+	// $thumbail = get_the_post_thumbnail($post->ID, 'large', array('class' => 'card-img-top'));
+	$thumbnail = get_the_post_thumbnail( $post->ID, 'large' );
 	    
 	$post_html = '';
 	
@@ -19,15 +19,16 @@ $title = get_the_title( $post -> ID);
 	
 	$post_html .= '<a href="' . $link . '">';
 	// $post_html .= '<div class="post-label-ct">BLOG</div>';
-	$post_html .= $thumbail;
+	$post_html .= '<div class="card-img-top">' . $thumbnail . '</div>';
 	$post_html .= '<div class="card-body">';
-	$post_html .= '<h3 class="card-title">' . $title . '</h3>';
+	$post_html .= '<h5 class="card-title">' . $title . '</h5>';
 	$post_html .= '<p class="card-text">';
 	$post_html .= '<span class="card-date">' . $date . '</span><br>';
 	$post_html .= '<span class="card-excerpt">' . $excerpt . '</span>';
 	$post_html .= '</p></a>';	
-	$post_html .= '<a href="' . $post_edit_link  . '">' . 'Edit'  . '</a>';
-	$post_html .= '</div>';
+	// $post_html .= '<a href="' . $post_edit_link  . '">' . 'Edit'  . '</a>';
+	$post_html .= '</div><!-- .card-body -->';
+	$post_html .= '</div><!-- .card -->';
 ?>
 
 <article <?php post_class();?> id="post-<?php the_ID();?>">
