@@ -65,6 +65,8 @@ $podcast_html .= '<div><a href="' . $post_edit_link  . '">' . 'Edit'  . '</a></d
 			echo $podcast_html;
 		?>
 
+		<?php understrap_post_nav(); ?>
+
 		<?php
 		wp_link_pages( array(
 			'before' => '<div class="page-links">' . __( 'Pages:', 'understrap' ),

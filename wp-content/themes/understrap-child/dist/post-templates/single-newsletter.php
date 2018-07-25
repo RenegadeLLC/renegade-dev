@@ -44,6 +44,8 @@ $newsletter_html .= '<div class="card-excerpt">' . $rn_introduction . '</div>';
 			echo $newsletter_html;
 		?>
 
+		<?php understrap_post_nav(); ?>
+
 		<?php
 		wp_link_pages( array(
 			'before' => '<div class="page-links">' . __( 'Pages:', 'understrap' ),

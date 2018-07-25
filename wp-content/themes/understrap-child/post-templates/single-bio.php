@@ -52,7 +52,10 @@ $rp_contact_link = get_field('rp_contact_link');
 		$people_html .= '</section>';
 
 		echo $people_html;
+		
 		?>
+
+		<?php understrap_post_nav(); ?>
 
 		<?php
 		wp_link_pages( array(
