@@ -28,22 +28,24 @@
 //    $podcast_html .= '<a href="' . $podcast_url . '" target="_blank">';
 	$podcast_html = '<div class="card">';
 	$podcast_html .= '<a href="' . $post_link . '">';
+	$podcast_html .= '<div class="card-img-top"><img src="' . $profile_image .'" alt="' . $first_name . ' ' . $last_name . '"></div>';
 	$podcast_html .= '<div class="card-body">';
-	$podcast_html .= '<div class="post-label-ct">PODCAST</div>';
+	// $podcast_html .= '<div class="post-label-ct">PODCAST</div>';
 	if($podcast_date){
-		$podcast_html .=  '<div class="date">' . $podcast_date . '</div>';
+		$podcast_html .=  '<p class="date">' . $podcast_date . '</p>';
 		
 	}
 	$podcast_html .= '<h5 class="card-title">' . $podcast_title  . '</h5>';
-	$podcast_html .= '<div class="podcast-inset">';
-	$podcast_html .= '<div class="podcast-image w-50 fleft"><img src="' . $profile_image .'" alt="' . $first_name . ' ' . $last_name . '"></div><!--.podcast-image -->';
-	$podcast_html .= '<div class="w-50 fleft podcast-details" style="background-color:#f2f2f2;">' . $podcast_details . '</div><!--.podcast-details -->';
-	$podcast_html .= '</div><!--.podcast-inset-->';
+	// $podcast_html .= '<div class="podcast-inset">';
+	// $podcast_html .= '<div class="podcast-image w-50 fleft"><img src="' . $profile_image .'" alt="' . $first_name . ' ' . $last_name . '"></div><!--.podcast-image -->';
+	$podcast_html .= '<p class="card-text"><span class="details">' . $podcast_details . '</span><br>';
+	// $podcast_html .= '<span class="details">' . $podcast_details . '</span><br>';
+	// $podcast_html .= '</div><!--.podcast-inset-->';
 	if($podcast_description){
-		$podcast_html .=  '<div class="excerpt"><p>' . $podcast_description . '</p></div><div style="clear:both"></div>';
+		$podcast_html .=  '<span class="excerpt"><p>' . $podcast_description . '</span></div>';
 	}
 	$podcast_html .=  '</a>';
-	$podcast_html .= '<div><a href="' . $post_edit_link  . '">' . 'Edit'  . '</a></div>';
+	// $podcast_html .= '<div><a href="' . $post_edit_link  . '">' . 'Edit'  . '</a></div>';
 	$podcast_html .= '</div><!-- .card-body -->';
 	$podcast_html .= '</div><!-- .card -->';
 	echo($podcast_html);

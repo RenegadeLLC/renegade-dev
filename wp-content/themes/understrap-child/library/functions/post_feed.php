@@ -26,23 +26,18 @@ function build_feed(){
         
             if(have_rows('pinned_posts')):
                 while ( have_rows('pinned_posts') ) : the_row();
-            
+
                     $pinned_post = get_sub_field('pinned_post');
                     $post = $pinned_post;
                     setup_postdata( $post ); 
                     
                     $post_type = get_post_type($post -> ID);
-                    echo '<div class="card">';	
                     if($post_type == 'podcasts'):
-                        echo '<div class="card-body">';	
                         //get_template_part( '/loop-templates/content', 'podcast' );
                         include($loop_templates.'content-podcast.php');
-                        echo '</div>';	
                     elseif($post_type == 'newsletters'):
-                        echo '<div class="card-body">';	
                         //get_template_part( '/loop-templates/content', 'newsletter' );
                         include($loop_templates.'content-newsletter.php');
-                        echo '</div>';	
                     elseif($post_type == 'post'):
                         //get_template_part( '/loop-templates/content', 'post' );
                         include($loop_templates.'content-post.php');
@@ -50,7 +45,6 @@ function build_feed(){
                         //get_template_part( '/loop-templates/content', 'video' );
                         include($loop_templates.'content-video.php');
                     endif;
-                    echo '</div>';
                     wp_reset_postdata();
                 endwhile;
                
@@ -119,7 +113,8 @@ function build_feed(){
     endwhile;   
     endif;
     ob_end_clean();
-    $feedHTML .= '</div></div><!-- .row -->';
+    $feedHTML .= '</div><!-- .card-columns -->';
+    $feedHTML .= '</div><!-- .row -->';
     return $feedHTML;
 }
 

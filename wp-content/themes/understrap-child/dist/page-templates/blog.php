@@ -13,7 +13,7 @@ $container = get_theme_mod('understrap_container_type');
 if (get_query_var('paged')) {$paged = get_query_var('paged');} elseif (get_query_var('page')) {$paged = get_query_var('page');} else { $paged = 1;}
 
 // $paged = get_query_var('paged');
-$rb_args = array('post_type' => 'post', 'posts_per_page' => 6, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged);
+$rb_args = array('post_type' => 'post', 'posts_per_page' => 9, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged);
 $wp_query = new WP_Query($rb_args);
 ?>
 

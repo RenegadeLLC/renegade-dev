@@ -13,7 +13,7 @@ $container = get_theme_mod( 'understrap_container_type' );
 //loop for paged posts
 if (get_query_var('paged')) {$paged = get_query_var('paged');} elseif (get_query_var('page')) {$paged = get_query_var('page');} else { $paged = 1;}
 
-$rn_args = array( 'post_type' => 'newsletters', 'posts_per_page' => 4, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged  );
+$rn_args = array( 'post_type' => 'newsletters', 'posts_per_page' => 6, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged  );
 $wp_query = new WP_Query( $rn_args );
 
 ?>
