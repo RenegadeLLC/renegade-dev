@@ -126,11 +126,14 @@ $pageHTML = '';
                                 $pageHTML .= $clientsHTML;
 
                             elseif ($content_section_type == 'Team Bio'):
-
-                                $team_member = get_sub_field('team_bio');
-                                $bioHTML = do_bio($team_member, $headlineHTML);
+                                $bioType = get_sub_field('number_of_people_to_display');
+                                if ($bioType == 'Single Bio'):
+                                    $team_member = get_sub_field('single_bio');
+                                    $bioHTML = do_bio($team_member, $headlineHTML);
+                                elseif ($bioType == 'All Team Members'):
+                                    $bioHTML = all_bios();
+                                endif;
                                 $pageHTML .= $bioHTML;
-
                             elseif ($content_section_type == 'Post Feed'):
 
                                 $pageHTML .= $headlineHTML;

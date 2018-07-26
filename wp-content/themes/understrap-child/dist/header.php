@@ -38,27 +38,23 @@ endif;
 <div class="hfeed site" id="page">
 
 	<!-- ******************* The Navbar Area ******************* -->
-<div class="wrapper-fluid wrapper-navbar" id="wrapper-navbar" itemscope itemtype="http://schema.org/WebSite">
-<?php if ($container == 'Fixed Width Container'):?>
-<div class="container" >
-<?php elseif ($container == 'Full Width Container'):?>
-<div class="container-fluid" >
+	<div id="wrapper-navbar" itemscope itemtype="http://schema.org/WebSite">
 
-<?php endif;?>
+
 		<a class="skip-link screen-reader-text sr-only" href="#content"><?php esc_html_e( 'Skip to content', 'understrap' ); ?></a>
 		
 		<?php if($include_utility_header == 'Yes'):?>
-<div class="utility-bar">
-<?php echo '<div class="header-phone-ct">' .  $phone_number . '</div><!-- .header-phone-ct -->';
-if($include_search == 'Yes'):
-echo  '<div class="header-search-ct">' . do_shortcode($search_shortcode) . '</div><!-- .header-search-ct -->';
-endif;
-?>
-</div><!--  .utility-bar -->
-<?php endif;//END INCLUDE UTILITY HEADER CONDITIONAL?>
+		<div class="utility-bar">
+		<?php echo '<div class="header-phone-ct">' .  $phone_number . '</div><!-- .header-phone-ct -->';
+		if($include_search == 'Yes'):
+		echo  '<div class="header-search-ct">' . do_shortcode($search_shortcode) . '</div><!-- .header-search-ct -->';
+		endif;
+		?>
+		</div><!--  .utility-bar -->
+		<?php endif;//END INCLUDE UTILITY HEADER CONDITIONAL?>
 		<nav class="navbar navbar-expand-md">
 
-
+			<div class="container" >
 					<!-- Your site title as branding in the menu -->
 					<?php if ( ! $header_logo ) { ?>
 
@@ -97,10 +93,7 @@ endif;
 					)
 				); ?>
 
-			<?php if ( 'container' == $container ) : ?>
 			</div><!-- .container -->
-			<?php endif; ?>
 
 		</nav><!-- .site-navigation -->
-</div><!--  .container -->
 	</div><!-- .wrapper-navbar end -->

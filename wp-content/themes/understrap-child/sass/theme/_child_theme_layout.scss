@@ -45,6 +45,10 @@
 }
 
 //** NAVBAR
+
+/*
+
+
 .nav {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -306,6 +310,64 @@ ul.dropdown-menu.show {
 	border: none;
 	border-radius: 0px;
 }
+*/
+
+.navbar-nav {
+	.dropdown {
+		&:hover {
+			.dropdown-menu {
+				display:block;
+			}
+		}
+	}
+	.nav-link {
+		border-bottom: none;
+	}
+}
+@media (max-width: 767px) {
+	.navbar-nav .nav-link {
+		border-top: 3px solid #fff;
+		border-bottom: none;
+	}
+}
+
+// .navbar-nav .dropdown:hover {
+// 	.dropdown-menu {
+// 		display: block;
+// 	}
+// 	> a {
+// 		// background-color: #f2f2f2;
+// 	}
+// }
+
+/* Small devices (landscape phones, 544px and up) */
+@media (min-width: 0) {  
+	.navbar-brand {
+		max-width: 140px;
+	} 
+}
+ 
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {   
+	.navbar-brand {
+		max-width: 140px;
+	}
+}
+ 
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {  
+	.navbar-brand {
+		max-width: 100%;
+	}
+}
+ 
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+	.navbar-brand {
+		max-width: 100%;
+	}
+}
+
 
 //** BUTTONS
 .btn-secondary {
