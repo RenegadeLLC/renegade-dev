@@ -16,70 +16,70 @@
 	}
 }
 // leadership
-body.page-template-people {
-	.row.leadership-team {
-		// background-color: $orangered;
-		.leadership-team-title {
-			color: white;
-			text-align: center;
-			margin-top: 30px;
-		}
-		article {
-			.entry-content {
-				text-align: center;
-				background-color: white;
-				margin: 15px 0;
-				padding: 30px;
-			}
-			.people-bio-image {
-				text-align: center;
-				img {
-					border-radius: 50%;
-				}
-			}
-			.people-bio-info {
-				h2 {
-					font-size: 2rem;
-				}
-				h3 {
-					font-size: 1.3rem;
-				}
-			}
-		}
-	}
-}
+// body.page-template-people {
+// 	.row.leadership-team {
+// 		// background-color: $orangered;
+// 		.leadership-team-title {
+// 			color: white;
+// 			text-align: center;
+// 			margin-top: 30px;
+// 		}
+// 		article {
+// 			.entry-content {
+// 				text-align: center;
+// 				background-color: white;
+// 				margin: 15px 0;
+// 				padding: 30px;
+// 			}
+// 			.people-bio-image {
+// 				text-align: center;
+// 				img {
+// 					border-radius: 50%;
+// 				}
+// 			}
+// 			.people-bio-info {
+// 				h2 {
+// 					font-size: 2rem;
+// 				}
+// 				h3 {
+// 					font-size: 1.3rem;
+// 				}
+// 			}
+// 		}
+// 	}
+// }
 // About Pages
-body.page-template-about,
-body.page-template-clients,
-body.page-template-projects,
-body.page-template-people {
-	.jumbotron {
-		background: $orangered;
-	}
-}
+// body.page-template-about,
+// body.page-template-clients,
+// body.page-template-projects,
+// body.page-template-people {
+// 	.jumbotron {
+// 		background: $orangered;
+// 	}
+// }
 
 // About 
-body.page-template-about {
-	.about-contact {
-		background: $yellowgreen;
-	}
-	.about-leadership {
-		background: $orangered;
-		text-align: center;
-		img {
-			border-radius: 50%;
-		}
-	}
-	.about-projects {
-		background: $white;
-	}
-	.about-clients {
-		background: $gray-200;
-		.client-logo {
-			background: none;
-		}
-	}
-}
+// body.page-template-about {
+// 	.about-contact {
+// 		background: $yellowgreen;
+// 	}
+// 	.about-leadership {
+// 		background: $orangered;
+// 		text-align: center;
+// 		img {
+// 			border-radius: 50%;
+// 		}
+// 	}
+// 	.about-projects {
+// 		background: $white;
+// 	}
+// 	.about-clients {
+// 		background: $gray-200;
+// 		.client-logo {
+// 			background: none;
+// 		}
+// 	}
+// }
 
 
 body.page-template-projects {
@@ -154,6 +154,19 @@ body.page-template-newsletters {
 		.card-columns {
 			-webkit-column-count: 2;
 			column-count: 2;
+		}
+	}
+}
+
+// team bios
+.row.leadership-team {
+	.people-bio {
+		text-align: center;
+		.people-bio-image {
+			padding: 2.5rem 2.5rem 1rem 2.5rem;
+			img {
+				border-radius: 50%;
+			}
 		}
 	}
 }
