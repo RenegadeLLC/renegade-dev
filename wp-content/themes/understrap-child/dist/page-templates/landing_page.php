@@ -11,7 +11,9 @@ global $columnHTML;
 global $headlineHTML;
 
 get_header();
-$container = get_theme_mod('understrap_container_type');
+// $container = get_theme_mod('understrap_container_type');
+
+$container = get_field('container_width', 'option');
 
 $pageHTML = '';
 
@@ -19,11 +21,19 @@ $pageHTML = '';
 
 <div class="wrapper" id="full-width-page-wrapper">
 
-	<div class="<?php echo esc_attr($container); ?>" id="content">
+<?php 
+        // echo esc_attr($container);
+        if ($container == 'Fixed Width Container'):
+            $pageHTML = '<div class="container" id="content">';
+        elseif ($container == 'Full Width Container'):
+            $pageHTML = '<div class="container" id="content">';
+        endif; //END CONTAINER WIDTH IF
+        ?>
         
         <div class="row">
 
-			<div class="content-area" id="primary">
+			<!-- <div class="content-area" id="primary"> -->
+			<div class="col-md-12 content-area" id="primary">
 
 				<main class="site-main" id="main" role="main">
 
@@ -111,7 +121,10 @@ $pageHTML = '';
                             if ($add_a_section_headline == 'Yes'):
 
                                 require FUNCTIONS . '/section_headline.php';
-
+                            
+                            elseif ($add_a_section_headline == 'No'):
+                            $headlineHTML = '';
+                            
                             endif; //END IF ADD SECTION HEADLINE
 
                             if ($content_section_type == 'Custom Section'):
