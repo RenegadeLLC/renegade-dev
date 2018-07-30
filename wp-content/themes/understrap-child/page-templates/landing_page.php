@@ -111,7 +111,10 @@ $pageHTML = '';
                             if ($add_a_section_headline == 'Yes'):
 
                                 require FUNCTIONS . '/section_headline.php';
-
+                            
+                            elseif ($add_a_section_headline == 'No'):
+                            $headlineHTML = '';
+                            
                             endif; //END IF ADD SECTION HEADLINE
 
                             if ($content_section_type == 'Custom Section'):

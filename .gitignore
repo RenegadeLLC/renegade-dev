@@ -108,3 +108,7 @@ wp-content/mysql.sql
 
 .htaccess
 node_modules/
+.project
+
+.settings/
+.buildpath
