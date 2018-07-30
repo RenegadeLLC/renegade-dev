@@ -5,7 +5,7 @@
 function build_feed(){  
     
     $feedHTML = '';
-    $feedHTML .= '<div class="row"><div class="card-columns">';
+    $feedHTML .= '<div class="grid row">';
     
     ob_start();
     
@@ -32,6 +32,7 @@ function build_feed(){
                     setup_postdata( $post ); 
                     
                     $post_type = get_post_type($post -> ID);
+                    echo '<div class="col-md-4 col-sm-6 grid__item">';	
                     if($post_type == 'podcasts'):
                         //get_template_part( '/loop-templates/content', 'podcast' );
                         include($loop_templates.'content-podcast.php');
@@ -45,6 +46,7 @@ function build_feed(){
                         //get_template_part( '/loop-templates/content', 'video' );
                         include($loop_templates.'content-video.php');
                     endif;
+                    echo '</div>';	
                     wp_reset_postdata();
                 endwhile;
                
@@ -80,15 +82,15 @@ function build_feed(){
             //use buffering to capture HTML
             
             $post_type = get_post_type();
-            echo '<div class="card-deck">';	
+            echo '<div class="col-md-4 col-sm-6 grid__item">';	
             if($post_type == 'podcasts'):   
-                echo '<div class="card-body">';	
+                // echo '<div class="card-body">';	
                 get_template_part( '/loop-templates/content', 'podcast' );
-                echo '</div>';	
+                // echo '</div>';	
             elseif($post_type == 'newsletters'):
-                echo '<div class="card-body">';	
+                // echo '<div class="card-body">';	
                 get_template_part( '/loop-templates/content', 'newsletter' );
-                echo '</div>';	
+                // echo '</div>';	
             elseif($post_type == 'post'):
                 get_template_part( '/loop-templates/content', 'post' );
             elseif($post_type == 'videos'):
@@ -113,7 +115,7 @@ function build_feed(){
     endwhile;   
     endif;
     ob_end_clean();
-    $feedHTML .= '</div><!-- .card-columns -->';
+    // $feedHTML .= '</div><!-- .card-columns -->';
     $feedHTML .= '</div><!-- .row -->';
     return $feedHTML;
 }
