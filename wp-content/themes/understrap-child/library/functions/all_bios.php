@@ -53,6 +53,7 @@ function all_bios(){
 
         $bioHTML .= '</div>';
         endwhile; // end of the loop.
+        wp_reset_postdata();
         // $bioHTML .= '</div>';
         $bioHTML .= '</div>';
     endif;
