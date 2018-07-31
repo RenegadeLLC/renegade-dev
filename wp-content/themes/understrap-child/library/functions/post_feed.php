@@ -5,7 +5,6 @@
 function build_feed(){  
     
     $feedHTML = '';
-    // $feedHTML .= '<div class="grid row">';
     
     ob_start();
     
@@ -62,10 +61,7 @@ function build_feed(){
             $number_of_posts_to_include = get_sub_field('number_of_posts_to_include');
             $included_post_types = get_sub_field('included_post_types');
             $post_type_array = [];
-
-            // $feedHTML .= '<div class="grid row">';
             $feedHTML .= '<div class="grid row">';
-            // $feedHTML .= '<div class="card-columns">';
             
             if(!$number_of_posts_to_include):
             $number_of_posts_to_include = -1;
@@ -85,50 +81,36 @@ function build_feed(){
                 'orderby' => 'date', 
                 'paged' => $paged  
             );
-            // $rpd_args = array( 'post_type' => array('newsletters', 'articles', 'podcasts'), 'posts_per_page' => $number_of_posts_to_include, 'post_status' => 'publish', 'order' => 'DESC', 'orderby' => 'date', 'paged' => $paged  );
             
             $wp_query = new WP_Query( $rpd_args );
-            
-            
-            //$feedHTML .= '<div class="post-feed-grid grid row post-grid"><div class="grid-gutter"></div>';
-            
             while ($wp_query->have_posts() ) : $wp_query->the_post();
-            //use buffering to capture HTML
-            
+
             $post_type = get_post_type();
             echo '<div class="col-md-4 col-sm-6 grid__item">';	
             if($post_type == 'podcasts'):   
-                // echo '<div class="card-body">';	
                 get_template_part( '/loop-templates/content', 'podcast' );
-                // echo '</div>';	
             elseif($post_type == 'newsletters'):
-                // echo '<div class="card-body">';	
                 get_template_part( '/loop-templates/content', 'newsletter' );
-                // echo '</div>';	
             elseif($post_type == 'post'):
                 get_template_part( '/loop-templates/content', 'post' );
             elseif($post_type == 'videos'):
                 get_template_part( '/loop-templates/content', 'video' );
             endif;
             echo '</div>';
+
             // If comments are open or we have at least one comment, load up the comment template.
             if ( comments_open() || get_comments_number() ) :
-            
             //comments_template();
-
-            
-            
             endif;
-            endwhile; // end of the loop.
 
-            // echo '</div><!-- card-columns -->';
+            endwhile; // end of the loop.
         
             // clean up after the query and pagination
             wp_reset_postdata(); 
-            // echo '</div>';
+            
             echo '</div><!-- .row -->';
 
-            echo '<!-- scroller button -->';
+            // SCROLLER
             echo '<div class="row">';
             echo '<div class="col-lg-3"></div>';
             echo '<div class="col-lg-6">';
@@ -141,11 +123,9 @@ function build_feed(){
             echo '<div class="col-lg-3"></div>';
             echo '</div>';
 
-
-            // next_posts_link() usage with max_num_pages
+            // PAGINATION
             next_posts_link( 'Older Entries', $wp_query->max_num_pages );
             previous_posts_link( 'Newer Entries' );
-            understrap_pagination();
 
         endif;
         
@@ -157,7 +137,6 @@ function build_feed(){
     endwhile;   
     endif;
     ob_end_clean();
-    // $feedHTML .= '</div><!-- .card-columns -->';
     return $feedHTML;
 }
 
