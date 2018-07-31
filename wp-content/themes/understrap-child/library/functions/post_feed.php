@@ -124,8 +124,10 @@ function build_feed(){
             echo '</div>';
 
             // PAGINATION
+            echo '<div class="pagination">';
             next_posts_link( 'Older Entries', $wp_query->max_num_pages );
             previous_posts_link( 'Newer Entries' );
+            echo '</div>';
 
         endif;
         
