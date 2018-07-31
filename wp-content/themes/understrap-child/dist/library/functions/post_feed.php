@@ -3,7 +3,6 @@
 
 
 function build_feed(){  
-    
     $feedHTML = '';
     
     ob_start();
@@ -18,6 +17,7 @@ function build_feed(){
     if(have_rows('post_feed_items')):
     
     while ( have_rows('post_feed_items') ) : the_row();
+
    
         $feed_type = get_sub_field('feed_type');
         
@@ -72,7 +72,10 @@ function build_feed(){
             endforeach;
 
             $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-            
+
+            // GRID
+            $cols = get_sub_field('number_of_columns');
+            // echo 'number of columns: ' . $cols;
             $rpd_args = array( 
                 'post_type' => $post_type_array, 
                 'posts_per_page' => $number_of_posts_to_include, 
@@ -86,7 +89,23 @@ function build_feed(){
             while ($wp_query->have_posts() ) : $wp_query->the_post();
 
             $post_type = get_post_type();
-            echo '<div class="col-md-4 col-sm-6 grid__item">';	
+            switch ($cols) {
+                case '1':
+                    echo '<div class="col-md-12 grid__item">';
+                    break;
+                case '2':
+                    echo '<div class="col-md-6 grid__item">';
+                    break;
+                case '3':
+                    echo '<div class="col-md-4 col-sm-6 grid__item">';
+                    break;
+                case '4':
+                    echo '<div class="col-md-3 col-sm-6 grid__item">';
+                    break;
+                default:
+                    echo '<div class="col-md-4 col-sm-6 grid__item">';
+            }
+
             if($post_type == 'podcasts'):   
                 get_template_part( '/loop-templates/content', 'podcast' );
             elseif($post_type == 'newsletters'):
