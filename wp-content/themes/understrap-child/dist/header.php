@@ -39,8 +39,13 @@ endif;
 
 	<!-- ******************* The Navbar Area ******************* -->
 	<div id="wrapper-navbar" itemscope itemtype="http://schema.org/WebSite">
+	<div class="wrapper-fluid wrapper-navbar" id="wrapper-navbar" itemscope itemtype="http://schema.org/WebSite">
+	<?php if ($container == 'Fixed Width Container'):?>
+	<div class="container" >
+	<?php elseif ($container == 'Full Width Container'):?>
+	<div class="container-fluid" >
 
-
+	<?php endif;?>
 		<a class="skip-link screen-reader-text sr-only" href="#content"><?php esc_html_e( 'Skip to content', 'understrap' ); ?></a>
 		
 		<?php if($include_utility_header == 'Yes'):?>

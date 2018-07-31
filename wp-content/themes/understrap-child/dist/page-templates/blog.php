@@ -40,7 +40,7 @@ $wp_query = new WP_Query($rb_args);
 					<!-- infinite scroll grid -->
 					<div class="grid row">
 						<?php while (have_posts()): the_post();?>
-						<div class="col-lg-4 col-md-6 .grid__item">
+						<div class="col-lg-4 col-md-6 grid__item">
 							<?php
 								// $postnum++;
 								// echo "<h2>" . $postnum . "</h2>";

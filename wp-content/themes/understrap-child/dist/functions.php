@@ -26,6 +26,15 @@ function theme_enqueue_styles() {
 
 // RENEGADE FUNCTIONS
 
+
+// Add page link attributes
+add_filter('next_posts_link_attributes', 'posts_link_attributes');
+add_filter('previous_posts_link_attributes', 'posts_link_attributes');
+
+function posts_link_attributes() {
+    return 'class="page-link"';
+}
+
 /********  DEFINE FILE PATHS ********/
 
 define('TEMPLATEPATH', get_stylesheet_directory());
@@ -130,6 +139,7 @@ if( function_exists('acf_add_options_page') ) {
  * Javascript for Load More
  * 
  */
+
 
 // function rn_load_more_js() {
 // 	global $wp_query;
