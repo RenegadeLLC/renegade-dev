@@ -16,9 +16,8 @@ $rp_social_icon;
 $rp_social_channel_url = get_field('rp_social_channel_url');
 $rp_bio_intro = get_field('rp_bio_intro');
 $rp_biography = get_field('rp_biography');
-$rp_fun_fact = get_field('rp_fun_fact');
-$rp_fun_fact_image = get_field('rp_fun_fact_image');
-$rp_random_image = get_field('rp_random_image');
+$rp_banner_image = get_field('rp_banner_image');
+$rp_sidebar_image = get_field('rp_sidebar_image');
 $rp_email_address = get_field('rp_email_address');
 $rp_contact_link = get_field('rp_contact_link');
 
@@ -36,7 +35,7 @@ $rp_contact_link = get_field('rp_contact_link');
 		$people_html .= '<header class="row people-title"><div class="col"><h2><span>' . $rp_first_name . ' ' . $rp_last_name .'</span><br>' . $rp_job_title . '</h2></header>';
 
 		$people_html .= '<section class="row people-intro">';
-		$people_html .= '<div class="col-md-6 people-image"><img src="' . $rp_bio_image . '" alt="' .  $rp_first_name . ' ' . $rp_last_name .'"></div>';
+		$people_html .= '<div class="col-md-6 people-image" style="background-image:url(' . $rp_banner_image . '); background-size:contain; background-repeat:no-repeat; background-position:0%;"><img src="' . $rp_bio_image . '" alt="' .  $rp_first_name . ' ' . $rp_last_name .'"></div>';
 		$people_html .= '<div class="col-md-6 people-intro-bio">' . $rp_bio_intro . '</div>';
 		$people_html .= '</section>';
 
@@ -44,6 +43,7 @@ $rp_contact_link = get_field('rp_contact_link');
 		$people_html .= '<aside class="col-md-4">';
 		$people_html .= '<div class="email" ><a href='. $rp_email_address . '> Contact ' . $rp_first_name . '</a></div>';
 		$people_html .= '<div class="social" ><a href='. $rp_email_address . '> Follow ' . $rp_first_name . '</a></div>';
+		$people_html .= '<div class="sidebar-img"><img src="' . $rp_sidebar_image . '"></div>';
 		$people_html .= '</aside>';
 		$people_html .= '<article class="col-md-8">';
 		$people_html .= '<div>'. $rp_biography . '</div>';

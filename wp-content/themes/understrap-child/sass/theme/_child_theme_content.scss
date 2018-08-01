@@ -174,6 +174,7 @@ body.page-template-newsletters {
 // people
 body.people-template-default {
 	header.row.people-title {
+		padding:24px 0;
 		text-align: center;
 		h2 {
 			color: #a2a1a6;
@@ -183,18 +184,23 @@ body.people-template-default {
 			}
 		}
 	}
+
 	section.row {
 		// margin-bottom: 50px;
-		padding: 3rem;
+		padding: 2rem 1em;
 	}
 
 	section.row.people-intro {
 		background-color: $orangered;
+		background-image: url(../img/saw_white_outlineDotted_1kx1k.png);
+		background-repeat:no-repeat;
+		background-size:45%;
+		background-position:5% -5%;
 		.people-image {
 			text-align: right;
 			img {
-				height: 325px;
-				width: 325px;
+				height: 275px;
+				width: 275px;
 				border-radius: 50%;
 			}
 		}
@@ -208,10 +214,12 @@ body.people-template-default {
 		}
 	}
 
+
 	section.row.people-content {
+
 		aside {
 			div {
-				margin-bottom: 15px;
+				margin-bottom: 32px;
 				a {
 					color: $orangered;
 					font-family: "Playfair Display";
@@ -230,7 +238,9 @@ body.people-template-default {
 						padding: 8px 10px;
 					}
 				}
+				
 			}
+
 			div.email a:before {
 				content: "\f0e0";
 				font-size: 1.25rem;
@@ -242,7 +252,7 @@ body.people-template-default {
 		}
 		p:first-child {
 			font-family: 'Playfair Display',serif !important;
-			font-size: 2rem;
+			font-size: 1.5rem;
 			font-weight: 500;
 			line-height: 1.25;
 		}
@@ -261,6 +271,8 @@ body.people-template-default {
 }
 
 // sidebars
+
+
 
 .sidebar-item{
 	display:block;
