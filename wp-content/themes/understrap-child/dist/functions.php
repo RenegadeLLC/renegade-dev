@@ -27,13 +27,42 @@ function theme_enqueue_styles() {
 // RENEGADE FUNCTIONS
 
 
-// Add page link attributes
+// Add page link attributes for posts page
 add_filter('next_posts_link_attributes', 'posts_link_attributes');
 add_filter('previous_posts_link_attributes', 'posts_link_attributes');
 
 function posts_link_attributes() {
     return 'class="page-link"';
 }
+/**
+ * Use 'the_posts' filter to move selected post on beginning of post array 
+ * Usage:
+ * <a href="<?php esc_url( add_query_arg( array('psel' => get_the_ID() ) ) ) ?>">\
+ * <?php the_thumbnail() ?>
+ * </a>
+*/
+
+// get the index
+function get_selected_post_index() {
+    $selID = filter_input(INPUT_GET, 'psel', FILTER_SANITIZE_NUMBER_INT);
+    if ($selID) {
+        global $wp_query;
+        return array_search($selID, wp_list_pluck($wp_query->posts, 'ID'), true);
+    }
+    return false;
+}
+
+add_filter('the_posts', function($posts, $wp_query) {
+
+// nothing to do if not main query or there're no posts or no post is selected
+if ($wp_query->is_main_query() && ! empty($posts) && ($i = get_selected_post_index())) {
+        $sel = $posts[$i]; // get selected post object
+        unset($posts[$i]); // remove it from posts array
+        array_unshift($posts, $sel); // put selected post to the beginning of the array
+    }
+    return $posts;
+}, 99, 2);
+
 
 /********  DEFINE FILE PATHS ********/
 

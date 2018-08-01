@@ -48,6 +48,23 @@ $pageHTML = '';
                             $content_section_name = get_sub_field('content_section_name');
                             //MAKE SECTION NAME LINK FRIENDLY
                             $content_section_name = clean_link_name($content_section_name);
+                            
+                            $vertical_alignment = get_sub_field('vertical_alignment');
+ 
+                            $align_items = '';
+                            if($vertical_alignment == 'Top'):
+                                $align_items = 'flex-start';
+                            elseif($vertical_alignment == 'Bottom'):
+                                $align_items = 'flex-middle';
+                            elseif($vertical_alignment == 'Centered'):
+                                $align_items = 'center';
+                            elseif($vertical_alignment == 'Stretched'):
+                                $align_items = 'stretch';
+                            elseif($vertical_alignment == 'Baseline'):
+                                $align_items = 'baseline';
+                            endif;
+                            
+                            $add_bottom_border = get_sub_field('add_bottom_border');
 
                             //GET SECTION TYPE
                             $content_section_type = get_sub_field('content_section_type');
