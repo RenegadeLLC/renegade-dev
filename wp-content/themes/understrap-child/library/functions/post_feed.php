@@ -130,7 +130,7 @@ function build_feed(){
             $cols = get_sub_field('number_of_columns');
             $col_grid_container;
             switch ($cols) {
-                case
+                case '1':
                     $col_grid_container = '<div class="col-md-12 grid__item">';
                     break;
                 case '2':
