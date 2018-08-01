@@ -1,7 +1,5 @@
 <?php
 
-
-
 function build_feed(){  
     $feedHTML = '';
     
@@ -61,40 +59,24 @@ function build_feed(){
                 array_push($post_type_array, $post_type);
             endforeach;
 
-            // get the pinned 
-
-            // top posts
-            $top_posts = [];
+            // ids of posts to put on top
+            $top_post_ids = [];
 
             // pinned posts
             $pinned_posts = [];
             if(have_rows('pinned_posts')):
-                echo '<div class="row">';
-                echo '<div class="col-md-12">';
-                echo '<h2>PINNED POSTS</h2>';
-                echo '<ul>';
                 while ( have_rows('pinned_posts') ) : the_row();
                     $pinned_post = get_sub_field('pinned_post');
                     $pinned_post_ID = $pinned_post -> ID;
-                    array_push($top_posts, $pinned_post_ID);
-                    // $post = $pinned_post;
-                    setup_postdata( $pinned_post ); 
-                    echo '<li><a href="' . get_permalink($pinned_post -> ID) . '">' .  get_post_type($pinned_post -> ID) . ' ' . $pinned_post_ID . ': ' . get_the_title( $pinned_post -> ID ) .'</a> </li> ';
+                    array_push($top_post_ids, $pinned_post_ID);
                 endwhile;
-                echo '</ul>';
             endif;
             wp_reset_query();
-            print_r($top_posts);
-            echo '</div>';
-            echo '</div>';
-            
 
-            // aggregate most recent stories in feed
-            echo '<div class="row">';
-            echo '<div class="col-md-12">';
-            echo '<h2>RECENT POSTS</h2>';
+            // TODO: expose this in ACF
+            $num_show = 30;
 
-            $num_show = 4;
+            // TODO: refactor to loop through ACF included_post_types
             $recent_posts = wp_get_recent_posts(array(
                 'posts_per_page'   => $num_show,
                 'orderby'          => 'date',
@@ -123,9 +105,9 @@ function build_feed(){
                 'post_type'        => 'downloads',
                 'post_status'      => 'publish',
             ));
+
             $recent_all = [];
             for ($x = 0; $x <= $num_show; $x++) {
-                // echo "The number is: $x <br>";
                 array_push(
                     $recent_all,
                     $recent_posts[$x],
@@ -136,25 +118,15 @@ function build_feed(){
             }
             $recent_all = array_filter($recent_all);
 
-            echo '<ul>';
             foreach( $recent_all as $recent ){
-                // push id to top_posts
-                array_push($top_posts, $recent["ID"]);
-                echo '<li><a href="' . get_permalink($recent["ID"]) . '">' .  $recent["post_type"] . ' ' . $recent["ID"] . ': ' . $recent["post_title"].'</a> </li> ';
+                array_push($top_post_ids, $recent["ID"]);
             }
-            echo '</ul>';
             wp_reset_query();
-            print_r($top_posts);
-            echo '</div>';
-            echo '</div>';
 
-            // start html template
-            // $feedHTML .= '<div class="grid row">';
+            // start HTML
             $feedHTML .= '<div class="grid row">';
 
             // set grid item container
-
-            // grid
             $cols = get_sub_field('number_of_columns');
             $col_grid_container;
             switch ($cols) {
@@ -174,46 +146,54 @@ function build_feed(){
                     $col_grid_container = '<div class="col-md-4 col-sm-6 grid__item">';
             }
 
-            // main query
-            $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
-            $rpd_args = array( 
-                'post_type' => $post_type_array, 
-                'posts_per_page' => $number_of_posts_to_include,
-                'post__not_in' => $top_posts,
-                'post_status' => 'publish', 
-                'order' => 'DESC', 
-                'orderby' => 'date', 
-                'paged' => $paged  
-            );
-            $wp_query = new WP_Query( $rpd_args );
-
-            // loop
-            while ($wp_query->have_posts() ) : $wp_query->the_post();
-
-            $post_type = get_post_type();
-
-            echo $col_grid_container ;
-            if($post_type == 'podcasts'):   
-                get_template_part( '/loop-templates/content', 'podcast' );
-            elseif($post_type == 'newsletters'):
-                get_template_part( '/loop-templates/content', 'newsletter' );
-            elseif($post_type == 'post'):
-                get_template_part( '/loop-templates/content', 'post' );
-            elseif($post_type == 'videos'):
-                get_template_part( '/loop-templates/content', 'video' );
-            endif;
-            echo '</div>';
-
-            // If comments are open or we have at least one comment, load up the comment template.
-            if ( comments_open() || get_comments_number() ) :
-            //comments_template();
-            endif;
-
-            endwhile; // end of the loop.
-        
-            // clean up after the query and pagination
-            wp_reset_postdata(); 
+            // get ids of all posts
+            $ids_args = [
+                'post_type'      => $post_type_array,
+                'posts_per_page' => -1,
+                'orderby'        => 'date', 
+                'order'          => 'DESC',
+                'post_status'    => 'publish', 
+                'fields'         => 'ids',
+            ];
+            $all_posts_ids = get_posts( $ids_args );
             
+            // Make sure we have posts before continuing
+            if ( $all_posts_ids ) {
+                // Add the array of top posts to the front of our $all_posts_ids array
+                $post_ids_merged = array_merge( $top_post_ids, $all_posts_ids );
+                // Make sure that we remove the ID's from their original positions
+                $reordered_ids   = array_unique( $post_ids_merged );
+            
+                // Now we can run our normal query
+                $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+                $args = [
+                    'post_type'      => $post_type_array,
+                    'posts_per_page' => $number_of_posts_to_include,
+                    'post__in'       => $reordered_ids,
+                    'orderby'        => 'post__in',
+                    'order'          => 'ASC',
+                    'paged'          => $paged
+                ];
+
+                // The loop
+                $loop = new WP_Query( $args ); 
+                while( $loop->have_posts() ) {
+                    $loop->the_post();
+                        $post_type = get_post_type();
+                        echo $col_grid_container ;
+                        if($post_type == 'podcasts'):   
+                            get_template_part( '/loop-templates/content', 'podcast' );
+                        elseif($post_type == 'newsletters'):
+                            get_template_part( '/loop-templates/content', 'newsletter' );
+                        elseif($post_type == 'post'):
+                            get_template_part( '/loop-templates/content', 'post' );
+                        elseif($post_type == 'videos'):
+                            get_template_part( '/loop-templates/content', 'video' );
+                        endif;
+                        echo '</div>';
+                }
+                wp_reset_postdata();
+            }
             echo '</div><!-- .row -->';
 
             // scroller
@@ -231,9 +211,12 @@ function build_feed(){
 
             // pagination
             echo '<div class="pagination">';
-            next_posts_link( 'Older Entries', $wp_query->max_num_pages );
+            next_posts_link( 'Older Entries', $loop->max_num_pages );
             previous_posts_link( 'Newer Entries' );
             echo '</div>';
+
+            // clean up after the query and pagination
+            wp_reset_postdata(); 
 
         endif;
         
