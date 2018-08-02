@@ -1,3 +1,13 @@
+// utility-nav
+.header-phone-ct {
+	&:before {
+		content: "\f095";
+		font-family: FontAwesome;
+		color: #000;
+		margin-right: 5px;
+	}
+}
+
 // testimonials
 @media (max-width:767px) {
 	#testimonials {
