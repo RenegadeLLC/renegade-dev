@@ -8,60 +8,61 @@
 ?>
 
 
-	<!-- content header -->
-	<div class="row">
-		<div class="content-section" style="background-color:#f2f2f2">
-			<h1><?php the_title(); ?></h1>
-		</div>
-	</div>
-	<div class="row">
-	<!-- left sdebar -->
-	<div class="col-md-2">
-	</div>
-	<div class="col-md-8">
-	<main class="site-main" id="main">
 <article <?php post_class();?> id="post-<?php the_ID();?>">
 
-	<header class="entry-header">
+		<!-- row header -->
+		<header class="entry-header">
+			<div class="row">
+				<div class="content-section" style="background-color:#f2f2f2; margin-bottom: 2.5rem;">
+					<div class="col-md-8">
+						<?php the_title('<h1 class="entry-title">', '</h1>');?>
+					</div>
+					<div class="col-md-4">
+					</div>
+				</div>
+			</div><!-- .row header -->
+		</header><!-- .entry-header -->
 
-		<?php the_title('<h1 class="entry-title">', '</h1>');?>
+		<!-- main content -->
+		<main class="site-main" id="main">
+			<div class="row">
 
-		<div class="entry-meta">
+				<!-- left sdebar -->
+				<div class="col-md-2">
+				</div>
 
-			<?php understrap_posted_on();?>
+				<!-- entry content -->
+				<div class="col-md-8">
+					<div class="entry-meta">
+						<?php understrap_posted_on();?>
+					</div><!-- .entry-meta -->
+					<div class="entry-content">
+							<?php echo get_the_post_thumbnail($post->ID, 'large'); ?>
+							<?php the_content();?>
+					</div>
+				</div>
 
-		</div><!-- .entry-meta -->
+				<!-- right sidebar -->
+				<div class="col-md-2">
+				</div>
+			</div>
+		</main><!-- main -->
 
-	</header><!-- .entry-header -->
+		<!-- row pagination -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content-section" style="border-top: 1px solid black">
 
-	<?php echo get_the_post_thumbnail($post->ID, 'large'); ?>
+				<?php understrap_post_nav();?>
 
-	<div class="entry-content">
-		<?php the_content();?>
+				<?php
+				wp_link_pages(array(
+					'before' => '<div class="page-links">' . __('Pages:', 'understrap'),
+					'after' => '</div>',
+				));
+				?>
+				</div>
+			</div><!-- .content-section -->
+		</div><!-- .row pagination-->
 
-</article><!-- #post-## -->
-			</main><!-- #main -->
-
-		</div>
-
-		<!-- right sidebar -->
-		<div class="col-md-2">
-		</div>
-
-</div><!-- .row -->
-
-<div class="row">
-	<div class="col-md-12">
-		<div class="content-section">
-
-		<?php understrap_post_nav();?>
-
-		<?php
-wp_link_pages(array(
-    'before' => '<div class="page-links">' . __('Pages:', 'understrap'),
-    'after' => '</div>',
-));
-?>
-		</div>
-	</div>
-</div>
+</article><!-- article -->
