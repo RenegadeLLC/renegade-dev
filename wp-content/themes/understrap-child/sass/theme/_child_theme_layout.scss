@@ -53,8 +53,52 @@
 	border: 1px solid #ddd !important;
 }
 
-//** NAVBAR
+//** UTILITY NAV
+.utility-bar {
+	width: 100%;
+	background: #f2f2f2;
+	height: 33px;
+	display: flex;
+	justify-content: flex-end;
 
+	.header-phone-ct {
+		padding: 4px 8px 8px;
+		font-size: .9rem;
+		font-weight: 500;
+	}
+
+	.header-email-ct {
+		padding: 3px 10px 3px 2px;
+		.fa-envelope{
+			&:before {
+				content: "\f0e0";
+				font-family: FontAwesome;
+				color: #000;
+				font-style: normal;
+			}
+		}
+	}
+}
+
+//** NAVBAR
+.navbar-nav {
+	.dropdown {
+		&:hover {
+			.dropdown-menu {
+				display:block;
+			}
+		}
+	}
+	.nav-link {
+		border-bottom: none;
+	}
+}
+@media (max-width: 767px) {
+	.navbar-nav .nav-link {
+		border-top: 3px solid #fff;
+		border-bottom: none;
+	}
+}
 
 /* Small devices (landscape phones, 544px and up) */
 @media (min-width: 0) {  

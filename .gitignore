@@ -112,3 +112,6 @@ node_modules/
 
 .settings/
 .buildpath
+
+# understrap-child specific
+/wp-content/themes/understrap-child/css/*
