@@ -44,7 +44,7 @@
 	// $podcast_html .= '<span class="details">' . $podcast_details . '</span><br>';
 	// $podcast_html .= '</div><!--.podcast-inset-->';
 	if($podcast_excerpt){
-		$podcast_html .=  '<span class="excerpt"><p>' . $podcast_excerpt . '</span></div>';
+		$podcast_html .=  '<span class="excerpt">' . $podcast_excerpt . '</span></p>';
 	}
 	$podcast_html .=  '</a>';
 	// $podcast_html .= '<div><a href="' . $post_edit_link  . '">' . 'Edit'  . '</a></div>';
