@@ -77,7 +77,9 @@ $newsletter_html .= '</div><!--.newsletter-content --></div><!-- .single-column-
 //$newsletter_html .= '</div><!-- .entry-content -->';
 
 		echo $newsletter_html;
-	
+	?>
+	<div class="section-sep"></div>
+	<?php
 		understrap_post_nav();
 
 		wp_link_pages( array(
