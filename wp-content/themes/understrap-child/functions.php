@@ -164,46 +164,15 @@ if( function_exists('acf_add_options_page') ) {
     
 }
 
-/**
- * Javascript for Load More
- * 
- */
-
-
-// function rn_load_more_js() {
-// 	global $wp_query;
-// 	$args = array(
-// 		'nonce' => wp_create_nonce( 'rn-load-more-nonce' ),
-// 		'url'   => admin_url( 'admin-ajax.php' ),
-// 		'query' => $wp_query->query,
-// 	);
-    
-    
-//     if ( get_post_type() === 'post' ) {
-// 	    wp_enqueue_script( 'rn-load-more', get_stylesheet_directory_uri() . '/library/js/load-more.js', array( 'jquery' ), '1.0', true );
-//         wp_localize_script( 'rn-load-more', 'rnloadmore', $args );
-//     }
-	
-// }
-// add_action( 'wp_enqueue_scripts', 'rn_load_more_js' );
-/**
- * AJAX Load More 
- *
- */
-// function rn_ajax_load_more() {
-// 	check_ajax_referer( 'rn-load-more-nonce', 'nonce' );
-    
-// 	$args = isset( $_POST['query'] ) ? $_POST['query'] : array();
-// 	$args['post_type'] = isset( $args['post_type'] ) ? $args['post_type'] : 'post';
-// 	$args['paged'] = $_POST['page'];
-// 	$args['post_status'] = 'publish';
-// 	ob_start();
-// 	$loop = new WP_Query( $args );
-// 	if( $loop->have_posts() ): while( $loop->have_posts() ): $loop->the_post();
-// 		rn_post_summary();
-// 	endwhile; endif; wp_reset_postdata();
-// 	$data = ob_get_clean();
-// 	wp_send_json_success( $data );
-// }
-// add_action( 'wp_ajax_rn_ajax_load_more', 'rn_ajax_load_more' );
-// add_action( 'wp_ajax_nopriv_rn_ajax_load_more', 'rn_ajax_load_more' );
+if ( ! function_exists( 'understrap_all_excerpts_get_more_link' ) ) {
+	/**
+	 * Adds a custom read more link to all excerpts, manually or automatically generated
+	 *
+	 * @param string $post_excerpt Posts's excerpt.
+	 *
+	 * @return string
+	 */
+	function understrap_all_excerpts_get_more_link( $post_excerpt ) {
+		return $post_excerpt . '...';
+	}
+}
