@@ -124,7 +124,7 @@ function build_feed(){
             wp_reset_query();
 
             // start HTML
-            $feedHTML .= '<div class="grid row">';
+            // $feedHTML .= '<div class="grid row">';
 
             // set grid item container
             $cols = get_sub_field('number_of_columns');
@@ -159,6 +159,7 @@ function build_feed(){
             
             // Make sure we have posts before continuing
             if ( $all_posts_ids ) {
+
                 // Add the array of top posts to the front of our $all_posts_ids array
                 $post_ids_merged = array_merge( $top_post_ids, $all_posts_ids );
                 // Make sure that we remove the ID's from their original positions
@@ -177,6 +178,15 @@ function build_feed(){
 
                 // The loop
                 $loop = new WP_Query( $args ); 
+
+                $count = $loop->post_count;
+
+                if ($count == $number_of_posts_to_include):
+                    echo '<div class="grid row">';
+                else:
+                    echo '<div class="row">';
+                endif;
+
                 while( $loop->have_posts() ) {
                     $loop->the_post();
                         $post_type = get_post_type();
@@ -193,27 +203,31 @@ function build_feed(){
                         echo '</div>';
                 }
                 wp_reset_postdata();
+
+                echo '</div><!-- .row -->';
+
+                if ($count == $number_of_posts_to_include):
+                echo '<div class="row">';
+                echo '<div class="col-lg-3"></div>';
+                echo '<div class="col-lg-6">';
+                // view more button
+                echo '<div><button type="button" class="btn btn-primary btn-block view-more-button">VIEW MORE</button></div>';
+                // loader wheel
+                echo '<div class="loader-wheel .infinite-scroll-request">';
+                echo '<i><i><i><i><i><i><i><i><i><i><i><i>';
+                echo '</i></i></i></i></i></i></i></i></i></i></i></i>';
+                echo '</div>';
+                echo '</div>';
+                echo '<div class="col-lg-3"></div>';
+                echo '</div>';
+                endif;
+    
+                // pagination
+                echo '<div class="pagination">';
+                next_posts_link( 'Older Entries', $loop->max_num_pages );
+                previous_posts_link( 'Newer Entries' );
+                echo '</div>';
             }
-            echo '</div><!-- .row -->';
-
-            // scroller
-            echo '<div class="row">';
-            echo '<div class="col-lg-3"></div>';
-            echo '<div class="col-lg-6">';
-            echo '<div><button type="button" class="btn btn-primary btn-block view-more-button">VIEW MORE</button></div>';
-            echo '<div class="loader-wheel .infinite-scroll-request">';
-            echo '<i><i><i><i><i><i><i><i><i><i><i><i>';
-            echo '</i></i></i></i></i></i></i></i></i></i></i></i>';
-            echo '</div>';
-            echo '</div>';
-            echo '<div class="col-lg-3"></div>';
-            echo '</div>';
-
-            // pagination
-            echo '<div class="pagination">';
-            next_posts_link( 'Older Entries', $loop->max_num_pages );
-            previous_posts_link( 'Newer Entries' );
-            echo '</div>';
 
             // clean up after the query and pagination
             wp_reset_postdata(); 
