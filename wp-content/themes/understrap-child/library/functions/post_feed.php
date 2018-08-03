@@ -207,22 +207,29 @@ function build_feed(){
                 echo '</div><!-- .row -->';
 
                 if ($count == $number_of_posts_to_include):
-                echo '<div class="row">';
-                echo '<div class="col-lg-3"></div>';
-                echo '<div class="col-lg-6">';
-                // view more button
-                echo '<div><button type="button" class="btn btn-primary btn-block view-more-button">VIEW MORE</button></div>';
-                // loader wheel
-                echo '<div class="loader-wheel .infinite-scroll-request">';
-                echo '<i><i><i><i><i><i><i><i><i><i><i><i>';
-                echo '</i></i></i></i></i></i></i></i></i></i></i></i>';
-                echo '</div>';
-                echo '</div>';
-                echo '<div class="col-lg-3"></div>';
-                echo '</div>';
+
+                if (!is_front_page()):
+                    echo '<div class="row">';
+                    echo '<div class="col-lg-3"></div>';
+                    echo '<div class="col-lg-6">';
+                    // view more button
+                    echo '<div><button type="button" class="btn btn-primary btn-block view-more-button">VIEW MORE</button></div>';
+                    // loader wheel
+                    echo '<div class="loader-wheel .infinite-scroll-request">';
+                    echo '<i><i><i><i><i><i><i><i><i><i><i><i>';
+                    echo '</i></i></i></i></i></i></i></i></i></i></i></i>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '<div class="col-lg-3"></div>';
+                    echo '</div>';
+                endif;
     
                 // pagination
-                echo '<div class="pagination">';
+                if (is_front_page()):
+                    echo '<div class="pagination" style:"visibility: hidden;">';
+                else: 
+                    echo '<div class="pagination">';
+                endif;
                 next_posts_link( 'Older Entries', $loop->max_num_pages );
                 previous_posts_link( 'Newer Entries' );
                 echo '</div>';
