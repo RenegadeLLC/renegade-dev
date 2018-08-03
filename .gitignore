@@ -106,6 +106,7 @@ wp-content/mysql.sql
 *.wmv
 *.avi
 
+# understrap-child
 .htaccess
 node_modules/
 .project
@@ -113,5 +114,5 @@ node_modules/
 .settings/
 .buildpath
 
-# understrap-child specific
-/wp-content/themes/understrap-child/css/*
+/wp-content/themes/understrap-child/css/**/*.map
+/wp-content/themes/understrap-child/css/**/*.css
