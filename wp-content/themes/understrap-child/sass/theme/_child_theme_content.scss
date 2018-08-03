@@ -294,6 +294,70 @@ body.people-template-default {
 	font-size:48px;
 	vertical-align: -webkit-baseline-middle;
 }
+
+// newsletters
+
+.newsletter-content{
+
+	a{
+		color:$blue;
+	}
+	.newsletter-section{
+		border-left:1px solid #f2f2f2;
+		border-right:1px solid #f2f2f2;
+		padding:24px 24px 16px 24px;
+	}
+
+	.newsletter-section:nth-child(odd){
+		background-color:#fff;
+	}
+
+	.newsletter-section:nth-child(even){
+		background-color:#f2f2f2;
+	}
+
+	.final-note{
+
+		background-image:url(../img/section_sepBK.png);
+		background-repeat: repeat-x;
+		background-position: top;
+		padding:24px;
+		font-family: 'Playfair Display',serif !important;
+		font-size: 1.5em;
+	}
+
+	h1{
+		margin-top:24px;
+	}
+
+	h3{
+		color:$blue;
+		margin-bottom:12px;
+	}
+	.newsletter-date{
+		font-size:1.5em;
+		font-weight:500;
+		margin:16px 0 16px 0;
+	}
+
+	.newsletter-intro{
+		background:url(../img/section_sepBK.png) repeat-x bottom;
+		padding-bottom:12px;
+	}
+	.newsletter-intro p:first-of-type{
+		font-family: 'Playfair Display',serif !important;
+		font-size: 1.75em;
+	}
+
+	.newsletter-intro p:nth-of-type(2), .newsletter-intro p:nth-of-type(3){
+		font-size: 1.25em;
+		line-height:180%;
+	}
+
+	.newsletter-text{
+		line-height: 180%;
+	}
+}
 // videos
 
 // subscribe form
