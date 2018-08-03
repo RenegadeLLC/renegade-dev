@@ -1,9 +1,72 @@
 // testimonials
-@media (max-width:767px) {
-	#testimonials {
-		.col-sm-12 {
-			padding: 1.25rem 0;
+
+/* Small devices (landscape phones, 544px and up) */
+@media (min-width: 0) {  
+	.section-testimonials {
+		&.card-columns {
+			column-count: 1;
 		}
+	}
+}
+@media (min-width:767px) {
+	.section-testimonials {
+		&.card-columns {
+			column-count: 2;
+		}
+	}
+}
+
+.section-testimonials {
+	.card {
+		background-color: $yellowgreen;
+		border: none !important;
+		margin: 0;
+	}
+	.card-body {
+		padding: 0;
+	}
+	.testimonial-ct {
+		border: 1px solid #fff;
+		padding: 32px;
+		color: #fff;
+		position: relative;
+		margin: 22px 10px;
+	}
+	
+	.open-quote {
+		display: block;
+		background: url("../img/quote_open.png");
+		background-color: $yellowgreen;
+		background-repeat: no-repeat;
+		background-size: 31px;
+		width: 37px;
+		height: 27px;
+		padding: 16px;
+		position: absolute;
+		left: -8px;
+		top: -1px;
+		background-position-y: top;
+		background-position-x: left;
+	}
+	
+	.close-quote {
+		display: block;
+		background: url("../img/quote_close.png");
+		background-color: $yellowgreen;
+		background-repeat: no-repeat;
+		background-size: 31px;
+		width: 37px;
+		height: 27px;
+		padding: 15px 14px;
+		position: absolute;
+		right: -8px;
+		bottom: -1px;
+		background-position-y: bottom;
+		background-position-x: right;
+	}
+	.quote-attrib {
+		color: #000;
+		line-height: 120%;
 	}
 }
 
