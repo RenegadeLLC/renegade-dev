@@ -113,6 +113,3 @@ node_modules/
 
 .settings/
 .buildpath
-
-/wp-content/themes/understrap-child/css/**/*.map
-/wp-content/themes/understrap-child/css/**/*.css
