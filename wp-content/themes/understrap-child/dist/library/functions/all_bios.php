@@ -42,7 +42,7 @@ function all_bios(){
         $people_html .= '<a href="' . $rp_link . '">';
         $people_html .= '<div class="people-bio-image"><img src="' . $rp_bio_image . '" alt="' .  $rp_first_name . ' ' . $rp_last_name .'"></div>';	
         $people_html .= '<div class="people-bio-info"><h3>' . $rp_first_name . ' ' . $rp_last_name .'</h3>';
-        $people_html .= '<h5>' . $rp_job_title . '</h5></div></a>';
+        $people_html .= '<h5 class="gray">' . $rp_job_title . '</h5></div></a>';
 
         // $bioHTML .= '<h2>A post</h2>';
         // $people_html .= '<div class="people-bio-image"><img src="' . $rp_bio_image . '" alt="' .  $rp_first_name . ' ' . $rp_last_name .'"></div>';

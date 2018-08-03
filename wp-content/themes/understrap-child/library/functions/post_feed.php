@@ -220,13 +220,13 @@ function build_feed(){
                 echo '</div>';
                 echo '<div class="col-lg-3"></div>';
                 echo '</div>';
-                endif;
     
                 // pagination
                 echo '<div class="pagination">';
                 next_posts_link( 'Older Entries', $loop->max_num_pages );
                 previous_posts_link( 'Newer Entries' );
                 echo '</div>';
+                endif;
             }
 
             // clean up after the query and pagination

@@ -36,7 +36,10 @@ function build_case_studies(){
                         $caseHTML .= '<div class="col-lg-4 col-md-4 col-sm-12 case-ct">';
                         $caseHTML .= '<a href="' . $case_url . '">';
                         $caseHTML .= '<div class="case-thumb-ct"><img src="'. $project_thumbnail_image . '" title="' . $client . ': ' . $project_title . '"></div><!-- .case-image-ct -->';
-                        $caseHTML .= '<div class="case-info">' . $client . '<br>' . $project_title . '</div><!-- .case-info -->';
+                        if($client != 'Renegade'):
+                            $caseHTML .= '<div class="case-info">' . $client . '<br>' . $project_title . '</div><!-- .case-info -->';
+                        endif;
+                        
                         $caseHTML .= '</a></div><!-- .case-ct-->';
                     
                         wp_reset_postdata();
@@ -70,7 +73,11 @@ function build_case_studies(){
                         $caseHTML .= '<div class="col-lg-4 col-md-4 col-sm-12 case-ct">';
                         $caseHTML .= '<a href="' . $case_url . '">';
                         $caseHTML .= '<div class="case-thumb-ct"><img src="'. $project_thumbnail_image . '" title="' . $client . ': ' . $project_title . '"></div><!-- .case-image-ct -->';
-                        $caseHTML .= '<div class="case-info"><h4>' . $client . ' <span class="light-grey">' . $project_title . '</span></h4></div><!-- .case-info -->';
+                        
+                        if($client != 'Renegade'):
+                            $caseHTML .= '<div class="case-info"><h4>' . $client . ' <span class="light-grey">' . $project_title . '</span></h4></div><!-- .case-info -->';
+                        endif;
+                      
                         $caseHTML .= '</a></div><!-- .case-ct-->';
     
                         wp_reset_postdata();

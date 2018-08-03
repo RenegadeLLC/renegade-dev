@@ -6,41 +6,63 @@
  */
 
 ?>
-<article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
-	<header class="entry-header">
 
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+<article <?php post_class();?> id="post-<?php the_ID();?>">
 
-		<div class="entry-meta">
+		<!-- row header -->
+		<header class="entry-header">
+			<div class="row">
+				<div class="content-section" style="background-color:#f2f2f2; margin-bottom: 2.5rem;">
+					<div class="col-md-8">
+						<?php the_title('<h1 class="entry-title">', '</h1>');?>
+					</div>
+					<div class="col-md-4">
+					</div>
+				</div>
+			</div><!-- .row header -->
+		</header><!-- .entry-header -->
 
-			<?php understrap_posted_on(); ?>
+		<!-- main content -->
+		<main class="site-main" id="main">
+			<div class="row">
 
-		</div><!-- .entry-meta -->
+				<!-- left sdebar -->
+				<div class="col-md-2">
+				</div>
 
-	</header><!-- .entry-header -->
+				<!-- entry content -->
+				<div class="col-md-8">
+					<div class="entry-meta">
+						<?php understrap_posted_on();?>
+					</div><!-- .entry-meta -->
+					<div class="entry-content">
+							<?php echo get_the_post_thumbnail($post->ID, 'large'); ?>
+							<?php the_content();?>
+					</div>
+				</div>
 
-	<?php echo get_the_post_thumbnail( $post->ID, 'large' ); ?>
+				<!-- right sidebar -->
+				<div class="col-md-2">
+				</div>
+			</div>
+		</main><!-- main -->
 
-	<div class="entry-content">
+		<!-- row pagination -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="content-section" style="border-top: 1px solid black">
 
-		<?php the_content(); ?>
+				<?php understrap_post_nav();?>
 
-		<?php understrap_post_nav(); ?>
-		
-		<?php
-		wp_link_pages( array(
-			'before' => '<div class="page-links">' . __( 'Pages:', 'understrap' ),
-			'after'  => '</div>',
-		) );
-		?>
+				<?php
+				wp_link_pages(array(
+					'before' => '<div class="page-links">' . __('Pages:', 'understrap'),
+					'after' => '</div>',
+				));
+				?>
+				</div>
+			</div><!-- .content-section -->
+		</div><!-- .row pagination-->
 
-	</div><!-- .entry-content -->
-
-	<footer class="entry-footer">
-
-		<?php understrap_entry_footer(); ?>
-
-	</footer><!-- .entry-footer -->
-
-</article><!-- #post-## -->
+</article><!-- article -->

@@ -63,6 +63,11 @@ jQuery(document).ready(function ($) {
         $grid.isotope('layout');
     });
 
+    $grid.on( 'last.infiniteScroll', function( event, response, path ) {
+        console.log( 'Loaded last page: ' + path );
+    });
+      
+
     // fixes for  mobile loading
 
     // $grid.on( 'append.infiniteScroll', function( event, response, path, items ) {

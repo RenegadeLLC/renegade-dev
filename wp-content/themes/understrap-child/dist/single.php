@@ -7,56 +7,54 @@
  * @package understrap
  */
 
-get_header();
-$container = get_theme_mod( 'understrap_container_type' );
+	get_header();
+// $container = get_theme_mod( 'understrap_container_type' );
+$container = get_field('container_width', 'option');
+
+	// echo esc_attr($container);
 ?>
 
 <div class="wrapper" id="full-width-page-wrapper">
 
-	<div class="<?php echo esc_attr( $container ); ?>" id="content">
+	<?php 
+		// echo esc_attr($container);
+		if ($container == 'Fixed Width Container'):
+			echo'<div class="container" id="content">';
+		elseif ($container == 'Full Width Container'):
+			echo'<div class="container" id="content">';
+		endif; //END CONTAINER WIDTH IF
+	?>
 
-		<div class="row">
+		<?php while ( have_posts() ) : the_post(); ?>
+			
+			<?php $post_type = get_post_type();
+				if ($post_type == 'post'):
+					get_template_part('post-templates/single', 'post');
+				elseif ($post_type == 'projects'):
+					get_template_part('post-templates/single', 'project');
+				elseif ($post_type == 'people'):
+					get_template_part('post-templates/single', 'bio');
+				elseif ($post_type == 'newsletters'):
+					get_template_part('post-templates/single', 'newsletter');
+				elseif ($post_type == 'podcasts'):
+					get_template_part('post-templates/single', 'podcast');
+				elseif ($post_type == 'downloads'):
+					get_template_part('post-templates/single', 'download');
+				elseif ($post_type == 'videos'):
+					get_template_part('post-templates/single', 'video');
+				endif;
+			?>
 
-			<div class="col-md-12 content-area" id="primary">
+			<?php
+			// If comments are open or we have at least one comment, load up the comment template.
+			if ( comments_open() || get_comments_number() ) :
 
-				<main class="site-main" id="main" role="main">
+				comments_template();
 
-					<?php while ( have_posts() ) : the_post(); ?>
-						
-						<?php $post_type = get_post_type();
-							if ($post_type == 'post'):
-								get_template_part('post-templates/single', 'post');
-							elseif ($post_type == 'projects'):
-								get_template_part('post-templates/single', 'project');
-							elseif ($post_type == 'people'):
-								get_template_part('post-templates/single', 'bio');
-							elseif ($post_type == 'newsletters'):
-								get_template_part('post-templates/single', 'newsletter');
-							elseif ($post_type == 'podcasts'):
-								get_template_part('post-templates/single', 'podcast');
-							elseif ($post_type == 'downloads'):
-								get_template_part('post-templates/single', 'download');
-							elseif ($post_type == 'videos'):
-								get_template_part('post-templates/single', 'video');
-							endif;
-						?>
+			endif;
+			?>
 
-						<?php
-						// If comments are open or we have at least one comment, load up the comment template.
-						if ( comments_open() || get_comments_number() ) :
-
-							comments_template();
-
-						endif;
-						?>
-
-					<?php endwhile; // end of the loop. ?>
-
-				</main><!-- #main -->
-
-			</div><!-- #primary -->
-
-		</div><!-- .row end -->
+		<?php endwhile; // end of the loop. ?>
 
 	</div><!-- Container end -->
 

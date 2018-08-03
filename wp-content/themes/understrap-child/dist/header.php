@@ -13,6 +13,7 @@ $header_logo = get_field('header_logo', 'option');
 $header_title = get_field('header_title', 'option');
 $include_utility_header = get_field('include_utility_header', 'option');
 $phone_number = get_field('phone_number', 'option');
+$email_address = get_field('email_address', 'option');
 $include_search =  get_field('include_search', 'option');
 
 if($include_search == 'Yes'):
@@ -39,46 +40,52 @@ endif;
 
 	<!-- ******************* The Navbar Area ******************* -->
 	<div id="wrapper-navbar" itemscope itemtype="http://schema.org/WebSite">
-	<div class="wrapper-fluid wrapper-navbar" id="wrapper-navbar" itemscope itemtype="http://schema.org/WebSite">
-	<?php if ($container == 'Fixed Width Container'):?>
-	<div class="container" >
-	<?php elseif ($container == 'Full Width Container'):?>
-	<div class="container-fluid" >
+		<!-- <div class="wrapper-fluid wrapper-navbar" id="wrapper-navbar" itemscope itemtype="http://schema.org/WebSite"> -->
+		<?php if ($container == 'Fixed Width Container'):?>
+		<div class="container" >
+		<?php elseif ($container == 'Full Width Container'):?>
+		<div class="container-fluid" >
+		<?php endif;?>
 
-	<?php endif;?>
-		<a class="skip-link screen-reader-text sr-only" href="#content"><?php esc_html_e( 'Skip to content', 'understrap' ); ?></a>
-		
-		<?php if($include_utility_header == 'Yes'):?>
-		<div class="utility-bar">
-		<?php echo '<div class="header-phone-ct">' .  $phone_number . '</div><!-- .header-phone-ct -->';
-		if($include_search == 'Yes'):
-		echo  '<div class="header-search-ct">' . do_shortcode($search_shortcode) . '</div><!-- .header-search-ct -->';
-		endif;
-		?>
-		</div><!--  .utility-bar -->
-		<?php endif;//END INCLUDE UTILITY HEADER CONDITIONAL?>
-		<nav class="navbar navbar-expand-md">
+			<!-- skip link -->
+			<a class="skip-link screen-reader-text sr-only" href="#content"><?php esc_html_e( 'Skip to content', 'understrap' ); ?></a>
+			
+			<!-- utility bar -->
+			<?php if($include_utility_header == 'Yes'):?>
+			<div class="row">
+				<div class="utility-bar">
+				<?php 
+					echo '<div class="header-phone-ct">' .  $phone_number . '</div><!-- .header-phone-ct -->';
+					echo '<div class="header-email-ct"><a href="mailto:' .  $email_address . '"><i class="fas fa-envelope"></i></a></div><!-- .header-email-ct -->';
+					if($include_search == 'Yes'):
+					echo  '<div class="header-search-ct">' . do_shortcode($search_shortcode) . '</div><!-- .header-search-ct -->';
+					endif;
+				?>
+				</div>
+			</div>
+			<?php endif;//END INCLUDE UTILITY HEADER CONDITIONAL?>
+			
+			<!-- navbar -->
+			<nav class="navbar navbar-expand-md">
+				<!-- Your site title as branding in the menu -->
+				<?php if ( ! $header_logo ) { ?>
 
-			<div class="container" >
-					<!-- Your site title as branding in the menu -->
-					<?php if ( ! $header_logo ) { ?>
+					<?php if ( is_front_page() && is_home() ) : ?>
 
-						<?php if ( is_front_page() && is_home() ) : ?>
-
-							<h1 class="navbar-brand mb-0"><a rel="home" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" itemprop="url"><?php echo $header_title; ?></a></h1>
-							
-						<?php else : ?>
-
-							<a class="navbar-brand" rel="home" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" itemprop="url"><?php echo $header_title; ?></a>
+						<h1 class="navbar-brand mb-0"><a rel="home" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" itemprop="url"><?php echo $header_title; ?></a></h1>
 						
-						<?php endif; ?>
-						
+					<?php else : ?>
+
+						<a class="navbar-brand" rel="home" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" itemprop="url"><?php echo $header_title; ?></a>
 					
-					<?php } else {?>
-					    
-					    <a class="navbar-brand" rel="home" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo $header_title;?>" itemprop="url"><img src="<?php echo $header_logo ?>" alt="<?php echo $header_title;?>"></a>
-							<?php //the_custom_logo();
-					} ?><!-- end custom logo -->
+					<?php endif; ?>
+					
+				
+				<?php } else {?>
+					
+					<a class="navbar-brand" rel="home" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo $header_title;?>" itemprop="url"><img src="<?php echo $header_logo ?>" alt="<?php echo $header_title;?>"></a>
+						<?php //the_custom_logo();
+				} ?><!-- end custom logo -->
 
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -98,7 +105,6 @@ endif;
 					)
 				); ?>
 
-			</div><!-- .container -->
-
-		</nav><!-- .site-navigation -->
+			</nav><!-- .site-navigation -->
+		</div><!-- .container end -->
 	</div><!-- .wrapper-navbar end -->

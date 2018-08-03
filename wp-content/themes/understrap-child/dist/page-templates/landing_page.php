@@ -195,7 +195,12 @@ $pageHTML = '';
 
                             //END CONTENT SECTION DIV
                             $pageHTML .= '</div><!-- .content-section #' . $content_section_name . '-->';
+                            
+                            $add_section_bottom_border = get_sub_field('add_section_bottom_border');
 
+                            if($add_section_bottom_border == 'Yes'){
+                                $pageHTML .= '<div class="container"><div class="section-sep"></div></div>';
+                            }
                         endwhile; //END CONTENT SECTIONS WHILE
 
                     endif; // END CONTENT SECTIONS IF

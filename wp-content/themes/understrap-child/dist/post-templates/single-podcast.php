@@ -14,57 +14,63 @@ $company_name = get_field('company_name', $post -> ID);
 $podcast_date = get_field('podcast_date', $post -> ID);
 $podcast_url = get_field('podcast_url', $post -> ID);
 $podcast_description = get_the_content();
+$podcast_embed_code=get_field('podcast_embed_code');
+$meet_the_guest = get_field('meet_the_guest');
 //the_content(); 
 $post_link = get_permalink($post -> ID)
 ;
 $post_edit_link = get_edit_post_link();
 $podcast_html = '';
-$podcast_details = '<span class="red semibold">GUEST:</span><br>';
-$podcast_details .= '<span class="semibold">' . $first_name . ' ' . $last_name . ',</span><br>';
-$podcast_details .= $job_title . ', <span class="semibold">' . $company_name . ' </span>';
-// $podcast_html .=  '<div class="feed-item post-item col-lg-4 col-md-6 col-sm-12 podcast-excerpt resource-excerpt">';
-$podcast_html .= '<a href="' . $podcast_url . '" target="_blank">';
-$podcast_html .= '<div class="post-label-ct">PODCAST</div>';
-if($podcast_date){
-	$podcast_html .=  '<div class="date">' . $podcast_date . '</div>';
+
+$podcast_html .= '<div class="row podcast-detail-hero">';
+$podcast_html .= '<div class="column col-md-3 podcast-profile-image-ct">';
+$podcast_html .= '<div class="podcast-profile-image"><img src="' . $profile_image . '" alt="' . $first_name . ' ' . $last_name . '"></div>';
+$podcast_html .= '</div><!-- .col-md-3-->';
+$podcast_html .= '<div class="column col-md-9 podcast-detail-info">';
+$podcast_html .= '<img src="http://renegadellc.staging.wpengine.com/wp-content/uploads/RTU_title_detailPage.png">';
 	
-}
-$podcast_html .= '<h3>' . $podcast_title  . '</h3>';
-$podcast_html .= '<div class="podcast-inset">';
-$podcast_html .= '<div class="podcast-image w-50 fleft"><img src="' . $profile_image .'" alt="' . $first_name . ' ' . $last_name . '"></div><!--.podcast-image -->';
-$podcast_html .= '<div class="w-50 fleft podcast-details" style="background-color:#f2f2f2;">' . $podcast_details . '</div><!--.podcast-details -->';
-$podcast_html .= '</div><!--.podcast-inset-->';
-if($podcast_description){
-	$podcast_html .=  '<div class="excerpt"><p>' . $podcast_description . '</p></div><div style="clear:both"></div>';
-}
-$podcast_html .=  '</a>';
-$podcast_html .= '<div><a href="' . $post_edit_link  . '">' . 'Edit'  . '</a></div>';
+	if($podcast_date){
+		$podcast_html .=  '<div class="date">' . $podcast_date . '</div>';
+	}
+$podcast_html .= '<h1>' . $podcast_title  . '</h1>';
+$podcast_html .= '<div class="podcast-guest-details"><span class="black">Guest: </span>' . $first_name . ' ' . $last_name . ' - ' . $job_title . ', <span class="semibold">' . $company_name . ' </span></div>';
+
+$podcast_html .= '</div><!-- .col-md-9-->';
+	if($podcast_embed_code):
+		$podcast_html .= '<div class="podcast-player-ct">' . $podcast_embed_code . '</div>';
+	endif;
+$podcast_html .= '</div><!-- .row -->';
+
+
+
+
 ?>
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
-	<header class="entry-header">
-
-		<?php 
-			// the_title( '<h1 class="entry-title">', '</h1>' ); 
-		?>
-
-		<div class="entry-meta">
-
-			<?php understrap_posted_on(); ?>
-
-		</div><!-- .entry-meta -->
-
-	</header><!-- .entry-header -->
-
-	<?php echo get_the_post_thumbnail( $post->ID, 'large' ); ?>
 
 	<div class="entry-content">
 
 		<?php 
-			// the_content(); 
+
+			$podcast_html .= '<div class="single-column-content"><div class="podcast-content">';
+			$content = get_the_content(); 
+			$podcast_html .= $content;
+				if($meet_the_guest):
+					$podcast_html .= '<h2>Meet the Guest</h2>' . $meet_the_guest;
+				endif;
+			if( have_rows('quotes') ):
+				$podcast_html .= '<h2>Quotes from ' . $first_name . ' ' . $last_name . '</h2>';
+				while ( have_rows('quotes') ) : the_row();
+					$quote= get_sub_field('quote_thing');
+					$podcast_html .= '<div class="quote">' . $quote . '</div>';
+				
+				endwhile;
+			endif;
+			
+			$podcast_html .= '</div><!-- .podcast-content --></div><!--  .entry-content -->';
 			echo $podcast_html;
 		?>
-
+<div class="section-sep"></div>
 		<?php understrap_post_nav(); ?>
 
 		<?php
