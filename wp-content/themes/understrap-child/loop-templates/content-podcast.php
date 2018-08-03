@@ -16,6 +16,8 @@
 	$podcast_date = get_field('podcast_date', $post -> ID);
 	$podcast_url = get_field('podcast_url', $post -> ID);
 	$podcast_description = get_the_content();
+	$podcast_excerpt = get_the_excerpt();
+	$podcast_excerpt = str_replace('Topline Summary ', '', $podcast_excerpt);
     //the_content(); 
 	$post_link = get_permalink($post -> ID)
 	;
@@ -41,8 +43,8 @@
 	$podcast_html .= '<p class="card-text"><span class="details">' . $podcast_details . '</span><br>';
 	// $podcast_html .= '<span class="details">' . $podcast_details . '</span><br>';
 	// $podcast_html .= '</div><!--.podcast-inset-->';
-	if($podcast_description){
-		$podcast_html .=  '<span class="excerpt"><p>' . $podcast_description . '</span></div>';
+	if($podcast_excerpt){
+		$podcast_html .=  '<span class="excerpt"><p>' . $podcast_excerpt . '</span></div>';
 	}
 	$podcast_html .=  '</a>';
 	// $podcast_html .= '<div><a href="' . $post_edit_link  . '">' . 'Edit'  . '</a></div>';
