@@ -20,7 +20,7 @@ $newsletter_html = '';
 <?php
 
 
-$newsletter_html .= '<div class="newsletter-banner">' . wp_get_attachment_image($rn_banner, $rn_size ) . '</div><!-- .newsletter-banner -->';
+$newsletter_html .= '<div class="row newsletter-banner">' . wp_get_attachment_image($rn_banner, $rn_size ) . '</div><!-- .newsletter-banner -->';
 $newsletter_html .= '<div class="single-column-content"><div class="newsletter-content">';
 $newsletter_html .= '<header class="entry-header">';
 $newsletter_html .= '<div class="newsletter-title"><h1>' . $rn_title . '</h1></div><!-- .newsletter-title -->';

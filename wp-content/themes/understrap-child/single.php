@@ -19,9 +19,9 @@ $container = get_field('container_width', 'option');
 	<?php 
 		// echo esc_attr($container);
 		if ($container == 'Fixed Width Container'):
-			echo'<div class="container" id="content" style="padding:0;">';
+			echo'<div class="container" id="content">';
 		elseif ($container == 'Full Width Container'):
-			echo'<div class="container" id="content" style="padding:0;">';
+			echo'<div class="container" id="content">';
 		endif; //END CONTAINER WIDTH IF
 	?>
 
