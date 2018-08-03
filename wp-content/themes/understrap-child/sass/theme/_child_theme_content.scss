@@ -118,6 +118,127 @@ body.people-template-default {
 	}
 }
 // podcasts
+
+.podcast-detail-hero{
+	background-color:#da5127;
+	background-image:url(http://renegadellc.staging.wpengine.com/wp-content/uploads/saw_red_fade_1kx1k.png);
+	background-repeat: no-repeat;
+	background-size:60%;
+	background-position:80% -8%;
+	padding:32px 0 0;
+}
+
+.podcast-profile-image-ct{
+	background-image:url(http://renegadellc.staging.wpengine.com/wp-content/uploads/rtu_profile_background_image.png);
+	background-size: contain;
+	background-repeat:no-repeat;
+	background-position: right bottom;
+}
+.podcast-profile-image img{
+	width:100%;
+	border-radius:50%;
+	border: 2px dotted #ccc;
+}
+
+.podcast-detail-info{
+
+	h1{
+		line-height:110%;
+		margin-bottom:24px;
+	}
+
+	.date{
+		font-size:1.5em;
+		color:#fff;
+		font-weight:500;
+		margin-top:8px;
+	}
+	img{
+		max-width:90%;
+	}
+
+	.podcast-guest-details{
+		font-size:1.5em;
+		color:#fff;
+		font-weight:300;
+	}
+
+}
+
+.podcast-player-ct{
+	background-image:url(http://renegadellc.staging.wpengine.com/wp-content/uploads/rtu_podcast_player_background.png);
+	background-size:contain;
+	background-repeat: no-repeat;
+	background-position:bottom;
+	width:100%;
+	padding:40px 0 0 0;
+
+	iframe{
+		margin:0 auto;
+		max-width:720px;
+		text-align:center;
+		width:90%;
+		display:block;
+		border:2px solid #000;
+	}
+}
+
+.podcast-content{
+	margin:8px 0 0 0;
+
+	a{
+		color:#da5127;
+	}
+
+	h2{
+		
+		margin:24px 0 24px 0;
+		padding:24px 0 0 0;
+		width:100%;
+		background:url(../img/section_sepBK.png) repeat-x top;
+	}
+
+	h2:first-of-type{
+		background:none;
+	}
+
+	h3, h4{
+		color:#da5127;
+		margin:24px 0 12px 0;
+	}
+
+	li{
+		margin-bottom:8px;
+	}
+
+	ol, ul{
+		margin-top:16px;
+	}
+
+	
+}
+
+.quote{
+	display:block;
+	font-size:1.25em;
+	margin:24px 0;
+	line-height: 120%;
+}
+
+.quote:before{
+	content: '\201C';
+	display:inline-block;
+	font-family: 'Playfair Display',serif !important;
+	font-size:48px;
+	vertical-align: -webkit-baseline-middle;
+}
+
+.quote:after{
+	content: '\201D';
+	font-family: 'Playfair Display',serif !important;
+	font-size:48px;
+	vertical-align: -webkit-baseline-middle;
+}
 // videos
 
 // subscribe form
