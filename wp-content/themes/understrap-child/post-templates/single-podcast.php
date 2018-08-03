@@ -62,8 +62,13 @@ $podcast_html .= '</div><!-- .row -->';
 				$podcast_html .= '<h2>Quotes from ' . $first_name . ' ' . $last_name . '</h2>';
 				while ( have_rows('quotes') ) : the_row();
 					$quote= get_sub_field('quote_thing');
-					$podcast_html .= '<div class="quote">' . $quote . '</div>';
-				
+					$attribution = get_sub_field('attribution');
+					$podcast_html .= '<div class="quote-ct"><div class="quote">' . $quote . '</div>';
+
+					if($attribution){
+						$podcast_html .= '<div class="attribution">' . $attribution . '</div>';
+					}
+					$podcast_html .= '</div><!-- .quote-ct -->';
 				endwhile;
 			endif;
 			
