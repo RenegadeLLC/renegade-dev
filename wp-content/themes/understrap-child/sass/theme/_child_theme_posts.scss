@@ -1,0 +1,26 @@
+body.single-post {
+    .entry-header {
+        .content-section {
+            background-color: $yellowgreen; 
+            margin-bottom: 2.5rem;
+        }
+    }
+    .entry-meta {
+        margin-bottom: 1rem;
+    }
+    .entry-content {
+        >p:first-child {
+            font-family: 'Playfair Display',serif;
+            font-size: 1.2rem;
+        }
+    }
+    .entry-pagination {
+        .container {
+            background: none;
+        }
+        .post-navigation {
+            background: url(../img/section_sepBK.png) repeat-x top;
+            // background: none;
+        }
+    }
+}
