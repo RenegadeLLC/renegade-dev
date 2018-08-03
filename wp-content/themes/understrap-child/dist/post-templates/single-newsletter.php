@@ -70,7 +70,7 @@ $newsletter_html .= '<div class="newsletter-intro">' . $rn_introduction . '</div
 
 if($rn_final_note):
 	$newsletter_html .= '<div class="final-note">' . $rn_final_note . '</div><!-- .final-note -->';
-else
+else:
 $newsletter_html .= '<div class="section-sep"></div>';
 endif;
 
