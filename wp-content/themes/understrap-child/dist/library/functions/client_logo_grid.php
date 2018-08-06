@@ -26,7 +26,7 @@ function make_logo_grid(){
             $case_study = get_field('case_study');
             $case_study_url = get_field('case_study_url');
             //$industry_vertical_name = $industry_vertical -> name;
-            if($client_name != 'Renegade'):
+            if($client_name != 'Renegade' && $client_logo):
                   $clientsHTML .= '<div class="client-grid-item col-lg-3 col-md-4 col-sm-6 col-xs-6';
               
                 $clientsHTML .= '">';
