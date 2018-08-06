@@ -81,23 +81,26 @@ $caseHTML = '';
 			
 			$caseHTML .= '</div><!-- .single-column-content -->';
 
-			$caseHTML .= '	</div><!-- .entry-content --></div><!-- .project-wrapper -->';
+			$caseHTML .= '	</div><!-- .entry-content -->';
 			echo $caseHTML;
 		
-			understrap_post_nav(); 
+			// understrap_post_nav(); 
 
 	
-		wp_link_pages( array(
-			'before' => '<div class="page-links">' . __( 'Pages:', 'understrap' ),
-			'after'  => '</div>',
-		) );
+		// wp_link_pages( array(
+		// 	'before' => '<div class="page-links">' . __( 'Pages:', 'understrap' ),
+		// 	'after'  => '</div>',
+		// ) );
 		?>
 
 
 	<footer class="entry-footer">
 
-		<?php understrap_entry_footer(); ?>
+		<?php 
+		// understrap_entry_footer(); 
+		?>
 
 	</footer><!-- .entry-footer -->
 
+	</div><!-- .project-wrapper -->
 </article><!-- #post-## -->
