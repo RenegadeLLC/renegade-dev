@@ -1,3 +1,24 @@
+// navigation block
+body.single {
+    a {
+        font-weight: 600;
+    }
+    .entry-footer {
+        .container {
+            background: none;
+            // padding: 2rem 0;
+        }
+        .post-navigation {
+            background: url(../img/section_sepBK.png) repeat-x top;
+            // background: none;
+        }
+        .nav-links {
+            padding: 1rem 0 2rem 0;
+        }
+    }
+}
+
+// default single post
 body.single-post {
     .entry-header {
         .content-section {
@@ -13,14 +34,62 @@ body.single-post {
             font-family: 'Playfair Display',serif;
             font-size: 1.2rem;
         }
-    }
-    .entry-pagination {
-        .container {
-            background: none;
+        a {
+            color: $yellowgreen;
         }
-        .post-navigation {
-            background: url(../img/section_sepBK.png) repeat-x top;
-            // background: none;
+    }
+    .entry-footer {
+        a {
+            color: $yellowgreen;
         }
     }
 }
+
+// newsletters
+body.single-newsletters {
+    .entry-footer {
+        a {
+            color: $blue;
+        }
+    }
+}
+
+// downloads
+body.single-downloads {
+    .entry-footer {
+        a {
+            color: $blue;
+        }
+    }
+}
+
+// podcasts
+body.single-podcasts {
+    .entry-footer {
+        a {
+            color: $orangered;
+        }
+    }
+}
+
+// people
+body.single-people {
+    .entry-footer {
+        a {
+            color: $orangered;
+        }
+    }
+}
+
+
+// projects
+body.single-projects {
+    .entry-footer {
+        a {
+            color: $orangered;
+        }
+    }
+}
+
+
+

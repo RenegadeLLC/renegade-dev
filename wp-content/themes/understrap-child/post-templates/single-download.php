@@ -26,21 +26,18 @@
 
 		<?php the_content(); ?>
 
-		<?php understrap_post_nav(); ?>
-
-		<?php
-		wp_link_pages( array(
-			'before' => '<div class="page-links">' . __( 'Pages:', 'understrap' ),
-			'after'  => '</div>',
-		) );
-		?>
-
 	</div><!-- .entry-content -->
-
+	
+	<!-- footer .row pagination -->
 	<footer class="entry-footer">
+			<?php understrap_post_nav();?>
 
-		<?php understrap_entry_footer(); ?>
-
-	</footer><!-- .entry-footer -->
+			<?php
+			wp_link_pages(array(
+				'before' => '<div class="page-links">' . __('Pages:', 'understrap'),
+				'after' => '</div>',
+			));
+			?>	
+	</footer><!-- footer .row pagination-->
 
 </article><!-- #post-## -->

@@ -13,7 +13,7 @@
 		<!-- row header -->
 		<header class="entry-header">
 			<div class="row">
-				<div class="content-section" style="background-color:#f2f2f2; margin-bottom: 2.5rem;">
+				<div class="content-section">
 					<div class="col-md-8">
 						<?php the_title('<h1 class="entry-title">', '</h1>');?>
 					</div>
@@ -37,7 +37,9 @@
 						<?php understrap_posted_on();?>
 					</div><!-- .entry-meta -->
 					<div class="entry-content">
-							<?php echo get_the_post_thumbnail($post->ID, 'large'); ?>
+							<?php 
+								// echo get_the_post_thumbnail($post->ID, 'large'); 
+							?>
 							<?php the_content();?>
 					</div>
 				</div>
@@ -49,10 +51,8 @@
 		</main><!-- main -->
 
 		<!-- row pagination -->
-		<div class="row">
+		<div class="row entry-pagination">
 			<div class="col-md-12">
-				<div class="content-section" style="border-top: 1px solid black">
-
 				<?php understrap_post_nav();?>
 
 				<?php
@@ -61,8 +61,13 @@
 					'after' => '</div>',
 				));
 				?>
-				</div>
-			</div><!-- .content-section -->
+			</div>
 		</div><!-- .row pagination-->
 
 </article><!-- article -->
+
+<footer class="entry-footer">
+
+	<?php understrap_entry_footer(); ?>
+
+</footer><!-- .entry-footer -->

@@ -80,22 +80,19 @@ $newsletter_html .= '</div><!--.newsletter-content --></div><!-- .single-column-
 
 		echo $newsletter_html;
 	?>
-	<div class="section-sep"></div>
-	<?php
-		understrap_post_nav();
-
-		wp_link_pages( array(
-			'before' => '<div class="page-links">' . __( 'Pages:', 'understrap' ),
-			'after'  => '</div><!-- .nav -->',
-		) );
-		
-		?>
-</article><!-- #post-## -->
-
+	
+	<!-- footer .row pagination -->
 	<footer class="entry-footer">
+			<?php understrap_post_nav();?>
 
-		<?php understrap_entry_footer(); ?>
+			<?php
+			wp_link_pages(array(
+				'before' => '<div class="page-links">' . __('Pages:', 'understrap'),
+				'after' => '</div>',
+			));
+			?>	
+	</footer><!-- footer .row pagination-->
 
-	</footer><!-- .entry-footer -->
+</article><!-- #post-## -->
 
 

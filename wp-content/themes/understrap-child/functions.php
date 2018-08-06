@@ -164,6 +164,7 @@ if( function_exists('acf_add_options_page') ) {
     
 }
 
+// overwrite post excerpts more link
 if ( ! function_exists( 'understrap_all_excerpts_get_more_link' ) ) {
 	/**
 	 * Adds a custom read more link to all excerpts, manually or automatically generated
@@ -174,5 +175,34 @@ if ( ! function_exists( 'understrap_all_excerpts_get_more_link' ) ) {
 	 */
 	function understrap_all_excerpts_get_more_link( $post_excerpt ) {
 		return $post_excerpt . '...';
+	}
+}
+
+// overwrite post next/prev nav
+if ( ! function_exists ( 'understrap_post_nav' ) ) {
+	function understrap_post_nav() {
+		// Don't print empty markup if there's nowhere to navigate.
+		$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
+		$next     = get_adjacent_post( false, '', false );
+
+		if ( ! $next && ! $previous ) {
+			return;
+		}
+		?>
+        <nav class="container navigation post-navigation">
+            <h2 class="sr-only"><?php _e( 'Post navigation', 'understrap' ); ?></h2>
+            <div class="row nav-links justify-content-between">
+                <?php
+
+                    if ( get_previous_post_link() ) {
+                        previous_post_link( '<div class="nav-previous">%link</div>', _x( '<i class="fa fa-angle-left"></i>&nbsp;%title', 'Previous post link', 'understrap' ) );
+                    }
+                    if ( get_next_post_link() ) {
+                        next_post_link( '<div class="nav-next">%link</div>',     _x( '%title&nbsp;<i class="fa fa-angle-right"></i>', 'Next post link', 'understrap' ) );
+                    }
+                ?>
+            </div><!-- .nav-links -->
+        </nav><!-- .navigation -->
+		<?php
 	}
 }
