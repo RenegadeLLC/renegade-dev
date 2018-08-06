@@ -83,6 +83,127 @@
 	}
 }
 
+// projects
+
+.project-wrapper{
+
+	background-image:url(../img/section_sepBK.png);
+		background-repeat: repeat-x;
+		background-position:bottom;
+		padding-bottom:24px;
+		margin-bottom:24px;
+	h1{
+		text-align:center;
+		padding:24px 0;
+	}
+
+	h2{
+		margin-top:24px;
+	}
+
+	h4{
+		color:#999;
+	}
+
+	.project-intro{
+		background-image:url(../img/section_sepBK.png);
+		background-repeat: repeat-x;
+		background-position:bottom;
+		padding-bottom:24px;
+		margin-bottom:24px;
+	}
+
+	.project-section{
+		background-image:url(../img/section_sepBK.png);
+		background-repeat: repeat-x;
+		background-position:bottom;
+		padding-bottom:24px;
+		margin-bottom:24px;
+
+		h2{
+			text-align:center;
+			margin-bottom:24px;
+		}
+
+		img{
+			display:block;
+			width:100%;
+			margin: 32px auto;
+		}
+
+			
+	}
+
+	.testimonial-ct {
+		border: 1px solid #bbbdbf;
+		padding: 32px;
+		color: #808184;
+		position: relative;
+		margin: 22px 10px;
+
+		.open-quote {
+			display: block;
+			background: url(../img/quote_open_green.png);
+			background-color: #fff;
+			background-repeat: no-repeat;
+			background-size: 31px;
+			width: 37px;
+			height: 27px;
+			padding: 16px;
+			position: absolute;
+			left: -8px;
+			top: -1px;
+			background-position-y: top;
+			background-position-x: left;
+		}
+
+		.close-quote {
+			display: block;
+			background: url(../img/quote_close_green.png);
+			background-color: #fff;
+			background-repeat: no-repeat;
+			background-size: 31px;
+			width: 37px;
+			height: 27px;
+			padding: 15px 14px;
+			position: absolute;
+			right: -8px;
+			bottom: -1px;
+			background-position-y: bottom;
+			background-position-x: right;
+		}
+
+		.quote-text{
+			font-size:1.5em;
+			color:#808184;
+			line-height:160%;
+		}
+
+		.quote-attrib{
+			font-size:1.5em;
+			font-weight:600;
+			color:#000;
+			line-height:140%;
+		}
+
+	
+	}
+
+	.project-title{
+		padding:24px 0;
+	}
+
+	.header-image{
+		display:block;
+		margin:0 auto;
+		max-width:300px;
+
+	}
+
+	.project-banner{
+		display:block;
+	}
+}
 // people
 body.people-template-default {
 	header.row.people-title {

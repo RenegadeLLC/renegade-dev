@@ -8,56 +8,88 @@
 
 $project_title = get_field('project_title', $post -> ID);
 $client_name = get_field('client_name', $post -> ID);
-$client = get_the_title($post -> ID);
+
+
 $case_url = get_permalink();
 
 $service_type = get_field('service_type', $post -> ID);
 $industry_vertical = get_field('industry_vertical', $post -> ID);
 $project_thumbnail_image = get_field('project_thumbnail_image', $post -> ID);
-$summary_headline = get_field('summary_headline', $post -> ID);
-$summary_text = get_field('summary_text', $post -> ID);
+$project_banner_image = get_field('project_banner_image', $post -> ID);
+$project_intro = get_field('project_intro', $post -> ID);
 
-$caseHTML .= '';
-$caseHTML .= '<a href="' . $case_url . '">';
-$caseHTML .= '<div><img src="'. $project_thumbnail_image . '" title="' . $client . ': ' . $project_title . '"></div>';
-$caseHTML .= '<div>' . $client . '<br>' . $project_title . '</div>';
-$caseHTML .= '<div><h2>' . $summary_headline . '</h2><p>' . $summary_text . '</p></div>';
-$caseHTML .= '</a>';
+$post = $client_name;
+setup_postdata( $post ); 
+$client_testimonial = get_field('client_testimonial', $post -> ID);
+$client = get_the_title($post -> ID);
+
+if(have_rows('client_testimonial')):
+	while(have_rows('client_testimonial')): the_row();
+		$testimonial_first_name = get_sub_field('first_name');
+		$testimonial_last_name = get_sub_field('last_name');
+		$job_title = get_sub_field('job_title');
+		$quote_text = get_sub_field('quote_text');
+	endwhile;
+endif;
+wp_reset_postdata();
+$caseHTML = '';
 
 ?>
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
+<div class="project-wrapper">
+	
+<?php
 
-	<header class="entry-header">
 
-		<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+	$caseHTML .= '<header class="entry-header"><h1>' . $client . '<br><span class="light-grey">' . $project_title . '</span></h1>';
 
-		<div class="entry-meta">
 
-			<?php understrap_posted_on(); ?>
+	$caseHTML .= '</header><!-- .entry-header --><div class="entry-content">';
 
-		</div><!-- .entry-meta -->
+	if ($project_banner_image):
+		$caseHTML .=	'<div class="row project-banner"><img src="' . $project_banner_image . '" alt="' . $client . ' ' .$project_name . '"></div>';
+	endif;
+	
+	$caseHTML .=  '<div class="single-column-content">';
 
-	</header><!-- .entry-header -->
+	$caseHTML .= '<div class="project-intro">' . $project_intro . '</div>';
 
-	<?php echo get_the_post_thumbnail( $post->ID, 'large' ); ?>
+	if( have_rows('project_section') ):
 
-	<div class="entry-content">
+		while ( have_rows('project_section') ) : the_row();
+			$section_top_image = get_sub_field('section_top_image');
+			$section_headline = get_sub_field('section_headline');
+			$section_content = get_sub_field('section_content');
 
-		<?php 
+			$caseHTML .= '<div class="project-section"><img src="' . $section_top_image . '" alt="' . $section_headline . '" class="header-image">';
+			$caseHTML .= '<h2>' . $section_headline . '</h2>' . $section_content . '</div>';
+		endwhile;
+	endif;
 			// the_content(); 
+
+			if($quote_text):
+				$caseHTML .= '<img src="http://renegadellc.staging.wpengine.com/wp-content/uploads/cs_testimonial_image.png" class="header-image">';
+				$caseHTML .= '<div class="testimonial-ct"><div class="open-quote"></div>';
+				$caseHTML .= '<div class="quote-text">'. $quote_text . '</div><!-- .quote-text -->';
+				$caseHTML .= '<div class="quote-attrib">' . $testimonial_first_name . ' ' . $testimonial_last_name . ',<br>';
+				$caseHTML .= $client . '</div><!-- .quote-attrib -->';
+				$caseHTML .= '<div class="close-quote"></div></div><!-- .testimonial-ct -->';
+			endif;
+			
+			$caseHTML .= '</div><!-- .single-column-content -->';
+
+			$caseHTML .= '	</div><!-- .entry-content --></div><!-- .project-wrapper -->';
 			echo $caseHTML;
-		?>
+		
+			understrap_post_nav(); 
 
-		<?php understrap_post_nav(); ?>
-
-		<?php
+	
 		wp_link_pages( array(
 			'before' => '<div class="page-links">' . __( 'Pages:', 'understrap' ),
 			'after'  => '</div>',
 		) );
 		?>
 
-	</div><!-- .entry-content -->
 
 	<footer class="entry-footer">
 
