@@ -113,6 +113,10 @@
 		margin-bottom:24px;
 	}
 
+	.project-section:last-of-type{
+		background:none;
+	}
+	
 	.project-section{
 		background-image:url(../img/section_sepBK.png);
 		background-repeat: repeat-x;
@@ -131,6 +135,7 @@
 			margin: 32px auto;
 		}
 
+		
 			
 	}
 
