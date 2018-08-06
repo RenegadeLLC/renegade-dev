@@ -37,24 +37,25 @@ function build_testimonials(){
                         $job_title = get_sub_field('job_title');
                         $quote_text = get_sub_field('quote_text');
 
-                        $testimonialHTML .= '<div class="card">';
-                       
-                        $testimonialHTML .= '<div class="card-body">';
-                        $testimonialHTML .= '<div class="testimonial-ct">';
-                        $testimonialHTML .=  '<div class="open-quote"></div>';
-                        $testimonialHTML .=  '<div class="quote-text">' . $quote_text . '</div><!-- .quote-text -->';
-                        $testimonialHTML .=  '<div class="quote-attrib"><span class="bold">' . $first_name . ' ' . $last_name . ',</span><br>';
+                        if($quote_text):
+                            $testimonialHTML .= '<div class="card">';
                         
-                            if($job_title):
-                                $testimonialHTML .= $job_title .'<br>';
-                            endif;
+                            $testimonialHTML .= '<div class="card-body">';
+                            $testimonialHTML .= '<div class="testimonial-ct">';
+                            $testimonialHTML .=  '<div class="open-quote"></div>';
+                            $testimonialHTML .=  '<div class="quote-text">' . $quote_text . '</div><!-- .quote-text -->';
+                            $testimonialHTML .=  '<div class="quote-attrib"><span class="bold">' . $first_name . ' ' . $last_name . ',</span><br>';
                             
-                        $testimonialHTML .= $client_name  . '</div><!-- .quote-attrib -->';
-                        $testimonialHTML .=  '<div class="close-quote"></div>';
-                        $testimonialHTML .= '</div><!-- .testimonial-ct -->';
-                        $testimonialHTML .= '</div><!-- .card-body -->';
-                        $testimonialHTML .= '</div><!-- .card -->';
-            
+                                if($job_title):
+                                    $testimonialHTML .= $job_title .'<br>';
+                                endif;
+                                
+                            $testimonialHTML .= $client_name  . '</div><!-- .quote-attrib -->';
+                            $testimonialHTML .=  '<div class="close-quote"></div>';
+                            $testimonialHTML .= '</div><!-- .testimonial-ct -->';
+                            $testimonialHTML .= '</div><!-- .card-body -->';
+                            $testimonialHTML .= '</div><!-- .card -->';
+                        endif;
                     endwhile;
                 endif;
             endwhile;//end query loop for all testimonials
@@ -79,24 +80,24 @@ function build_testimonials(){
                             $last_name = get_sub_field('last_name');
                             $job_title = get_sub_field('job_title');
                             $quote_text = get_sub_field('quote_text');
-                            
-                            $testimonialHTML .= '<div class="card">';
-                            $testimonialHTML .= '<div class="card-body">';
-                            $testimonialHTML .= '<div class="testimonial-ct">';
-                            $testimonialHTML .=  '<div class="open-quote"></div>';
-                            $testimonialHTML .=  '<div class="quote-text">' . $quote_text . '</div><!-- .quote-text -->';
-                            $testimonialHTML .=  '<div class="quote-attrib">' . $first_name . ' ' . $last_name . ',<br>';
-                            
-                                if($job_title):
-                                    $testimonialHTML .= $job_title .'<br>';
+                                if($quote_text):
+                                    $testimonialHTML .= '<div class="card">';
+                                    $testimonialHTML .= '<div class="card-body">';
+                                    $testimonialHTML .= '<div class="testimonial-ct">';
+                                    $testimonialHTML .=  '<div class="open-quote"></div>';
+                                    $testimonialHTML .=  '<div class="quote-text">' . $quote_text . '</div><!-- .quote-text -->';
+                                    $testimonialHTML .=  '<div class="quote-attrib">' . $first_name . ' ' . $last_name . ',<br>';
+                                    
+                                        if($job_title):
+                                            $testimonialHTML .= $job_title .'<br>';
+                                        endif;
+                                    
+                                    $testimonialHTML .= $client_name  . '</div><!-- .quote-attrib -->';
+                                    $testimonialHTML .= '<div class="close-quote"></div>';
+                                    $testimonialHTML .= '</div><!-- . testimonial-ct -->';
+                                    $testimonialHTML .= '</div><!-- . card-body -->';
+                                    $testimonialHTML .= '</div><!-- .card -->';
                                 endif;
-                            
-                            $testimonialHTML .= $client_name  . '</div><!-- .quote-attrib -->';
-                            $testimonialHTML .= '<div class="close-quote"></div>';
-                            $testimonialHTML .= '</div><!-- . testimonial-ct -->';
-                            $testimonialHTML .= '</div><!-- . card-body -->';
-                            $testimonialHTML .= '</div><!-- .card -->';
-                            
                         endwhile;
                       
                     endif;

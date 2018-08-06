@@ -164,6 +164,7 @@ $pageHTML = '';
                                     $team_member = get_sub_field('single_bio');
                                     $bioHTML .= do_bio($team_member, $headlineHTML);
                                 elseif ($bioType == 'All Team Members'):
+                                    $bioHTML .= $headlineHTML;
                                     $bioHTML .= all_bios();
                                 endif;
                                 $pageHTML .= $bioHTML;

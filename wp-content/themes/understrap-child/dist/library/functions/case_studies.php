@@ -11,10 +11,10 @@ function build_case_studies(){
         
             $numCases = get_sub_field('number_of_case_studies_to_display');
          
-            if($numCases == 'All Case Studies'):
+ 
             
                 $case_args = array( 'post_type' => 'projects', 'posts_per_page' => -1 , 'orderby' => 'menu_order', /*'meta_key' => $meta_key,*/ 'order' => 'ASC');
-                $case_loop = new WP_Query( $case_args );
+                $case_loop = new WP_Query( $case_args );           if($numCases == 'All Case Studies'):
                 if(have_posts($case_loop)):
                     while ( $case_loop->have_posts() ) : $case_loop->the_post();
                         
@@ -25,7 +25,7 @@ function build_case_studies(){
                         $client = get_the_title($post -> ID);
                         
                        
-                        $case_url = get_permalink($post -> ID);
+                        $case_url = get_permalink();
                         
                         $service_type = get_field('service_type');
                         $industry_vertical = get_field('industry_vertical');
@@ -33,17 +33,15 @@ function build_case_studies(){
                         $summary_headline = get_field('summary_headline');
                         $summary_text = get_field('summary_text');
                    
-                        $caseHTML .= '<div class="col-lg-4 col-md-4 col-sm-12 case-ct">';
-                        $caseHTML .= '<a href="' . $case_url . '">';
-                        $caseHTML .= '<div class="case-thumb-ct"><img src="'. $project_thumbnail_image . '" title="' . $client . ': ' . $project_title . '"></div><!-- .case-image-ct -->';
                         if($client != 'Renegade'):
+                            $caseHTML .= '<div class="col-lg-4 col-md-4 col-sm-12 case-ct">';
+                            $caseHTML .= '<a href="' . $case_url . '">';
+                            $caseHTML .= '<div class="case-thumb-ct"><img src="'. $project_thumbnail_image . '" title="' . $client . ': ' . $project_title . '"></div><!-- .case-image-ct -->';
                             $caseHTML .= '<div class="case-info">' . $client . '<br>' . $project_title . '</div><!-- .case-info -->';
+                            $caseHTML .= '</a></div><!-- .case-ct-->';
                         endif;
-                        
-                        $caseHTML .= '</a></div><!-- .case-ct-->';
-                    
-                        wp_reset_postdata();
                     endwhile;
+                    wp_reset_postdata();
                 endif;//end query loop for all testimonials
             elseif($numCases == 'Select Case Studies'):
             
@@ -53,31 +51,29 @@ function build_case_studies(){
                         
                         $case_study = get_sub_field('case_study');
                         $post = $case_study;
-                        
                         setup_postdata( $post );
 
                         $project_title = get_field('project_title', $post -> ID);
-                        $client_name = get_field('client_name', $post -> ID);
+                        $client_name = get_field('client_name');
+                        $client = get_the_title($post -> ID);
                      
-                        $cpost = $client_name ;
-                        setup_postdata( $cpost );
-                        $client = get_the_title($cpost -> ID);
-                        wp_reset_postdata();
-                        $case_url = get_permalink($cpost -> ID);
+                        $case_url = get_permalink($post -> ID);
                         $service_type = get_field('service_type', $post -> ID);
                         $industry_vertical = get_field('industry_vertical', $post -> ID);
                         $project_thumbnail_image = get_field('project_thumbnail_image', $post -> ID);
                         $summary_headline = get_field('summary_headline', $post -> ID);
                         $summary_text = get_field('summary_text', $post -> ID);
-                        
+
                         $caseHTML .= '<div class="col-lg-4 col-md-4 col-sm-12 case-ct">';
+                        // $caseHTML .= '<div>' . $client . '</div>';
+                        // $caseHTML .= '<div>' . $client_name . '</div>';
+                        if($client != 'Renegade' && $client !='Coming Soon'):
                         $caseHTML .= '<a href="' . $case_url . '">';
+                        endif;
                         $caseHTML .= '<div class="case-thumb-ct"><img src="'. $project_thumbnail_image . '" title="' . $client . ': ' . $project_title . '"></div><!-- .case-image-ct -->';
-                        
-                        if($client != 'Renegade'):
+                        if($client != 'Renegade' && $client !='Coming Soon'):
                             $caseHTML .= '<div class="case-info"><h4>' . $client . ' <span class="light-grey">' . $project_title . '</span></h4></div><!-- .case-info -->';
                         endif;
-                      
                         $caseHTML .= '</a></div><!-- .case-ct-->';
     
                         wp_reset_postdata();
