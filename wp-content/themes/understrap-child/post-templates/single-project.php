@@ -60,9 +60,9 @@ $caseHTML = '';
 			$section_top_image = get_sub_field('section_top_image');
 			$section_headline = get_sub_field('section_headline');
 			$section_content = get_sub_field('section_content');
-
+			$caseHTML .= '<div class="project-section">';
 			if($section_top_image):
-				$caseHTML .= '<div class="project-section"><img src="' . $section_top_image . '" alt="' . $section_headline . '" class="header-image">';
+				$caseHTML .= '<img src="' . $section_top_image . '" alt="' . $section_headline . '" class="header-image">';
 			endif;
 			
 			$caseHTML .= '<h2>' . $section_headline . '</h2>' . $section_content . '</div>';

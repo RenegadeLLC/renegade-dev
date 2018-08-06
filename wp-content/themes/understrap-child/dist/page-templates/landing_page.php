@@ -156,10 +156,10 @@ $pageHTML = '';
                                 $pageHTML .= $clientsHTML;
 
                             elseif ($content_section_type == 'Team Bio'):
-                                $pageHTML .= $headlineHTML;
+                               
                                 $bioHTML ='';
                                 $bioType = get_sub_field('number_of_people_to_display');
-                                // $bioHTML ='<h2>' . $bioType . '</h2>';
+                               
                                 if ($bioType == 'Single Bio'):
                                     $team_member = get_sub_field('single_bio');
                                     $bioHTML .= do_bio($team_member, $headlineHTML);

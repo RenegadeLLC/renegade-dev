@@ -25,7 +25,7 @@ function build_case_studies(){
                         $client = get_the_title($post -> ID);
                         
                        
-                        $case_url = get_permalink();
+                        $case_url = get_permalink($post -> ID);
                         
                         $service_type = get_field('service_type');
                         $industry_vertical = get_field('industry_vertical');
@@ -63,7 +63,7 @@ function build_case_studies(){
                         setup_postdata( $cpost );
                         $client = get_the_title($cpost -> ID);
                         wp_reset_postdata();
-                        $case_url = get_permalink();
+                        $case_url = get_permalink($cpost -> ID);
                         $service_type = get_field('service_type', $post -> ID);
                         $industry_vertical = get_field('industry_vertical', $post -> ID);
                         $project_thumbnail_image = get_field('project_thumbnail_image', $post -> ID);

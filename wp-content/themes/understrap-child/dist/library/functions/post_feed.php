@@ -18,7 +18,7 @@ function build_feed(){
         $feed_type = get_sub_field('feed_type');
         
         if($feed_type == 'Pinned Posts'):
-            $feedHTML .= '<div class="row">';
+            $feedHTML .= '<div class="row" id="'. get_sub_field('content_section_name') . '">';
             $feedHTML .= '<div class="card-columns">';
             if(have_rows('pinned_posts')):
                 while ( have_rows('pinned_posts') ) : the_row();
@@ -182,9 +182,9 @@ function build_feed(){
                 $count = $loop->post_count;
 
                 if ($count == $number_of_posts_to_include):
-                    echo '<div class="grid row">';
+                    echo '<div class="grid row" id="'. get_sub_field('content_section_name') . '">';
                 else:
-                    echo '<div class="row">';
+                    echo '<div class="row" id="'. get_sub_field('content_section_name') . '">';
                 endif;
 
                 while( $loop->have_posts() ) {
@@ -213,7 +213,7 @@ function build_feed(){
                     echo '<div class="col-lg-3"></div>';
                     echo '<div class="col-lg-6">';
                     // view more button
-                    echo '<div><button type="button" class="btn btn-primary btn-block view-more-button">VIEW MORE</button></div>';
+                    echo '<div><button type="button" class="btn btn-dark btn-block view-more-button">View More</button></div>';
                     // loader wheel
                     echo '<div class="loader-wheel .infinite-scroll-request">';
                     echo '<i><i><i><i><i><i><i><i><i><i><i><i>';
