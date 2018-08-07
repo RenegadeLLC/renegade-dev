@@ -27,7 +27,7 @@ function make_logo_grid(){
             $case_study_url = get_field('case_study_url');
             //$industry_vertical_name = $industry_vertical -> name;
             if($client_name != 'Renegade' && $client_logo):
-                  $clientsHTML .= '<div class="client-grid-item col-lg-2 col-md-4 col-sm-6 col-xs-6';
+                  $clientsHTML .= '<div class="client-grid-item col-lg-15 col-md-4 col-sm-6 col-xs-6';
               
                 $clientsHTML .= '">';
                 
@@ -55,11 +55,10 @@ function make_logo_grid(){
                 $client_logo = get_field('clientLogo', $post);
                 $case_study = get_field('case_study', $post);
                 
-                $clientsHTML .= '<div class="client-grid-item col-lg-2 col-lg-offset-1 col-md-3 col-sm-6 col-xs-6 ';
+                $clientsHTML .= '<div class="client-grid-item col-lg-15 col-md-3 col-sm-6 col-xs-6 ';
             
                 $clientsHTML .= '">';
-               
-               if($case_study == 'Yes'):
+                if($case_study == 'Yes'):
                     $case_study_url = get_field('case_study_url', $post);
                     $clientsHTML .= '<a href="' . $case_study_url . '">';
                endif;
