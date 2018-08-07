@@ -116,7 +116,7 @@
 	.project-section:last-of-type{
 		background:none;
 	}
-	
+
 	.project-section{
 		background-image:url(../img/section_sepBK.png);
 		background-repeat: repeat-x;
@@ -568,8 +568,6 @@ a, a:hover{
 	margin:0px auto;
 }
 
-
-
 .grid-item img{
 	width:100%;
 	display:block;
@@ -606,11 +604,7 @@ a, a:hover{
 }
 
 
-
-
-
 /******************************  NEWSLETTER GRID STYLES  ******************************/
-
 
 
 h2.newsletter,  h2.newsletter a{
@@ -621,11 +615,9 @@ h2.newsletter,  h2.newsletter a{
 /******************************  ARTICLE GRID STYLES  ******************************/
 
 
-
 h2.article, h2.article a{
 	color:$yellowgreen;
 }
-
 
 
 /******************************  PODCAST GRID STYLES  ******************************/
