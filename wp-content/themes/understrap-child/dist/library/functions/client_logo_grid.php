@@ -2,8 +2,8 @@
 
 function make_logo_grid(){  
     $clientsHTML = '';
-    $clientsHTML .= '<div class="wrapper" style="background:#fff;">';
-    $clientsHTML .= '<div class="client-logo-grid row" style="background-color:#fff;">';
+
+    $clientsHTML .= '<div class="client-logo-grid row">';
     
     if( have_rows('client_logo_grid') ):
     $i=1;
@@ -27,7 +27,7 @@ function make_logo_grid(){
             $case_study_url = get_field('case_study_url');
             //$industry_vertical_name = $industry_vertical -> name;
             if($client_name != 'Renegade' && $client_logo):
-                  $clientsHTML .= '<div class="client-grid-item col-lg-3 col-md-4 col-sm-6 col-xs-6';
+                  $clientsHTML .= '<div class="client-grid-item col-lg-2 col-md-4 col-sm-6 col-xs-6';
               
                 $clientsHTML .= '">';
                 
@@ -55,7 +55,7 @@ function make_logo_grid(){
                 $client_logo = get_field('clientLogo', $post);
                 $case_study = get_field('case_study', $post);
                 
-                $clientsHTML .= '<div class="client-grid-item col-lg-3 col-md-3 col-sm-6 col-xs-6 ';
+                $clientsHTML .= '<div class="client-grid-item col-lg-2 col-lg-offset-1 col-md-3 col-sm-6 col-xs-6 ';
             
                 $clientsHTML .= '">';
                //$clientsHTML .= '<div class="grid-sizer grid-item col-lg-3 col-md-3 col-sm-6">';
@@ -77,7 +77,7 @@ function make_logo_grid(){
     
     
     $clientsHTML .= '</div>';//end grid
-    $clientsHTML .= '</div><!-- .wrapper -->';
+  
     endwhile;
     endif;
     return $clientsHTML;
