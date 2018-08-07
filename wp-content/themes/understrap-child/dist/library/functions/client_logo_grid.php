@@ -22,6 +22,7 @@ function make_logo_grid(){
             $client_name = get_the_title();
             $client_id = get_the_ID();
             $client_logo = get_field('clientLogo');
+            $client_logo_color = get_field('client_logo_color');
             $industry_vertical = get_field('industry_vertical');
             $case_study = get_field('case_study');
             $case_study_url = get_field('case_study_url');
@@ -38,8 +39,14 @@ function make_logo_grid(){
                     $clientsHTML .= '<div class="client-logo">';
                 endif;
                 
-                $clientsHTML .= '<img src="' . $client_logo . '" alt="' . $client_name . '"></div></div>';
-                
+                if($case_study == 'Yes'):
+                   // $clientsHTML .= '<img src="' . $client_logo_color. '" alt="' . $client_name . '"></div></div>';
+                    $clientsHTML .= '<img src="' . $client_logo . '" alt="' . $client_name . '"></div></div>';
+           
+                else:
+                    $clientsHTML .= '<img src="' . $client_logo . '" alt="' . $client_name . '"></div></div>';
+                endif;
+
                 if($case_study == 'Yes'):
                     $clientsHTML .= '</a>';
                 endif;
@@ -70,8 +77,14 @@ function make_logo_grid(){
                       $clientsHTML .= '<div class="client-logo">';
                   endif;
                   
-                  $clientsHTML .= '<img src="' . $client_logo . '" alt="' . $client_name . '"></div></div>';
-                  
+                  if($case_study == 'Yes'):
+                    $clientsHTML .= '<img src="' . $client_logo_color. '" alt="' . $client_name . '"></div></div>';
+                    $clientsHTML .= '<img src="' . $client_logo . '" alt="' . $client_name . '"></div></div>';
+             
+                else:
+                    $clientsHTML .= '<img src="' . $client_logo . '" alt="' . $client_name . '"></div></div>';
+                endif;
+  
                   if($case_study == 'Yes'):
                       $clientsHTML .= '</a>';
                   endif;
