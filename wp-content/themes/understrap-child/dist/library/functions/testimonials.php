@@ -44,7 +44,7 @@ function build_testimonials(){
                             $testimonialHTML .= '<div class="testimonial-ct">';
                             $testimonialHTML .=  '<div class="open-quote"></div>';
                             $testimonialHTML .=  '<div class="quote-text">' . $quote_text . '</div><!-- .quote-text -->';
-                            $testimonialHTML .=  '<div class="quote-attrib"><span class="bold">' . $first_name . ' ' . $last_name . ',</span><br>';
+                            $testimonialHTML .=  '<div class="quote-attrib"><span class="bold">' . $first_name . ' ' . $last_name . '</span><br>';
                             
                                 if($job_title):
                                     $testimonialHTML .= $job_title .'<br>';
@@ -86,7 +86,7 @@ function build_testimonials(){
                                     $testimonialHTML .= '<div class="testimonial-ct">';
                                     $testimonialHTML .=  '<div class="open-quote"></div>';
                                     $testimonialHTML .=  '<div class="quote-text">' . $quote_text . '</div><!-- .quote-text -->';
-                                    $testimonialHTML .=  '<div class="quote-attrib">' . $first_name . ' ' . $last_name . ',<br>';
+                                    $testimonialHTML .=  '<div class="quote-attrib">' . $first_name . ' ' . $last_name . '<br>';
                                     
                                         if($job_title):
                                             $testimonialHTML .= $job_title .'<br>';

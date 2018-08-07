@@ -211,7 +211,7 @@ span.excerpt{
 .author,
 .author a {
 	color: #000;
-	font-family: 'MuseoSans-500', sans-serif !important;
+	font-family: 'Raleway', sans-serif !important;
 	font-size: 1em;
 	margin-bottom: 12px;
 }
@@ -507,3 +507,14 @@ ul.social-icons li:last-of-type {
 	padding: 8px;
 }
 
+.mc4wp-success{
+	font-family: 'Playfair Display',serif !important;
+	font-size:1.5em;
+	color:#000;
+}
+
+.mc4wp-alert{
+	font-family: 'Playfair Display',serif !important;
+	font-size:1.5em;
+	color:$orangered;
+}
