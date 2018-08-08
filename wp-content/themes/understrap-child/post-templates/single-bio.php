@@ -32,7 +32,7 @@ $rp_contact_link = get_field('rp_contact_link');
 
 		$people_html = '';
 		
-		$people_html .= '<header class="row people-title"><div class="col"><h1><span>' . $rp_first_name . ' ' . $rp_last_name .'</span><br>' . $rp_job_title . '</h1></header>';
+		$people_html .= '<header class="row people-title"><div class="col"><h1>' . $rp_first_name . ' ' . $rp_last_name .'<br><span class="light-gray">' . $rp_job_title . '</span></h1></header>';
 
 		$people_html .= '<section class="row people-intro">';
 		$people_html .= '<div class="col-md-6 people-image" style="background-image:url(' . $rp_banner_image . '); background-size:contain; background-repeat:no-repeat; background-position:0%;"><img src="' . $rp_bio_image . '" alt="' .  $rp_first_name . ' ' . $rp_last_name .'"></div>';
