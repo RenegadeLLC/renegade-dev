@@ -13,7 +13,21 @@ body.single {
         .post-navigation {
             background: url(../img/section_sepBK.png) repeat-x top;
             // background: none;
+
+            .nav-previous {
+                float: left;
+                width: 50%;
+                margin-right: auto;
+            }
+
+            .nav-next {
+                float: right;
+                text-align: right;
+                width: 50%;
+                margin-left: auto;
+	        }
         }
+        
         .nav-links {
             padding: 1rem 0 2rem 0;
         }
