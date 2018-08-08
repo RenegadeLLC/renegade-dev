@@ -196,8 +196,10 @@ if ( ! function_exists ( 'understrap_post_nav' ) ) {
 		// Don't print empty markup if there's nowhere to navigate.
 		$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
         $next     = get_adjacent_post( false, '', false );
+
         // exception to show first name on leadership pages
-        $rp_first_name = get_field('rp_first_name');
+        $prev_first_name = get_post_meta( $previous->ID, 'rp_first_name', $single = true);
+        $next_first_name = get_post_meta( $next->ID, 'rp_first_name', $single = true);
 
 		if ( ! $next && ! $previous ) {
 			return;
@@ -209,10 +211,10 @@ if ( ! function_exists ( 'understrap_post_nav' ) ) {
                 <?php
 
                     if ( get_previous_post_link() ) {
-                        previous_post_link( '<div class="nav-previous">%link</div>', _x( '<i class="fa fa-angle-left"></i>&nbsp;'. $rp_first_name . '%title', 'Previous post link', 'understrap' ) );
+                        previous_post_link( '<div class="nav-previous">%link</div>', _x( '<i class="fa fa-angle-left"></i>&nbsp;'. $prev_first_name . '&nbsp;%title', 'Previous post link', 'understrap' ) );
                     }
                     if ( get_next_post_link() ) {
-                        next_post_link( '<div class="nav-next">%link</div>',     _x( $rp_first_name . '&nbsp;%title&nbsp;<i class="fa fa-angle-right"></i>', 'Next post link', 'understrap' ) );
+                        next_post_link( '<div class="nav-next">%link</div>',     _x( $next_first_name . '&nbsp;%title&nbsp;<i class="fa fa-angle-right"></i>', 'Next post link', 'understrap' ) );
                     }
                 ?>
             </div><!-- .nav-links -->
