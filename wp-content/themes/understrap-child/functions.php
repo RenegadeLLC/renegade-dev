@@ -170,6 +170,12 @@ if( function_exists('acf_add_options_page') ) {
     
 }
 
+// limit excerpt length
+function custom_excerpt_length( $length ) {
+	return 40;
+}
+add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
+
 // overwrite post excerpts more link
 if ( ! function_exists( 'understrap_all_excerpts_get_more_link' ) ) {
 	/**
