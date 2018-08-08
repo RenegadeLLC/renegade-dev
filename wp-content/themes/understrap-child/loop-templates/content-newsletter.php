@@ -10,6 +10,7 @@ $rn_date = get_field('rn_date', $post -> ID);
 $rn_thumbnail_image= get_field('rn_banner', $post -> ID);
 $rn_link = get_permalink($post -> ID);
 $rn_introduction= get_field('rn_introduction' , $post -> ID);
+$rn_excerpt = limit_text($rn_introduction, 40);
 $rn_banner = get_field('rn_banner', $post -> ID);
 $rn_size = "half";
 
@@ -20,7 +21,7 @@ $newsletter_html .= '<div class="card-body">';
 $newsletter_html .= '<h5 class="card-title">' . $rn_title . '</h5>';
 $newsletter_html .= '<p class="card-text">';
 $newsletter_html .= '<span class="date">' . $rn_date . '</span><br>';
-$newsletter_html .= '<span class="card-excerpt">' . $rn_introduction . '</span>';
+$newsletter_html .= '<span class="card-excerpt">' . $rn_excerpt . '</span>';
 $newsletter_html .= '</p>';
 $newsletter_html .= '</div><!-- .card-body -->';
 $newsletter_html .= '</div><!-- .card -->';

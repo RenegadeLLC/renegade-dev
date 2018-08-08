@@ -102,6 +102,15 @@ function change_date( $post_id ) {
     wp_update_post( $my_post );
 }
 
+function limit_text($text, $limit) {
+    if (str_word_count($text, 0) > $limit) {
+        $words = str_word_count($text, 2);
+        $pos = array_keys($words);
+        $text = substr($text, 0, $pos[$limit]) . '...';
+    }
+    return $text;
+}
+
 // enqueue_scripts: make sure to include ajaxurl, so we know where to send the post request
 // function dt_add_main_js(){
     
