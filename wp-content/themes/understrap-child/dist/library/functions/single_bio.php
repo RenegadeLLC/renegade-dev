@@ -14,9 +14,10 @@ function do_bio($team_member, $headlineHTML){
     $rp_bio_image = get_field('rp_bio_image', $post);
     $rp_short_bio = get_field('rp_short_bio', $post);
     $rp_email_address = get_field('rp_email_address', $post);
-    
+    $rp_banner_image = get_field('rp_banner_image', $post);
+
     $bioHTML .= '<div class="feature-bio-ct">';
-    $bioHTML .= '<div class="col-lg-6 col-md-6 col-sm-12 fleft bio-highlight-left">'. $headlineHTML;
+    $bioHTML .= '<div class="col-lg-6 col-md-6 col-sm-12 fleft bio-highlight-left" style="background-image:url(' .  $rp_banner_image . '); background-repeat:no-repeat; background-position:bottom; background-size:contain;">'. $headlineHTML;
     $bioHTML .= '<div class="bio-image-ct"><img src="' . $rp_bio_image . '" alt="' . $rp_first_name . ' ' . $rp_last_name .  '"></div><!-- .bio-image-ct -->';
     $bioHTML .= '</div><!-- .w-50 -->';
     
