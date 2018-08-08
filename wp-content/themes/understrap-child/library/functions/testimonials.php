@@ -76,7 +76,7 @@ function build_testimonials(){
                         while(have_rows('client_testimonial', $post -> ID)): the_row();
                             
                             $client_name = get_the_title($post -> ID);
-                            $first_name = get_field('first_name');
+                            $first_name = get_sub_field('first_name');
                             $last_name = get_sub_field('last_name');
                             $job_title = get_sub_field('job_title');
                             $quote_text = get_sub_field('quote_text');
@@ -86,7 +86,7 @@ function build_testimonials(){
                                     $testimonialHTML .= '<div class="testimonial-ct">';
                                     $testimonialHTML .=  '<div class="open-quote"></div>';
                                     $testimonialHTML .=  '<div class="quote-text">' . $quote_text . '</div><!-- .quote-text -->';
-                                    $testimonialHTML .=  '<div class="quote-attrib">' . $first_name . ' ' . $last_name . '<br>';
+                                    $testimonialHTML .=  '<div class="quote-attrib"><span class="bold">' . $first_name . ' ' . $last_name . '</span><br>';
                                     
                                         if($job_title):
                                             $testimonialHTML .= $job_title .'<br>';
