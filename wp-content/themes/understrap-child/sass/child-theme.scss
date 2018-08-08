@@ -15,7 +15,8 @@
 @import "theme/child_theme_typography"; // Core Typogrpahy
 @import "theme/child_theme_layout"; // Core Layout
 @import "theme/child_theme_content"; // Main Theme File for Content
-@import "theme/child_theme_posts"; // Main Theme File for Content
 
 //** ADDITIONAL - Dev and other files we want to isolate from core theme files 
 @import "theme/child_theme_anne"; // <--------- Anne's theme updates
+@import "theme/child_theme_posts"; // tweaks to post pages
+@import "theme/child_theme_services"; // tweaks to services section pages
