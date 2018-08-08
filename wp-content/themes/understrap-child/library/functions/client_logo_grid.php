@@ -78,7 +78,7 @@ function make_logo_grid(){
                   endif;
                   
                   if($case_study == 'Yes'):
-                    $clientsHTML .= '<img src="' . $client_logo_color. '" alt="' . $client_name . '"></div></div>';
+                    //$clientsHTML .= '<img src="' . $client_logo_color. '" alt="' . $client_name . '"></div></div>';
                     $clientsHTML .= '<img src="' . $client_logo . '" alt="' . $client_name . '"></div></div>';
              
                 else:
