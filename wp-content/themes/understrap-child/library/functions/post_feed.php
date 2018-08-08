@@ -211,8 +211,8 @@ function build_feed(){
 
                 if (!is_front_page()):
                     echo '<div class="row">';
-                    echo '<div class="col-lg-3"></div>';
-                    echo '<div class="col-lg-6">';
+                    echo '<div class="col-md-4"></div>';
+                    echo '<div class="col-md-4">';
                     // view more button
                     echo '<div><button type="button" class="btn btn-dark btn-block view-more-button">View More</button></div>';
                     // loader wheel
@@ -221,7 +221,7 @@ function build_feed(){
                     echo '</i></i></i></i></i></i></i></i></i></i></i></i>';
                     echo '</div>';
                     echo '</div>';
-                    echo '<div class="col-lg-3"></div>';
+                    echo '<div class="col-md-4"></div>';
                     echo '</div>';
                 endif;
     
