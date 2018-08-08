@@ -86,8 +86,8 @@ function build_feed(){
             ));
             $recent_news = wp_get_recent_posts(array(
                 'posts_per_page'   => $num_show,
-                'orderby'          => 'date',
-                'order'            => 'DESC',
+                'orderby'          => 'meta_value',
+                'meta_key'         => 'rn_date',
                 'post_type'        => 'newsletters',
                 'post_status'      => 'publish',
             ));
