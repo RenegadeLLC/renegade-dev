@@ -93,7 +93,8 @@ function build_feed(){
             ));
             $recent_podcasts = wp_get_recent_posts(array(
                 'posts_per_page'   => $num_show,
-                'orderby'          => 'date',
+                'orderby'          => 'meta_value',
+                'meta_key'         => 'podcast_date',
                 'order'            => 'DESC',
                 'post_type'        => 'podcasts',
                 'post_status'      => 'publish',
