@@ -127,9 +127,11 @@ $pageHTML = '';
 
                                 endif;
 
+                                $pageHTML .= '"';
+                                
                             endif; //end if customize section background
 
-                            $pageHTML .= '" id="' . $content_section_name . '"';
+                            $pageHTML .= ' id="' . $content_section_name . '"';
 
                             $pageHTML .= '>'; //end of div declaration
 
