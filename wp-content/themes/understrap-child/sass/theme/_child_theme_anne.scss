@@ -36,7 +36,10 @@ div.asp_m.asp_m_1 {
 // 	font-size: .9rem;
 // 	font-weight: 500;
 // }
-
+.btn-dark {
+	font-family: 'Playfair Display', serif;
+	display:inline-block;
+}
 .content-section {
 	display: flex;
 	overflow: hidden;
@@ -123,7 +126,7 @@ div.asp_m.asp_m_1 {
 }
 
 .image-text-wrapper .bt {
-	font-family: Playfair, serif;
+	font-family: 'Playfair Display', serif;
 	display: inline;
 	background-color: #000;
 	padding: 4px 8px;

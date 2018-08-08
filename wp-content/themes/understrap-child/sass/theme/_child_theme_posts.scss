@@ -40,6 +40,20 @@ body.single-post {
         .content-section {
             background-color: $yellowgreen; 
             margin-bottom: 2.5rem;
+            min-height:250px;
+            background-image:url(../img/saw_white_fade_1kx1k.png);
+            background-repeat:no-repeat;
+            background-position:95% 50%;
+            background-size:50%;
+
+            .blog-header-img{
+                background-image:url(http://renegadellc.staging.wpengine.com/wp-content/uploads/blog_detail_banner_image_sm.png);
+                background-repeat:no-repeat;
+                background-size:70%;
+                background-position:right;
+                width:100%;
+                height:100%;
+            }
         }
     }
     .entry-meta {
