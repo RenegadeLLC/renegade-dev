@@ -199,35 +199,58 @@ if ( ! function_exists( 'understrap_all_excerpts_get_more_link' ) ) {
 	}
 }
 
-// overwrite post next/prev nav
-if ( ! function_exists ( 'understrap_post_nav' ) ) {
-	function understrap_post_nav() {
-		// Don't print empty markup if there's nowhere to navigate.
-		$previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
-        $next     = get_adjacent_post( false, '', false );
+// override post next/prev nav
+function understrap_post_nav() {
+    // Don't print empty markup if there's nowhere to navigate.
+    $previous = ( is_attachment() ) ? get_post( get_post()->post_parent ) : get_adjacent_post( false, '', true );
+    $next     = get_adjacent_post( false, '', false );
 
-        // exception to show first name on leadership pages
-        $prev_first_name = get_post_meta( $previous->ID, 'rp_first_name', $single = true);
-        $next_first_name = get_post_meta( $next->ID, 'rp_first_name', $single = true);
+    // exception to show first name on leadership pages
+    $prev_first_name = get_post_meta( $previous->ID, 'rp_first_name', $single = true);
+    $next_first_name = get_post_meta( $next->ID, 'rp_first_name', $single = true);
 
-		if ( ! $next && ! $previous ) {
-			return;
-		}
-		?>
-        <nav class="container navigation post-navigation">
-            <h2 class="sr-only"><?php _e( 'Post navigation', 'understrap' ); ?></h2>
-            <div class="row nav-links justify-content-between">
-                <?php
+    if ( ! $next && ! $previous ) {
+        return;
+    }
+    ?>
+    <nav class="container navigation post-navigation">
+        <h2 class="sr-only"><?php _e( 'Post navigation', 'understrap' ); ?></h2>
+        <div class="row nav-links justify-content-between">
+            <?php
 
-                    if ( get_previous_post_link() ) {
-                        previous_post_link( '<div class="nav-previous">%link</div>', _x( '<i class="fa fa-angle-left"></i>&nbsp;'. $prev_first_name . '&nbsp;%title', 'Previous post link', 'understrap' ) );
-                    }
-                    if ( get_next_post_link() ) {
-                        next_post_link( '<div class="nav-next">%link</div>',     _x( $next_first_name . '&nbsp;%title&nbsp;<i class="fa fa-angle-right"></i>', 'Next post link', 'understrap' ) );
-                    }
-                ?>
-            </div><!-- .nav-links -->
-        </nav><!-- .navigation -->
-		<?php
-	}
+                if ( get_previous_post_link() ) {
+                    previous_post_link( '<div class="nav-previous">%link</div>', _x( '<i class="fa fa-angle-left"></i>&nbsp;'. $prev_first_name . '&nbsp;%title', 'Previous post link', 'understrap' ) );
+                }
+                if ( get_next_post_link() ) {
+                    next_post_link( '<div class="nav-next">%link</div>',     _x( $next_first_name . '&nbsp;%title&nbsp;<i class="fa fa-angle-right"></i>', 'Next post link', 'understrap' ) );
+                }
+            ?>
+        </div><!-- .nav-links -->
+    </nav><!-- .navigation -->
+    <?php
+}
+
+
+
+// override posted on function
+function understrap_posted_on() {
+    $time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
+    // if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
+    //     $time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s"> (%4$s) </time>';
+    // }
+    $time_string = sprintf( $time_string,
+        esc_attr( get_the_date( 'c' ) ),
+        esc_html( get_the_date() ),
+        esc_attr( get_the_modified_date( 'c' ) ),
+        esc_html( get_the_modified_date() )
+    );
+    $posted_on = sprintf(
+        esc_html_x( '%s', 'post date', 'understrap' ),
+        '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
+    );
+    $byline = sprintf(
+        esc_html_x( 'By %s', 'post author', 'understrap' ),
+        '<span class="author vcard"><a class="url fn n" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a></span>'
+    );
+    echo '<span class="posted-on">' . $posted_on . '</span><br><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
 }

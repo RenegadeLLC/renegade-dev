@@ -36,6 +36,9 @@ body.single {
 
 // default single post
 body.single-post {
+    .byline, .author, .author a {
+        font-weight: 700;
+    }
     .entry-header {
         .content-section {
             background-color: $yellowgreen; 
