@@ -66,28 +66,4 @@ jQuery(document).ready(function ($) {
     $grid.on( 'last.infiniteScroll', function( event, response, path ) {
         console.log( 'Loaded last page: ' + path );
     });
-      
-
-    // fixes for  mobile loading
-
-    // $grid.on( 'append.infiniteScroll', function( event, response, path, items ) {
-    //     $grid.isotope({
-    //         // Packery options...
-    //         itemSelector: 'div[class*="grid__item"]',
-    //     });
-    //     $grid.find('img[srcset]').each( function( i, img ) {
-    //         img.outerHTML = img.outerHTML;
-    //     });
-    // });
-
-    // show console message when scroll has reached bottom
-    // $grid.on( 'scrollThreshold.infiniteScroll', function( event ) {
-    //     console.log('Scroll at bottom');
-    // });
-    
-    // filter items on button click
-    // $('.filter-button-group').on('click', 'button', function () {
-    //     var filterValue = $(this).attr('data-filter');
-    //     $grid.isotope({filter: filterValue});
-    // });
 });
