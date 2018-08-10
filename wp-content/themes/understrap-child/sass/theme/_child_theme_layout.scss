@@ -94,6 +94,13 @@
 		border-bottom: none;
 	}
 }
+
+.navbar-expand-md {
+	.navbar-collapse >ul {
+		padding-bottom: 1.5rem;
+	}
+}
+
 @media (max-width: 767px) {
 	.navbar-nav .nav-link {
 		border-top: 3px solid #fff;

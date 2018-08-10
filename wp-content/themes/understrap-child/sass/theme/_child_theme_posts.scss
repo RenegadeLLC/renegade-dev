@@ -64,6 +64,11 @@ body.single-post {
             background-position:95% 50%;
             background-size:50%;
             display: block;
+            position: relative;
+
+            .blog-headline {
+                z-index: 100;
+            }
 
             .blog-header-img{
                 background-image:url(http://renegadellc.staging.wpengine.com/wp-content/uploads/blog_detail_banner_image_sm.png);
@@ -72,6 +77,8 @@ body.single-post {
                 background-position:right;
                 width:100%;
                 height:100%;
+                position: absolute;
+                bottom: -55%;
             }
         }
     }

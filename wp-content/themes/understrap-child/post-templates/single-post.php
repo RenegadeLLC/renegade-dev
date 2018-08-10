@@ -14,7 +14,7 @@
 	<header class="entry-header">
 		<div class="row">
 			<div class="content-section">
-				<div class="col-md-8">
+				<div class="col-md-8 blog-headline">
 					<?php the_title('<h1 class="entry-title">', '</h1>');?>
 				</div>
 				<div class="col-md-4 blog-header-img">
