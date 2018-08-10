@@ -1,3 +1,18 @@
+// post feeds
+@media (max-width:768px) {
+	#renegade_thinking,
+	#podcasts_feed,
+	#newsletter_content,
+	#downloads_content,
+	#blog_content {
+		padding: 2rem 0;
+		.row.non-dynamic {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+}
+
 // navigation block
 body.single {
     .entry-footer {
@@ -48,6 +63,7 @@ body.single-post {
             background-repeat:no-repeat;
             background-position:95% 50%;
             background-size:50%;
+            display: block;
 
             .blog-header-img{
                 background-image:url(http://renegadellc.staging.wpengine.com/wp-content/uploads/blog_detail_banner_image_sm.png);
