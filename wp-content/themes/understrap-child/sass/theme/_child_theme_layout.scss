@@ -214,13 +214,16 @@
 // }
 
 .view-more-button {
-	margin: 2rem 0;
+	// margin: 2rem 0;
     background-color: #000;
     color: #fff;
     border: none;
     font-family: 'Playfair Display',serif;
     font-size: 20px;
     padding: 8px;
+}
+.view-more-button-container {
+	padding: 15px;
 }
 
 .loader-wheel {

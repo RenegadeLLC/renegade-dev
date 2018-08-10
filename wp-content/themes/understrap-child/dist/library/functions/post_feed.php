@@ -124,9 +124,6 @@ function build_feed(){
             }
             wp_reset_query();
 
-            // start HTML
-            // $feedHTML .= '<div class="grid row">';
-
             // set grid item container
             $cols = get_sub_field('number_of_columns');
             $col_grid_container;
@@ -138,7 +135,7 @@ function build_feed(){
                     $col_grid_container = '<div class="col-md-6 grid__item">';
                     break;
                 case '3':
-                    $col_grid_container = '<div class="col-md-4 col-sm-6 grid__item">';
+                    $col_grid_container = '<div class="col-lg-4 col-md-6 grid__item">';
                     break;
                 case '4':
                     $col_grid_container = '<div class="col-md-3 col-sm-6 grid__item">';
@@ -183,9 +180,9 @@ function build_feed(){
                 $count = $loop->post_count;
 
                 if ($count == $number_of_posts_to_include):
-                    echo '<div class="grid row" id="'. get_sub_field('content_section_name') . '">';
+                    echo '<div class="post-feed dynamic grid row">';
                 else:
-                    echo '<div class="row" id="'. get_sub_field('content_section_name') . '">';
+                    echo '<div class="post-feed non-dynamic row">';
                 endif;
 
                 while( $loop->have_posts() ) {
@@ -214,7 +211,7 @@ function build_feed(){
                     echo '<div class="col-md-4"></div>';
                     echo '<div class="col-md-4">';
                     // view more button
-                    echo '<div><button type="button" class="btn btn-dark btn-block view-more-button">View More</button></div>';
+                    echo '<div class="view-more-button-container"><button type="button" class="btn btn-dark btn-block view-more-button">View More</button></div>';
                     // loader wheel
                     echo '<div class="loader-wheel .infinite-scroll-request">';
                     echo '<i><i><i><i><i><i><i><i><i><i><i><i>';

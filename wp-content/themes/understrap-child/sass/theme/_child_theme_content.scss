@@ -1,3 +1,19 @@
+
+// post feeds
+@media (max-width:768px) {
+	#renegade_thinking,
+	#podcasts_feed,
+	#newsletter_content,
+	#downloads_content,
+	#blog_content {
+		padding: 2rem 0;
+		.row.non-dynamic {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+}
+
 // testimonials
 
 /* Small devices (landscape phones, 544px and up) */
