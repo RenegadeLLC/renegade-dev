@@ -397,7 +397,15 @@ body.people-template-default {
 	
 }
 
-@media (max-width:768px) {
+@media (max-width:991px) {
+	body.single-podcasts {
+		.podcast-content {
+			padding-left: 1rem;
+			padding-right: 1rem;
+		}
+	}
+}
+@media (max-width:767px) {
 	body.single-podcasts {
 		.podcast-profile-image-ct {
 			padding: 0 2rem 2rem;

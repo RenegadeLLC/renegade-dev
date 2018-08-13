@@ -30,6 +30,7 @@
 // navigation block
 body.single {
     .entry-footer {
+        font-weight: 600;
         a {
             font-weight: 600;
         }
@@ -42,7 +43,9 @@ body.single {
         .post-navigation {
             background: url(../img/section_sepBK.png) repeat-x top;
             // background: none;
-
+            span {
+                padding-right: 0;
+            }
             .nav-previous {
                 float: left;
                 width: 50%;
@@ -63,10 +66,35 @@ body.single {
     }
 }
 
-@media (max-width:768px) {
+@media (min-width:768px) {
+    body.single {
+        .post-navigation {
+            .nav-previous-alt,
+            .nav-next-alt {
+                display:none;
+            }
+            .nav-next-text,
+            .nav-previous-text {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+@media (max-width:767px) {
     body.single {
         .nav-links {
-            font-size: .9rem;
+            font-size: 1.2rem;
+        }
+        .post-navigation {
+            .nav-previous-alt,
+            .nav-next-alt {
+                display: inline-block;
+            }
+            .nav-next-text,
+            .nav-previous-text {
+                display:none;
+            }
         }
     }
 }
@@ -117,6 +145,7 @@ body.single-post {
         }
     }
     .entry-footer {
+        color: $yellowgreen;
         a {
             color: $yellowgreen;
         }
@@ -159,6 +188,7 @@ body.single-post {
 // newsletters
 body.single-newsletters {
     .entry-footer {
+        color: $blue;
         a {
             color: $blue;
         }
@@ -168,6 +198,7 @@ body.single-newsletters {
 // downloads
 body.single-downloads {
     .entry-footer {
+        color: $blue;
         a {
             color: $blue;
         }
@@ -177,6 +208,7 @@ body.single-downloads {
 // podcasts
 body.single-podcasts {
     .entry-footer {
+        color: $orangered;
         a {
             color: $orangered;
         }
@@ -187,6 +219,7 @@ body.single-podcasts {
 // people
 body.single-people {
     .entry-footer {
+        color: $orangered;
         a {
             color: $orangered;
         }

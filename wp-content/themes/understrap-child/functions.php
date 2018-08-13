@@ -219,10 +219,10 @@ function understrap_post_nav() {
             <?php
 
                 if ( get_previous_post_link() ) {
-                    previous_post_link( '<div class="nav-previous">%link</div>', _x( '<i class="fa fa-angle-left"></i>&nbsp;'. $prev_first_name . '&nbsp;%title', 'Previous post link', 'understrap' ) );
+                    previous_post_link( '<div class="nav-previous">%link</div>', _x( $prev_first_name . '<i class="fa fa-angle-left"></i>&nbsp;<span class="nav-previous-alt">PREV</span><span class="nav-previous-text">%title</span>', 'Previous post link', 'understrap' ) );
                 }
                 if ( get_next_post_link() ) {
-                    next_post_link( '<div class="nav-next">%link</div>',     _x( $next_first_name . '&nbsp;%title&nbsp;<i class="fa fa-angle-right"></i>', 'Next post link', 'understrap' ) );
+                    next_post_link( '<div class="nav-next">%link</div>',     _x( $next_first_name . '<span class="nav-next-alt">NEXT</span><span class="nav-next-text">%title</span>&nbsp;<i class="fa fa-angle-right"></i>', 'Next post link', 'understrap' ) );
                 }
             ?>
         </div><!-- .nav-links -->
