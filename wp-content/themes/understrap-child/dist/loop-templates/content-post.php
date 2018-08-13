@@ -23,7 +23,7 @@ $title = get_the_title( $post -> ID);
 	$post_html .= '<div class="card-body">';
 	$post_html .= '<h5 class="card-title">' . $title . '</h5>';
 	$post_html .= '<p class="card-text">';
-	$post_html .= '<span class="card-date">' . $date . '</span><br>';
+	$post_html .= '<span class="card-date date">' . $date . '</span><br><br>';
 	$post_html .= '<span class="card-excerpt">' . $excerpt . '</span>';
 	$post_html .= '</p></a>';	
 	// $post_html .= '<a href="' . $post_edit_link  . '">' . 'Edit'  . '</a>';
