@@ -71,11 +71,11 @@ body.single {
         .post-navigation {
             .nav-previous-alt,
             .nav-next-alt {
-                display:none;
+                display: none;
             }
             .nav-next-text,
             .nav-previous-text {
-                display: inline-block;
+                display: inline;
             }
         }
     }
@@ -89,11 +89,11 @@ body.single {
         .post-navigation {
             .nav-previous-alt,
             .nav-next-alt {
-                display: inline-block;
+                display: inline;
             }
             .nav-next-text,
             .nav-previous-text {
-                display:none;
+                display: none;
             }
         }
     }
