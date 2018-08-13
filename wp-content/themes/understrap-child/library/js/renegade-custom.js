@@ -4,15 +4,7 @@
 jQuery(document).ready(function ($) {
 
     // prevent orphans
-    // $("p,h1,h2,h3,h4,h5,h6").each(function(i,e) {
-    //     var text = $(e).html();
-    //     text = text.split(' ');
-    //     var lastWord = text.pop();
-    //     text = text.join(' ') + "&nbsp;" + lastWord;
-    //     $(e).html(text);
-    // });
-
-    $("p,h1,h2,h3,h4,h5,h6").unorphanize();
+    $("p").unorphanize();
 
     // check if mobile
     // TODO: consider making this global

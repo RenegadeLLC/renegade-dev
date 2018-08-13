@@ -2,6 +2,10 @@
 
 // Mobile specific scripts
 jQuery(document).ready(function ($) {
+
+    // prevent orphans
+    $("p").unorphanize();
+
     // check if mobile
     // TODO: consider making this global
     var isMobile = false; //initiate as false
@@ -63,7 +67,8 @@ jQuery(document).ready(function ($) {
         $grid.isotope('layout');
     });
 
-    $grid.on( 'last.infiniteScroll', function( event, response, path ) {
-        console.log( 'Loaded last page: ' + path );
-    });
+    // $grid.on( 'last.infiniteScroll', function( event, response, path ) {
+        // console.log( 'Loaded last page: ' + path );
+    // });
+    
 });
