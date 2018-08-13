@@ -397,6 +397,34 @@ body.people-template-default {
 	
 }
 
+@media (max-width:768px) {
+	body.single-podcasts {
+		.podcast-profile-image-ct {
+			padding: 0 2rem 2rem;
+		}
+		.podcast-detail-info {
+			padding-left: 2rem;
+			padding-right: 2rem;
+			.date {
+				font-size: 1.5rem;
+			}
+			h1 {
+				font-size: 2.5rem;
+			}
+			.podcast-guest-details {
+				font-size: 1.5rem;
+			}
+		}
+		.podcast-player-ct {
+			padding: 25px 0 0 0;
+		}
+		.podcast-content {
+			padding-left: 1rem;
+			padding-right: 1rem;
+		}
+	}
+}
+
 .quote-ct{
 	margin:24px 0;
 	font-size:1.25em;
@@ -489,6 +517,39 @@ body.people-template-default {
 		line-height: 180%;
 	}
 }
+
+
+@media (max-width:991px) {
+	body.single-newsletters {
+		.newsletter-title, 
+		.newsletter-date,
+		.newsletter-intro {
+			padding-left: 1.5rem;
+			padding-right: 1.5rem;
+		}
+		.newsletter-title h1 {
+			font-size: 2.5rem;
+		}
+		.newsletter-date,
+		.newsletter-intro {
+			font-size: 1.5rem;
+			p:first-of-type {
+				font-size: 1.5rem;
+				line-height: 2rem;
+			}
+			p:nth-of-type(2) {
+				font-size: 1.2rem;
+				line-height: 2rem;
+			}
+		}
+		.newsletter-content,
+		.newsletter-text {
+			line-height: 2rem;
+		}
+	}
+}
+
+
 // videos
 
 // subscribe form
@@ -661,9 +722,8 @@ h2.podcast, h2.podcast a{
 
 .date, .date a{
 	font-size:1.2em;
-}
-
 	}
+}
 
 
 

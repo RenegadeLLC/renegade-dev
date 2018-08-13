@@ -1,5 +1,18 @@
 // post feeds
+.post-feed {
+    .card-title {
+        font-size: 1.5rem;
+    }
+    .site-main {
+        .col-md-8 {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+    }
+}
+
 @media (max-width:768px) {
+    // header block
 	#renegade_thinking,
     #podcasts_feed,
     #resources_content,
@@ -128,6 +141,7 @@ body.single-podcasts {
         }
     }
 }
+
 
 // people
 body.single-people {
