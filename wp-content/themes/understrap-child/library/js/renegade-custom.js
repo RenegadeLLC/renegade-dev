@@ -2,6 +2,18 @@
 
 // Mobile specific scripts
 jQuery(document).ready(function ($) {
+
+    // prevent orphans
+    // $("p,h1,h2,h3,h4,h5,h6").each(function(i,e) {
+    //     var text = $(e).html();
+    //     text = text.split(' ');
+    //     var lastWord = text.pop();
+    //     text = text.join(' ') + "&nbsp;" + lastWord;
+    //     $(e).html(text);
+    // });
+
+    $("p,h1,h2,h3,h4,h5,h6").unorphanize();
+
     // check if mobile
     // TODO: consider making this global
     var isMobile = false; //initiate as false
@@ -63,7 +75,8 @@ jQuery(document).ready(function ($) {
         $grid.isotope('layout');
     });
 
-    $grid.on( 'last.infiniteScroll', function( event, response, path ) {
-        console.log( 'Loaded last page: ' + path );
-    });
+    // $grid.on( 'last.infiniteScroll', function( event, response, path ) {
+        // console.log( 'Loaded last page: ' + path );
+    // });
+    
 });

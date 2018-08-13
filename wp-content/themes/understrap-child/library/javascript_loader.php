@@ -47,6 +47,11 @@ function renegade_scripts() {
 	wp_register_script('jquery-touch-events', $scriptdir . 'jquery.mobile-events.min.js');
 	wp_enqueue_script('jquery-touch-events');
 
+	//UNORPHANIZE TEXT
+	wp_register_script('jquery-unorphanize', $scriptdir . 'unorphanize.jquery.min.js');
+	wp_enqueue_script('jquery-unorphanize');
+	
+
 	//CUSTOM SCRIPTS
 	wp_register_script('renegade-custom', $scriptdir . 'renegade-custom.js');
 	wp_enqueue_script('renegade-custom');
