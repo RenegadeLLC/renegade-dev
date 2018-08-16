@@ -28,9 +28,9 @@
 	$podcast_details .= $job_title . ', <span class="semibold">' . $company_name . ' </span>';
 	// $podcast_html .=  '<div class="feed-item post-item col-lg-4 col-md-6 col-sm-12 podcast-excerpt resource-excerpt">';
 //    $podcast_html .= '<a href="' . $podcast_url . '" target="_blank">';
-	$podcast_html = '<div class="card">';
 	$podcast_html .= '<a href="' . $post_link . '">';
-	$podcast_html .= '<div class="card-img-top"><img src="' . $profile_image .'" alt="' . $first_name . ' ' . $last_name . '"></div>';
+	$podcast_html = '<div class="card">';
+	$podcast_html .= '<img width="337" height="337" src="' . $profile_image .'" alt="' . $first_name . ' ' . $last_name . '">';
 	$podcast_html .= '<div class="card-body">';
 	// $podcast_html .= '<div class="post-label-ct">PODCAST</div>';
 	if($podcast_date){
@@ -46,10 +46,10 @@
 	if($podcast_excerpt){
 		$podcast_html .=  '<span class="excerpt">' . $podcast_excerpt . '</span></p>';
 	}
-	$podcast_html .=  '</a>';
 	// $podcast_html .= '<div><a href="' . $post_edit_link  . '">' . 'Edit'  . '</a></div>';
 	$podcast_html .= '</div><!-- .card-body -->';
 	$podcast_html .= '</div><!-- .card -->';
+	$podcast_html .=  '</a>';
 	echo($podcast_html);
 ?>
 

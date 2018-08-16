@@ -15,20 +15,20 @@ $title = get_the_title( $post -> ID);
 	$post_html = '';
 	
 
-	$post_html .= '<div class="card">';	
 	
 	$post_html .= '<a href="' . $link . '">';
+	$post_html .= '<div class="card">';	
 	// $post_html .= '<div class="post-label-ct">BLOG</div>';
-	$post_html .= '<div class="card-img-top">' . $thumbnail . '</div>';
+	$post_html .= $thumbnail;
 	$post_html .= '<div class="card-body">';
 	$post_html .= '<h5 class="card-title">' . $title . '</h5>';
 	$post_html .= '<p class="card-text">';
 	$post_html .= '<span class="card-date date">' . $date . '</span><br><br>';
 	$post_html .= '<span class="card-excerpt">' . $excerpt . '</span>';
-	$post_html .= '</p></a>';	
+	$post_html .= '</p>';	
 	// $post_html .= '<a href="' . $post_edit_link  . '">' . 'Edit'  . '</a>';
 	$post_html .= '</div><!-- .card-body -->';
-	$post_html .= '</div><!-- .card -->';
+	$post_html .= '</div></a><!-- .card -->';
 ?>
 
 <article <?php post_class();?> id="post-<?php the_ID();?>">
