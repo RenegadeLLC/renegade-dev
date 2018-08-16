@@ -55,7 +55,7 @@ endif;
 			<div class="row">
 				<div class="utility-bar">
 				<?php 
-					echo '<div class="header-phone-ct">' .  $phone_number . '</div><!-- .header-phone-ct -->';
+					echo '<div class="header-phone-ct"><a href="tel:' .  preg_replace('/\D/', '', $phone_number) . '">' .  $phone_number . '</a></div><!-- .header-phone-ct -->';
 					echo '<div class="header-email-ct"><a href="mailto:' .  $email_address . '"><i class="fas fa-envelope"></i></a></div><!-- .header-email-ct -->';
 					if($include_search == 'Yes'):
 					echo  '<div class="header-search-ct">' . do_shortcode($search_shortcode) . '</div><!-- .header-search-ct -->';
