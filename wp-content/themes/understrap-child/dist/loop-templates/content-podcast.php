@@ -28,8 +28,8 @@
 	$podcast_details .= $job_title . ', <span class="semibold">' . $company_name . ' </span>';
 	// $podcast_html .=  '<div class="feed-item post-item col-lg-4 col-md-6 col-sm-12 podcast-excerpt resource-excerpt">';
 //    $podcast_html .= '<a href="' . $podcast_url . '" target="_blank">';
-	$podcast_html .= '<a href="' . $post_link . '">';
 	$podcast_html = '<div class="card">';
+	$podcast_html .= '<a href="' . $post_link . '">';
 	$podcast_html .= '<img width="337" height="337" src="' . $profile_image .'" alt="' . $first_name . ' ' . $last_name . '">';
 	$podcast_html .= '<div class="card-body">';
 	// $podcast_html .= '<div class="post-label-ct">PODCAST</div>';
@@ -48,8 +48,8 @@
 	}
 	// $podcast_html .= '<div><a href="' . $post_edit_link  . '">' . 'Edit'  . '</a></div>';
 	$podcast_html .= '</div><!-- .card-body -->';
-	$podcast_html .= '</div><!-- .card -->';
 	$podcast_html .=  '</a>';
+	$podcast_html .= '</div><!-- .card -->';
 	echo($podcast_html);
 ?>
 
