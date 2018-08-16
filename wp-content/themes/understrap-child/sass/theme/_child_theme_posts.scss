@@ -154,6 +154,19 @@ body.single-post {
 
 
 @media (max-width:768px) {
+    // content sections
+    .content-section {
+        .text-ct {
+            padding: 0;
+            h1 {
+                font-size: 2.5rem;
+            }
+            h4 {
+                font-size: 1.5rem;
+                line-height: 2.5rem;
+            }
+        }
+    }
     // blog feed
     #blog_header {
         .text-ct {
