@@ -435,26 +435,31 @@ body.people-template-default {
 
 .quote-ct{
 	margin:24px 0;
-	font-size:1.25em;
+	font-size:1.25rem;
 }
 .quote{
 	display:block;
-	line-height: 120%;
+	line-height: 1.75rem;
 }
 
 .quote:before{
 	content: '\201C';
 	display:inline-block;
 	font-family: 'Playfair Display',serif !important;
-	font-size:48px;
+	// font-size:48px;
+	font-size: 2.5rem;
 	line-height: 0;
+	vertical-align: middle;
 	vertical-align: -webkit-baseline-middle;
 }
 
 .quote:after{
 	content: '\201D';
 	font-family: 'Playfair Display',serif !important;
-	font-size:48px;
+	// font-size:48px;
+	font-size: 2.5rem;
+	line-height: 0;
+	vertical-align: middle;
 	vertical-align: -webkit-baseline-middle;
 }
 
