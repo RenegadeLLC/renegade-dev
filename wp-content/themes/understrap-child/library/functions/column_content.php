@@ -122,7 +122,7 @@ function get_column_content($column_name, $column_width){
         $link_text = $column_content['link_text'];
         $link_url = $column_content['link_url'];
         
-        $columnHTML .= '<div class="image-text-wrapper">';
+        $columnHTML .= '<div class="image-text-wrapper"><a href="' . $link_url . '">';
         $columnHTML .= '<div class="image-ct"><img src="' . $image . '" alt="' . $image_title . '"></div><!-- .image-ct -->';
         $columnHTML .= '<div class="text-ct">';
         if($column_headline):
@@ -130,7 +130,7 @@ function get_column_content($column_name, $column_width){
         endif;
         
         $columnHTML .=  $text . '</div><!-- .text-ct -->';
-        $columnHTML .= '<div class="bt-fixed"><div class="bt-ct"><div class="bt"><a href="' . $link_url . '">' . $link_text . '</a></div><!-- .bt --></div><!-- .bt-ct --></div><!-- .bt-fixed -->';
+        $columnHTML .= '<div class="bt-fixed"><div class="bt-ct"><div class="bt">' . $link_text . '</a></div><!-- .bt --></div><!-- .bt-ct --></div><!-- .bt-fixed -->';
         $columnHTML .= '</div><!--.image-text-wrapper -->';
     endif;
     
