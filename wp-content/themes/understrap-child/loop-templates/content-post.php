@@ -10,7 +10,7 @@ $title = get_the_title( $post -> ID);
 	$link = get_permalink($post -> ID);
 	$post_edit_link = get_edit_post_link();
 	// $thumbail = get_the_post_thumbnail($post->ID, 'large', array('class' => 'card-img-top'));
-	$thumbnail = get_the_post_thumbnail( $post->ID, 'large' );
+	$thumbnail = get_the_post_thumbnail( $post->ID, 'thumbnail' );
 	    
 	$post_html = '';
 	

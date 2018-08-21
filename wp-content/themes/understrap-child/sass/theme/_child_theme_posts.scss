@@ -11,6 +11,21 @@
     }
 }
 
+//** BLOG POST FEATURED IMAGE
+
+.post-feature-img{
+	display:block;
+	max-width:720px;
+	margin: 32px auto 32px auto;
+	z-index:999;
+	text-align:center;
+	width:100%;
+
+	img{
+		display:block;
+	}
+}
+
 @media (max-width:768px) {
     // header block
 	#renegade_thinking,
@@ -104,11 +119,16 @@ body.single-post {
     .byline, .author, .author a {
         font-weight: 700;
     }
+
+    time.entry-date{
+        display:block;
+    }
+
     .entry-header {
         .content-section {
             background-color: $yellowgreen; 
             margin-bottom: 2.5rem;
-            min-height:250px;
+            min-height:224px;
             background-image:url(../img/saw_white_fade_1kx1k.png);
             background-repeat:no-repeat;
             background-position:95% 50%;
@@ -139,6 +159,7 @@ body.single-post {
         >p:first-child {
             font-family: 'Playfair Display',serif;
             font-size: 1.2rem;
+            line-height:160%;
         }
         a {
             color: $yellowgreen;

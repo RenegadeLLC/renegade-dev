@@ -6,7 +6,7 @@
  */
 
 ?>
-
+<?php $post_thumb = get_the_post_thumbnail_url(); ?>
 
 <article <?php post_class();?> id="post-<?php the_ID();?>">
 
@@ -20,8 +20,9 @@
 				<div class="col-md-4 blog-header-img">
 				</div>
 			</div>
+			
 		</div><!-- .row header -->
-	</header><!-- .entry-header -->
+		</header><!-- .entry-header -->
 
 	<!-- main content -->
 	<main class="site-main" id="main">
@@ -36,7 +37,10 @@
 				<div class="entry-meta">
 					<?php understrap_posted_on();?>
 				</div><!-- .entry-meta -->
+				<div class="row"><div class="post-feature-img"><img src=" <?php echo($post_thumb) ?> "></div></div>
+
 				<div class="entry-content">
+				
 						<?php 
 							// echo get_the_post_thumbnail($post->ID, 'large'); 
 						?>
@@ -63,3 +67,11 @@
 	</footer><!-- footer .row pagination-->
 
 </article><!-- article -->
+
+<script>
+$(document).ready(function(){
+ 
+      $(".post-feature-img").appendTo("p:first-of-type");
+  
+});
+</script>
