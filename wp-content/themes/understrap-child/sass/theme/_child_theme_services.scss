@@ -8,9 +8,14 @@
 }
 
 // when header text stack breaks to 2 lines
-@media (min-width: 992px) {  
-	#renegade_services,
+@media (max-width:991px) {
+    #renegade_services,
     #services {
+        .image-text-wrapper {
+            .bt-fixed {
+                padding: 0;
+            }
+        }
         .image-text-wrapper {
             .image-text-stack {
                 min-height: 8rem;    
