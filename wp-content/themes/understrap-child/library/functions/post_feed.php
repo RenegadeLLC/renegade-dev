@@ -213,11 +213,14 @@ function build_feed(){
                     // view more button
                     echo '<div class="view-more-button-container"><button type="button" class="btn btn-dark btn-block view-more-button">View More</button></div>';
                     // loader wheel
-                    echo '<div class="loader-wheel .infinite-scroll-request">';
+                    echo '<div class="loader-wheel">';
+                    echo '<div class="infinite-scroll-request">';
                     echo '<i><i><i><i><i><i><i><i><i><i><i><i>';
                     echo '</i></i></i></i></i></i></i></i></i></i></i></i>';
                     echo '</div>';
                     echo '</div>';
+                    echo '</div>';
+
                     echo '<div class="col-md-4"></div>';
                     echo '</div>';
                 endif;
