@@ -55,7 +55,7 @@ function create_podcast_post_type() {
 			//'register_meta_box_cb' => 'add_custom_meta_box',
 			'hierarchical' => true,
 			'rewrite' => true,
-			'supports' => array('title', 'revisions', 'editor', 'tags', 'categories', 'archives'),
+			'supports' => array('title', 'revisions', 'editor', 'tags', 'categories', 'comments', 'archives'),
 			'has_archive' => true,
 	       'publicly_queryable'  => true
 			
