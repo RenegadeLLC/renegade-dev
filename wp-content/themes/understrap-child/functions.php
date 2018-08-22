@@ -256,8 +256,7 @@ function understrap_posted_on() {
 }
 
 // open comments for specific posts and post types
-// add_filter( 'comments_open', 'my_comments_open', 10, 2 ); // example of targeting specific posts
-add_filter( 'comments_open', 'my_comments_open' );
+add_filter( 'comments_open', 'my_comments_open', 10, 2 );
 
 function my_comments_open( $open, $post_id ) {
     $post = get_post( $post_id );
