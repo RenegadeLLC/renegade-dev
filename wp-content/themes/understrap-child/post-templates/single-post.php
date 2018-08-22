@@ -41,19 +41,16 @@
 
 				<div class="entry-content">
 				
-						<?php 
-							// echo get_the_post_thumbnail($post->ID, 'large'); 
-						?>
-						<?php the_content();?>
-				</div>
+					<?php 
+						// echo get_the_post_thumbnail($post->ID, 'large'); 
+					?>
+					<?php the_content();?>
 
-				<?php
-				// If comments are open or we have at least one comment, load up the comment template.
-				if ( comments_open() || get_comments_number() ) :
-					comments_template();
-				endif;
-				?>
+					<div id="respond">
+						<!-- social commenting inserted here by socializer plugin -->
+					</div>
 				
+				</div>
 			</div>
 
 			<!-- right sidebar -->

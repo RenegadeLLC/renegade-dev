@@ -249,7 +249,6 @@ body.single-podcasts {
     }
 }
 
-
 // people
 body.single-people {
     .entry-footer {
@@ -260,7 +259,20 @@ body.single-people {
     }
 }
 
+// social sharing buttons
+.the_champ_horizontal_sharing {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
 
+// comments 
+body.single-post,
+body.single-podcasts {
+    #respond {
+        background: url(../img/section_sepBK.png) repeat-x top;
+        padding-top: 1rem;
+    }
+}
 // projects
 // body.single-projects {
 //     .entry-footer {
