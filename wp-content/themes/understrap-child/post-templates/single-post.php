@@ -79,7 +79,7 @@
 <script>
 $(document).ready(function(){
  
-      $(".post-feature-img").appendTo("p:first-of-type");
+      $(".post-feature-img").appendTo(".entry-content p:first-of-type").first();
   
 });
 </script>
