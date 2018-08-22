@@ -14,6 +14,7 @@ $footer_address = get_field('footer_address', 'option');
 $footer_phone_number = get_field('footer_phone_number','option');
 $footer_social_channels = get_field('footer_social_channels', 'option');
 $copyright_text = get_field('copyright_text', 'option');
+$add_utility_footer = get_field('add_utility_footer', 'option');
 
 $container = get_field('container_width', 'option');
 
@@ -154,8 +155,39 @@ $the_theme = wp_get_theme();
 		</div><!-- row end -->
 
 </div><!-- .footer-ct -->
+<div class="footer-utility-wrapper">
+    <div class="copyright-ct"><?php echo $copyright_text ?></div>
 
+    <?php 
+    
+    if($add_utility_footer == 'Yes'):
+        $utility_footer = '<div class="utility-footer-ct">';
+        if( have_rows('utility_links', 'option') ):
+
+          
+           while ( have_rows('utility_links', 'option') ) : the_row();
+                $link_name = get_sub_field('link_name');
+                $link_url = get_sub_field('link_url');
+                $open_in_new_window = get_sub_field('open_in_new_window');
+
+                $utility_footer .= '<a class="utility-footer" href="' . $link_url . '"';
+
+                    if($open_in_new_window == 'Yes'):
+                        $utility_footer .= 'target="_blank">';
+                    endif;
+
+                $utility_footer .= '>';
+                $utility_footer .= $link_name  . '</a>';
+            endwhile;
+        endif;
+        $utility_footer .= '</div><!-- .utility-footer-ct -->';
+    endif;
+        echo $utility_footer;
+    ?>
+</div><!-- .footer-utility-wrapper -->
 </div><!-- wrapper end -->
+
+
 
 </div><!-- #page we need this extra closing tag here -->
 </div><!-- .container -->
