@@ -10,8 +10,20 @@
 	}
 }
 #full-width-page-wrapper {
+	padding-top: 10.5rem;
 	#content {
 		padding-top: 0;
+	}
+}
+
+@media (max-width:991px) {
+	#full-width-page-wrapper {
+		padding-top: 7.5rem;
+	}
+}
+@media (max-width:767px) {
+	#full-width-page-wrapper {
+		padding-top: 6rem !important;
 	}
 }
 
@@ -56,6 +68,7 @@
 
 //** UTILITY NAV
 .utility-bar {
+	z-index: 200;
 	width: 100%;
 	background: #f2f2f2;
 	height: 33px;
@@ -82,6 +95,43 @@
 }
 
 //** NAVBAR
+
+#wrapper-navbar {
+	background: white;
+	width:100%;
+	background: #fff;
+	border-bottom: 1px solid #e1e1e1;
+	z-index: 9999;
+	top: 0;
+	position: fixed;
+
+	/* animation magic */
+	transition: all 0.4s ease-in-out;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	.utility-bar {
+		transition: all 0.2s ease-in-out;
+		-webkit-transition: all 0.2s ease-in-out;
+		-moz-transition: all 0.2s ease-in-out;
+	}
+	.navbar-brand {
+		transition: all 0.3s ease-in-out;
+		-webkit-transition: all 0.3s ease-in-out;
+		-moz-transition: all 0.3s ease-in-out;
+	}
+
+	// shrink state
+	&.shrink {
+		.utility-bar {
+			margin-top: -75px;
+		}
+		.navbar-brand {
+			max-width: 140px;
+			transition: all 0.4s ease-out;
+		}
+	}
+}
+
 .navbar {
 	padding: .5rem 0;
 }

@@ -1,4 +1,14 @@
 // Custom scripts
+jQuery(document).on("scroll", function(){
+    // console.log($(document).scrollTop());
+    // shrinking sticky navigation
+    if ($(document).scrollTop() > 100) {
+        $("#wrapper-navbar").addClass("shrink");
+    }
+    else {
+        $("#wrapper-navbar").removeClass("shrink");
+    }
+});
 
 // Mobile specific scripts
 jQuery(document).ready(function ($) {
