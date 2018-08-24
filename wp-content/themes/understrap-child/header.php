@@ -54,14 +54,24 @@ endif;
 			<!-- utility bar -->
 			<?php if($include_utility_header == 'Yes'):?>
 			<div class="row">
-				<div class="utility-bar">
+				<!-- <div class="utility-bar"> -->
 				<?php 
-					echo '<div class="header-phone-ct"><a href="tel:' .  preg_replace('/\D/', '', $phone_number) . '">' .  $phone_number . '</a></div><!-- .header-phone-ct -->';
-					echo '<div class="header-email-ct"><a href="mailto:' .  $email_address . '"><i class="fas fa-envelope"></i></a></div><!-- .header-email-ct -->';
-					if($include_search == 'Yes'):
-					echo  '<div class="header-search-ct">' . do_shortcode($search_shortcode) . '</div><!-- .header-search-ct -->';
-					endif;
+					// echo '<div class="header-phone-ct"><a href="tel:' .  preg_replace('/\D/', '', $phone_number) . '">' .  $phone_number . '</a></div><!-- .header-phone-ct -->';
+					// echo '<div class="header-email-ct"><a href="mailto:' .  $email_address . '"><i class="fas fa-envelope"></i></a></div><!-- .header-email-ct -->';
+					// if($include_search == 'Yes'):
+					// echo  '<div class="header-search-ct">' . do_shortcode($search_shortcode) . '</div><!-- .header-search-ct -->';
+					// endif;
 				?>
+				<!-- </div> -->
+				<div class="utility-bar">
+				<!-- The WordPress Menu goes here -->
+				<?php wp_nav_menu(
+					array(
+						'theme_location'  => 'utility',
+						'menu_id'         => 'utiliy-menu',
+						'depth'           => 1
+					)
+				); ?>
 				</div>
 			</div>
 			<?php endif;//END INCLUDE UTILITY HEADER CONDITIONAL?>

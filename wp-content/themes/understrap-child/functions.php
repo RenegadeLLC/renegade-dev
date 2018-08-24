@@ -128,9 +128,9 @@ function register_my_menus() {
         array(
             'footer' => __( 'Footer' ),
             'mobile' => __( 'Mobile' ),
-           
+            'utility' => __( 'Utility' ),
         )
-        );
+    );
 }
 add_action( 'init', 'register_my_menus' );
 
