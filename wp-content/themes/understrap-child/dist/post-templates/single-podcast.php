@@ -41,40 +41,45 @@ $podcast_html .= '</div><!-- .col-md-9-->';
 	endif;
 $podcast_html .= '</div><!-- .row -->';
 
+// guest
+if($meet_the_guest):
+	$guest_html .= '<h2>Meet the Guest</h2>' . $meet_the_guest;
+endif;
 
+// quotes
+if( have_rows('quotes') ):
+	$quotes_html .= '<h2>Quotes from ' . $first_name . ' ' . $last_name . '</h2>';
+	while ( have_rows('quotes') ) : the_row();
+		$quote= get_sub_field('quote_thing');
+		$attribution = get_sub_field('attribution');
+		$quotes_html .= '<div class="quote-ct"><div class="quote">' . $quote . '</div>';
 
+		if($attribution){
+			$quotes_html .= '<div class="attribution">' . $attribution . '</div>';
+		}
+		$quotes_html .= '</div><!-- .quote-ct -->';
+	endwhile;
+endif;
 
 ?>
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 
 
 	<div class="entry-content">
+		<?php echo $podcast_html; ?>
+		<div class="single-column-content">
+			<div class="podcast-content">
+			<?php 
+				the_content();
+				echo $guest_html;
+				echo $quotes_html;
+			?>
+			</div><!-- .podcast-content -->
 
-		<?php 
-
-			$podcast_html .= '<div class="single-column-content"><div class="podcast-content">';
-			$content = get_the_content(); 
-			$podcast_html .= $content;
-				if($meet_the_guest):
-					$podcast_html .= '<h2>Meet the Guest</h2>' . $meet_the_guest;
-				endif;
-			if( have_rows('quotes') ):
-				$podcast_html .= '<h2>Quotes from ' . $first_name . ' ' . $last_name . '</h2>';
-				while ( have_rows('quotes') ) : the_row();
-					$quote= get_sub_field('quote_thing');
-					$attribution = get_sub_field('attribution');
-					$podcast_html .= '<div class="quote-ct"><div class="quote">' . $quote . '</div>';
-
-					if($attribution){
-						$podcast_html .= '<div class="attribution">' . $attribution . '</div>';
-					}
-					$podcast_html .= '</div><!-- .quote-ct -->';
-				endwhile;
-			endif;
-			
-			$podcast_html .= '</div><!-- .podcast-content --></div><!--  .entry-content -->';
-			echo $podcast_html;
-		?>
+		<div id="respond">
+			<!-- social commenting inserted here by socializer plugin -->
+		</div>
+	</div><!-- .entry-content -->
 
 
 	<!-- footer .row pagination -->

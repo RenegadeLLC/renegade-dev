@@ -41,10 +41,15 @@
 
 				<div class="entry-content">
 				
-						<?php 
-							// echo get_the_post_thumbnail($post->ID, 'large'); 
-						?>
-						<?php the_content();?>
+					<?php 
+						// echo get_the_post_thumbnail($post->ID, 'large'); 
+					?>
+					<?php the_content();?>
+
+					<div id="respond">
+						<!-- social commenting inserted here by socializer plugin -->
+					</div>
+				
 				</div>
 			</div>
 
@@ -71,7 +76,7 @@
 <script>
 $(document).ready(function(){
  
-      $(".post-feature-img").appendTo("p:first-of-type");
+      $(".post-feature-img").appendTo(".entry-content p:first-of-type").first();
   
 });
 </script>

@@ -254,3 +254,17 @@ function understrap_posted_on() {
     );
     echo '<span class="posted-on">' . $posted_on . '</span><br><span class="byline"> ' . $byline . '</span>'; // WPCS: XSS OK.
 }
+
+// open comments for specific posts and post types
+// add_filter( 'comments_open', 'my_comments_open', 10, 2 );
+
+function my_comments_open( $open, $post_id ) {
+    $post = get_post( $post_id );
+    if ( 
+        'podcasts' == $post->post_type || 
+        'post' == $post->post_type
+    ) {
+        $open = true;
+    }
+    return $open;
+}

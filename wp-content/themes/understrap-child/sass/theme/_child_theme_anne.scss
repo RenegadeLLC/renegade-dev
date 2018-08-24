@@ -125,11 +125,15 @@ div.asp_m.asp_m_1 {
 	width: 100%;
 }
 
-.image-text-wrapper .bt {
+.bt {
 	font-family: 'Playfair Display', serif;
 	display: inline;
 	background-color: #000;
 	padding: 4px 8px;
+
+	a{
+		color:#fff;
+	}
 }
 
 .image-text-wrapper .bt a {

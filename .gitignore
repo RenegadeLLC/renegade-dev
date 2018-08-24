@@ -113,3 +113,10 @@ node_modules/
 
 .settings/
 .buildpath
+wp-content/themes/understrap-child/css/child-theme.css
+wp-content/themes/understrap-child/css/child-theme.min.css
+wp-content/themes/understrap-child/css/child-theme.min.css.map
+wp-content/themes/understrap-child/dist/functions.php
+wp-content/themes/understrap-child/dist/post-templates/single-newsletter.php
+wp-content/themes/understrap-child/dist/post-templates/single-podcast.php
+wp-content/themes/understrap-child/dist/post-templates/single-post.php
