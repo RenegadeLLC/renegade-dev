@@ -225,6 +225,13 @@
 	}
 }
 
+// changes when in admin view
+body.logged-in.admin-bar {
+	#wrapper-navbar {
+		top: 32px;
+	}
+}
+
 .navbar {
 	padding: .5rem 0;
 }
