@@ -36,11 +36,13 @@
 			<div class="col-md-8">
 				<div class="entry-meta">
 					<?php understrap_posted_on();?>
+					<?php if($post_thumb):
+					echo'<div class="row"><div class="post-feature-img"><img src="' . $post_thumb. '"></div></div>';
+					endif;
+					?>
+					<?php echo do_shortcode("[TheChamp-Sharing]"); ?>
 				</div><!-- .entry-meta -->
-				<div class="row"><div class="post-feature-img"><img src=" <?php echo($post_thumb) ?> "></div></div>
-
 				<div class="entry-content">
-				
 					<?php 
 						// echo get_the_post_thumbnail($post->ID, 'large'); 
 					?>
@@ -75,8 +77,9 @@
 
 <script>
 $(document).ready(function(){
- 
+	if ($post_thumb) {
       $(".post-feature-img").appendTo(".entry-content p:first-of-type").first();
+	}
   
 });
 </script>

@@ -156,9 +156,10 @@ body.single-post {
         margin-bottom: 1rem;
     }
     .entry-content {
-        >p:first{
+        > p:first-child {
             font-family: 'Playfair Display',serif;
-            font-size: 1.2rem;
+            font-size: 1.75rem;
+            font-weight: 500;
             line-height:160%;
         }
         a {
