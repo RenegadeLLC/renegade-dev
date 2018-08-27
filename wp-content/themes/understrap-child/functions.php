@@ -268,3 +268,6 @@ function my_comments_open( $open, $post_id ) {
     }
     return $open;
 }
+
+// add a shortcode to display default search form
+add_shortcode('wpbsearch', 'get_search_form');
