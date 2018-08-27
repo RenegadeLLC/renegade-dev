@@ -34,15 +34,23 @@ $container   = get_theme_mod( 'understrap_container_type' );
 				<div class="content-section" id="search_content">
 					<?php /* Start the Loop */ ?>
 					<div class="post-feed dynamic grid row">
-					<?php while ( have_posts() ) : the_post(); ?>
+					<?php while ( have_posts() ) : the_post(); 
+						$post_type = get_post_type();
+					?>
 						<div class="col-lg-4 col-md-6 grid__item">
 						<?php
-						/**
-						 * Run the loop for the search to output the results.
-						 * If you want to overload this in a child theme then include a file
-						 * called content-search.php and that will be used instead.
-						 */
-						get_template_part( 'loop-templates/content', 'search' );
+						// use post types loop template, content-search is default
+                        if($post_type == 'podcasts'):   
+                            get_template_part( '/loop-templates/content', 'podcast' );
+                        elseif($post_type == 'newsletters'):
+                            get_template_part( '/loop-templates/content', 'newsletter' );
+                        elseif($post_type == 'post'):
+                            get_template_part( '/loop-templates/content', 'post' );
+                        elseif($post_type == 'videos'):
+							get_template_part( '/loop-templates/content', 'video' );
+						else:
+							get_template_part( 'loop-templates/content', 'search' );
+                        endif;
 						?>
 						</div>
 					<?php endwhile; ?>
