@@ -232,6 +232,14 @@ body.logged-in.admin-bar {
 	}
 }
 
+@media screen and (max-width: 782px) {
+	body.logged-in.admin-bar {
+		#wrapper-navbar {
+			top: 46px;
+		}
+	}
+}
+
 .navbar {
 	padding: .5rem 0;
 }

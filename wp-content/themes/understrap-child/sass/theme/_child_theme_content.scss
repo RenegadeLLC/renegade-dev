@@ -209,6 +209,7 @@
 		display:block;
 	}
 }
+
 // people
 body.people-template-default {
 	header.row.people-title {
@@ -801,5 +802,14 @@ h2.podcast, h2.podcast a{
 	}
 	.post-feed-grid .w-50 {
 		width: 100% !important;
+	}
+}
+
+
+//** SEARCH CONTENT
+
+@media (max-width:991px) {
+	#search_content {
+		padding: 0;
 	}
 }
