@@ -45,7 +45,7 @@ jQuery(document).ready(function ($) {
         });
     }
 
-    // Inifinite using Isotope, Packery & jQuery
+    // Inifinite Scroll using Isotope, Packery & jQuery
 
     // init
     var $grid = $('.grid').isotope({
@@ -68,8 +68,8 @@ jQuery(document).ready(function ($) {
         // disable loading on scroll
         status: '.loader-wheel',
         hideNav: '.pagination',
-        outlayer: iso
-        // debug: true,
+        outlayer: iso,
+        debug: true
     });
 
     // layout Isotope after each image loads
@@ -80,5 +80,11 @@ jQuery(document).ready(function ($) {
     // $grid.on( 'last.infiniteScroll', function( event, response, path ) {
         // console.log( 'Loaded last page: ' + path );
     // });
+
+    // hide view-more button if no more next page link
+    var $nextLink = $('a.page-link');
+    if ( !$nextLink.length ) {
+        $('.view-more-button').hide();
+    }
     
 });
