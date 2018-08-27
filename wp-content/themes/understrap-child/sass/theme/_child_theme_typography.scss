@@ -80,12 +80,14 @@ h3,
 .h3 {
 	font-size: 2rem;
 	font-weight: 500;
+	margin-top:24px;
 }
 
 h4,
 .h4 {
-	font-size: 1.75rem;
-	line-height: 160%;
+	font-size: 1.5rem;
+	line-height: 140%;
+	margin-bottom:8px;
 }
 
 h5,
@@ -98,6 +100,11 @@ h6,
 	font-size: 1rem;
 }
 
+.section-headline-text{
+	h1, h2, h3, h4{
+		margin:0px;
+	}
+}
 
 @media (max-width:768px) {
     body {
