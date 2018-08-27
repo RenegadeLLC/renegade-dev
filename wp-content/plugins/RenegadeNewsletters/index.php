@@ -56,7 +56,7 @@ function create_newsletter_post_type() {
 			'hierarchical' => false,
 			'rewrite' => true,
 			'has_archive' => true,
-			'supports' => array('editor', 'title', 'revisions', 'tags', 'categories', 'archives', 'thumbnail')
+			'supports' => array('excerpt', 'editor', 'title', 'revisions', 'tags', 'categories', 'archives', 'thumbnail')
 	);
 
 	register_post_type( 'newsletters' , $args );

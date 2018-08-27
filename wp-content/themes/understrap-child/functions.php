@@ -181,7 +181,20 @@ if( function_exists('acf_add_options_page') ) {
 
 // limit excerpt length
 function custom_excerpt_length( $length ) {
-	return 40;
+
+    global $post;
+
+    if($post->post_type == 'post'):
+        return 60;
+
+    elseif($post->post_type == 'podcasts'):   
+        return 40;
+        elseif($post->post_type == 'newsletters'):
+            return 60;
+    elseif($post->post_type == 'downloads'):  
+        return 60;
+    endif;
+ 
 }
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 

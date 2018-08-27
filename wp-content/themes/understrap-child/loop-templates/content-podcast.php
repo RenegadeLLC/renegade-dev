@@ -33,11 +33,12 @@
 	$podcast_html .= '<img width="337" height="337" src="' . $profile_image .'" alt="' . $first_name . ' ' . $last_name . '">';
 	$podcast_html .= '<div class="card-body">';
 	// $podcast_html .= '<div class="post-label-ct">PODCAST</div>';
+
+	$podcast_html .= '<h5 class="card-title">' . $podcast_title  . '</h5>';
 	if($podcast_date){
 		$podcast_html .=  '<p class="date">' . $podcast_date . '</p>';
 		
 	}
-	$podcast_html .= '<h5 class="card-title">' . $podcast_title  . '</h5>';
 	// $podcast_html .= '<div class="podcast-inset">';
 	// $podcast_html .= '<div class="podcast-image w-50 fleft"><img src="' . $profile_image .'" alt="' . $first_name . ' ' . $last_name . '"></div><!--.podcast-image -->';
 	$podcast_html .= '<p class="card-text"><span class="details">' . $podcast_details . '</span><br>';
