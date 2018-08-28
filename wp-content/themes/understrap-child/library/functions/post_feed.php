@@ -206,7 +206,7 @@ function build_feed(){
 
                 if ($count == $number_of_posts_to_include):
 
-                if (!is_front_page()):
+                if (is_paged()):
                     echo '<div class="row">';
                     echo '<div class="col-md-4"></div>';
                     echo '<div class="col-md-4">';
