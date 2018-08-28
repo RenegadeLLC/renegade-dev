@@ -187,13 +187,13 @@ function custom_excerpt_length( $length ) {
     global $post;
 
     if($post->post_type == 'post'):
-        return 60;
+        return 70;
     elseif($post->post_type == 'podcasts'):   
-        return 40;
+        return 50;
     elseif($post->post_type == 'downloads'):  
-        return 60;
+        return 70;
     endif;
-    // newsletters use "limit_text' function  
+    // newsletters use "limit_text' function  in loop-templates/content-newsletter.php
 }
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
