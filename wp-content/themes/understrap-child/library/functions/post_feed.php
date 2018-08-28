@@ -205,8 +205,8 @@ function build_feed(){
                 echo '</div><!-- .row -->';
 
                 if ($count == $number_of_posts_to_include):
-
-                if (!is_front_page()):
+                
+                if (!is_front_page() and !is_404() and !is_page(get_page_by_path('404-2') -> ID)):
                     echo '<div class="row">';
                     echo '<div class="col-md-4"></div>';
                     echo '<div class="col-md-4">';
@@ -252,4 +252,3 @@ function build_feed(){
     ob_end_clean();
     return $feedHTML;
 }
-
