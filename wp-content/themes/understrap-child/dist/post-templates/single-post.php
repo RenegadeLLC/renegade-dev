@@ -77,7 +77,7 @@
 
 <script>
 $(document).ready(function(){
-	if ($post_thumb) {
+	if (".post-feature-img") {
       $(".post-feature-img").appendTo(".entry-content p:first-of-type").first();
 	}
   

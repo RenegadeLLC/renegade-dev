@@ -18,7 +18,7 @@ $container   = get_theme_mod( 'understrap_container_type' );
 		<div class="row">
 
 				<!-- HEADER -->
-				<div class="content-section" id="search_header" style="background:#f2f2f2">
+				<div class="content-section" id="search_header">
 				<?php if ( have_posts() ) : ?>
 
 					<header class="page-header">
@@ -26,7 +26,7 @@ $container   = get_theme_mod( 'understrap_container_type' );
 							<h1 class="page-title"><?php printf(
 							/* translators:*/
 							 esc_html__( 'Search Results for: %s', 'understrap' ),
-								'<span style="color:#007bff">' . get_search_query() . '</span>' ); ?></h1>
+								'<span class="page-query">' . get_search_query() . '</span>' ); ?></h1>
 
 					</header><!-- .page-header -->
 				</div><!-- #search_header -->
