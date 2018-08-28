@@ -202,7 +202,6 @@ function build_feed(){
                 }
                 wp_reset_postdata();
 
-                echo 'paged: ' . $paged;
                 echo '</div><!-- .row -->';
 
                 if ($count == $number_of_posts_to_include):
