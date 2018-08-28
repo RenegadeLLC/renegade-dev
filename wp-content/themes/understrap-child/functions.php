@@ -187,11 +187,11 @@ function custom_excerpt_length( $length ) {
     global $post;
 
     if($post->post_type == 'post'):
-        return 70;
+        return 60;
     elseif($post->post_type == 'podcasts'):   
-        return 50;
+        return 40;
     elseif($post->post_type == 'downloads'):  
-        return 70;
+        return 60;
     endif;
     // newsletters use "limit_text' function  in loop-templates/content-newsletter.php
 }

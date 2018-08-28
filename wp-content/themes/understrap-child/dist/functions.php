@@ -193,7 +193,7 @@ function custom_excerpt_length( $length ) {
     elseif($post->post_type == 'downloads'):  
         return 60;
     endif;
-    // newsletters use "limit_text' function  
+    // newsletters use "limit_text' function  in loop-templates/content-newsletter.php
 }
 add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
