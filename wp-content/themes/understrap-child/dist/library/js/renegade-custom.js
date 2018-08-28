@@ -68,8 +68,7 @@ jQuery(document).ready(function ($) {
         // disable loading on scroll
         status: '.loader-wheel',
         hideNav: '.pagination',
-        outlayer: iso,
-        debug: true
+        outlayer: iso
     });
 
     // layout Isotope after each image loads
@@ -102,7 +101,10 @@ jQuery(document).ready(function ($) {
         },
         minChars: 2,
         delay: 150,
-        cache: true
+        cache: true,
+        onSelect: function(e, term, item){
+            window.location.href = "/?s=" + term.split(' ').join('+');
+        }
 	});
     
 });
