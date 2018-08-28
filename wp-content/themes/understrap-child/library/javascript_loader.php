@@ -51,6 +51,9 @@ function renegade_scripts() {
 	wp_register_script('jquery-unorphanize', $scriptdir . 'unorphanize.jquery.min.js');
 	wp_enqueue_script('jquery-unorphanize');
 	
+	//AUTOCOMPLETE
+	wp_enqueue_script('autocomplete', $scriptdir . 'jquery.auto-complete.min.js', array('jquery'));
+	wp_enqueue_style('autocomplete.css', $scriptdir . 'jquery.auto-complete.css');
 
 	//CUSTOM SCRIPTS
 	wp_register_script('renegade-custom', $scriptdir . 'renegade-custom.js');

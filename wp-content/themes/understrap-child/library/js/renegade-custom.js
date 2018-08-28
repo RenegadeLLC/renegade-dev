@@ -86,5 +86,23 @@ jQuery(document).ready(function ($) {
     if ( !$nextLink.length ) {
         $('.view-more-button').hide();
     }
+
+    // jquery autocomplete
+    $('input[name="s"]').autoComplete({
+		source: function(name, response) {
+			$.ajax({
+				type: 'POST',
+				dataType: 'json',
+				url: '/wp-admin/admin-ajax.php',
+				data: 'action=get_listing_names&name='+name,
+				success: function(data) {
+					response(data);
+				}
+			});
+        },
+        minChars: 2,
+        delay: 150,
+        cache: true
+	});
     
 });
