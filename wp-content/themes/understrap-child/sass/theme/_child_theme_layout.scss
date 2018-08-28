@@ -344,6 +344,32 @@ body.logged-in.admin-bar {
 	}
 }
 
+//** SEARCH FORM
+// when in content-section
+body.search {
+	.page-title span.page-query {
+		color: $gray-600;
+	}
+}
+#search,
+#search_header {
+	background: $light-gray;
+	form {
+		input, .btn {
+			border-radius: 0;
+			border: 1px solid $gray-400;
+		}
+		.btn {
+			background:  $gray-800;
+			color: #fff;
+		}
+		textarea:focus, input:focus {
+			outline: none;
+			box-shadow: 0 0 0 0 rgba(0,255,255,0)
+		}
+	}
+}
+
 
 //** CARDS
 .card {
