@@ -3,12 +3,21 @@
     .card-title {
         font-size: 1.5rem;
     }
+
+  
     .site-main {
         .col-md-8 {
             padding-left: 2rem;
             padding-right: 2rem;
         }
     }
+}
+.card-label{
+    display:inline-block;
+    background: #000;
+    color:#fff;
+    font-size:.7em;
+    padding:0 4px;
 }
 
 //** BLOG POST FEATURED IMAGE

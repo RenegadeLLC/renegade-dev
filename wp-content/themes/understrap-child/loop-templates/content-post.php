@@ -18,10 +18,12 @@ $title = get_the_title( $post -> ID);
 	
 	$post_html .= '<a href="' . $link . '">';
 	$post_html .= '<div class="card">';	
+	
 	// $post_html .= '<div class="post-label-ct">BLOG</div>';
 	$post_html .= $thumbnail;
 	$post_html .= '<div class="card-body">';
 	$post_html .= '<h5 class="card-title">' . $title . '</h5>';
+	$post_html.= '<div class="card-label">BLOG</div>';
 	$post_html .= '<p class="card-text">';
 	$post_html .= '<div class="card-date date">' . $date . '</div>';
 	$post_html .= '<div class="card-excerpt">' . $excerpt . '</div>';
