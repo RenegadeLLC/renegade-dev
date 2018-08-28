@@ -35,20 +35,21 @@
 	// $podcast_html .= '<div class="post-label-ct">PODCAST</div>';
 
 	$podcast_html .= '<h5 class="card-title">' . $podcast_title  . '</h5>';
+	$podcast_html .= '<p class="card-text">';
 	if($podcast_date){
-		$podcast_html .=  '<p class="date">' . $podcast_date . '</p>';
+		$podcast_html .=  '<div class="card-date date">' . $podcast_date . '</div>';
 		
 	}
 	// $podcast_html .= '<div class="podcast-inset">';
 	// $podcast_html .= '<div class="podcast-image w-50 fleft"><img src="' . $profile_image .'" alt="' . $first_name . ' ' . $last_name . '"></div><!--.podcast-image -->';
-	$podcast_html .= '<p class="card-text"><span class="details">' . $podcast_details . '</span><br>';
+	$podcast_html .= '<span class="details">' . $podcast_details . '</span><br>';
 	// $podcast_html .= '<span class="details">' . $podcast_details . '</span><br>';
 	// $podcast_html .= '</div><!--.podcast-inset-->';
 	if($podcast_excerpt){
-		$podcast_html .=  '<span class="excerpt">' . $podcast_excerpt . '</span></p>';
+		$podcast_html .=  '<div class="card-excerpt">' . $podcast_excerpt . '</div>';
 	}
 	// $podcast_html .= '<div><a href="' . $post_edit_link  . '">' . 'Edit'  . '</a></div>';
-	$podcast_html .= '</div><!-- .card-body -->';
+	$podcast_html .= '</p></div><!-- .card-body -->';
 	$podcast_html .=  '</a>';
 	$podcast_html .= '</div><!-- .card -->';
 	echo($podcast_html);
