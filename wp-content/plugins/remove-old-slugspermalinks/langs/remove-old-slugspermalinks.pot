@@ -1,0 +1,146 @@
+#: remove-old-slugs.php:141
+msgid "Once Weekly"
+msgstr ""
+
+#: remove-old-slugs.php:145
+msgid "Once a Minute"
+msgstr ""
+
+#: remove-old-slugs.php:159
+msgid "Settings"
+msgstr ""
+
+#: remove-old-slugs.php:162
+msgid "Unlock All"
+msgstr ""
+
+#: remove-old-slugs.php:175 remove-old-slugs.php:176 remove-old-slugs.php:327
+msgid "Old Slugs"
+msgstr ""
+
+#: remove-old-slugs.php:266
+#, php-format
+msgid "Removing old slugs from database finished! %d old slug(s) deleted."
+msgstr ""
+
+#: remove-old-slugs.php:276
+msgid "Old Slug"
+msgstr ""
+
+#: remove-old-slugs.php:277
+msgid "Post ID"
+msgstr ""
+
+#: remove-old-slugs.php:278
+msgid "Post Title"
+msgstr ""
+
+#: remove-old-slugs.php:279
+msgid "Post Type"
+msgstr ""
+
+#: remove-old-slugs.php:280
+msgid "Current Slug"
+msgstr ""
+
+#: remove-old-slugs.php:298
+#, php-format
+msgid "<p><strong>%d</strong> old slug(s) found:<p>"
+msgstr ""
+
+#: remove-old-slugs.php:303
+msgid "Are you sure?"
+msgstr ""
+
+#: remove-old-slugs.php:303
+msgid "Remove old slugs"
+msgstr ""
+
+#: remove-old-slugs.php:310
+msgid "No old slugs found in database."
+msgstr ""
+
+#: remove-old-slugs.php:328
+msgid "This tool removes old slugs (permalinks) from database."
+msgstr ""
+
+#: remove-old-slugs.php:335
+msgid "Refresh list"
+msgstr ""
+
+#: remove-old-slugs.php:339
+msgid "Automatic Clean Ups"
+msgstr ""
+
+#: remove-old-slugs.php:341
+#, php-format
+msgid "You will need %s plugin to enable automatic old slugs clean ups."
+msgstr ""
+
+#: remove-old-slugs.php:343
+msgid "Remove Old Slugs Pro"
+msgstr ""
+
+#: remove-old-slugs.php:346
+msgid ""
+"<code>DISABLE_WP_CRON</code> is set to <code>true</code> in your <code>wp-"
+"config.php</code> file - \"Scheduled Clean Ups\" won't work."
+msgstr ""
+
+#: remove-old-slugs.php:352
+msgid "Disabled"
+msgstr ""
+
+#: remove-old-slugs.php:353
+msgid "Every minute"
+msgstr ""
+
+#: remove-old-slugs.php:354
+msgid "Hourly"
+msgstr ""
+
+#: remove-old-slugs.php:355
+msgid "Twice daily"
+msgstr ""
+
+#: remove-old-slugs.php:356
+msgid "Daily"
+msgstr ""
+
+#: remove-old-slugs.php:357
+msgid "Weekly"
+msgstr ""
+
+#: remove-old-slugs.php:366 remove-old-slugs.php:383
+msgid "Save"
+msgstr ""
+
+#: remove-old-slugs.php:371
+#, php-format
+msgid "Next old slugs clean up is scheduled on %s. Current time is %s."
+msgstr ""
+
+#: remove-old-slugs.php:380
+msgid "No"
+msgstr ""
+
+#: remove-old-slugs.php:381
+msgid "Yes"
+msgstr ""
+
+#: remove-old-slugs.php:389
+msgid "Scheduled Clean Ups"
+msgstr ""
+
+#: remove-old-slugs.php:390
+#, php-format
+msgid "Set old slugs to be cleared periodically (%s)."
+msgstr ""
+
+#: remove-old-slugs.php:395
+msgid "Clean Up on Save Post"
+msgstr ""
+
+#: remove-old-slugs.php:396
+msgid "Set old slugs to be cleared automatically, when post is saved."
+msgstr ""
