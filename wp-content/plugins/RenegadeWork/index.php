@@ -109,8 +109,8 @@ function create_project_post_type() {
 			'capability_type' => 'post',
 			//'register_meta_box_cb' => 'add_custom_meta_box',
 			'hierarchical' => true,
-			'rewrite' => true,
-			'has_archive' => false,
+			'rewrite' => array( 'slug' => 'about-renegade/b2b-content-strategy-case-studies', 'with_front' => false ),
+			'has_archive' => 'projects',
 			'supports' => array('title', 'custom_meta_fields', 'page_attributes', 'revisions'),
 	    
 	);

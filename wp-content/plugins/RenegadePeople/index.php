@@ -53,8 +53,9 @@ function create_people_post_type() {
 			'capability_type' => 'page',
 			//'register_meta_box_cb' => 'add_custom_meta_box',
 			'hierarchical' => true,
-			'rewrite' => true,
-			'supports' => array('title', 'custom_meta_fields', 'custom-fields', 'revisions')
+			'rewrite' => array( 'slug' => 'about-renegade/renegade-thinkers-leadership-team', 'with_front' => false ),
+			'supports' => array('title', 'custom_meta_fields', 'custom-fields', 'revisions'),
+			'has_archive' => 'people'
 	);
 
 	register_post_type( 'people' , $args );

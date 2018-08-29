@@ -54,9 +54,9 @@ function create_podcast_post_type() {
 			'capability_type' => 'post',
 			//'register_meta_box_cb' => 'add_custom_meta_box',
 			'hierarchical' => true,
-			'rewrite' => true,
+			'rewrite' => array( 'slug' => 'resources-story-hub/podcasts', 'with_front'=> false ),
 			'supports' => array('excerpt', 'title', 'revisions', 'editor', 'tags', 'categories', 'comments', 'archives'),
-			'has_archive' => true,
+			'has_archive' => 'podcasts',
 	       'publicly_queryable'  => true
 			
 				

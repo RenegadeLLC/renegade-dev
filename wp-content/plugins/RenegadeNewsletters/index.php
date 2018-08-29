@@ -54,8 +54,8 @@ function create_newsletter_post_type() {
 			'capability_type' => 'post',
 			//'register_meta_box_cb' => 'add_custom_meta_box',
 			'hierarchical' => false,
-			'rewrite' => true,
-			'has_archive' => true,
+			'rewrite' => array( 'slug' => 'resources-story-hub/marketing-newsletter-thecut', 'with_front'=> false ),
+			'has_archive' => 'newsletters',
 			'supports' => array('excerpt', 'editor', 'title', 'revisions', 'tags', 'categories', 'archives', 'thumbnail')
 	);
 
