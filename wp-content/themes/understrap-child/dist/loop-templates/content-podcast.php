@@ -5,6 +5,7 @@
  * @package understrap
  */
 	//GET POST TYPE FIELDS
+	
 	global $orderby;
 	$podcast_title = get_the_title($post -> ID);
 	$profile_image = get_field('profile_image', $post -> ID);
@@ -18,9 +19,11 @@
 	$podcast_description = get_the_content();
 	$podcast_excerpt = get_the_excerpt();
 	$podcast_excerpt = str_replace('Topline Summary ', '', $podcast_excerpt);
+
+	//global $num_types;
+	//var_dump($num_types);
     //the_content(); 
-	$post_link = get_permalink($post -> ID)
-	;
+	$post_link = get_permalink($post -> ID);
 	$post_edit_link = get_edit_post_link();
 	$podcast_html = '';
 	$podcast_details = '<span class="red semibold">GUEST:</span><br>';
@@ -29,12 +32,15 @@
 	// $podcast_html .=  '<div class="feed-item post-item col-lg-4 col-md-6 col-sm-12 podcast-excerpt resource-excerpt">';
 //    $podcast_html .= '<a href="' . $podcast_url . '" target="_blank">';
 	$podcast_html = '<div class="card">';
+	
 	$podcast_html .= '<a href="' . $post_link . '">';
+	
 	$podcast_html .= '<img width="337" height="337" src="' . $profile_image .'" alt="' . $first_name . ' ' . $last_name . '">';
 	$podcast_html .= '<div class="card-body">';
 	// $podcast_html .= '<div class="post-label-ct">PODCAST</div>';
 
 	$podcast_html .= '<h5 class="card-title">' . $podcast_title  . '</h5>';
+	$podcast_html .= '<div class="card-label">PODCAST</div>';
 	$podcast_html .= '<p class="card-text">';
 	if($podcast_date){
 		$podcast_html .=  '<div class="card-date date">' . $podcast_date . '</div>';
@@ -51,6 +57,7 @@
 	// $podcast_html .= '<div><a href="' . $post_edit_link  . '">' . 'Edit'  . '</a></div>';
 	$podcast_html .= '</p></div><!-- .card-body -->';
 	$podcast_html .=  '</a>';
+
 	$podcast_html .= '</div><!-- .card -->';
 	echo($podcast_html);
 ?>

@@ -16,6 +16,7 @@ $rn_thumbnail_image = get_field('rn_thumbnail_image', $post -> ID);
 $rn_size = array('506', '169');
 
 $newsletter_html = '<div class="card">';
+
 $newsletter_html .= '<a href="' . $rn_link . '">';
 if($rn_thumbnail_image ):
 	$newsletter_html .= '<img src="' . $rn_thumbnail_image . '" alt="' . $rn_title  . '">';	
@@ -25,6 +26,7 @@ endif;
 
 $newsletter_html .= '<div class="card-body">';
 $newsletter_html .= '<h5 class="card-title">' . $rn_title . '</h5>';
+$newsletter_html.= '<div class="card-label">NEWSLETTER</div>';
 $newsletter_html .= '<p class="card-text">';
 $newsletter_html .= '<div class="card-date date">' . $rn_date . '</div>';
 $newsletter_html .= '<div class="card-excerpt">' . $rn_excerpt . '</div>';

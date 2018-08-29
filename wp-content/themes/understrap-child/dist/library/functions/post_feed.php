@@ -179,16 +179,25 @@ function build_feed(){
 
                 $count = $loop->post_count;
 
+                // set dynamic or non-dynamic classes
                 if ($count == $number_of_posts_to_include):
-                    echo '<div class="post-feed dynamic grid row">';
+                    echo '<div class="post-feed dynamic grid row';
                 else:
-                    echo '<div class="post-feed non-dynamic row">';
+                    echo '<div class="post-feed non-dynamic row';
+                endif;
+
+                // set single-type class if only single post type
+                if (count($post_type_array) > 1):
+                    echo '">';
+                else:
+                    echo ' single-type">';
                 endif;
 
                 while( $loop->have_posts() ) {
                     $loop->the_post();
                         $post_type = get_post_type();
                         echo $col_grid_container ;
+                        // echo 'post types array: ' . count($post_type_array);
                         if($post_type == 'podcasts'):   
                             get_template_part( '/loop-templates/content', 'podcast' );
                         elseif($post_type == 'newsletters'):
@@ -205,8 +214,8 @@ function build_feed(){
                 echo '</div><!-- .row -->';
 
                 if ($count == $number_of_posts_to_include):
-
-                if (!is_front_page()):
+                
+                if (!is_front_page() and !is_404() and !is_page(get_page_by_path('404-2') -> ID)):
                     echo '<div class="row">';
                     echo '<div class="col-md-4"></div>';
                     echo '<div class="col-md-4">';
@@ -226,7 +235,7 @@ function build_feed(){
                 endif;
     
                 // pagination
-                if (is_front_page()):
+                if (is_front_page() and !is_404() and !is_page(get_page_by_path('404-2') -> ID)):
                     echo '<div class="pagination" style:"visibility: hidden;">';
                 else: 
                     echo '<div class="pagination">';
@@ -252,4 +261,3 @@ function build_feed(){
     ob_end_clean();
     return $feedHTML;
 }
-
