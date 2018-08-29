@@ -20,6 +20,12 @@
     padding:0 4px;
 }
 
+.post-feed.single-type {
+    .card-label {
+        display: none;
+    }
+}
+
 //** BLOG POST FEATURED IMAGE
 
 .post-feature-img{
