@@ -41,7 +41,7 @@ $caseHTML = '';
 <?php
 
 
-	$caseHTML .= '<header class="entry-header"><h1>' . $client . '<br><span class="light-grey">' . $project_title . '</span></h1>';
+	$caseHTML .= '<header class="entry-header"><h1>' . $client . '<br><span class="project-title">' . $project_title . '</span></h1>';
 
 
 	$caseHTML .= '</header><!-- .entry-header --><div class="entry-content">';
