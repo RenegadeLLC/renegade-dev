@@ -286,8 +286,35 @@ body.people-template-default {
 				font-size: 1.25rem;
 				padding: 9px 11px;
 			}
-			div.social a:before {
-				content: "\f099";
+			div.social {
+				&.none {
+					display: none;
+				}
+				&.twitter {
+					a:before {
+						content: "\f099";
+					}
+				}
+				&.facebook {
+					a:before {
+						content: "\f09a";
+					}
+				}
+				&.pinterest {
+					a:before {
+						content: "\f0d2";
+					}
+				}
+				&.instagram {
+					a:before {
+						content: "\f16d";
+					}
+				}
+				&.linkedin {
+					a:before {
+						content: "\f08c";
+					}
+				}
 			}
 		}
 		p:first-child {
