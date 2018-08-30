@@ -64,6 +64,7 @@ function make_logo_grid(){
                 setup_postdata( $post );
                 $client_logo = get_field('clientLogo', $post);
                 $case_study = get_field('case_study', $post);
+                $case_study_url = get_field('case_study_url', $post);
                 
                 if($client_name != 'Renegade' && $client_logo):
                     $clientsHTML .= '<div class="client-grid-item col-lg-15 col-md-4 col-sm-6 col-xs-6';
