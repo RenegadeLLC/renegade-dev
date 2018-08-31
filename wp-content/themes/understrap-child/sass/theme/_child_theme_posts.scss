@@ -11,6 +11,11 @@
             padding-right: 2rem;
         }
     }
+    article.post {
+        img.wp-post-image {
+            flex-shrink: 0;
+        }
+    }
 }
 .card-label{
     display:inline-block;
@@ -53,7 +58,7 @@
 		.row.non-dynamic {
 			margin-left: 0;
 			margin-right: 0;
-		}
+        }
 	}
 }
 
