@@ -14,7 +14,7 @@ function make_logo_grid(){
     
     if($numLogos == 'All Logos'):
 
-        $rc_args = array( 'post_type' => 'clients', 'posts_per_page' => -1 , 'orderby' => 'menu_order', /*'meta_key' => $meta_key,*/ 'order' => 'ASC');
+        $rc_args = array( 'post_type' => 'clients', 'posts_per_page' => -1 , 'orderby' => 'title', /*'meta_key' => $meta_key,*/ 'order' => 'ASC');
         $rc_loop = new WP_Query( $rc_args );
         
         if(have_posts($rc_loop)):
