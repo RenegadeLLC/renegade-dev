@@ -9,6 +9,7 @@
 	global $orderby;
 	$podcast_title = get_the_title($post -> ID);
 	$profile_image = get_field('profile_image', $post -> ID);
+	$show_image = get_field('show_image', $post -> ID);
 	$promo_video = get_field('promo_video', $post -> ID);
 	$first_name = get_field('first_name', $post -> ID);
 	$last_name = get_field('last_name', $post -> ID);
@@ -29,15 +30,14 @@
 	$podcast_details = '<span class="red semibold">GUEST:</span><br>';
 	$podcast_details .= '<span class="semibold">' . $first_name . ' ' . $last_name . ',</span><br>';
 	$podcast_details .= $job_title . ', <span class="semibold">' . $company_name . ' </span>';
-	// $podcast_html .=  '<div class="feed-item post-item col-lg-4 col-md-6 col-sm-12 podcast-excerpt resource-excerpt">';
-//    $podcast_html .= '<a href="' . $podcast_url . '" target="_blank">';
+	
 	$podcast_html = '<div class="card">';
 	
 	$podcast_html .= '<a href="' . $post_link . '">';
 	
-	$podcast_html .= '<img width="337" height="337" src="' . $profile_image .'" alt="' . $first_name . ' ' . $last_name . '">';
+	$podcast_html .= '<img width="337" height="337" src="' . $show_image .'" alt="' . $first_name . ' ' . $last_name . '">';
 	$podcast_html .= '<div class="card-body">';
-	// $podcast_html .= '<div class="post-label-ct">PODCAST</div>';
+
 
 	$podcast_html .= '<h5 class="card-title">' . $podcast_title  . '</h5>';
 	$podcast_html .= '<div class="card-label">PODCAST</div>';
@@ -46,15 +46,10 @@
 		$podcast_html .=  '<div class="card-date date">' . $podcast_date . '</div>';
 		
 	}
-	// $podcast_html .= '<div class="podcast-inset">';
-	// $podcast_html .= '<div class="podcast-image w-50 fleft"><img src="' . $profile_image .'" alt="' . $first_name . ' ' . $last_name . '"></div><!--.podcast-image -->';
 	$podcast_html .= '<span class="details">' . $podcast_details . '</span><br>';
-	// $podcast_html .= '<span class="details">' . $podcast_details . '</span><br>';
-	// $podcast_html .= '</div><!--.podcast-inset-->';
-	if($podcast_excerpt){
+		if($podcast_excerpt){
 		$podcast_html .=  '<div class="card-excerpt">' . $podcast_excerpt . '</div>';
 	}
-	// $podcast_html .= '<div><a href="' . $post_edit_link  . '">' . 'Edit'  . '</a></div>';
 	$podcast_html .= '</p></div><!-- .card-body -->';
 	$podcast_html .=  '</a>';
 

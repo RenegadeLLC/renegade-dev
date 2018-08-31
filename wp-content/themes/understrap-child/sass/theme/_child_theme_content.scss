@@ -851,3 +851,20 @@ h2.podcast, h2.podcast a{
 		padding: 0;
 	}
 }
+
+// zype video player 
+iframe.zype-player {
+	height: 312px;
+}
+
+@media (max-width:991px) {
+	iframe.zype-player {
+		height: 232px;
+	}
+}
+
+@media (max-width: 767px) {
+	iframe.zype-player {
+		height: 171px;
+	}
+}

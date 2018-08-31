@@ -286,6 +286,12 @@ body.single-people {
     padding-bottom: 1rem;
 }
 
+@media (max-width:991px) {
+    .the_champ_horizontal_sharing {
+        padding-left: 1.5rem;
+    }
+}
+
 // comments 
 body.single-post,
 body.single-podcasts {

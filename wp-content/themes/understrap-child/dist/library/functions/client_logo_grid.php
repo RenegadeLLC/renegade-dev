@@ -14,7 +14,7 @@ function make_logo_grid(){
     
     if($numLogos == 'All Logos'):
 
-        $rc_args = array( 'post_type' => 'clients', 'posts_per_page' => -1 , 'orderby' => 'menu_order', /*'meta_key' => $meta_key,*/ 'order' => 'ASC');
+        $rc_args = array( 'post_type' => 'clients', 'posts_per_page' => -1 , 'orderby' => 'title', /*'meta_key' => $meta_key,*/ 'order' => 'ASC');
         $rc_loop = new WP_Query( $rc_args );
         
         if(have_posts($rc_loop)):
@@ -64,6 +64,7 @@ function make_logo_grid(){
                 setup_postdata( $post );
                 $client_logo = get_field('clientLogo', $post);
                 $case_study = get_field('case_study', $post);
+                $case_study_url = get_field('case_study_url', $post);
                 
                 if($client_name != 'Renegade' && $client_logo):
                     $clientsHTML .= '<div class="client-grid-item col-lg-15 col-md-4 col-sm-6 col-xs-6';
