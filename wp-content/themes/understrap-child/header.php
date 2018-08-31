@@ -32,6 +32,14 @@ endif;
 	<meta name="apple-mobile-web-app-title" content="<?php bloginfo( 'name' ); ?> - <?php bloginfo( 'description' ); ?>">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
+
+	<?php 
+	$google_header_code = get_field('google_header_code', 'option');
+	if($google_header_code):
+		echo($google_header_code);
+	endif;
+	?>
+
 	<?php wp_head(); ?>
 </head>
 
