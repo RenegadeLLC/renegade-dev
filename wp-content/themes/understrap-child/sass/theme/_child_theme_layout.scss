@@ -355,6 +355,11 @@ body.search {
 #search,
 #search_header {
 	background: $light-gray;
+}
+#search,
+#search_header,
+.no-results,
+.not-found {
 	form {
 		input, .btn {
 			border-radius: 0;
@@ -382,6 +387,16 @@ body.search {
 	// do not display extraneous card label
 	.card-label {
 		display: none;
+	}
+}
+
+//** AUTHOR
+#author_header {
+	background-color: $orangered;
+	h1 {
+		span {
+			color: white;
+		}
 	}
 }
 
