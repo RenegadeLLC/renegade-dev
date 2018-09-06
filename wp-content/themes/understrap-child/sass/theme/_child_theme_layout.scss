@@ -371,6 +371,19 @@ body.search {
 	}
 }
 
+//** ARCHIVES
+#archive_header {
+	background-color: $yellowgreen;
+	.archive-name {
+		color: $white;
+	}
+}
+#archive_content {
+	// do not display extraneous card label
+	.card-label {
+		display: none;
+	}
+}
 
 //** CARDS
 .card {

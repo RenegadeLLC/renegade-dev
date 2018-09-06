@@ -318,3 +318,25 @@ function ajax_listings() {
  
 	die(); //stop "0" from being output
 }
+
+// reformat archive headers
+add_filter( 'get_the_archive_title', function ( $title ) {
+
+    if( is_category() ) {
+
+        $title = single_cat_title( '', false );
+
+    }
+	if ( is_category() ) {
+		/* translators: Category archive title. 1: Category name */
+		$title = sprintf( __( 'Category: %s' ), '<span class="archive-name">' . single_cat_title( '', false ) . '</span>' );
+	} elseif ( is_tag() ) {
+		/* translators: Tag archive title. 1: Tag name */
+        $title = sprintf( __( 'Tag: %s' ), '<span class="archive-name">' . single_tag_title( '', false ) . '</span>');
+    } elseif ( is_post_type_archive() ) {
+        /* translators: Post type archive title. 1: Post type name */
+        $title = sprintf( __( 'Archives: %s' ), '<span class="archive-name">' .  post_type_archive_title( '', false )  . '</span>');
+    } 
+    return $title;
+
+});
