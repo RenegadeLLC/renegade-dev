@@ -13,8 +13,11 @@ $container   = get_theme_mod( 'understrap_container_type' );
 
 <div class="wrapper" id="full-width-page-wrapper">
 
-	<div class="<?php echo esc_attr( $container ); ?>" id="content" tabindex="-1">
-
+	<div class="<?php 
+		$str = post_type_archive_title( '', false ); 
+		$archive_title = strtolower($str);
+		echo esc_attr( $container ) . ' ' . $archive_title; 
+		?>" id="content" tabindex="-1">
 		<div class="row">
 
 				<!-- HEADER -->

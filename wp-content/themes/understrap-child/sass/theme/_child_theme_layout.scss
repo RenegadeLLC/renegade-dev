@@ -389,6 +389,16 @@ body.search {
 		display: none;
 	}
 }
+body.archive {
+	.container {
+		&.podcasts #archive_header {
+			background-color: $orangered;
+		}
+		&.newsletters #archive_header {
+			background-color: $blue;
+		}
+	}
+}
 
 //** AUTHOR
 #author_header {
