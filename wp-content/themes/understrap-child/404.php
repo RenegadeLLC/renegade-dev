@@ -22,7 +22,15 @@ $sidebar_pos = get_theme_mod( 'understrap_sidebar_position' );
                 <div class="row">
                     <div class="column col-md-12">
                         <div class="text-ct">
-                            <p><img src="/wp-content/uploads/404_img.png" alt="" width="1600" height="483" class="alignnone size-full wp-image-15288" srcset="http://local.renegade.com:8888/wp-content/uploads/404_img.png 1600w, http://local.renegade.com:8888/wp-content/uploads/404_img-900x272.png 900w, http://local.renegade.com:8888/wp-content/uploads/404_img-768x232.png 768w, http://local.renegade.com:8888/wp-content/uploads/404_img-1200x362.png 1200w" sizes="(max-width: 1600px) 100vw, 1600px"></p>
+                            <p>
+                            <img src="/wp-content/uploads/404_img.png" alt="" width="1600" height="483" 
+                            class="alignnone size-full wp-image-15288" 
+                            srcset="/wp-content/uploads/404_img.png 1600w, 
+                            /wp-content/uploads/404_img-900x272.png 900w, 
+                            /wp-content/uploads/404_img-768x232.png 768w, 
+                            /wp-content/uploads/404_img-1200x362.png 1200w" 
+                            sizes="(max-width: 1600px) 100vw, 1600px">
+                            </p>
                         </div><!-- .text-ct -->
                     </div><!-- .column-->
                 </div>
