@@ -1,0 +1,77 @@
+//** SERVICES
+#renegade_services,
+#services {
+    .image-text-wrapper {
+        .bt-fixed {
+            padding: 0 24px;
+        }
+    }
+}
+
+// when header text stack breaks to 3 lines
+@media (min-width: 1200px) {  
+	#renegade_services,
+    #services {
+        .image-text-wrapper {
+            .image-text-stack {
+                min-height: 5rem;    
+            }
+        }
+    }
+}
+
+// when header text stack breaks to 2 lines
+@media (max-width:991px) {
+    #renegade_services,
+    #services {
+        .image-text-wrapper {
+            .bt-fixed {
+                padding: 0;
+            }
+            .image-text-stack {
+                min-height: 3rem;    
+            }
+        }
+        .row {
+            > div:first-child {
+                .image-text-stack {
+                    min-height: 5rem;    
+                }
+            }
+        }
+    }
+}
+
+// when header text stack is single line
+@media (max-width:767px) {
+    #renegade_services,
+    #services {
+        .image-text-wrapper {
+            padding-bottom: 2rem;
+            .bt-fixed {
+                padding: 0;
+            }
+            .image-text-stack {
+                min-height: auto !important;    
+            }
+        }
+    }
+}
+
+//** CASE STUDIES
+#case_studies {
+    .case-info {
+        h4 {
+            margin-bottom: 2rem;
+        }
+    }
+}
+
+//** CONTACT
+#body.content-section {
+    .text-ct {
+        > h3:first-child {
+            margin-top: 0;
+        }
+    }
+}

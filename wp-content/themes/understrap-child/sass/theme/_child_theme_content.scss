@@ -72,13 +72,46 @@
 }
 
 // team bios
-.row.leadership-team {
+.people-bio {
+	text-align: center;
+	.people-bio-image {
+		padding: 2.5rem 2.5rem 1rem 2.5rem;
+		img {
+			border-radius: 50%;
+		}
+	}
+	.people-bio-info {
+		h3 {
+			margin-top: 0;
+		}
+	}
+}
+
+@media screen and (max-width:992px) {
+	.people-bio {
+		text-align: center;
+		.people-bio-image {
+			padding: 1rem;
+		}
+	}
+	.people-bio-info {
+		h3 {
+			font-size: 1.75rem;
+		}
+	}
+}
+@media screen and (max-width:767px) {
 	.people-bio {
 		text-align: center;
 		.people-bio-image {
 			padding: 2.5rem 2.5rem 1rem 2.5rem;
 			img {
 				border-radius: 50%;
+			}
+		}
+		.people-bio-info {
+			h3 {
+				font-size: 2rem;
 			}
 		}
 	}

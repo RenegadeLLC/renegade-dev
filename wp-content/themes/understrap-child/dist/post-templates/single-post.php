@@ -29,11 +29,11 @@
 		<div class="row">
 
 			<!-- left sdebar -->
-			<div class="col-md-2">
+			<div class="col-lg-2">
 			</div>
 
 			<!-- entry content -->
-			<div class="col-md-8">
+			<div class="col-md-12 col-lg-8">
 				<div class="entry-meta">
 					<?php understrap_posted_on();?>
 					<?php if($post_thumb):
@@ -56,7 +56,7 @@
 			</div>
 
 			<!-- right sidebar -->
-			<div class="col-md-2">
+			<div class="col-lg-2">
 			</div>
 		</div>
 	</main><!-- main -->
