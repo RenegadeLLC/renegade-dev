@@ -9,6 +9,7 @@
 		background-color: white;
 	}
 }
+#error-404-wrapper,
 #full-width-page-wrapper {
 	padding-top: 10.5rem;
 	#content {
@@ -17,11 +18,13 @@
 }
 
 @media (max-width:991px) {
+	#error-404-wrapper,
 	#full-width-page-wrapper {
 		padding-top: 7.5rem;
 	}
 }
 @media (max-width:767px) {
+	#error-404-wrapper,
 	#full-width-page-wrapper {
 		padding-top: 6rem !important;
 	}
