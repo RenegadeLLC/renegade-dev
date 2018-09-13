@@ -215,7 +215,7 @@ function build_feed(){
 
                 if ($count == $number_of_posts_to_include):
                 
-                if (!is_front_page() and !is_404() and !is_page(get_page_by_path('404-2') -> ID)):
+                if (!is_front_page() and !is_404()):
                     echo '<div class="row">';
                     echo '<div class="col-md-4"></div>';
                     echo '<div class="col-md-4">';
@@ -235,7 +235,7 @@ function build_feed(){
                 endif;
     
                 // pagination
-                if (is_front_page() and !is_404() and !is_page(get_page_by_path('404-2') -> ID)):
+                if (!is_front_page() and !is_404()):
                     echo '<div class="pagination" style:"visibility: hidden;">';
                 else: 
                     echo '<div class="pagination">';
