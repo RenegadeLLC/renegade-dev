@@ -16,7 +16,7 @@
 
 ?>
 
-<div class="wrapper" id="full-width-page-wrapper">
+<div class="wrapper" id="single-wrapper">
 
 	<?php 
 		// echo esc_attr($container);

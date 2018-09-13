@@ -19,7 +19,7 @@ $pageHTML = '';
 
 ?>
 
-<div class="wrapper" id="full-width-page-wrapper">
+<div class="wrapper" id="landing-page-wrapper">
 
 <?php 
         // echo esc_attr($container);

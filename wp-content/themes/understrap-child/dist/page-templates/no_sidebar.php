@@ -17,7 +17,7 @@ $pageHTML = '';
 
 ?>
 
-<div class="wrapper" id="full-width-page-wrapper">
+<div class="wrapper" id="no-sidebar-wrapper">
 
 	<?php 
 

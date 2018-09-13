@@ -12,7 +12,7 @@ $container = get_field('container_width', 'option');
 
 ?>
 
-<div class="wrapper" id="full-width-page-wrapper">
+<div class="wrapper" id="archive-wrapper">
 
 		<?php
 
