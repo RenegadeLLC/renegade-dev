@@ -20,7 +20,7 @@ $container = get_field('container_width', 'option');
 if ($container == 'Fixed Width Container'):
     echo '<div class="container" id="content">';
 elseif ($container == 'Full Width Container'):
-    echo '<div class="container" id="content">';
+    echo '<div id="content">';
 endif; //END CONTAINER WIDTH IF
 ?>
 

@@ -7,17 +7,26 @@
 
 get_header();
 
-$container   = get_theme_mod( 'understrap_container_type' );
+// $container   = get_theme_mod( 'understrap_container_type' );
+$container = get_field('container_width', 'option');
 
 ?>
 
 <div class="wrapper" id="full-width-page-wrapper">
 
-	<div class="<?php 
+		<?php
+
+		$divHTML = '<div ';
 		$str = post_type_archive_title( '', false ); 
 		$archive_title = strtolower($str);
-		echo esc_attr( $container ) . ' ' . $archive_title; 
-		?>" id="content" tabindex="-1">
+        if ($container == 'Fixed Width Container'):
+            $divHTML .= 'class="container ' . $archive_title . '" id="content" tabindex="-1">';
+        elseif ($container == 'Full Width Container'):
+            $divHTML .= 'class="' . $archive_title . '" id="content" tabindex="-1">';
+		endif; //END CONTAINER WIDTH 
+		echo $divHTML;
+        ?>
+
 		<div class="row">
 
 				<!-- HEADER -->

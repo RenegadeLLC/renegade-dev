@@ -35,7 +35,7 @@
 	
 	$podcast_html .= '<a href="' . $post_link . '">';
 	
-	$podcast_html .= '<img width="337" height="337" src="' . $show_image .'" alt="' . $first_name . ' ' . $last_name . '">';
+	$podcast_html .= '<img class="card-img" width="337" height="337" src="' . $show_image .'" alt="' . $first_name . ' ' . $last_name . '">';
 	$podcast_html .= '<div class="card-body">';
 
 
