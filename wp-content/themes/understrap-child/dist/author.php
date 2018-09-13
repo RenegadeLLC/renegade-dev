@@ -39,11 +39,14 @@ endif; //END CONTAINER WIDTH IF
                         <!-- <h1>Drew Neisser<br><span class="job-title">Founder &amp; CEO</span>
                         </h1> -->
                         <?php
-$curauth = (isset($_GET['author_name'])) ? get_user_by('slug',
-    $author_name) : get_userdata(intval($author));
-?>
+                            $curauth = (isset($_GET['author_name'])) ? get_user_by('slug', $author_name) : get_userdata(intval($author));
+                            $the_author = esc_html( $curauth->display_name );
+                            if (!$the_author):
+                                $the_author = esc_html($curauth->first_name) . ' ' . esc_html($curauth->last_name);
+                            endif;
+                        ?>
 
-                        <h1><?php esc_html_e('Author: ', 'understrap');?><span><?php echo esc_html($curauth->nickname); ?></span></h1>
+                        <h1><?php esc_html_e('Author: ', 'understrap');?><span><?php echo $the_author; ?></span></h1>
                     </div>
                 </header><!-- .page-header -->
             </div>
@@ -51,7 +54,7 @@ $curauth = (isset($_GET['author_name'])) ? get_user_by('slug',
 					<!-- The Loop -->
 					<?php if (have_posts()): ?>
                 <div class="col">
-                        <h2><?php esc_html_e('Posts by', 'understrap');?> <?php echo esc_html($curauth->nickname); ?></h2>
+                        <h2><?php esc_html_e('Posts by', 'understrap');?> <?php echo $the_author; ?></h2>
 
                 </div>
                 <div class="post-feed dynamic grid row">
