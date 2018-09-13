@@ -24,7 +24,7 @@ $pageHTML = '';
 if ($container == 'Fixed Width Container'):
     $pageHTML = '<div class="container" id="content">';
 elseif ($container == 'Full Width Container'):
-    $pageHTML = '<div class="container" id="content">';
+    $pageHTML = '<div id="content">';
 endif;//END CONTAINER WIDTH IF
 ?>
 
