@@ -7,13 +7,21 @@
 
 get_header();
 
-$container   = get_theme_mod( 'understrap_container_type' );
+// $container   = get_theme_mod( 'understrap_container_type' );
+$container = get_field('container_width', 'option');
 
 ?>
 
 <div class="wrapper" id="full-width-page-wrapper">
+<?php
+// echo esc_attr($container);
+if ($container == 'Fixed Width Container'):
+    echo '<div class="container" id="content" tabindex="-1">';
+elseif ($container == 'Full Width Container'):
+    echo '<div id="content" tabindex="-1">';
+endif; //END CONTAINER WIDTH IF
+?>
 
-	<div class="<?php echo esc_attr( $container ); ?>" id="content" tabindex="-1">
 
 		<div class="row">
 
