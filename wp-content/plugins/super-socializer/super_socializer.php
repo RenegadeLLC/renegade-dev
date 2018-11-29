@@ -3,7 +3,7 @@
 Plugin Name: Super Socializer
 Plugin URI: https://super-socializer-wordpress.heateor.com
 Description: A complete 360 degree solution to provide all the social features like Social Login, Social Commenting, Social Sharing, Social Media follow and more.
-Version: 7.12.1
+Version: 7.12.2
 Author: Team Heateor
 Author URI: https://www.heateor.com
 Text Domain: super-socializer
@@ -11,7 +11,7 @@ Domain Path: /languages
 License: GPL2+
 */
 defined('ABSPATH') or die("Cheating........Uh!!");
-define('THE_CHAMP_SS_VERSION', '7.12.1');
+define('THE_CHAMP_SS_VERSION', '7.12.2');
 
 require 'helper.php';
 
@@ -376,6 +376,9 @@ function the_champ_connect(){
 		    ));
 
 		    $helper = $facebook->getRedirectLoginHelper();
+		    if(isset($_GET['state'])){
+			    $_SESSION['FBRLH_state'] = sanitize_text_field($_GET['state']);
+			}
 
 		    $permissions = array('email'); // Optional permissions
 		    if(!isset($_GET['code'])){
@@ -574,7 +577,7 @@ function the_champ_connect(){
 			/* Build TwitterOAuth object with client credentials. */
 			$connection = new TwitterOAuth($theChampLoginOptions['twitter_key'], $theChampLoginOptions['twitter_secret']);
 			/* Get temporary credentials. */
-			$requestToken = $connection->getRequestToken(esc_url(home_url()).'/index.php?SuperSocializerAuth=Twitter');
+			$requestToken = $connection->getRequestToken(esc_url(home_url()));
 			if($connection->http_code == 200){
 				// generate unique ID
 				$uniqueId = mt_rand();
@@ -597,7 +600,7 @@ function the_champ_connect(){
 					<?php echo esc_url(home_url()) ?>
 					</li>
 					<li><?php echo sprintf(__('Enter exactly the following url in <strong>Callback URLs</strong> option in your Twitter app (see step 3 %s)', 'super-socializer'), '<a target="_blank" href="http://support.heateor.com/how-to-get-twitter-api-key-and-secret/">here</a>') ?><br/>
-					<?php echo esc_url(home_url().'/index.php?SuperSocializerAuth=Twitter') ?>
+					<?php echo esc_url(home_url()); ?>
 					</li>
 					<li><?php _e('Make sure cURL is enabled at your website server. You may need to contact the server administrator of your website to verify this', 'super-socializer') ?></li>
 					<li><?php echo sprintf(__('Make sure that "Enable Callback Locking" option is disabled. See step 4 %s', 'super-socializer'), '<a target="_blank" href="http://support.heateor.com/how-to-get-twitter-api-key-and-secret">here</a>') ?></li>
@@ -609,7 +612,7 @@ function the_champ_connect(){
 		}
 	}
 	// twitter authentication
-	if(isset($_GET['SuperSocializerAuth']) && sanitize_text_field($_GET['SuperSocializerAuth']) == 'Twitter' && isset($_REQUEST['oauth_token'])){
+	if(isset($_REQUEST['oauth_token']) && isset($_REQUEST['oauth_verifier'])){
 		global $wpdb;
 		$uniqueId = $wpdb->get_var($wpdb->prepare("SELECT user_id FROM $wpdb->usermeta WHERE meta_key = 'thechamp_twitter_oauthtoken' and meta_value = %s", sanitize_text_field($_REQUEST['oauth_token'])));
 		$oauthTokenSecret = get_user_meta($uniqueId, 'thechamp_twitter_oauthtokensecret', true);
@@ -1587,6 +1590,15 @@ function heateor_ss_twitter_callback_notification_read(){
 add_action('wp_ajax_heateor_ss_twitter_callback_notification_read', 'heateor_ss_twitter_callback_notification_read');
 
 /**
+ * Set flag in database if new Twitter callback notification has been read
+ */
+function heateor_ss_twitter_new_callback_notification_read(){
+	update_option('heateor_ss_twitter_new_callback_notification_read', '1');
+	die;
+}
+add_action('wp_ajax_heateor_ss_twitter_new_callback_notification_read', 'heateor_ss_twitter_new_callback_notification_read');
+
+/**
  * Set flag in database if Linkedin redirection notification has been read
  */
 function heateor_ss_linkedin_redirection_notification_read(){
@@ -1733,7 +1745,7 @@ function the_champ_addon_update_notification(){
 				</script>
 				<div id="heateor_ss_twitter_callback_notification" class="error">
 					<h3>Super Socializer</h3>
-					<p><?php echo sprintf(__('Add %s in "Callback URLs" option in your Twitter app settings for Twitter login to work. For more details, check step 4 <a href="%s" target="_blank">here</a>', 'super-socializer'), home_url() . '/index.php?SuperSocializerAuth=Twitter', 'http://support.heateor.com/how-to-get-twitter-api-key-and-secret/'); ?><input type="button" onclick="heateorSsTwitterCbNotificationRead()" style="margin-left: 5px;" class="button button-primary" value="<?php _e('Okay', 'super-socializer') ?>" /></p>
+					<p><?php echo sprintf(__('Add %s in "Callback URLs" option in your Twitter app settings for Twitter login to work. For more details, check step 4 <a href="%s" target="_blank">here</a>', 'super-socializer'), home_url(), 'http://support.heateor.com/how-to-get-twitter-api-key-and-secret/'); ?><input type="button" onclick="heateorSsTwitterCbNotificationRead()" style="margin-left: 5px;" class="button button-primary" value="<?php _e('Okay', 'super-socializer') ?>" /></p>
 				</div>
 				<?php
 			}
@@ -1850,6 +1862,31 @@ function the_champ_addon_update_notification(){
 				}
 			}
 
+		}
+
+		if(version_compare('7.12.2', $currentVersion) <= 0 && isset($theChampLoginOptions['enable']) && is_array($theChampLoginOptions['providers']) && in_array('twitter', $theChampLoginOptions['providers'])){
+			if(!get_option('heateor_ss_twitter_new_callback_notification_read')){
+				?>
+				<script type="text/javascript">
+				function heateorSsTwitterNewCbNotificationRead(){
+					jQuery.ajax({
+						type: 'GET',
+						url: '<?php echo get_admin_url() ?>admin-ajax.php',
+						data: {
+							action: 'heateor_ss_twitter_new_callback_notification_read'
+						},
+						success: function(data, textStatus, XMLHttpRequest){
+							jQuery('#heateor_ss_twitter_new_callback_notification').fadeOut();
+						}
+					});
+				}
+				</script>
+				<div id="heateor_ss_twitter_new_callback_notification" class="error">
+					<h3>Super Socializer</h3>
+					<p><?php echo sprintf(__('Replace url saved in "Callback URLs" option in your Twitter app settings from %s for Twitter login to work. For more details, check step 4 <a href="%s" target="_blank">here</a>', 'super-socializer'), home_url(), 'http://support.heateor.com/how-to-get-twitter-api-key-and-secret/'); ?><input type="button" onclick="heateorSsTwitterNewCbNotificationRead()" style="margin-left: 5px;" class="button button-primary" value="<?php _e('Okay', 'super-socializer') ?>" /></p>
+				</div>
+				<?php
+			}
 		}
 
 		if(!get_option('heateor_ss_browser_notification_read')){

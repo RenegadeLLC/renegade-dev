@@ -10,12 +10,80 @@ jQuery(document).on("scroll", function(){
     }
 });
 
+//SLIDER HEIGHT SCRIPT
+
+jQuery(document).ready(function ($) {
+//alert('slider height');
+
+var slider = $('.slideshow-ct');
+
+
+if(slider){
+    
+    setSlideshowHeight();
+}
+
+
+$(window).resize(function(){
+    setSlideshowHeight();
+    
+});
+
+});
+
+function setSlideshowHeight(){
+    var slideshow_ct = $('.slideshow-ct');
+
+    $(slideshow_ct).each(function(){
+        var h_arr = new Array()
+        var slideshow = $(this).children('.slideshow');
+        var slides = $(slideshow).children('.slide-ct');
+
+        $(slides).each(function(){
+            var slide_element = $(this).children('.slide-element');
+
+            $(slide_element).each(function(){
+                var eh = $(this).height();
+                h_arr.push(eh);
+            })
+        })
+
+        var slider_height = Math.max.apply(Math,h_arr);
+
+        $(this).height(slider_height);
+
+        var content_section = $(this).parent('.content-section');
+        $(content_section).css('padding', '0px');
+
+    })
+}
+function setSliderHeight(){
+    
+
+var h_arr = new Array();
+var element = $('.slide-element');
+
+var slide_ct = $(element).parent('.slide-ct');
+$(slide_ct).parent('.slideshow-ct');
+
+
+$(element).each(function(){
+    var eh = $(this).height();
+    h_arr.push(eh);
+})
+
+
+var slider_height = Math.max.apply(Math,h_arr);
+
+$(slide_ct ).height(slider_height);
+}
+
 // Mobile specific scripts
 jQuery(document).ready(function ($) {
 
     // prevent orphans
     $("p").unorphanize();
-
+    $(".sans").unorphanize();
     // check if mobile
     // TODO: consider making this global
     var isMobile = false; //initiate as false

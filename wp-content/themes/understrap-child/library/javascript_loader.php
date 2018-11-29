@@ -60,22 +60,44 @@ function renegade_scripts() {
 	wp_enqueue_script('renegade-custom');
 
 	//EASING EQUATIONS FOR GREENSOCK PLUGIN	
-	// wp_register_script('easing', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/easing/EasePack.min.js');
+	 wp_register_script('easing', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/easing/EasePack.min.js');
 	//wp_register_script('easing', $scriptdir . 'greensock/EasePack.min.js');
-	// wp_enqueue_script('easing');
+	 wp_enqueue_script('easing');
 	
 	//CSS FOR GREENSOCK PLUGIN	
-	// wp_register_script('css', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js');
+	 wp_register_script('css', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/CSSPlugin.min.js');
 	//wp_register_script('css',$scriptdir .  'greensock/CSSPlugin.min.js');
-	// wp_enqueue_script('css');
+	wp_enqueue_script('css');
+
+	//GREENSOCK TIMELINEMAX PLUGIN
+	wp_register_script('timelineMax', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineMax.min.js');
+	//wp_register_script('tweenLite', $scriptdir . 'greensock/TimelineMax.min.js');
+	wp_enqueue_script('timelineMax');
+
+	//GREENSOCK TIMELINELIGHT PLUGIN
+	//wp_register_script('timelineLite', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js');
+	//wp_register_script('tweenLite', $scriptdir . 'greensock/TimelineLite.min.js');
+	//wp_enqueue_script('timelineMax');
+
+	//GREENSOCK TWEENMAX PLUGIN
+	wp_register_script('tweenMax', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js');
+	//wp_register_script('tweenLite', $scriptdir . 'greensock/TweenMax.min.js');
+	wp_enqueue_script('tweenMax');
+	
 
 	//GREENSOCK TWEENLITE PLUGIN
-	// wp_register_script('tweenLite', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js');
+	wp_register_script('tweenLite', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenLite.min.js');
 	//wp_register_script('tweenLite', $scriptdir . 'greensock/TweenLite.min.js');
-	// wp_enqueue_script('tweenLite');
+	wp_enqueue_script('tweenLite');
 	
 	//SCROLLTO FOR GREENSOCK PLUGIN
-	// wp_register_script('scrollTo', $scriptdir . 'greensock/ScrollToPlugin.min.js');
-	// wp_enqueue_script('scrollTo');
+	//wp_register_script('scrollTo', $scriptdir . 'greensock/ScrollToPlugin.min.js');
+	wp_register_script('scrollTo', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/plugins/ScrollToPlugin.min.js');
+	wp_enqueue_script('scrollTo');
+
+	
+	//SCROLLTO FOR GREENSOCK PLUGIN
+	wp_register_script('slider', $scriptdir . 'greensock_slider.js');
+	wp_enqueue_script('slider');
 }
 ?>

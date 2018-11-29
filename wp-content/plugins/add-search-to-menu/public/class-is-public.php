@@ -60,7 +60,7 @@ class IS_Public
     function wp_enqueue_scripts()
     {
         global  $wp_query ;
-        if ( !isset( $this->opt['do_not_load_plugin_files']['plugin-css-file'] ) && !isset( $this->opt['not_load_files']['css'] ) ) {
+        if ( ($this->ivory_search || !isset( $this->opt['do_not_load_plugin_files']['plugin-css-file'] )) && !isset( $this->opt['not_load_files']['css'] ) ) {
             wp_enqueue_style(
                 'ivory-search-styles',
                 plugins_url( '/public/css/ivory-search.css', IS_PLUGIN_FILE ),
@@ -69,7 +69,7 @@ class IS_Public
             );
         }
         
-        if ( !isset( $this->opt['do_not_load_plugin_files']['plugin-js-file'] ) && !isset( $this->opt['not_load_files']['js'] ) ) {
+        if ( ($this->ivory_search || !isset( $this->opt['do_not_load_plugin_files']['plugin-js-file'] )) && !isset( $this->opt['not_load_files']['js'] ) ) {
             wp_enqueue_script(
                 'ivory-search-scripts',
                 plugins_url( '/public/js/ivory-search.js', IS_PLUGIN_FILE ),
@@ -77,7 +77,7 @@ class IS_Public
                 IS_VERSION,
                 true
             );
-            if ( is_search() && isset( $wp_query->query_vars['_is_settings']['highlight_terms'] ) ) {
+            if ( is_search() && isset( $wp_query->query_vars['_is_settings']['highlight_terms'] ) && 0 !== $wp_query->found_posts ) {
                 wp_enqueue_script(
                     'is-highlight',
                     plugins_url( '/public/js/is-highlight.js', IS_PLUGIN_FILE ),
@@ -89,7 +89,7 @@ class IS_Public
         }
         
         
-        if ( is_search() && isset( $wp_query->query_vars['_is_settings']['highlight_terms'] ) ) {
+        if ( is_search() && isset( $wp_query->query_vars['_is_settings']['highlight_terms'] ) && 0 !== $wp_query->found_posts ) {
             wp_enqueue_script(
                 'is-highlight',
                 plugins_url( '/public/js/is-highlight.js', IS_PLUGIN_FILE ),
@@ -144,12 +144,8 @@ class IS_Public
             return '[ivory-search]';
         }
         $atts = shortcode_atts( array(
-            'id'         => 0,
-            'title'      => '',
-            'html_id'    => '',
-            'html_name'  => '',
-            'html_class' => '',
-            'output'     => 'form',
+            'id'    => 0,
+            'title' => '',
         ), $atts, 'ivory-search' );
         $id = (int) $atts['id'];
         $title = trim( $atts['title'] );
@@ -222,13 +218,7 @@ class IS_Public
     }
     
     /**
-     * Display search form.
-     *
-     * Will first attempt to locate the searchform.php file in either the child or
-     * the parent, then load it. If it doesn't exist, then the default search form
-     * will be displayed. The default search form is HTML, which will be displayed.
-     * There is a filter applied to the search form HTML in order to edit or replace
-     * it. The filter is {@see 'get_search_form'}.
+     * Displays menu search form.
      * 
      * @since 4.0
      *
@@ -240,45 +230,10 @@ class IS_Public
         /**
          * Fires before the search form is retrieved, at the start of get_search_form().
          */
-        do_action( 'pre_get_search_form' );
         do_action( 'pre_get_menu_search_form' );
-        $format = ( current_theme_supports( 'html5', 'search-form' ) ? 'html5' : 'xhtml' );
-        /**
-         * Filters the HTML format of the search form.
-         * 
-         * @param string $format The type of markup to use in the search form.
-         *                       Accepts 'html5', 'xhtml'.
-         */
-        $format = apply_filters( 'search_form_format', $format );
-        $format = apply_filters( 'menu_search_form_format', $format );
-        $search_form_template = locate_template( 'searchform.php' );
-        
-        if ( '' !== $search_form_template ) {
-            ob_start();
-            require $search_form_template;
-            $form = ob_get_clean();
-        } else {
-            
-            if ( 'html5' == $format ) {
-                $form = '<form role="search" method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
-					<label>
-						<span class="screen-reader-text">' . _x( 'Search for:', 'label' ) . '</span>
-						<input type="search" class="search-field" placeholder="' . esc_attr_x( 'Search &hellip;', 'placeholder' ) . '" value="' . get_search_query() . '" name="s" />
-					</label>
-					<input type="submit" class="search-submit" value="' . esc_attr_x( 'Search', 'submit button' ) . '" />
-				</form>';
-            } else {
-                $form = '<form role="search" method="get" id="searchform" class="searchform" action="' . esc_url( home_url( '/' ) ) . '">
-					<div>
-						<label class="screen-reader-text" for="s">' . _x( 'Search for:', 'label' ) . '</label>
-						<input type="text" value="' . get_search_query() . '" name="s" id="s" />
-						<input type="submit" id="searchsubmit" value="' . esc_attr_x( 'Search', 'submit button' ) . '" />
-					</div>
-				</form>';
-            }
-        
-        }
-        
+        remove_filter( 'get_search_form', array( IS_Public::getInstance(), 'get_search_form' ), 99 );
+        $form = get_search_form( false );
+        add_filter( 'get_search_form', array( IS_Public::getInstance(), 'get_search_form' ), 99 );
         /**
          * Filters the HTML output of the search form.
          *
@@ -286,6 +241,43 @@ class IS_Public
          */
         $result = apply_filters( 'get_menu_search_form', $form );
         $result = preg_replace( '/<\\/form>/', '<input type="hidden" name="id" value="m" /></form>', $result );
+        $menu_search_form = ( isset( $this->opt['menu_search_form'] ) ? $this->opt['menu_search_form'] : 0 );
+        
+        if ( !$menu_search_form ) {
+            $page = get_page_by_path( 'default-search-form', OBJECT, 'is_search_form' );
+            if ( !empty($page) ) {
+                $menu_search_form = $page->ID;
+            }
+        }
+        
+        
+        if ( $menu_search_form ) {
+            $is_fields = get_post_meta( $menu_search_form );
+            
+            if ( !empty($is_fields) ) {
+                
+                if ( isset( $is_fields['_is_includes'] ) ) {
+                    $temp = maybe_unserialize( $is_fields['_is_includes'][0] );
+                    if ( isset( $temp['post_type_qs'] ) && 'none' !== $temp['post_type_qs'] ) {
+                        $result = preg_replace( '/<\\/form>/', '<input type="hidden" name="post_type" value="' . $temp['post_type_qs'] . '" /></form>', $result );
+                    }
+                }
+                
+                
+                if ( isset( $is_fields['_is_settings'] ) ) {
+                    $temp = maybe_unserialize( $is_fields['_is_settings'][0] );
+                    if ( isset( $temp['disable'] ) ) {
+                        return '';
+                    }
+                    if ( isset( $temp['demo'] ) && !current_user_can( 'administrator' ) ) {
+                        return '';
+                    }
+                }
+            
+            }
+        
+        }
+        
         if ( null === $result ) {
             $result = $form;
         }
@@ -309,23 +301,23 @@ class IS_Public
                 $items .= '<li class="gsc-cse-search-menu">' . $this->opt['menu_gcse'] . '</li>';
             } else {
                 
-                if ( isset( $this->opt['add_search_to_menu_gcse'] ) && '' != $this->opt['add_search_to_menu_gcse'] ) {
+                if ( !$this->ivory_search && isset( $this->opt['add_search_to_menu_gcse'] ) && '' != $this->opt['add_search_to_menu_gcse'] ) {
                     $items .= '<li class="gsc-cse-search-menu">' . $this->opt['add_search_to_menu_gcse'] . '</li>';
                 } else {
-                    $search_class = ( isset( $this->opt['add_search_to_menu_classes'] ) ? $this->opt['add_search_to_menu_classes'] . ' astm-search-menu is-menu ' : 'astm-search-menu is-menu ' );
+                    $search_class = ( !$this->ivory_search && isset( $this->opt['add_search_to_menu_classes'] ) ? $this->opt['add_search_to_menu_classes'] . ' astm-search-menu is-menu ' : 'astm-search-menu is-menu ' );
                     $search_class = ( isset( $this->opt['menu_classes'] ) ? $this->opt['menu_classes'] . ' astm-search-menu is-menu ' : $search_class );
                     
                     if ( isset( $this->opt['menu_style'] ) ) {
                         $search_class .= $this->opt['menu_style'];
                     } else {
-                        $search_class .= ( isset( $this->opt['add_search_to_menu_style'] ) ? $this->opt['add_search_to_menu_style'] : 'default' );
+                        $search_class .= ( !$this->ivory_search && isset( $this->opt['add_search_to_menu_style'] ) ? $this->opt['add_search_to_menu_style'] : 'default' );
                     }
                     
                     
                     if ( isset( $this->opt['menu_title'] ) ) {
                         $title = $this->opt['menu_title'];
                     } else {
-                        $title = ( isset( $this->opt['add_search_to_menu_title'] ) ? $this->opt['add_search_to_menu_title'] : '' );
+                        $title = ( !$this->ivory_search && isset( $this->opt['add_search_to_menu_title'] ) ? $this->opt['add_search_to_menu_title'] : '' );
                     }
                     
                     $items .= '<li class="' . esc_attr( $search_class ) . '">';
@@ -371,23 +363,23 @@ class IS_Public
             $items .= '<div class="astm-search-menu-wrapper is-menu-wrapper"><div class="gsc-cse-search-menu">' . $this->opt['menu_gcse'] . '</div></div>';
         } else {
             
-            if ( isset( $this->opt['add_search_to_menu_gcse'] ) && $this->opt['add_search_to_menu_gcse'] != '' ) {
+            if ( !$this->ivory_search && isset( $this->opt['add_search_to_menu_gcse'] ) && $this->opt['add_search_to_menu_gcse'] != '' ) {
                 $items .= '<div class="astm-search-menu-wrapper is-menu-wrapper"><div class="gsc-cse-search-menu">' . $this->opt['add_search_to_menu_gcse'] . '</div></div>';
             } else {
-                $search_class = ( isset( $this->opt['add_search_to_menu_classes'] ) ? $this->opt['add_search_to_menu_classes'] . ' astm-search-menu is-menu ' : 'astm-search-menu is-menu ' );
+                $search_class = ( !$this->ivory_search && isset( $this->opt['add_search_to_menu_classes'] ) ? $this->opt['add_search_to_menu_classes'] . ' astm-search-menu is-menu ' : 'astm-search-menu is-menu ' );
                 $search_class = ( isset( $this->opt['menu_classes'] ) ? $this->opt['menu_classes'] . ' astm-search-menu is-menu ' : $search_class );
                 
                 if ( isset( $this->opt['menu_style'] ) ) {
                     $search_class .= $this->opt['menu_style'];
                 } else {
-                    $search_class .= ( isset( $this->opt['add_search_to_menu_style'] ) ? $this->opt['add_search_to_menu_style'] : 'default' );
+                    $search_class .= ( !$this->ivory_search && isset( $this->opt['add_search_to_menu_style'] ) ? $this->opt['add_search_to_menu_style'] : 'default' );
                 }
                 
                 
                 if ( isset( $this->opt['menu_title'] ) ) {
                     $title = $this->opt['menu_title'];
                 } else {
-                    $title = ( isset( $this->opt['add_search_to_menu_title'] ) ? $this->opt['add_search_to_menu_title'] : '' );
+                    $title = ( !$this->ivory_search && isset( $this->opt['add_search_to_menu_title'] ) ? $this->opt['add_search_to_menu_title'] : '' );
                 }
                 
                 $items .= '<div class="astm-search-menu-wrapper is-menu-wrapper"><div>';
@@ -409,7 +401,7 @@ class IS_Public
                 
                 if ( !isset( $this->opt['menu_style'] ) || $this->opt['menu_style'] !== 'popup' ) {
                     $items .= $this->get_menu_search_form( false );
-                    if ( isset( $this->opt['add_search_to_menu_close_icon'] ) && $this->opt['add_search_to_menu_close_icon'] || isset( $this->opt['menu_close_icon'] ) && $this->opt['menu_close_icon'] ) {
+                    if ( isset( $this->opt['add_search_to_menu_close_icon'] ) && $this->opt['add_search_to_menu_close_icon'] && !$this->ivory_search || isset( $this->opt['menu_close_icon'] ) && $this->opt['menu_close_icon'] ) {
                         $items .= '<div class="search-close"></div>';
                     }
                 }
@@ -447,22 +439,9 @@ class IS_Public
             $check_value = ( isset( $this->opt['menu_search_form'] ) ? $this->opt['menu_search_form'] : 0 );
             
             if ( !$check_value ) {
-                $attachment = array();
-                
-                if ( isset( $this->opt['menu_posts'] ) ) {
-                    $query->set( 'post_type', $this->opt['menu_posts'] );
-                    $attachment = $this->opt['menu_posts'];
-                } else {
-                    
-                    if ( !$this->ivory_search && isset( $this->opt['add_search_to_menu_posts'] ) ) {
-                        $query->set( 'post_type', $this->opt['add_search_to_menu_posts'] );
-                        $attachment = $this->opt['add_search_to_menu_posts'];
-                    }
-                
-                }
-                
-                if ( !empty($attachment) && in_array( 'attachment', $attachment ) ) {
-                    $query->set( 'post_status', array( 'publish', 'inherit' ) );
+                $page = get_page_by_path( 'default-search-form', OBJECT, 'is_search_form' );
+                if ( !empty($page) ) {
+                    $is_id = $page->ID;
                 }
             }
         
@@ -504,6 +483,9 @@ class IS_Public
                                     foreach ( $temp as $inc_key => $inc_val ) {
                                         if ( is_array( $inc_val ) && !empty($inc_val) || '' !== $inc_val ) {
                                             switch ( $inc_key ) {
+                                                case 'post__in':
+                                                    $query->set( $inc_key, array_values( $inc_val ) );
+                                                    break;
                                                 case 'post_type':
                                                     
                                                     if ( !isset( $q['post_type'] ) || NULL == $q['post_type'] ) {
@@ -758,6 +740,7 @@ class IS_Public
         
         $searchand = '';
         $search = " AND ( ";
+        $OR = '';
         foreach ( (array) $q['search_terms'] as $term ) {
             $term = $f . $wpdb->esc_like( $term ) . $l;
             $OR = '';
@@ -831,14 +814,11 @@ class IS_Public
             $search .= ")";
             $searchand = " {$terms_relation_type} ";
         }
-        $search = apply_filters( 'is_posts_search_terms', $search, $q['search_terms'] );
-        
-        if ( '' !== $OR ) {
-            $search .= ")";
-        } else {
-            $search = "";
+        if ( '' === $OR ) {
+            $search = " AND ( 0 ";
         }
-        
+        $search = apply_filters( 'is_posts_search_terms', $search, $q['search_terms'] );
+        $search .= ")";
         if ( isset( $q['post_type'] ) && NULL !== $q['post_type'] && !is_array( $q['post_type'] ) ) {
             $q['post_type'] = array( $q['post_type'] );
         }
@@ -912,6 +892,9 @@ class IS_Public
         }
         $woo_sku = false;
         $exc_custom_fields = false;
+        if ( class_exists( 'WooCommerce' ) && is_fs()->is_plan_or_trial__premium_only( 'pro_plus' ) ) {
+            $woo_sku = ( isset( $q['_is_includes']['woo']['sku'] ) ? true : false );
+        }
         if ( isset( $q['_is_includes']['custom_field'] ) || $exc_custom_fields || $woo_sku ) {
             $join .= " LEFT JOIN {$wpdb->postmeta} pm ON ({$wpdb->posts}.ID = pm.post_id) ";
         }
@@ -968,7 +951,7 @@ class IS_Public
             echo  '</style>' ;
         } else {
             
-            if ( isset( $this->opt['add_search_to_menu_css'] ) && $this->opt['add_search_to_menu_css'] != '' ) {
+            if ( !$this->ivory_search && isset( $this->opt['add_search_to_menu_css'] ) && $this->opt['add_search_to_menu_css'] != '' ) {
                 echo  '<style type="text/css" media="screen">' ;
                 echo  '/* Add search to menu custom CSS code */' ;
                 echo  wp_specialchars_decode( esc_html( $this->opt['add_search_to_menu_css'] ), ENT_QUOTES ) ;

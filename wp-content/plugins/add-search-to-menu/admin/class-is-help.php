@@ -42,7 +42,7 @@ class IS_Help {
 
 				$this->screen->add_help_tab( array(
 					'id'	  => 'edit_settings',
-					'title'   => __( 'Settings', 'ivory-search' ),
+					'title'   => __( 'Options', 'ivory-search' ),
 					'content' => $this->content( 'edit_settings' ) ) );
 
 				$this->sidebar();
@@ -56,7 +56,7 @@ class IS_Help {
 
 				$this->screen->add_help_tab( array(
 					'id'	  => 'search_to_menu',
-					'title'	  => __( 'Search To Menu', 'ivory-search' ),
+					'title'	  => __( 'Menu Search', 'ivory-search' ),
 					'content' => $this->content( 'search_to_menu' ) ) );
 
 				$this->screen->add_help_tab( array(
@@ -84,7 +84,7 @@ class IS_Help {
 		$content['edit_overview'] .= '<p>' . __( "<strong>Title</strong> is the title of a search form. This title is only used for labeling a search form, and can be edited.", 'ivory-search' ) . '</p>';
 		$content['edit_overview'] .= '<p>' . __( "<strong>Includes</strong> provides options to control which content on the site is searchable.", 'ivory-search' ) . '</p>';
 		$content['edit_overview'] .= '<p>' . __( "<strong>Excludes</strong> provides options to exclude specific content from the search on the site.", 'ivory-search' ) . '</p>';
-		$content['edit_overview'] .= '<p>' . __( "<strong>Settings</strong> provides a place where you can customize overall behavior of this search form.", 'ivory-search' ) . '</p>';
+		$content['edit_overview'] .= '<p>' . __( "<strong>Options</strong> provides a place where you can customize overall behavior of this search form.", 'ivory-search' ) . '</p>';
 
 		$content['includes'] = '<p>' . __( "Control here which content you want to make searchable using this search form.", 'ivory-search' ) . '</p>';
 
@@ -93,7 +93,7 @@ class IS_Help {
 		$content['edit_settings'] = '<p>' . __( "Control here the overall behaviour of this search form.", 'ivory-search' ) . '</p>';
 
 		$content['settings_overview'] = '<p>' . __( "On this screen, you can manage search added in the site navgation menu and configure settings that will affect all search forms and search functionality on the site. The settings screen comprised of the following sections:", 'ivory-search' ) . '</p>';
-		$content['settings_overview'] .= '<p>' . __( "<strong>Search To Menu</strong> provides a place where you can customize the behavior of search form added in the site navgation menu.", 'ivory-search' ) . '</p>';
+		$content['settings_overview'] .= '<p>' . __( "<strong>Menu Search</strong> provides a place where you can customize the behavior of search form added in the site navgation menu.", 'ivory-search' ) . '</p>';
 		$content['settings_overview'] .= '<p>' . __( "<strong>Settings</strong> provides options to configure sitewide search functionality.", 'ivory-search' ) . '</p>';
 
 		$content['search_to_menu'] = '<p>' . __( "Cofigure the options in this section to manage search added in the site navigation menu.", 'ivory-search' ) . '</p>';
@@ -114,11 +114,10 @@ class IS_Help {
 		$this->screen->set_help_sidebar( $content );
 	}
 
-	public static function help_tooltip( $title, $content ) { ?>
-		<span class="is-tooltip">
-			<i class="dashicons dashicons-editor-help is-help"></i>
-			<span class="is-tip">
-				<strong><?php echo $title; ?></strong>
+	public static function help_info( $content ) { ?>
+		<span class="is-help">
+			<i class="dashicons dashicons-warning"></i>
+			<span class="is-info">
 				<?php echo $content; ?>
 			</span>
 		</span>

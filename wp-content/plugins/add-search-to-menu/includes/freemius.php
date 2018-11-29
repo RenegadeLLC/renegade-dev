@@ -18,18 +18,19 @@ function is_fs()
         // Include Freemius SDK.
         require_once dirname( __FILE__ ) . '/freemius/start.php';
         $is_fs = fs_dynamic_init( array(
-            'id'             => '2086',
-            'slug'           => 'add-search-to-menu',
-            'type'           => 'plugin',
-            'public_key'     => 'pk_e05b040b84ff5014d0f0955127743',
-            'is_premium'     => false,
-            'has_addons'     => false,
-            'has_paid_plans' => true,
-            'menu'           => array(
+            'id'              => '2086',
+            'slug'            => 'add-search-to-menu',
+            'type'            => 'plugin',
+            'public_key'      => 'pk_e05b040b84ff5014d0f0955127743',
+            'is_premium'      => false,
+            'has_addons'      => false,
+            'has_paid_plans'  => true,
+            'has_affiliation' => 'selected',
+            'menu'            => array(
             'slug'    => 'ivory-search',
             'support' => false,
         ),
-            'is_live'        => true,
+            'is_live'         => true,
         ) );
     }
     

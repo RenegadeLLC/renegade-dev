@@ -128,6 +128,7 @@ class IS_Loader {
 	private function public_hooks() {
 
 		$public = IS_Public::getInstance();
+
 		add_action( 'init', array( $public, 'init' ) );
 		add_filter( 'get_search_form', array( $public, 'get_search_form' ), 99 );
 
@@ -152,7 +153,6 @@ class IS_Loader {
 			add_filter( 'wp_nav_menu_items', array( $public, 'wp_nav_menu_items' ), 99, 2 );
 		}
 
-		/* Requests distinct results */
 		add_filter( 'posts_distinct_request', array( $public, 'posts_distinct_request' ) );
 		add_filter( 'posts_join' , array( $public, 'posts_join' ) );
 		add_filter( 'posts_search', array( $public, 'posts_search' ), 501, 2 );

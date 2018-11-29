@@ -45,19 +45,58 @@
 				}
 			}
 		} );
+
+		$('.form-table .actions a.expand').click( function() {
+			$('.form-table .actions a.expand').hide();
+			$('.form-table .ui-accordion-content, .form-table .actions a.collapse').show();
+			$('.form-table .ui-accordion-content').addClass('ui-accordion-content-active');
+			$('.form-table h3').addClass('ui-state-active');
+			return false;
+		} );
 		
-		$( '#search-form-editor' ).on( 'change', function() {
-			if ( ! $( '.search-form-editor-panel .is-warning' ).length ) {
-				$( '.search-form-editor-panel' ).prepend('<div class="is-warning">Settings have changed, you should save them!</div>')
+		$('.form-table .actions a.collapse').click( function() {
+			$('.form-table .actions a.expand').show();
+			$('.form-table .ui-accordion-content, .form-table .actions a.collapse').hide();
+			$('.form-table .ui-accordion-content').removeClass('ui-accordion-content-active');
+			$('.form-table h3').removeClass('ui-state-active');
+			return false;
+		} );
+
+		$( ".form-table" ).accordion( {
+			collapsible: true,
+			heightStyle: "content",
+			icons: false,
+		} );
+
+		$('#search-body option').mousedown(function(e) {
+			if ($(this).attr('selected')) {
+				$(this).removeAttr('selected');
+				return false;
 			}
 		} );
 
-		$( '#search-form-editor-tabs' ).focusin( function( event ) {
-			$( '#search-form-editor .keyboard-interaction' ).css(
-				'visibility', 'visible' );
-		} ).focusout( function( event ) {
-			$( '#search-form-editor .keyboard-interaction' ).css(
-				'visibility', 'hidden' );
+		$( ".col-title .list-search" ).keyup(function() {
+			var search_val = $(this).val().toLowerCase();
+			var search_sel = $(this).parent().parent().find('select option');
+			$( search_sel ).each(function() {
+				if ( $(this).text().toLowerCase().indexOf( search_val ) === -1 ) {
+					$(this).fadeOut( 'fast' );
+				} else {
+					$(this).fadeIn( 'fast' );
+				}
+			} );
+		} );
+
+		$( ".list-search.wide" ).keyup(function() {
+			var search_val = $(this).val().toLowerCase();
+			var search_sel = $(this).parent().find('select option');
+			$( search_sel ).each(function() {
+				if ( $(this).text().toLowerCase().indexOf( search_val ) === -1 ) {
+					$(this).fadeOut( 'fast' );
+				} else {
+					$(this).fadeIn( 'fast' );
+				}
+			} );
 		} );
 
 		if ( '' === $( '#title' ).val() ) {
@@ -66,11 +105,30 @@
 
 		ivory_search.titleHint();
 
-		$( window ).on( 'beforeunload', function( event ) {
-			console.log('beforeunload');
-			var changed = false;
+		$('#search-form-editor .ind-status').each(function(){
+			var ind_class = $(this).attr('class').split(' ')[1];
+			if ( ind_class !== null ) {
+				$('.form-table h3 .indicator.'+ind_class).fadeIn();
+			}
+		} );
 
-			$( '#is-admin-form-element :input[type!="hidden"]' ).each( function() {
+		$('#search-form-editor').on('keyup change paste', 'input, select, textarea', function( e ){
+			var ind_class = $(e.target).attr("class");
+			if ( ind_class !== null ) {
+				$('.form-table h3 .indicator.'+ind_class).fadeOut().fadeIn();
+			}
+		} );
+
+		var changed = false;
+
+		$(document).on("submit", "form", function(event){
+			changed = false;
+			$(window).off('beforeunload');
+		} );
+
+		$( window ).on( 'beforeunload', function( event ) {
+
+			$( '#search-body :input[type!="hidden"]' ).each( function() {
 				if ( $( this ).is( ':checkbox, :radio' ) ) {
 					if ( this.defaultChecked != $( this ).is( ':checked' ) ) {
 						changed = true;

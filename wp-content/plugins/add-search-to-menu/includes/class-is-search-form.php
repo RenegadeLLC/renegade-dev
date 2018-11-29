@@ -13,8 +13,6 @@ class IS_Search_Form {
 	private $is_locale;
 	private $properties = array();
 	private $unit_tag;
-	private $responses_count = 0;
-	private $shortcode_atts = array();
 
 	private function __construct( $post = null ) {
 		$post = get_post( $post );
@@ -259,203 +257,29 @@ class IS_Search_Form {
 	/* Generating Form HTML */
 
 	public function form_html( $args = '' ) {
-		$args = wp_parse_args( $args, array(
-			'html_id'    => '',
-			'html_name'  => '',
-			'html_class' => '',
-			'output'     => 'form',
-		) );
 
-		$this->shortcode_atts = $args;
+		do_action( 'pre_is_get_search_form' );
 
-		if ( 'raw_form' == $args['output'] ) {
-			return '<pre class="is-raw-form"><code>'
-				. esc_html( $this->prop( 'form' ) ) . '</code></pre>';
-		}
+		remove_filter( 'get_search_form', array( IS_Public::getInstance(), 'get_search_form' ), 99 );
+		$form = get_search_form( false );
+		add_filter( 'get_search_form', array( IS_Public::getInstance(), 'get_search_form' ), 99 );
 
-		$this->unit_tag = self::get_unit_tag( $this->id );
+		$result = apply_filters( 'is_search_form', $form );
 
-		$lang_tag = str_replace( '_', '-', $this->locale );
-
-		if ( preg_match( '/^([a-z]+-[a-z]+)-/i', $lang_tag, $matches ) ) {
-			$lang_tag = $matches[1];
-		}
-
-		$html = '';
-		$html = apply_filters( 'is_before_search_form', $html );
-
-		$html .= sprintf( '<div %s>',
-			IS_Admin_Public::format_atts( array(
-				'role' => 'form',
-				'class' => 'ivory-search search-form',
-				'id' => $this->unit_tag,
-				( get_option( 'html_type' ) == 'text/html' ) ? 'lang' : 'xml:lang'
-					=> $lang_tag,
-				'dir' => is_rtl( $this->locale ) ? 'rtl' : 'ltr',
-			) )
-		);
-
-		$html .= "\n" . $this->screen_reader_response() . "\n";
-
-		$url = $this->get_request_uri();
-
-		if ( $frag = strstr( $url, '#' ) ) {
-			$url = substr( $url, 0, -strlen( $frag ) );
-		}
-
-		$url .= '#' . $this->unit_tag;
-
-		$url = apply_filters( 'is_form_action_url', $url );
-
-		$id_attr = apply_filters( 'is_form_id_attr',
-			preg_replace( '/[^A-Za-z0-9:._-]/', '', $args['html_id'] ) );
-
-		$name_attr = apply_filters( 'is_form_name_attr',
-			preg_replace( '/[^A-Za-z0-9:._-]/', '', $args['html_name'] ) );
-
-		$class = 'ivory-search-form search-form searchform';
-
-		if ( $args['html_class'] ) {
-			$class .= ' ' . $args['html_class'];
-		}
-
-		$class = explode( ' ', $class );
-		$class = array_map( 'sanitize_html_class', $class );
-		$class = array_filter( $class );
-		$class = array_unique( $class );
-		$class = implode( ' ', $class );
-		$class = apply_filters( 'is_form_class_attr', $class );
-
-		$enctype = apply_filters( 'is_form_enctype', '' );
-		$autocomplete = apply_filters( 'is_form_autocomplete', '' );
-
-		$atts = array(
-			'role'         => 'search',
-			'action'       => esc_url( home_url( '/' ) ),
-			'method'       => 'get',
-			'class'        => $class,
-			'id'	       => 'searchform',
-			'enctype'      => $this->enctype_value( $enctype ),
-			'autocomplete' => $autocomplete,
-		);
-
-		if ( '' !== $id_attr ) {
-			$atts['id'] = $id_attr;
-		}
-
-		if ( '' !== $name_attr ) {
-			$atts['name'] = $name_attr;
-		}
-
-		$atts = IS_Admin_Public::format_atts( $atts );
-
-		$html .= sprintf( '<form %s>', $atts ) . "\n";
-
-		$format = current_theme_supports( 'html5', 'search-form' ) ? 'html5' : 'xhtml';
-
-		if ( 'html5' == $format ) {
-			$html .= '<label>
-					<span class="screen-reader-text">' . _x( 'Search for:', 'label' ) . '</span>
-					<input type="search" class="search-field" placeholder="' . esc_attr_x( 'Search &hellip;', 'placeholder' ) . '" value="' . get_search_query() . '" name="s" />
-				</label>
-				<input type="submit" class="search-submit" id="searchsubmit" value="'. esc_attr_x( 'Search', 'submit button' ) .'" />';
-		} else {
-			$html .= '<label class="screen-reader-text" for="s">' . _x( 'Search for:', 'label' ) . '</label>
-					<input type="text" value="' . get_search_query() . '" name="s" id="s" />
-					<input type="submit" class="search-submit" id="searchsubmit" value="'. esc_attr_x( 'Search', 'submit button' ) .'" />';
-		}
-
-		$html .= $this->form_hidden_fields();
-
-		if ( ! $this->responses_count ) {
-			$html .= $this->form_response_output();
-		}
-
-		$html = apply_filters( 'is_search_form', $html );
-
-		$html .= '</form>';
-		$html .= '</div>';
-
-		$html = apply_filters( 'is_after_search_form', $html );
-
-		return $html;
-	}
-
-	private function form_hidden_fields() {
-		$hidden_fields = array(
-			'id' => $this->id(),
-		);
+		$result = preg_replace('/<\/form>/', '<input type="hidden" name="id" value="' . $args['id'] . '" /></form>', $result );
 
 		$_includes = $this->prop( '_is_includes' );
 
 		if ( isset( $_includes['post_type_qs'] ) && 'none' !== $_includes['post_type_qs'] ) {
-			$hidden_fields = array_merge ( $hidden_fields, array( 'post_type' => $_includes['post_type_qs'] ) );
+			$result = preg_replace('/<\/form>/', '<input type="hidden" name="post_type" value="' . $_includes['post_type_qs'] . '" /></form>', $result );
 		}
 
-		$hidden_fields += (array) apply_filters(
-			'is_form_hidden_fields', array() );
-
-		$content = '';
-
-		foreach ( $hidden_fields as $name => $value ) {
-			$content .= sprintf(
-				'<input type="hidden" name="%1$s" value="%2$s" />',
-				esc_attr( $name ), esc_attr( $value ) ) . "\n";
+		if ( null === $result ) {
+			$result = $form;
 		}
 
-		return '<div style="display: none;">' . "\n" . $content . '</div>' . "\n";
+		return $result;
 	}
-
-	public function form_response_output() {
-		$class = 'is-response-output';
-		$role = '';
-		$content = '';
-
-		if ( $this->is_posted() ) { // Post response output for non-AJAX
-			$role = 'alert';
-		} else {
-			$class .= ' is-display-none';
-		}
-
-		$atts = array(
-			'class' => trim( $class ),
-			'role' => trim( $role ),
-		);
-
-		$atts = IS_Admin_Public::format_atts( $atts );
-
-		$output = sprintf( '<div %1$s>%2$s</div>',
-			$atts, esc_html( $content ) );
-
-		$output = apply_filters( 'is_form_response_output',
-			$output, $class, $content, $this );
-
-		$this->responses_count += 1;
-
-		return $output;
-	}
-
-	public function screen_reader_response() {
-		$class = 'screen-reader-response';
-		$role = '';
-		$content = '';
-
-		if ( $this->is_posted() ) { // Post response output for non-AJAX
-			$role = 'alert';
-		}
-
-		$atts = array(
-			'class' => trim( $class ),
-			'role' => trim( $role ) );
-
-		$atts = IS_Admin_Public::format_atts( $atts );
-
-		$output = sprintf( '<div %1$s>%2$s</div>',
-			$atts, $content );
-
-		return $output;
-	}
-
 
 	/* Settings */
 
@@ -620,39 +444,4 @@ class IS_Search_Form {
 		return $output;
 	}
 
-	function get_request_uri() {
-		static $request_uri = '';
-
-		if ( empty( $request_uri ) ) {
-			$request_uri = add_query_arg( array() );
-		}
-
-		return esc_url_raw( $request_uri );
-	}
-
-	function enctype_value( $enctype ) {
-		$enctype = trim( $enctype );
-
-		if ( empty( $enctype ) ) {
-			return '';
-		}
-
-		$valid_enctypes = array(
-			'application/x-www-form-urlencoded',
-			'multipart/form-data',
-			'text/plain',
-		);
-
-		if ( in_array( $enctype, $valid_enctypes ) ) {
-			return $enctype;
-		}
-
-		$pattern = '%^enctype="(' . implode( '|', $valid_enctypes ) . ')"$%';
-
-		if ( preg_match( $pattern, $enctype, $matches ) ) {
-			return $matches[1]; // for back-compat
-		}
-
-		return '';
-	}
 }

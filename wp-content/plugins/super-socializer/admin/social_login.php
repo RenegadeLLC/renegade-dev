@@ -215,7 +215,7 @@
 							<br/>
 							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Callback URL</strong> option at the link mentioned', 'super-socializer'); ?></span>
 							<br/>
-							<strong style="color: #14ACDF"><?php echo esc_url(home_url().'/index.php?SuperSocializerAuth=Twitter'); ?></strong>
+							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
 							</div>
 							</td>
 						</tr>
@@ -241,7 +241,7 @@
 							<br/>
 							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Callback URL</strong> option at the link mentioned', 'super-socializer'); ?></span>
 							<br/>
-							<strong style="color: #14ACDF"><?php echo esc_url(home_url().'/index.php?SuperSocializerAuth=Twitter'); ?></strong>
+							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
 							</div>
 							</td>
 						</tr>

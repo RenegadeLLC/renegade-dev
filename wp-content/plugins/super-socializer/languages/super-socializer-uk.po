@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Super Socializer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-21 16:51+0530\n"
-"PO-Revision-Date: 2018-08-21 16:51+0530\n"
+"POT-Creation-Date: 2018-09-06 23:21+0530\n"
+"PO-Revision-Date: 2018-09-06 23:21+0530\n"
 "Last-Translator: Team Heateor <hello@heateor.com>\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -17,19 +17,19 @@ msgstr ""
 "%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../super_socializer.php:389
+#: ../super_socializer.php:392
 msgid "Problem fetching access token: "
 msgstr ""
 
-#: ../super_socializer.php:393 ../super_socializer.php:407
+#: ../super_socializer.php:396 ../super_socializer.php:410
 msgid "Facebook SDK returned an error: "
 msgstr ""
 
-#: ../super_socializer.php:403
+#: ../super_socializer.php:406
 msgid "Graph returned an error: "
 msgstr ""
 
-#: ../super_socializer.php:569
+#: ../super_socializer.php:572
 msgid ""
 "cURL is not enabled at your website server. Please contact your website "
 "server administrator to enable it."
@@ -37,7 +37,7 @@ msgstr ""
 "Curl не включений у вашому веб-сайті. Вам, можливо, буде потрібно звернутися "
 "до адміністратора вашого сайту, щоб включити це."
 
-#: ../super_socializer.php:596
+#: ../super_socializer.php:599
 #, fuzzy, php-format
 msgid ""
 "Enter exactly the following url in <strong>Website</strong> option in your "
@@ -46,7 +46,7 @@ msgstr ""
 "Введіть діюче посилання для <strong> сайту </ strong> та <strong> зворотне "
 "посилання </ strong> у вашому додатку Твіттера (дивіться крок 3% s)"
 
-#: ../super_socializer.php:599
+#: ../super_socializer.php:602
 #, fuzzy, php-format
 msgid ""
 "Enter exactly the following url in <strong>Callback URLs</strong> option in "
@@ -55,7 +55,7 @@ msgstr ""
 "Введіть діюче посилання для <strong> сайту </ strong> та <strong> зворотне "
 "посилання </ strong> у вашому додатку Твіттера (дивіться крок 3% s)"
 
-#: ../super_socializer.php:602
+#: ../super_socializer.php:605
 msgid ""
 "Make sure cURL is enabled at your website server. You may need to contact "
 "the server administrator of your website to verify this"
@@ -64,7 +64,7 @@ msgstr ""
 "буде потрібно звернутися до адміністратора сервера вашого сайту, щоб "
 "переконатися в цьому."
 
-#: ../super_socializer.php:603
+#: ../super_socializer.php:606
 #, php-format
 msgid ""
 "Make sure that \"Enable Callback Locking\" option is disabled. See step 4 %s"
@@ -72,71 +72,71 @@ msgstr ""
 "Переконайтеся, що «Включити Блокування зворотного виклику» параметр "
 "відключений. Дивіться крок 4% s"
 
-#: ../super_socializer.php:869 ../helper.php:963
+#: ../super_socializer.php:872 ../helper.php:963
 msgid "Please verify your email address to login."
 msgstr "Будь ласка, підтвердіть свою адресу електронної пошти."
 
-#: ../super_socializer.php:869
+#: ../super_socializer.php:872
 msgid "Your email has been verified. Now you can login to your account"
 msgstr ""
 "Ваша електронна адреса була перевірена. Тепер ви можете увійти до свого "
 "облікового запису"
 
-#: ../super_socializer.php:873
+#: ../super_socializer.php:876
 msgid "Notification"
 msgstr "Повідомлення"
 
-#: ../super_socializer.php:891 ../admin/social_login.php:746
+#: ../super_socializer.php:894 ../admin/social_login.php:746
 msgid "Email required"
 msgstr "Електронна адреса (обо'язково)"
 
-#: ../super_socializer.php:894
+#: ../super_socializer.php:897
 msgid "Please check your email inbox to complete the registration."
 msgstr "Будь ласка, перевірте вашу поштову скриньку для завершення реєстрації."
 
-#: ../super_socializer.php:901 ../helper.php:503
+#: ../super_socializer.php:904 ../helper.php:503
 msgid "Enter your LiveJournal username"
 msgstr "Введіть ваше ім'я користувача LiveJournal"
 
-#: ../super_socializer.php:974
+#: ../super_socializer.php:977
 msgid "Leave a reply"
 msgstr "Залишити коментар"
 
-#: ../super_socializer.php:986 ../inc/social_sharing.php:237
+#: ../super_socializer.php:989 ../inc/social_sharing.php:237
 msgid "Shares"
 msgstr "Поширили:"
 
-#: ../super_socializer.php:986 ../inc/social_sharing.php:237
+#: ../super_socializer.php:989 ../inc/social_sharing.php:237
 msgid "Share"
 msgstr "Поділитися"
 
-#: ../super_socializer.php:986
+#: ../super_socializer.php:989
 #, fuzzy
 msgid "Link copied."
 msgstr "LinkedIn"
 
-#: ../super_socializer.php:1225
+#: ../super_socializer.php:1228
 msgid "Super Socializer - General Options"
 msgstr "Super Socializer - Загальні Параметри"
 
-#: ../super_socializer.php:1225 ../admin/general_options.php:11
+#: ../super_socializer.php:1228 ../admin/general_options.php:11
 #: ../admin/social_commenting.php:43
 msgid "General Options"
 msgstr "Загальні параметри"
 
-#: ../super_socializer.php:1293 ../helper.php:885
+#: ../super_socializer.php:1296 ../helper.php:885
 msgid "Social Avatar"
 msgstr "Соціальний Аватар"
 
-#: ../super_socializer.php:1296
+#: ../super_socializer.php:1299
 msgid "Small Avatar Url"
 msgstr "Посилання для маленького аватара"
 
-#: ../super_socializer.php:1300
+#: ../super_socializer.php:1303
 msgid "Large Avatar Url"
 msgstr "Посилання для великого аватара"
 
-#: ../super_socializer.php:1304 ../helper.php:888
+#: ../super_socializer.php:1307 ../helper.php:888
 msgid ""
 "Do not fetch and update social avatar from my profile, next time I Social "
 "Login"
@@ -144,13 +144,13 @@ msgstr ""
 "Не отримувати і оновлювати соціальний аватар з мого профілю, в наступний "
 "раз  коли я використовую вхід через соцмережі"
 
-#: ../super_socializer.php:1308 ../helper.php:889
+#: ../super_socializer.php:1311 ../helper.php:889
 msgid "Update social avatar, next time I Social Login"
 msgstr ""
 "Оновлення аватара соцмереж наступного разу при використанні входу через "
 "соцмережі"
 
-#: ../super_socializer.php:1381 ../super_socializer.php:1973
+#: ../super_socializer.php:1384 ../super_socializer.php:2010
 msgid ""
 "Your browser is blocking some features of this website. Please follow the "
 "instructions at {support_url} to unblock these."
@@ -158,75 +158,75 @@ msgstr ""
 "Ваш браузер блокує деякі функції даного веб-сайту. Будь ласка, дотримуйтесь "
 "інструкцій в {support_url}, щоб розблокувати функції."
 
-#: ../super_socializer.php:1387
+#: ../super_socializer.php:1390
 msgid "Login with your Social ID"
 msgstr "Увійти через соціальний аккаунт"
 
-#: ../super_socializer.php:1388
+#: ../super_socializer.php:1391
 msgid "Email you entered is already registered or invalid"
 msgstr "Електронна пошта, яку ви ввели, вже зареєстрована або недійсна"
 
-#: ../super_socializer.php:1393
+#: ../super_socializer.php:1396
 msgid "Please enter a valid email address. You might be required to verify it"
 msgstr ""
 "Будь ласка, введіть дійсну адресу електронної пошти. Вам, можливо, буде "
 "потрібно перевірити його"
 
-#: ../super_socializer.php:1397 ../super_socializer.php:1897
+#: ../super_socializer.php:1400 ../super_socializer.php:1934
 msgid "Link your social account to login to your account at this website"
 msgstr ""
 "Введіть посилання на ваш аккаунт в соціальних мережах щоб увійти в обліковий "
 "запис на цьому сайті"
 
-#: ../super_socializer.php:1617
+#: ../super_socializer.php:1629
 msgid ""
 "Update \"Facebook Comments Moderation\" add-on for compatibility with "
 "current version of Super Socialzer"
 msgstr ""
 
-#: ../super_socializer.php:1626
+#: ../super_socializer.php:1638
 msgid ""
 "Update \"Facebook Comments Notifier\" add-on for compatibility with current "
 "version of Super Socialzer"
 msgstr ""
 
-#: ../super_socializer.php:1635
+#: ../super_socializer.php:1647
 msgid ""
 "Update \"Social Login Buttons\" add-on for compatibility with current "
 "version of Super Socialzer"
 msgstr ""
 
-#: ../super_socializer.php:1644
+#: ../super_socializer.php:1656
 msgid ""
 "Update \"Social Share myCRED Integration\" add-on for maximum compatibility "
 "with current version of Super Socialzer"
 msgstr ""
 
-#: ../super_socializer.php:1653
+#: ../super_socializer.php:1665
 msgid ""
 "Update \"Social Login myCRED Integration\" add-on for maximum compatibility "
 "with current version of Super Socialzer"
 msgstr ""
 
-#: ../super_socializer.php:1660
+#: ../super_socializer.php:1672
 msgid ""
 "Update \"Social Login myCRED Integration\" add-on for compatibility with "
 "LiveJournal Login of Super Socialzer"
 msgstr ""
 
-#: ../super_socializer.php:1671
+#: ../super_socializer.php:1683
 #, php-format
 msgid ""
 "To continue using Steam login save Steam API key <a href=\"%s\">here</a>"
 msgstr ""
 
-#: ../super_socializer.php:1687
+#: ../super_socializer.php:1699
 #, php-format
 msgid ""
 "To continue using Social Login, save the secret keys <a href=\"%s\">here</a>"
 msgstr ""
 
-#: ../super_socializer.php:1711
+#: ../super_socializer.php:1723
 #, php-format
 msgid ""
 "Add %s in \"Valid OAuth redirect URIs\" option in your Facebook app settings "
@@ -234,14 +234,14 @@ msgid ""
 "target=\"_blank\">here</a>"
 msgstr ""
 
-#: ../super_socializer.php:1711 ../super_socializer.php:1736
-#: ../super_socializer.php:1761 ../super_socializer.php:1786
-#: ../super_socializer.php:1819 ../super_socializer.php:1847
-#: ../super_socializer.php:1873
+#: ../super_socializer.php:1723 ../super_socializer.php:1748
+#: ../super_socializer.php:1773 ../super_socializer.php:1798
+#: ../super_socializer.php:1831 ../super_socializer.php:1859
+#: ../super_socializer.php:1886 ../super_socializer.php:1910
 msgid "Okay"
 msgstr "Гаразд."
 
-#: ../super_socializer.php:1736
+#: ../super_socializer.php:1748
 #, php-format
 msgid ""
 "Add %s in \"Callback URLs\" option in your Twitter app settings for Twitter "
@@ -249,7 +249,7 @@ msgid ""
 "\">here</a>"
 msgstr ""
 
-#: ../super_socializer.php:1761
+#: ../super_socializer.php:1773
 #, php-format
 msgid ""
 "Add %s in \"Authorized Redirect URLs\" option in your Linkedin app settings "
@@ -257,7 +257,7 @@ msgid ""
 "target=\"_blank\">here</a>"
 msgstr ""
 
-#: ../super_socializer.php:1786
+#: ../super_socializer.php:1798
 #, php-format
 msgid ""
 "Add %s in \"Authorized redirect URIs\" option in your Google client settings "
@@ -265,13 +265,13 @@ msgid ""
 "target=\"_blank\">here</a>"
 msgstr ""
 
-#: ../super_socializer.php:1797
+#: ../super_socializer.php:1809
 #, php-format
 msgid ""
 "Save the url of privacy policy page of your website <a href=\"%s\">here</a>"
 msgstr ""
 
-#: ../super_socializer.php:1819
+#: ../super_socializer.php:1831
 #, php-format
 msgid ""
 "This plugin is GDPR compliant. You need to update the privacy policy of your "
@@ -279,7 +279,7 @@ msgid ""
 "\"%s\" target=\"_blank\">here</a>"
 msgstr ""
 
-#: ../super_socializer.php:1847
+#: ../super_socializer.php:1859
 #, php-format
 msgid ""
 "Twitter share counts are no longer working as newsharecounts.com is down. To "
@@ -287,7 +287,15 @@ msgid ""
 "\"_blank\">here</a> with this domain"
 msgstr ""
 
-#: ../super_socializer.php:1873
+#: ../super_socializer.php:1886
+#, php-format
+msgid ""
+"Replace url saved in \"Callback URLs\" option in your Twitter app settings "
+"from %s for Twitter login to work. For more details, check step 4 <a href="
+"\"%s\" target=\"_blank\">here</a>"
+msgstr ""
+
+#: ../super_socializer.php:1910
 #, php-format
 msgid ""
 "Your website visitors will see a popup notification (only once) if their "

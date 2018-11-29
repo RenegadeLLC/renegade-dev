@@ -194,6 +194,13 @@ $pageHTML = '';
                                 $casesHTML = build_case_studies();
                                 $pageHTML .= $casesHTML;
 
+                            elseif ($content_section_type == 'Slide'):
+                                
+                                $navigation_color = get_sub_field('navigation_color');
+                                $pageHTML .= $headlineHTML;
+                                $slidesHTML = build_slideshow($navigation_color);
+                                $pageHTML .= $slidesHTML;
+
                             endif; // END CONTENT SECTION TYPE IF
 
                             //END CONTENT SECTION DIV

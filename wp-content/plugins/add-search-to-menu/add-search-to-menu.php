@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Ivory Search
  * Plugin URI:  https://ivorysearch.com
- * Description: The Ultimate WordPress Search plugin to power your custom search. Helping you build a better search. Includes WooCommerce Search support!
- * Version:     4.0.1
+ * Description: The WordPress Search plugin to power your WordPress site custom search. Helping you build a better search. Includes WooCommerce Search support!
+ * Version:     4.1.3
  * Author:      Ivory Search
  * Author URI:  https://ivorysearch.com/
  * License:     GPL2+
@@ -12,6 +12,8 @@
  * Text Domain: ivory-search
  *
  * @fs_premium_only /includes/class-is-stemmer.php
+ * 
+ * WC tested up to: 3.4
  *
  * Ivory Search is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

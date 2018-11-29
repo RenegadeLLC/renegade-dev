@@ -1,5 +1,5 @@
 <?php
-
+require_once (FUNCTIONS. '/slideshows.php');
 require_once (FUNCTIONS. '/renegade_navwalker.php');
 require_once (FUNCTIONS. '/clean_link_name.php');
 require_once (FUNCTIONS. '/column_content.php');
