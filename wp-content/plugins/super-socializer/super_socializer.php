@@ -3,7 +3,7 @@
 Plugin Name: Super Socializer
 Plugin URI: https://super-socializer-wordpress.heateor.com
 Description: A complete 360 degree solution to provide all the social features like Social Login, Social Commenting, Social Sharing, Social Media follow and more.
-Version: 7.12.2
+Version: 7.12.6
 Author: Team Heateor
 Author URI: https://www.heateor.com
 Text Domain: super-socializer
@@ -11,7 +11,7 @@ Domain Path: /languages
 License: GPL2+
 */
 defined('ABSPATH') or die("Cheating........Uh!!");
-define('THE_CHAMP_SS_VERSION', '7.12.2');
+define('THE_CHAMP_SS_VERSION', '7.12.6');
 
 require 'helper.php';
 
@@ -1172,7 +1172,7 @@ function the_champ_frontend_styles(){
 	echo isset( $theChampSharingOptions['hide_mobile_sharing'] ) && $theChampSharingOptions['vertical_screen_width'] != '' ? '@media screen and (max-width:' . $theChampSharingOptions['vertical_screen_width'] . 'px){.the_champ_vertical_sharing{display:none!important}}' : '';
 	$bottom_sharing_postion_inverse = $theChampSharingOptions['bottom_sharing_alignment'] == 'left' ? 'right' : 'left';
 	$bottom_sharing_responsive_css = '';
-	if($theChampSharingOptions['bottom_sharing_position_radio'] == 'responsive'){
+	if(isset($theChampSharingOptions['vertical_enable']) && $theChampSharingOptions['bottom_sharing_position_radio'] == 'responsive'){
 		$vertical_sharing_icon_height = $theChampSharingOptions['vertical_sharing_shape'] == 'rectangle' ? $theChampSharingOptions['vertical_sharing_height'] : $theChampSharingOptions['vertical_sharing_size'];
 		$num_sharing_icons = isset($theChampSharingOptions['vertical_re_providers']) ? count($theChampSharingOptions['vertical_re_providers']) : 0;
 		$total_share_count_enabled = isset($theChampSharingOptions['vertical_total_shares']) ? 1 : 0;
@@ -1400,6 +1400,7 @@ function the_champ_save_default_options(){
 	   'scl_title' => __('Link your social account to login to your account at this website', 'super-socializer'),
 	   'link_account' => 1,
 	   'gdpr_enable' => 1,
+	   'gdpr_placement' => 'above',
 	   'privacy_policy_url' => '',
 	   'privacy_policy_optin_text' => 'I agree to my personal data being stored and used as per Privacy Policy',
 	   'ppu_placeholder' => 'Privacy Policy'
@@ -1493,8 +1494,7 @@ function the_champ_save_default_options(){
 	   'share_count_cache_refresh_unit' => 'minutes',
 	   'language' => get_locale(),
 	   'twitter_username' => '',
-	   'buffer_username' => '',
-	   'tweet_count_service' => 'opensharecount'
+	   'buffer_username' => ''
 	));
 
 	// counter options
@@ -1554,13 +1554,13 @@ function heateor_ss_browser_notification_read(){
 add_action('wp_ajax_heateor_ss_browser_notification_read', 'heateor_ss_browser_notification_read');
 
 /**
- * Set flag in database if Twitter share count notification has been read
+ * Set flag in database if Twitcount notification has been read
  */
-function heateor_ss_twitter_share_notification_read(){
-	update_option('heateor_ss_twitter_share_notification_read', '1');
+function heateor_ss_twitcount_notification_read(){
+	update_option('heateor_ss_twitcount_notification_read', '1');
 	die;
 }
-add_action('wp_ajax_heateor_ss_twitter_share_notification_read', 'heateor_ss_twitter_share_notification_read');
+add_action('wp_ajax_heateor_ss_twitcount_notification_read', 'heateor_ss_twitcount_notification_read');
 
 /**
  * Set flag in database if GDPR notification has been read
@@ -1640,7 +1640,7 @@ function the_champ_addon_update_notification(){
 			<?php
 		}
 
-		if(defined('HEATEOR_SOCIAL_LOGIN_BUTTONS_VERSION') && version_compare('1.1.2', HEATEOR_SOCIAL_LOGIN_BUTTONS_VERSION) > 0){
+		if(defined('HEATEOR_SOCIAL_LOGIN_BUTTONS_VERSION') && version_compare('1.1.4', HEATEOR_SOCIAL_LOGIN_BUTTONS_VERSION) > 0){
 			?>
 			<div class="error notice">
 				<h3>Social Login Buttons</h3>
@@ -1701,7 +1701,7 @@ function the_champ_addon_update_notification(){
 			<?php
 		}
 
-		if(version_compare('7.11', $currentVersion) <= 0 && isset($theChampLoginOptions['enable']) && is_array($theChampLoginOptions['providers']) && in_array('facebook', $theChampLoginOptions['providers'])){
+		if(version_compare('7.11', $currentVersion) <= 0 && isset($theChampLoginOptions['enable']) && isset($theChampLoginOptions['providers']) && is_array($theChampLoginOptions['providers']) && in_array('facebook', $theChampLoginOptions['providers'])){
 			if(!get_option('heateor_ss_fb_redirection_notification_read')){
 				?>
 				<script type="text/javascript">
@@ -1726,7 +1726,7 @@ function the_champ_addon_update_notification(){
 			}
 		}
 
-		if(version_compare('7.11.14', $currentVersion) <= 0 && isset($theChampLoginOptions['enable']) && is_array($theChampLoginOptions['providers']) && in_array('twitter', $theChampLoginOptions['providers'])){
+		if(version_compare('7.11.14', $currentVersion) <= 0 && isset($theChampLoginOptions['enable']) && isset($theChampLoginOptions['providers']) && is_array($theChampLoginOptions['providers']) && in_array('twitter', $theChampLoginOptions['providers'])){
 			if(!get_option('heateor_ss_twitter_callback_notification_read')){
 				?>
 				<script type="text/javascript">
@@ -1751,7 +1751,7 @@ function the_champ_addon_update_notification(){
 			}
 		}
 
-		if(version_compare('7.11', $currentVersion) <= 0 && isset($theChampLoginOptions['enable']) && is_array($theChampLoginOptions['providers']) && in_array('linkedin', $theChampLoginOptions['providers'])){
+		if(version_compare('7.11', $currentVersion) <= 0 && isset($theChampLoginOptions['enable']) && isset($theChampLoginOptions['providers']) && is_array($theChampLoginOptions['providers']) && in_array('linkedin', $theChampLoginOptions['providers'])){
 			if(!get_option('heateor_ss_linkedin_redirection_notification_read')){
 				?>
 				<script type="text/javascript">
@@ -1776,7 +1776,7 @@ function the_champ_addon_update_notification(){
 			}
 		}
 
-		if(version_compare('7.11', $currentVersion) <= 0 && isset($theChampLoginOptions['enable']) && is_array($theChampLoginOptions['providers']) && in_array('google', $theChampLoginOptions['providers']) && home_url() != the_champ_get_http() . $_SERVER['HTTP_HOST']){
+		if(version_compare('7.11', $currentVersion) <= 0 && isset($theChampLoginOptions['enable']) && isset($theChampLoginOptions['providers']) && is_array($theChampLoginOptions['providers']) && in_array('google', $theChampLoginOptions['providers']) && home_url() != the_champ_get_http() . $_SERVER['HTTP_HOST']){
 			if(!get_option('heateor_ss_google_redirection_notification_read')){
 				?>
 				<script type="text/javascript">
@@ -1838,25 +1838,25 @@ function the_champ_addon_update_notification(){
 		if(version_compare('7.12.1', $currentVersion) <= 0){
 			global $theChampSharingOptions;
 			if(isset($theChampSharingOptions['enable']) && ((isset($theChampSharingOptions['hor_enable']) && isset($theChampSharingOptions['horizontal_re_providers']) && in_array('twitter', $theChampSharingOptions['horizontal_re_providers']) && (isset($theChampSharingOptions['horizontal_counts']) || isset($theChampSharingOptions['horizontal_total_shares']))) || (isset($theChampSharingOptions['vertical_enable']) && isset($theChampSharingOptions['vertical_re_providers']) && in_array('twitter', $theChampSharingOptions['vertical_re_providers']) && (isset($theChampSharingOptions['vertical_counts']) || isset($theChampSharingOptions['vertical_total_shares']))))){
-				if(!get_option('heateor_ss_twitter_share_notification_read')){
+				if(!get_option('heateor_ss_twitcount_notification_read')){
 					?>
 					<script type="text/javascript">
-					function heateorSsTwitterShareNotificationRead(){
+					function heateorSsTwitcountNotificationRead(){
 						jQuery.ajax({
 							type: 'GET',
 							url: '<?php echo get_admin_url() ?>admin-ajax.php',
 							data: {
-								action: 'heateor_ss_twitter_share_notification_read'
+								action: 'heateor_ss_twitcount_notification_read'
 							},
 							success: function(data, textStatus, XMLHttpRequest){
-								jQuery('#heateor_ss_twitter_share_notification').fadeOut();
+								jQuery('#heateor_ss_twitcount_notification').fadeOut();
 							}
 						});
 					}
 					</script>
-					<div id="heateor_ss_twitter_share_notification" class="update-nag">
+					<div id="heateor_ss_twitcount_notification" class="update-nag">
 						<h3>Super Socializer</h3>
-						<p><?php echo sprintf(__('Twitter share counts are no longer working as newsharecounts.com is down. To continue showing the Twitter shares, just sign up <a href="%s" target="_blank">here</a> with this domain', 'super-socializer'), 'https://opensharecount.com'); ?>. No other steps needed.<input type="button" onclick="heateorSsTwitterShareNotificationRead()" style="margin-left: 5px;" class="button button-primary" value="<?php _e('Okay', 'super-socializer') ?>" /></p>
+						<p><?php echo sprintf( __( 'Now plugin supports a new service Twitcount.com to show Twitter shares. To continue showing the Twitter shares, click "Give me my Twitter counts back" button at <a href="%s" target="_blank">their website</a> and register your website %s with them. No need to copy-paste any code from their website.', 'super-socializer' ), 'http://twitcount.com', home_url() ); ?><input type="button" onclick="heateorSsTwitcountNotificationRead()" style="margin-left: 5px;" class="button button-primary" value="<?php _e( 'Okay', 'super-socializer' ) ?>" /></p>
 					</div>
 					<?php
 				}
@@ -1864,7 +1864,7 @@ function the_champ_addon_update_notification(){
 
 		}
 
-		if(version_compare('7.12.2', $currentVersion) <= 0 && isset($theChampLoginOptions['enable']) && is_array($theChampLoginOptions['providers']) && in_array('twitter', $theChampLoginOptions['providers'])){
+		if(version_compare('7.12.2', $currentVersion) <= 0 && isset($theChampLoginOptions['enable']) && isset($theChampLoginOptions['providers']) && is_array($theChampLoginOptions['providers']) && in_array('twitter', $theChampLoginOptions['providers'])){
 			if(!get_option('heateor_ss_twitter_new_callback_notification_read')){
 				?>
 				<script type="text/javascript">
@@ -1922,6 +1922,12 @@ function the_champ_update_db_check(){
 	$currentVersion = get_option('the_champ_ss_version');
 
 	if($currentVersion && $currentVersion != THE_CHAMP_SS_VERSION){
+		if(version_compare("7.12.5", $currentVersion) > 0){
+			global $theChampLoginOptions;
+			$theChampLoginOptions['gdpr_placement'] = 'above';
+			update_option('the_champ_login', $theChampLoginOptions);
+		}
+
 		if(version_compare("7.12.1", $currentVersion) > 0){
 			global $theChampSharingOptions;
 			$theChampSharingOptions['tweet_count_service'] = 'opensharecount';

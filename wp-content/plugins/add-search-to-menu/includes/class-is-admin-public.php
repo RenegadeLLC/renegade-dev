@@ -28,9 +28,7 @@ class IS_Admin_Public {
 		if ( null !== $is ) {
 			$this->opt = $is->opt;
 		} else {
-			$old_opt = (array)get_option( 'add_search_to_menu' );
-			$new_opt = (array)get_option( 'ivory_search' );
-			$this->opt = array_merge( $old_opt, $new_opt );
+			$this->opt = Ivory_Search::load_options();
 		}
 	}
 

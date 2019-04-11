@@ -32,9 +32,7 @@ class IS_Admin
         if ( null !== $is ) {
             $this->opt = $is->opt;
         } else {
-            $old_opt = (array) get_option( 'add_search_to_menu' );
-            $new_opt = (array) get_option( 'ivory_search' );
-            $this->opt = array_merge( $old_opt, $new_opt );
+            $this->opt = Ivory_Search::load_options();
         }
         
         $this->networkactive = is_multisite() && array_key_exists( plugin_basename( IS_PLUGIN_FILE ), (array) get_site_option( 'active_sitewide_plugins' ) );
@@ -76,7 +74,7 @@ class IS_Admin
         );
         $args = array(
             'saveAlert' => __( "The changes you made will be lost if you navigate away from this page.", 'ivory-search' ),
-            'activeTab' => ( isset( $_GET['active-tab'] ) ? (int) $_GET['active-tab'] : 0 ),
+            'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
         );
         wp_localize_script( 'is-admin-scripts', 'ivory_search', $args );
         wp_enqueue_script( 'is-admin-scripts' );
@@ -106,33 +104,98 @@ class IS_Admin
      */
     function all_admin_notices()
     {
-        $strpos = strpos( get_current_screen()->id, 'ivory-search' );
-        if ( 0 === $strpos || 0 < $strpos ) {
-            return;
-        }
         $hascaps = ( $this->networkactive ? is_network_admin() && current_user_can( 'manage_network_plugins' ) : current_user_can( 'manage_options' ) );
         
         if ( $hascaps ) {
-            $url = ( is_network_admin() ? network_site_url() : site_url( '/' ) );
-            echo  '<div class="notice notice-info is-dismissible ivory-search"><p>' . sprintf(
-                __( 'To configure <em>Ivory Search plugin</em> please visit its <a href="%1$s">configuration page</a> and to get plugin support contact us on <a href="%2$s" target="_blank">plugin support forum</a> or <a href="%3$s" target="_blank">contact us page</a>.', 'ivory-search' ),
-                $url . 'wp-admin/admin.php?page=ivory-search',
-                'https://ivorysearch.com/support/',
-                'https://ivorysearch.com/contact/'
-            ) . '</p></div>' ;
+            $screen = get_current_screen();
+            $is_ivory = strpos( $screen->id, 'ivory-search' );
+            if ( 0 !== $is_ivory && FALSE === $is_ivory && (!isset( $_GET['is_dismiss'] ) || 'notice_config' !== $_GET['is_dismiss']) ) {
+                
+                if ( !isset( $this->opt['is_notices']['config'] ) || !$this->opt['is_notices']['config'] ) {
+                    $url = ( is_network_admin() ? network_site_url() : site_url( '/' ) );
+                    echo  '<div class="notice ivory-search"><p>' . sprintf(
+                        __( 'To configure <em>Ivory Search plugin</em> please visit its <a href="%1$s">configuration page</a> and to get plugin support contact us on <a href="%2$s" target="_blank">plugin support forum</a> or <a href="%3$s" target="_blank">contact us page</a>.', 'ivory-search' ),
+                        $url . 'wp-admin/admin.php?page=ivory-search',
+                        'https://ivorysearch.com/support/',
+                        'https://ivorysearch.com/contact/'
+                    ) ;
+                    echo  '<a class="is-notice-dismiss" href="' . add_query_arg( 'is_dismiss', 'notice_config' ) . '">' . __( 'Dismiss', 'iovry-search' ) . '</a></p></div>' ;
+                }
+            
+            }
+            $display_review = true;
+            //Don't display if dismissed
+            if ( isset( $this->opt['is_notices']['review'] ) && $this->opt['is_notices']['review'] ) {
+                $display_review = false;
+            }
+            //Don't display on seoncary screens, don't be too nagging
+            if ( isset( $_GET['action'] ) && $_GET['action'] == 'edit' || $screen->action == 'add' || $screen->base == 'plugins' || $screen->base == 'widgets' ) {
+                $display_review = false;
+            }
+            $date = get_option( 'is_install', false );
+            
+            if ( $date && $display_review ) {
+                $diff = time() - strtotime( $date );
+                
+                if ( $diff > 900000 ) {
+                    echo  '<div class="is-notice notice"><div class="is-notice-image"></div><div class="is-notice-body">' ;
+                    echo  '<a class="is-notice-dismiss" href="' . add_query_arg( 'is_dismiss', 'notice_review' ) . '">' . esc_html__( 'Dismiss', 'iovry-search' ) . '</a>' ;
+                    echo  '<div class="is-notice-title">' . esc_html__( 'Have you found Ivory Search plugin useful?', 'iovry-search' ) . '</div>' ;
+                    echo  '<div class="is-notice-content">' . esc_html__( 'We poured a lot of hours into creating it, and we\'d love it if you could give us a nice rating on the official plugin directory.', 'iovry-search' ) . '</div>' ;
+                    echo  '<div class="is-notice-links">' ;
+                    echo  '<a href="' . esc_url( 'https://wordpress.org/support/plugin/add-search-to-menu/reviews/?filter=5#new-post' ) . '" class="button button-primary" target="_blank" >' . esc_html__( 'Rate Ivory Search and Help Us Out', 'iovry-search' ) . '</a>' ;
+                    echo  '<a href="' . esc_url( 'https://ivorysearch.com/support/' ) . '" class="button button-primary" target="_blank">' . esc_html__( 'Get Support', 'iovry-search' ) . '</a>' ;
+                    echo  '<a href="' . esc_url( 'https://ivorysearch.com/contact/' ) . '" class="button button-primary" target="_blank">' . esc_html__( 'Say Hi', 'iovry-search' ) . '</a>' ;
+                    echo  '</div></div></div>' ;
+                }
+            
+            }
+        
         }
     
     }
     
     /**
-     * Handles plugin notice dismiss functionality using AJAX.
+     * Displays posts in the list using AJAX.
      */
-    function dismiss_notice()
+    function display_posts()
     {
+        $posts = get_posts( array(
+            'post_type'      => $_REQUEST['post_type'],
+            'posts_per_page' => -1,
+            'orderby'        => 'title',
+            'order'          => 'ASC',
+        ) );
         
-        if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-            $this->opt['dismiss_admin_notices'] = 1;
-            update_option( 'ivory_search', $this->opt );
+        if ( !empty($posts) ) {
+            $temp = '';
+            $meta = get_post_meta( $_REQUEST['post_id'] );
+            
+            if ( 'includes' === $_REQUEST['inc_exc'] && isset( $meta['_is_includes'] ) ) {
+                $meta = maybe_unserialize( $meta['_is_includes'][0] );
+            } else {
+                if ( 'excludes' === $_REQUEST['inc_exc'] && isset( $meta['_is_excludes'] ) ) {
+                    $meta = maybe_unserialize( $meta['_is_excludes'][0] );
+                }
+            }
+            
+            foreach ( $posts as $post2 ) {
+                $checked = '';
+                
+                if ( 'includes' === $_REQUEST['inc_exc'] ) {
+                    $checked = ( isset( $meta['post__in'] ) && in_array( $post2->ID, $meta['post__in'] ) ? $post2->ID : 0 );
+                } else {
+                    if ( 'excludes' === $_REQUEST['inc_exc'] ) {
+                        $checked = ( isset( $meta['post__not_in'] ) && in_array( $post2->ID, $meta['post__not_in'] ) ? $post2->ID : 0 );
+                    }
+                }
+                
+                $post_title = ( isset( $post2->post_title ) && '' !== $post2->post_title ? esc_html( $post2->post_title ) : $post2->post_name );
+                $temp .= '<option value="' . esc_attr( $post2->ID ) . '" ' . selected( $post2->ID, $checked, false ) . '>' . $post_title . '</option>';
+            }
+            echo  $temp ;
+        } else {
+            _e( 'No posts found', 'ivory-search' );
         }
         
         die;
@@ -143,29 +206,19 @@ class IS_Admin
      */
     function admin_footer()
     {
-        $strpos = strpos( get_current_screen()->id, 'ivory-search' );
-        if ( 0 === $strpos || 0 < $strpos ) {
-            return;
-        }
         ?>
-	<script>
-		// Dismisses plugin notices.
-		 ( function( $ ) {
-			'use strict';
-			$( window ).load( function() {
-				$( '.notice.is-dismissible.ivory-search .notice-dismiss' ).on( 'click', function() {
-					$.ajax( {
-						url: "<?php 
-        echo  admin_url( 'admin-ajax.php' ) ;
-        ?>",
-						data: {
-							action: 'dismiss_notice'
-						}
-					} );
-				} );
-			} );
-		} )( jQuery );
-	</script>
+		<style type="text/css">
+		/* ADMIN NOTICES */
+		.is-notice { margin:20px 0; border:none; padding:0; overflow:hidden; background:#e6e9ec; max-width:900px; }
+		.is-notice-dismiss { display:block; float:right; color:#999; line-height:1; margin:0 0 0 15px; text-decoration:none; }
+		.is-notice-image { float:left; margin:10px; width:90px; height:90px; background:url(<?php 
+        echo  esc_url( plugins_url( 'assets/logo.jpg', __FILE__ ) ) ;
+        ?>) no-repeat center; background-size:cover; }
+		.is-notice-body { margin:0 0 0 110px; padding:15px; background:#fff; }
+		.is-notice-title { font-size:16px; font-weight:bold; margin:0 0 5px; }
+		.is-notice-content { margin:0 0 10px; padding:0; }
+		.is-notice-links a.button { margin-right: 10px;text-decoration: none;}
+		</style>
 	<?php 
     }
     
@@ -174,8 +227,31 @@ class IS_Admin
      */
     function admin_init()
     {
-        $settings_fields = new IS_Settings_Fields( $this->opt );
-        $settings_fields->register_settings_fields();
+        
+        if ( isset( $_GET['is_dismiss'] ) && '' !== $_GET['is_dismiss'] ) {
+            $is_notices = get_option( 'is_notices', array() );
+            
+            if ( 'notice_config' === $_GET['is_dismiss'] ) {
+                $is_notices['is_notices']['config'] = 1;
+            } else {
+                if ( 'notice_review' === $_GET['is_dismiss'] ) {
+                    $is_notices['is_notices']['review'] = 1;
+                }
+            }
+            
+            update_option( 'is_notices', $is_notices );
+            wp_redirect( remove_query_arg( 'is_dismiss' ) );
+        }
+        
+        if ( !get_option( 'is_install', false ) ) {
+            update_option( 'is_install', date( 'Y-m-d' ) );
+        }
+        
+        if ( !empty($GLOBALS['pagenow']) && ('admin.php' === $GLOBALS['pagenow'] || 'options.php' === $GLOBALS['pagenow']) ) {
+            $settings_fields = new IS_Settings_Fields( $this->opt );
+            $settings_fields->register_settings_fields();
+        }
+        
         /* Creates default search form */
         $search_form = get_page_by_title( 'Default Search Form', OBJECT, IS_Search_Form::post_type );
         
@@ -190,7 +266,6 @@ class IS_Admin
             ),
                 'search_title'   => 1,
                 'search_content' => 1,
-                'search_excerpt' => 1,
             );
             $args['_is_excludes'] = '';
             $args['_is_settings'] = '';
@@ -327,7 +402,7 @@ class IS_Admin
         
         if ( $post = IS_Search_Form::get_current() ) {
             $post_id = ( $post->initial() ? -1 : $post->id() );
-            include_once 'partials/new-search-form.php';
+            include_once 'partials/search-form.php';
             return;
         }
         
@@ -383,7 +458,7 @@ class IS_Admin
             $post = IS_Search_Form::get_template();
         }
         $post_id = -1;
-        include_once 'partials/new-search-form.php';
+        include_once 'partials/search-form.php';
     }
     
     /**
@@ -415,6 +490,7 @@ class IS_Admin
             $args['_is_includes'] = ( isset( $_POST['_is_includes'] ) ? $_POST['_is_includes'] : '' );
             $args['_is_excludes'] = ( isset( $_POST['_is_excludes'] ) ? $_POST['_is_excludes'] : '' );
             $args['_is_settings'] = ( isset( $_POST['_is_settings'] ) ? $_POST['_is_settings'] : '' );
+            $args['tab'] = ( isset( $_POST['tab'] ) ? $_POST['tab'] : 'includes' );
             $invalid = false;
             if ( !empty($args['_is_includes']) && !empty($args['_is_excludes']) ) {
                 foreach ( $args['_is_includes'] as $key => $value ) {
@@ -451,16 +527,16 @@ class IS_Admin
             
             if ( $invalid ) {
                 $query = array(
-                    'post'       => $id,
-                    'active-tab' => ( isset( $_POST['active-tab'] ) ? (int) $_POST['active-tab'] : 0 ),
+                    'post' => $id,
+                    'tab'  => ( isset( $_POST['tab'] ) ? $_POST['tab'] : 'includes' ),
                 );
                 $query['message'] = 'invalid';
                 $query['data'] = $invalid;
             } else {
                 $search_form = $this->save_form( $args );
                 $query = array(
-                    'post'       => ( $search_form ? $search_form->id() : 0 ),
-                    'active-tab' => ( isset( $_POST['active-tab'] ) ? (int) $_POST['active-tab'] : 0 ),
+                    'post' => ( $search_form ? $search_form->id() : 0 ),
+                    'tab'  => ( isset( $_POST['tab'] ) ? $_POST['tab'] : 'includes' ),
                 );
                 
                 if ( !$search_form ) {
@@ -496,7 +572,7 @@ class IS_Admin
                 $args['_is_settings'] = '';
                 $search_form = $this->save_form( $args );
                 $query['post'] = $id;
-                $query['active-tab'] = ( isset( $_POST['active-tab'] ) ? (int) $_POST['active-tab'] : 0 );
+                $query['tab'] = ( isset( $_POST['tab'] ) ? $_POST['tab'] : 'includes' );
                 $query['message'] = 'reset';
             }
             
@@ -604,6 +680,7 @@ class IS_Admin
             '_is_includes' => null,
             '_is_excludes' => null,
             '_is_settings' => null,
+            'tab'          => null,
         ) );
         $args['id'] = (int) $args['id'];
         $search_form = '';
@@ -624,9 +701,15 @@ class IS_Admin
             $search_form->set_locale( $args['_is_locale'] );
         }
         $properties = $search_form->get_properties();
-        $properties['_is_includes'] = $this->sanitize_includes( $args['_is_includes'] );
-        $properties['_is_excludes'] = $this->sanitize_excludes( $args['_is_excludes'] );
-        $properties['_is_settings'] = $this->sanitize_settings( $args['_is_settings'] );
+        if ( null === $args['tab'] || 'includes' === $args['tab'] ) {
+            $properties['_is_includes'] = $this->sanitize_includes( $args['_is_includes'] );
+        }
+        if ( null === $args['tab'] || 'excludes' === $args['tab'] ) {
+            $properties['_is_excludes'] = $this->sanitize_excludes( $args['_is_excludes'] );
+        }
+        if ( null === $args['tab'] || 'options' === $args['tab'] ) {
+            $properties['_is_settings'] = $this->sanitize_settings( $args['_is_settings'] );
+        }
         $search_form->set_properties( $properties );
         do_action(
             'is_before_save_form',
@@ -655,10 +738,12 @@ class IS_Admin
             return $defaults;
         }
         $defaults = wp_parse_args( $defaults, array(
-            'post_type' => array(
+            'post_type'      => array(
             'post' => 'post',
             'page' => 'page',
         ),
+            'search_title'   => 1,
+            'search_content' => 1,
         ) );
         $input = wp_parse_args( $input, $defaults );
         $output = $this->sanitize_fields( $input );

@@ -122,7 +122,11 @@ class TheChampSharingWidget extends WP_Widget {
 		if($instance['hide_for_logged_in']==1 && is_user_logged_in()) return;
 		
 		global $theChampSharingOptions, $post;
-		$postId = $post -> ID;
+		if(NULL === $post){
+			$postId = 0;
+		}else{
+			$postId = $post->ID;
+		}
 		$customUrl = apply_filters('heateor_ss_custom_share_url', '', $post);
 		if($customUrl){
 			$sharingUrl = $customUrl;
@@ -288,7 +292,11 @@ class TheChampVerticalSharingWidget extends WP_Widget {
 		if($instance['hide_for_logged_in']==1 && is_user_logged_in()) return;
 		
 		global $theChampSharingOptions, $post;
-		$postId = $post -> ID;
+		if(NULL === $post){
+			$postId = 0;
+		}else{
+			$postId = $post->ID;
+		}
 		$customUrl = apply_filters('heateor_ss_custom_share_url', '', $post);
 		if($customUrl){
 			$sharingUrl = $customUrl;
@@ -797,58 +805,67 @@ class TheChampFollowWidget extends WP_Widget {
 		$iconStyle = 'width:'. $instance['size'] .'px;height:'. $instance['size'] .'px;'. ( $instance['icon_shape'] == 'round' ? 'border-radius:999px;' : '' );
 		$html .= '<ul class="heateor_ss_follow_ul">';
 		if ( $instance['facebook'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Facebook" title="Facebook" class="theChampSharing theChampFacebookBackground"><a target="_blank" href="'. $instance['facebook'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampFacebookSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Facebook" title="Facebook" class="theChampSharing theChampFacebookBackground"><a target="_blank" aria-label="Facebook" href="'. $instance['facebook'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampFacebookSvg"></ss></a></i></li>';
 		}
 		if ( $instance['twitter'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Twitter" title="Twitter" class="theChampSharing theChampTwitterBackground"><a target="_blank" href="'. $instance['twitter'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampTwitterSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Twitter" title="Twitter" class="theChampSharing theChampTwitterBackground"><a target="_blank" aria-label="Twitter" href="'. $instance['twitter'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampTwitterSvg"></ss></a></i></li>';
 		}
 		if ( $instance['instagram'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Instagram" title="Instagram" class="theChampSharing theChampInstagramBackground"><a target="_blank" href="'. $instance['instagram'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampInstagramSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Instagram" title="Instagram" class="theChampSharing theChampInstagramBackground"><a target="_blank" aria-label="Instagram" href="'. $instance['instagram'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampInstagramSvg"></ss></a></i></li>';
 		}
 		if ( $instance['pinterest'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Pinterest" title="Pinterest" class="theChampSharing theChampPinterestBackground"><a target="_blank" href="'. $instance['pinterest'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampPinterestSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Pinterest" title="Pinterest" class="theChampSharing theChampPinterestBackground"><a target="_blank" aria-label="Pinterest" href="'. $instance['pinterest'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampPinterestSvg"></ss></a></i></li>';
 		}
 		if ( $instance['behance'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Behance" title="Behance" class="theChampSharing theChampBehanceBackground"><a target="_blank" href="'. $instance['behance'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampBehanceSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Behance" title="Behance" class="theChampSharing theChampBehanceBackground"><a target="_blank" aria-label="Behance" href="'. $instance['behance'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampBehanceSvg"></ss></a></i></li>';
 		}
 		if ( $instance['flickr'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Flickr" title="Flickr" class="theChampSharing theChampFlickrBackground"><a target="_blank" href="'. $instance['flickr'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampFlickrSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Flickr" title="Flickr" class="theChampSharing theChampFlickrBackground"><a target="_blank" aria-label="Flickr" href="'. $instance['flickr'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampFlickrSvg"></ss></a></i></li>';
 		}
 		if ( $instance['foursquare'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Foursquare" title="Foursquare" class="theChampSharing theChampFoursquareBackground"><a target="_blank" href="'. $instance['foursquare'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampFoursquareSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Foursquare" title="Foursquare" class="theChampSharing theChampFoursquareBackground"><a target="_blank" aria-label="Foursquare" href="'. $instance['foursquare'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampFoursquareSvg"></ss></a></i></li>';
 		}
 		if ( $instance['github'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Github" title="Github" class="theChampSharing theChampGithubBackground"><a target="_blank" href="'. $instance['github'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampGithubSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Github" title="Github" class="theChampSharing theChampGithubBackground"><a target="_blank" aria-label="Github" href="'. $instance['github'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampGithubSvg"></ss></a></i></li>';
 		}
 		if ( $instance['google'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Google+" title="Google+" class="theChampSharing theChampGoogleplusBackground"><a target="_blank" href="'. $instance['google'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampGoogleplusSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Google+" title="Google+" class="theChampSharing theChampGoogleplusBackground"><a target="_blank" aria-label="Google+" href="'. $instance['google'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampGoogleplusSvg"></ss></a></i></li>';
 		}
 		if ( $instance['linkedin'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Linkedin" title="Linkedin" class="theChampSharing theChampLinkedinBackground"><a target="_blank" href="'. $instance['linkedin'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampLinkedinSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Linkedin" title="Linkedin" class="theChampSharing theChampLinkedinBackground"><a target="_blank" aria-label="Linkedin" href="'. $instance['linkedin'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampLinkedinSvg"></ss></a></i></li>';
 		}
 		if ( $instance['linkedin_company'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Linkedin Company" title="Linkedin Company" class="theChampSharing theChampLinkedinBackground"><a target="_blank" href="'. $instance['linkedin_company'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampLinkedinSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Linkedin Company" title="Linkedin Company" class="theChampSharing theChampLinkedinBackground"><a target="_blank" aria-label="Linkedin Company" href="'. $instance['linkedin_company'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampLinkedinSvg"></ss></a></i></li>';
+		}
+		if ( $instance['medium'] ) {
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Medium" title="Medium" class="theChampSharing theChampMediumBackground"><a target="_blank" aria-label="Medium" href="'. $instance['medium'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampMediumSvg"></ss></a></i></li>';
+		}
+		if ( $instance['odnoklassniki'] ) {
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Odnoklassniki" title="Odnoklassniki" class="theChampSharing theChampOdnoklassnikiBackground"><a target="_blank" aria-label="Odnoklassniki" href="'. $instance['odnoklassniki'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampOdnoklassnikiSvg"></ss></a></i></li>';
 		}
 		if ( $instance['snapchat'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Snapchat" title="Snapchat" class="theChampSharing theChampSnapchatBackground"><a target="_blank" href="'. $instance['snapchat'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampSnapchatSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Snapchat" title="Snapchat" class="theChampSharing theChampSnapchatBackground"><a target="_blank" aria-label="Snapchat" href="'. $instance['snapchat'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampSnapchatSvg"></ss></a></i></li>';
 		}
 		if ( $instance['tumblr'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Tumblr" title="Tumblr" class="theChampSharing theChampTumblrBackground"><a target="_blank" href="'. $instance['tumblr'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampTumblrSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Tumblr" title="Tumblr" class="theChampSharing theChampTumblrBackground"><a target="_blank" aria-label="Tumblr" href="'. $instance['tumblr'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampTumblrSvg"></ss></a></i></li>';
 		}
 		if ( $instance['vimeo'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Vimeo" title="Vimeo" class="theChampSharing theChampVimeoBackground"><a target="_blank" href="'. $instance['vimeo'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampVimeoSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Vimeo" title="Vimeo" class="theChampSharing theChampVimeoBackground"><a target="_blank" aria-label="Vimeo" href="'. $instance['vimeo'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampVimeoSvg"></ss></a></i></li>';
+		}
+		if ( $instance['vkontakte'] ) {
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Vkontakte" title="Vkontakte" class="theChampSharing theChampVkontakteBackground"><a target="_blank" aria-label="Vkontakte" href="'. $instance['vkontakte'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampVkontakteSvg"></ss></a></i></li>';
 		}
 		if ( $instance['youtube'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Youtube" title="Youtube" class="theChampSharing theChampYoutubeBackground"><a target="_blank" href="'. $instance['youtube'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampYoutubeSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Youtube" title="Youtube" class="theChampSharing theChampYoutubeBackground"><a target="_blank" aria-label="Youtube" href="'. $instance['youtube'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampYoutubeSvg"></ss></a></i></li>';
 		}
 		if ( $instance['youtube_channel'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Youtube Channel" title="Youtube Channel" class="theChampSharing theChampYoutubeBackground"><a target="_blank" href="'. $instance['youtube_channel'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampYoutubeSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Youtube Channel" title="Youtube Channel" class="theChampSharing theChampYoutubeBackground"><a target="_blank" aria-label="Youtube Channel" href="'. $instance['youtube_channel'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampYoutubeSvg"></ss></a></i></li>';
 		}
 		if ( $instance['rss_feed'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="RSS Feed" title="RSS Feed" class="theChampSharing theChampRSSBackground"><a target="_blank" href="'. $instance['rss_feed'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampRSSSvg"></ss></a></i></li>';
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="RSS Feed" title="RSS Feed" class="theChampSharing theChampRSSBackground"><a target="_blank" aria-label="RSS Feed" href="'. $instance['rss_feed'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampRSSSvg"></ss></a></i></li>';
 		}
 		$html = apply_filters( 'heateor_ss_follow_icons', $html, $instance, $iconStyle );
-		$html .= '<ul>';
+		$html .= '</ul>';
 
 		return $html;
 	}
@@ -870,9 +887,12 @@ class TheChampFollowWidget extends WP_Widget {
 		$instance['google'] = $new_instance['google'];
 		$instance['linkedin'] = $new_instance['linkedin'];
 		$instance['linkedin_company'] = $new_instance['linkedin_company'];
+		$instance['medium'] = $new_instance['medium'];
+		$instance['odnoklassniki'] = $new_instance['odnoklassniki'];
 		$instance['snapchat'] = $new_instance['snapchat'];
 		$instance['tumblr'] = $new_instance['tumblr'];
 		$instance['vimeo'] = $new_instance['vimeo'];
+		$instance['vkontakte'] = $new_instance['vkontakte'];
 		$instance['youtube'] = $new_instance['youtube'];
 		$instance['youtube_channel'] = $new_instance['youtube_channel'];
 		$instance['rss_feed'] = $new_instance['rss_feed'];
@@ -885,7 +905,7 @@ class TheChampFollowWidget extends WP_Widget {
 	/** Widget options in admin panel */ 
 	public function form( $instance ) { 
 		/* Set up default widget settings. */ 
-		$defaults = array( 'title' => '', 'size' => '32', 'icon_shape' => 'round', 'facebook' => '', 'twitter' => '', 'instagram' => '', 'pinterest' => '', 'behance' => '', 'flickr' => '', 'foursquare' => '', 'github' => '', 'google' => '', 'linkedin' => '', 'linkedin_company' => '', 'snapchat' => '', 'tumblr' => '', 'vimeo' => '', 'youtube' => '', 'youtube_channel' => '', 'rss_feed' => '', 'before_widget_content' => '', 'after_widget_content' => '' );  
+		$defaults = array( 'title' => '', 'size' => '32', 'icon_shape' => 'round', 'facebook' => '', 'twitter' => '', 'instagram' => '', 'pinterest' => '', 'behance' => '', 'flickr' => '', 'foursquare' => '', 'github' => '', 'google' => '', 'linkedin' => '', 'linkedin_company' => '', 'medium' => '', 'odnoklassniki' => '', 'snapchat' => '', 'tumblr' => '', 'vimeo' => '', 'vkontakte' => '', 'youtube' => '', 'youtube_channel' => '', 'rss_feed' => '', 'before_widget_content' => '', 'after_widget_content' => '' );  
 
 		foreach( $instance as $key => $value ) {  
 			if ( is_string( $value ) ) {
@@ -940,6 +960,12 @@ class TheChampFollowWidget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'linkedin_company' ); ?>"><?php _e( 'LinkedIn Company URL:', 'super-socializer' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'linkedin_company' ); ?>" name="<?php echo $this->get_field_name( 'linkedin_company' ); ?>" type="text" value="<?php echo $instance['linkedin_company']; ?>" /><br/>
 			<span>https://www.linkedin.com/company/ID</span><br/><br/>
+			<label for="<?php echo $this->get_field_id( 'medium' ); ?>"><?php _e( 'Medium URL:', 'super-socializer' ); ?></label> 
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'medium' ); ?>" name="<?php echo $this->get_field_name( 'medium' ); ?>" type="text" value="<?php echo $instance['medium']; ?>" /><br/>
+			<span>https://medium.com/@ID</span><br/><br/>
+			<label for="<?php echo $this->get_field_id( 'odnoklassniki' ); ?>"><?php _e( 'Odnoklassniki URL:', 'super-socializer' ); ?></label> 
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'odnoklassniki' ); ?>" name="<?php echo $this->get_field_name( 'odnoklassniki' ); ?>" type="text" value="<?php echo $instance['odnoklassniki']; ?>" /><br/>
+			<span>https://ok.ru/profile/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'snapchat' ); ?>"><?php _e( 'Snapchat URL:', 'super-socializer' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'snapchat' ); ?>" name="<?php echo $this->get_field_name( 'snapchat' ); ?>" type="text" value="<?php echo $instance['snapchat']; ?>" /><br/>
 			<span>https://www.snapchat.com/add/ID</span><br/><br/>
@@ -949,6 +975,9 @@ class TheChampFollowWidget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'vimeo' ); ?>"><?php _e( 'Vimeo URL:', 'super-socializer' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'vimeo' ); ?>" name="<?php echo $this->get_field_name( 'vimeo' ); ?>" type="text" value="<?php echo $instance['vimeo']; ?>" /><br/>
 			<span>https://vimeo.com/ID</span><br/><br/>
+			<label for="<?php echo $this->get_field_id( 'vkontakte' ); ?>"><?php _e( 'Vkontakte URL:', 'super-socializer' ); ?></label> 
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'vkontakte' ); ?>" name="<?php echo $this->get_field_name( 'vkontakte' ); ?>" type="text" value="<?php echo $instance['vkontakte']; ?>" /><br/>
+			<span>https://vk.com/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'youtube' ); ?>"><?php _e( 'Youtube URL:', 'super-socializer' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'youtube' ); ?>" name="<?php echo $this->get_field_name( 'youtube' ); ?>" type="text" value="<?php echo $instance['youtube']; ?>" /><br/>
 			<span>https://www.youtube.com/user/ID</span><br/><br/>

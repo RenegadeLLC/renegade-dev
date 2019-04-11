@@ -31,17 +31,27 @@ class IS_Search_Editor
             return;
         }
         echo  '<ul id="search-form-editor-tabs">' ;
+        $url = esc_url( menu_page_url( 'ivory-search-new', false ) );
+        if ( isset( $_GET['post'] ) && is_numeric( $_GET['post'] ) ) {
+            $url = esc_url( menu_page_url( 'ivory-search', false ) ) . '&post=' . $_GET['post'] . '&action=edit';
+        }
+        $tab = ( isset( $_GET['tab'] ) ? $_GET['tab'] : 'includes' );
         foreach ( $this->panels as $id => $panel ) {
-            echo  sprintf( '<li id="%1$s-tab"><a href="#%1$s">%2$s</a></li>', esc_attr( $id ), esc_html( $panel['title'] ) ) ;
+            $class = ( $tab == $id ? 'active' : '' );
+            echo  sprintf(
+                '<li id="%1$s-tab" class="%2$s"><a href="%3$s">%4$s</a></li>',
+                esc_attr( $id ),
+                esc_attr( $class ),
+                $url . '&tab=' . $id,
+                esc_html( $panel['title'] )
+            ) ;
         }
         echo  '</ul>' ;
-        foreach ( $this->panels as $id => $panel ) {
-            echo  sprintf( '<div class="search-form-editor-panel" id="%1$s">', esc_attr( $id ) ) ;
-            $this->notice( $id, $panel );
-            $callback = $panel['callback'];
-            $this->{$callback}( $this->search_form );
-            echo  '</div>' ;
-        }
+        echo  sprintf( '<div class="search-form-editor-panel" id="%1$s">', esc_attr( $tab ) ) ;
+        $this->notice( $tab, $tab . '_panel' );
+        $callback = $tab . '_panel';
+        $this->{$callback}( $this->search_form );
+        echo  '</div>' ;
     }
     
     public function notice( $id, $panel )
@@ -78,8 +88,8 @@ class IS_Search_Editor
     {
         $id = '_is_includes';
         $includes = $post->prop( $id );
-        $settings = $post->prop( '_is_settings' );
         $excludes = $post->prop( '_is_excludes' );
+        $settings = $post->prop( '_is_settings' );
         ?>
 		<h4 class="panel-desc">
 			<?php 
@@ -200,14 +210,14 @@ class IS_Search_Editor
         foreach ( $post_types as $post_type ) {
             $posts = get_posts( array(
                 'post_type'      => $post_type,
-                'posts_per_page' => -1,
+                'posts_per_page' => 100,
                 'orderby'        => 'title',
                 'order'          => 'ASC',
             ) );
             
             if ( !empty($posts) ) {
                 $html = '<div class="col-wrapper"><div class="col-title">';
-                $col_title = ucwords( $post_type );
+                $col_title = '<span>' . ucwords( $post_type ) . '</span>';
                 $temp = '';
                 $selected_pt = array();
                 foreach ( $posts as $post2 ) {
@@ -223,7 +233,11 @@ class IS_Search_Editor
                 }
                 $html .= $col_title . '<input class="list-search" placeholder="' . __( "Search..", 'ivory-search' ) . '" type="text"></div>';
                 $html .= '<select class="_is_includes-post__in" name="' . $id . '[post__in][]" multiple size="8" >';
-                $html .= $temp . '</select></div>';
+                $html .= $temp . '</select>';
+                if ( count( $posts ) >= 100 ) {
+                    $html .= '<div id="' . $post_type . '" class="load-all">' . __( 'Load All', 'ivory-search' ) . '</div>';
+                }
+                $html .= '</div>';
                 echo  $html ;
                 if ( !empty($selected_pt) ) {
                     echo  '<span class="ind-status ' . $id . '-post__in"></span>' ;
@@ -231,7 +245,7 @@ class IS_Search_Editor
             }
         
         }
-        echo  '<br /><label for="' . $id . '-post__in" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
+        echo  '<br /><label for="' . $id . '-post__in" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key & Left Mouse button to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
         ?>
 			</div></div>
 
@@ -284,7 +298,7 @@ class IS_Search_Editor
                 }
             
             }
-            echo  '<br /><label for="' . $id . '-tax_query" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
+            echo  '<br /><label for="' . $id . '-tax_query" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key & Left Mouse button to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
             $ind_status = false;
             if ( isset( $includes['tax_query'] ) && !empty($includes['tax_query']) ) {
                 $ind_status = true;
@@ -313,7 +327,7 @@ class IS_Search_Editor
                 echo  '<span class="ind-status ' . $id . '-tax_query"></span>' ;
             }
         } else {
-            _e( 'No taxonomies registered for slected post types.', 'ivory-search' );
+            _e( 'No taxonomies registered for selected post types.', 'ivory-search' );
         }
         
         ?>
@@ -352,7 +366,7 @@ class IS_Search_Editor
                 echo  '<option value="' . esc_attr( $meta_key ) . '" ' . selected( $meta_key, $checked, false ) . '>' . esc_html( $meta_key ) . '</option>' ;
             }
             echo  '</select>' ;
-            echo  '<br /><label for="' . $id . '-custom_field" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
+            echo  '<br /><label for="' . $id . '-custom_field" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key & Left Mouse button to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
         }
         
         
@@ -394,12 +408,22 @@ class IS_Search_Editor
             }
             
             if ( in_array( 'product', $args ) ) {
+                $ind_status = false;
                 $woo_sku_disable = ( is_fs()->is_plan_or_trial( 'pro_plus' ) && $this->is_premium_plugin ? '' : ' disabled ' );
                 $checked = ( isset( $includes['woo']['sku'] ) && $includes['woo']['sku'] ? 1 : 0 );
-                echo  '<p class="check-radio"><label for="' . $id . '-sku" ><input class="_is_includes-woocommerce" type="checkbox" ' . $woo_sku_disable . ' id="' . $id . '-sku" name="' . $id . '[woo][sku]" value="1" ' . checked( 1, $checked, false ) . '/>' ;
-                echo  '<span class="toggle-check-text"></span>' . esc_html__( "Search in WooCommerce products SKU.", 'ivory-search' ) . '</label>' ;
-                echo  IS_Admin::pro_link( 'pro_plus' ) . '</p>' ;
                 if ( $checked ) {
+                    $ind_status = true;
+                }
+                echo  '<p class="check-radio"><label for="' . $id . '-sku" ><input class="_is_includes-woocommerce" type="checkbox" ' . $woo_sku_disable . ' id="' . $id . '-sku" name="' . $id . '[woo][sku]" value="1" ' . checked( 1, $checked, false ) . '/>' ;
+                echo  '<span class="toggle-check-text"></span>' . esc_html__( "Search in WooCommerce products SKU.", 'ivory-search' ) . '</label></p>' ;
+                $checked = ( isset( $includes['woo']['variation'] ) && $includes['woo']['variation'] ? 1 : 0 );
+                if ( !$ind_status && $checked ) {
+                    $ind_status = true;
+                }
+                echo  '<p class="check-radio"><label for="' . $id . '-variation" ><input class="_is_includes-woocommerce" type="checkbox" ' . $woo_sku_disable . ' id="' . $id . '-variation" name="' . $id . '[woo][variation]" value="1" ' . checked( 1, $checked, false ) . '/>' ;
+                echo  '<span class="toggle-check-text"></span>' . esc_html__( "Search in WooCommerce products variation.", 'ivory-search' ) . '</label>' ;
+                echo  IS_Admin::pro_link( 'pro_plus' ) . '</p>' ;
+                if ( $ind_status ) {
                     echo  '<span class="ind-status ' . $id . '-woocommerce"></span>' ;
                 }
             } else {
@@ -703,7 +727,7 @@ class IS_Search_Editor
             ?></a></span></h3>
 			<div>
 				<?php 
-            $content = __( 'Configure searching to search based on posts that have a specific MIME type or files that have specific media attachments', 'ivory-search' );
+            $content = __( 'Configure the option to search files, media, attachments, images, documents or post types of specific MIME type.', 'ivory-search' );
             IS_Help::help_info( $content );
             echo  '<div>' ;
             
@@ -723,7 +747,7 @@ class IS_Search_Editor
                         }
                         echo  '</select>' ;
                         echo  IS_Admin::pro_link( 'pro_plus' ) ;
-                        echo  '<br /><br /><label for="' . $id . '-post_file_type" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
+                        echo  '<br /><br /><label for="' . $id . '-post_file_type" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key & Left Mouse button to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
                     }
                 
                 } else {
@@ -802,14 +826,14 @@ class IS_Search_Editor
             foreach ( $post_types as $post_type ) {
                 $posts = get_posts( array(
                     'post_type'      => $post_type,
-                    'posts_per_page' => -1,
+                    'posts_per_page' => 100,
                     'orderby'        => 'title',
                     'order'          => 'ASC',
                 ) );
                 
                 if ( !empty($posts) ) {
                     $html = '<div class="col-wrapper"><div class="col-title">';
-                    $col_title = ucwords( $post_type );
+                    $col_title = '<span>' . ucwords( $post_type ) . '</span>';
                     $temp = '';
                     $selected_pt = array();
                     foreach ( $posts as $post2 ) {
@@ -825,7 +849,11 @@ class IS_Search_Editor
                     }
                     $html .= $col_title . '<input class="list-search" placeholder="' . __( "Search..", 'ivory-search' ) . '" type="text"></div>';
                     $html .= '<select class="_is_excludes-post__not_in" name="' . $id . '[post__not_in][]" multiple size="8" >';
-                    $html .= $temp . '</select></div>';
+                    $html .= $temp . '</select>';
+                    if ( count( $posts ) >= 100 ) {
+                        $html .= '<div id="' . $post_type . '" class="load-all">' . __( 'Load All', 'ivory-search' ) . '</div>';
+                    }
+                    $html .= '</div>';
                     echo  $html ;
                     if ( !empty($selected_pt) ) {
                         echo  '<span class="ind-status ' . $id . '-post__not_in"></span>' ;
@@ -833,7 +861,7 @@ class IS_Search_Editor
                 }
             
             }
-            echo  '<br /><label for="' . $id . '-post__not_in" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
+            echo  '<br /><label for="' . $id . '-post__not_in" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key & Left Mouse button to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
         } else {
             _e( 'Search is already limited to specific posts selected in Includes section.', 'ivory-search' );
         }
@@ -885,12 +913,12 @@ class IS_Search_Editor
                 }
             
             }
-            echo  '<br /><label for="' . $id . '-tax_query" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
+            echo  '<br /><label for="' . $id . '-tax_query" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key & Left Mouse button to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
             if ( isset( $excludes['tax_query'] ) && !empty($excludes['tax_query']) ) {
                 echo  '<span class="ind-status ' . $id . '-tax_query"></span>' ;
             }
         } else {
-            _e( 'No taxonomies registered for slected post types.', 'ivory-search' );
+            _e( 'No taxonomies registered for selected post types.', 'ivory-search' );
         }
         
         ?>
@@ -931,7 +959,7 @@ class IS_Search_Editor
             }
             echo  '</select>' ;
             echo  IS_Admin::pro_link() ;
-            echo  '<br /><br /><label for="' . $id . '-custom_field" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
+            echo  '<br /><br /><label for="' . $id . '-custom_field" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key & Left Mouse button to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
         }
         
         
@@ -1008,7 +1036,7 @@ class IS_Search_Editor
         ?></a></span></h3>
 			<div>
 				<?php 
-        $content = __( 'Exclude posts from the search created by slected authors.', 'ivory-search' );
+        $content = __( 'Exclude posts from the search created by selected authors.', 'ivory-search' );
         IS_Help::help_info( $content );
         echo  '<div>' ;
         
@@ -1139,7 +1167,7 @@ class IS_Search_Editor
                         }
                         echo  '</select>' ;
                         echo  IS_Admin::pro_link( 'pro_plus' ) ;
-                        echo  '<br /><br /><label for="' . $id . '-post_file_type" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
+                        echo  '<br /><br /><label for="' . $id . '-post_file_type" style="font-size: 10px;clear:both;display:block;">' . esc_html__( "Press CTRL key & Left Mouse button to select multiple terms or deselect them.", 'ivory-search' ) . '</label>' ;
                     }
                 
                 } else {
@@ -1171,7 +1199,7 @@ class IS_Search_Editor
 	<?php 
     }
     
-    public function settings_panel( $post )
+    public function options_panel( $post )
     {
         $id = '_is_settings';
         $settings = $post->prop( $id );

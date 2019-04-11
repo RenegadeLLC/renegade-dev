@@ -21,7 +21,7 @@ $post_link = get_permalink($post -> ID)
 ;
 $post_edit_link = get_edit_post_link();
 $podcast_html = '';
-
+$podcast_html .= '<content:encoded>';
 $podcast_html .= '<div class="row podcast-detail-hero">';
 $podcast_html .= '<div class="column col-md-3 podcast-profile-image-ct">';
 $podcast_html .= '<div class="podcast-profile-image"><img src="' . $profile_image . '" alt="' . $first_name . ' ' . $last_name . '"></div>';
@@ -60,7 +60,7 @@ if( have_rows('quotes') ):
 		$quotes_html .= '</div><!-- .quote-ct -->';
 	endwhile;
 endif;
-
+$podcast_html .= '</content:encoded>';
 ?>
 <article <?php post_class(); ?> id="post-<?php the_ID(); ?>">
 

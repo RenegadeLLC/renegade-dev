@@ -48,10 +48,10 @@ class DeleteRequest {
     public function getByTypeAndDataIdAndAccessRequestId($type = '', $dataId = 0, $accessRequestId = 0) {
         global $wpdb;
         $query = "SELECT `ID` FROM `" . self::getDatabaseTableName() . "`";
-        $query .= " WHERE `type` = '%s'";
-        $query .= " AND `data_id` = '%d'";
-        $query .= " AND `access_request_id` = '%d'";
-        $query .= " AND `site_id` = '%d'";
+        $query .= " WHERE `type` = %s";
+        $query .= " AND `data_id` = %d";
+        $query .= " AND `access_request_id` = %d";
+        $query .= " AND `site_id` = %d";
         $result = $wpdb->get_row($wpdb->prepare($query, $type, $dataId, $accessRequestId, get_current_blog_id()));
         if ($result !== null) {
             return new self($result->ID);
@@ -61,14 +61,18 @@ class DeleteRequest {
 
     /**
      * @param int $accessRequestId
+     * @param bool $showAnonymised
      * @return int
      */
-    public function getAmountByAccessRequestId($accessRequestId = 0) {
+    public function getAmountByAccessRequestId($accessRequestId = 0, $showAnonymised = true) {
         global $wpdb;
         $query = "SELECT COUNT(`ID`) FROM `" . self::getDatabaseTableName() . "`";
-        $query .= " WHERE `access_request_id` = '%d'";
+        $query .= " WHERE `access_request_id` = %d";
+        if ($showAnonymised === false) {
+            $query .= " AND `ip_address` != '127.0.0.1'";
+        }
         $query .= " AND `processed` = '0'";
-        $query .= " AND `site_id` = '%d'";
+        $query .= " AND `site_id` = %d";
         $result = $wpdb->get_var($wpdb->prepare($query, intval($accessRequestId), get_current_blog_id()));
         if ($result !== null) {
             return absint($result);
@@ -136,7 +140,7 @@ class DeleteRequest {
 
     public function load() {
         global $wpdb;
-        $query = "SELECT * FROM `" . self::getDatabaseTableName() . "` WHERE `ID` = '%d'";
+        $query = "SELECT * FROM `" . self::getDatabaseTableName() . "` WHERE `ID` = %d";
         $row = $wpdb->get_row($wpdb->prepare($query, $this->getId()));
         if ($row !== null) {
             $this->loadByRow($row);
@@ -151,7 +155,7 @@ class DeleteRequest {
         global $wpdb;
         $row = $wpdb->get_row(
             $wpdb->prepare(
-                "SELECT * FROM `" . self::getDatabaseTableName() . "` WHERE `ID` = '%d'",
+                "SELECT * FROM `" . self::getDatabaseTableName() . "` WHERE `ID` = %d",
                 intval($id)
             )
         );
@@ -166,9 +170,14 @@ class DeleteRequest {
         if ($this->exists($this->getId())) {
             $wpdb->update(
                 self::getDatabaseTableName(),
-                array('processed' => $this->getProcessed()),
+                array(
+                    'ip_address' => $this->getIpAddress(),
+                    'data_id' => $this->getDataId(),
+                    'type' => $this->getType(),
+                    'processed' => $this->getProcessed()
+                ),
                 array('ID' => $this->getId()),
-                array('%d'),
+                array('%s', '%d', '%s', '%d'),
                 array('%d')
             );
             return $this->getId();
@@ -199,16 +208,19 @@ class DeleteRequest {
      * @return null|string
      */
     public function getManageUrl() {
-        switch ($this->getType()) {
-            case 'user' :
-                return get_edit_user_link($this->getDataId());
-                break;
-            case 'comment' :
-                return get_edit_comment_link($this->getDataId());
-                break;
-            case 'woocommerce_order' :
-                return get_edit_post_link($this->getDataId());
-                break;
+        $dataId = intval($this->getDataId());
+        if ($dataId > 0) {
+            switch ($this->getType()) {
+                case 'user' :
+                    return get_edit_user_link($this->getDataId());
+                    break;
+                case 'comment' :
+                    return get_edit_comment_link($this->getDataId());
+                    break;
+                case 'woocommerce_order' :
+                    return get_edit_post_link($this->getDataId());
+                    break;
+            }
         }
         return '';
     }
@@ -218,6 +230,9 @@ class DeleteRequest {
      */
     public function getNiceTypeLabel() {
         switch ($this->getType()) {
+            case 'unknown' :
+                $output = __('Unknown', WP_GDPR_C_SLUG);
+                break;
             case 'user' :
                 $output = __('User', WP_GDPR_C_SLUG);
                 break;
@@ -232,6 +247,10 @@ class DeleteRequest {
                 break;
         }
         return $output;
+    }
+
+    public function isAnonymised() {
+        return ($this->getIpAddress() === '127.0.0.1');
     }
 
     /**

@@ -1,11 +1,11 @@
 === Ivory Search - WordPress Search Plugin ===
 Contributors: ivorysearch, vinod dalvi
 Donate link: https://ivorysearch.com/pricing/
-Tags: search, search menu, woocommerce search, search plugin, search shortcode, search widget, exclude from search, custom search, search by post type, search by category, relevant search, search forms
+Tags: search, woocommerce search, image search, search shortcode,  exclude from search, search widget, search menu, search plugin, custom search, search by post type, search by category, relevant search, search forms
 Requires at least: 3.9
-Tested up to: 4.9
+Tested up to: 5.0
 Requires PHP: 5.2.4
-Stable tag: 4.1.3
+Stable tag: 4.1.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,7 @@ Feel free to ask it using [Contact Form](https://ivorysearch.com/contact/).
 <li> Search in category or taxonomy terms description.</li>
 <li> Search posts having specific custom fields or metadata.</li>
 <li> Search WooCommerce products SKU. [Premium]</li>
+<li> Search WooCommerce products variation. [Premium]</li>
 <li> Search posts created by specific authors. [Premium]</li>
 <li> Search in author Display name and display the posts created by that author.</li>
 <li> Search posts having specific statuses. [Premium]</li>
@@ -134,7 +135,7 @@ Any suggestions or comments are welcome. Feel free to contact us using this [Con
 
 Please read below documentation to know how to use Ivory Search plugin.
 
-[https://ivorysearch.com/knowledge-base/how-to-use-ivory-search-plugin/](https://ivorysearch.com/knowledge-base/how-to-use-ivory-search-plugin/)
+[https://ivorysearch.com/docs/how-to-use-ivory-search-plugin/](https://ivorysearch.com/docs/how-to-use-ivory-search-plugin/)
 
 = Is the plugin compatible with WooCommerce? = 
 
@@ -176,6 +177,19 @@ Yes we do. We try our best to help free users with customisation requests and we
 10. Displays full width search form in the menu.
 
 == Changelog ==
+
+= 4.1.6 =
+* Fixed -  Post type issue when reset search form.
+* Styled - Twenty Nineteen theme search form.
+* Fixed - New search form tabs issue.
+
+= 4.1.5 =
+* Fixed - Firefox browser right mouse click closing search form issue.
+
+= 4.1.4 =
+* Searches in WooCommerce products variation.
+* Fixed - Firefox browser dropdown select issue.
+* Optimized plugin admin options.
 
 = 4.1.3 =
 * Developed option to search specific posts, pages or custom post types.

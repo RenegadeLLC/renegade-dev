@@ -143,6 +143,9 @@ class Helper {
                     $type = 'error';
                     $message = __('Couldn\'t find this consent.', WP_GDPR_C_SLUG);
                     break;
+	            case 'wpgdprc-cookie-bar-reset' :
+	            	$message = __('The cookie bar has been reset', WP_GDPR_C_SLUG);
+	            	break;
             }
             if (!empty($message)) {
                 printf(
@@ -486,6 +489,57 @@ class Helper {
     }
 
     /**
+     * This function returns all available options used by the WPGDPRC plugin.
+     * NOTE: Keep this list updated in case of newly added/updated options.
+     *
+     * @return array
+     */
+    public static function getAvailableOptions() {
+        $output = array();
+
+        // Settings for activated plugins
+        $activatedPlugins = Helper::getActivatedPlugins();
+        foreach ($activatedPlugins as $plugin) {
+            $output[] = WP_GDPR_C_PREFIX . '_integrations_' . $plugin['id'];
+            $output[] = WP_GDPR_C_PREFIX . '_integrations_' . $plugin['id'] . '_form_text';
+            $output[] = WP_GDPR_C_PREFIX . '_integrations_' . $plugin['id'] . '_error_message';
+            switch ($plugin['id']) {
+                case 'gravity-forms' :
+                case 'contact-form-7' :
+                    $output[] = WP_GDPR_C_PREFIX . '_integrations_' . $plugin['id'] . '_forms';
+                    break;
+            }
+            switch ($plugin['id']) {
+                case 'gravity-forms' :
+                case 'woocommerce' :
+                case 'wordpress' :
+                    $output[] = WP_GDPR_C_PREFIX . '_integrations_' . $plugin['id'] . '_required_message';
+                    break;
+            }
+        }
+
+        // Settings for the checklist
+        foreach (Helper::getCheckList() as $id => $check) {
+            $output[] = WP_GDPR_C_PREFIX . '_general_' . $id;
+        }
+
+        // Settings for the general things
+        $output[] = WP_GDPR_C_PREFIX . '_settings_privacy_policy_page';
+        $output[] = WP_GDPR_C_PREFIX . '_settings_privacy_policy_text';
+        $output[] = WP_GDPR_C_PREFIX . '_settings_enable_access_request';
+        if (Helper::isEnabled('enable_access_request', 'settings')) {
+            $output[] = WP_GDPR_C_PREFIX . '_settings_access_request_page';
+            $output[] = WP_GDPR_C_PREFIX . '_settings_access_request_form_checkbox_text';
+            $output[] = WP_GDPR_C_PREFIX . '_settings_delete_request_form_explanation_text';
+        }
+        $output[] = WP_GDPR_C_PREFIX . '_settings_consents_modal_title';
+        $output[] = WP_GDPR_C_PREFIX . '_settings_consents_modal_explanation_text';
+        $output[] = WP_GDPR_C_PREFIX . '_settings_consents_bar_explanation_text';
+
+        return $output;
+    }
+
+    /**
      * @return bool|\WP_Post
      */
     public static function getAccessRequestPage() {
@@ -507,6 +561,16 @@ class Helper {
             }
         }
         return $output;
+    }
+
+        /**
+         * Function resets the cookie bar for all users, this will happen on button trigger & when new Consent has been added.
+         */
+    public static function resetCookieBar() {
+    	    $consentVersion = get_option('wpgdprc_consent_version');
+            $consentVersion += 1;
+            update_option('wpgdprc_consent_version', $consentVersion);
+
     }
 
     /**
@@ -543,7 +607,8 @@ class Helper {
                 'value' => 1
             )
         ));
-        $consents = (!empty($_COOKIE['wpgdprc-consent'])) ? esc_html($_COOKIE['wpgdprc-consent']) : '';
+        $consentVersion = get_option('wpgdprc_consent_version');
+        $consents = (!empty($_COOKIE['wpgdprc-consent-' . $consentVersion])) ? esc_html($_COOKIE['wpgdprc-consent-' . $consentVersion]) : '';
         if (!empty($requiredConsents)) {
             foreach ($requiredConsents as $requiredConsent) {
                 $output[] = intval($requiredConsent->getId());
@@ -648,6 +713,64 @@ class Helper {
         }
         return $output;
     }
+
+	/**
+	 * @param $email
+	 *
+	 * @return null|string
+	 */
+	public static function anonymizeEmail($email) {
+
+		if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+
+			$emailParts = explode('@', $email);
+			$localPart = $emailParts[0];
+			if (strlen($localPart) > 1 && strlen($localPart) < 4) {
+				$localPart = substr_replace($localPart, '*', strlen($localPart) - 1);
+			} else if (strlen($localPart) > 3 && strlen($localPart) < 6) {
+				$localPart = substr_replace($localPart, '**', strlen($localPart) - 2);
+			} else if (strlen($localPart) > 5) {
+				$localPart = substr_replace($localPart, '***', strlen($localPart) - 3);
+			} else {
+				$domain = $emailParts[1];
+				$domainName = explode('.', $domain);
+				$anonymisedDomain = str_replace($domainName[0], '***', $domainName[0]);
+			}
+
+			if (isset($domainName) && isset($anonymisedDomain)) {
+				return $localPart . '@' . $anonymisedDomain . '.' . $domainName[1];
+			} else {
+				return $localPart . '@' . $emailParts[1];
+			}
+		} else {
+			return NULL;
+		}
+
+	}
+
+	/**
+	 * @param $ip
+	 *
+	 * @return null|string
+	 */
+	public static function anonymizeIP($ip) {
+
+		if (filter_var($ip, FILTER_VALIDATE_IP)) {
+			if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+				$lastDot = strrpos($ip, '.') + 1;
+				return substr($ip, 0, $lastDot)
+				       . str_repeat('*', strlen($ip) - $lastDot);
+			} else if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+				$lastColon = strrpos($ip, ':') + 1;
+				return substr($ip, 0, $lastColon)
+				       . str_repeat('*', strlen($ip) - $lastColon);
+			} else {
+				return NULL;
+			}
+		} else {
+			return NULL;
+		}
+	}
 
     /**
      * @return null|Helper

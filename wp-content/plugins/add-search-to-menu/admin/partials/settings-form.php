@@ -32,12 +32,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div id="search-form-editor">
 			<?php
 				settings_fields( 'ivory_search' );
-				$activetab = isset( $_GET['active-tab'] ) ? (int) $_GET['active-tab'] : '0';
-				echo '<input type="hidden" id="active-tab" name="active-tab" value="'. $activetab .'" />';
 
 				$panels = array(
-						'search-to-menu' => array(
-								'search-to-menu',
+						'menu-search' => array(
+								'menu-search',
 								'Menu Search',
 						),
 						'settings' => array(
@@ -48,16 +46,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				echo '<ul id="search-form-editor-tabs">';
 
+				$tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'menu-search';
+				$url = esc_url( menu_page_url( 'ivory-search-settings', false ) );
+
 				foreach ( $panels as $id => $panel ) {
-					echo sprintf( '<li id="%1$s-tab"><a href="#%1$s">%2$s</a></li>',
-						esc_attr( $panel[0] ), esc_html( $panel[1] ) );
+					$class = ( $tab == $id ) ? 'active' : '';
+					echo sprintf( '<li id="%1$s-tab" class="%2$s"><a href="%3$s">%4$s</a></li>',
+						esc_attr( $panel[0] ), esc_attr( $class ), $url . '&tab=' . $panel[0], esc_html( $panel[1] ) );
 				}
 
 				echo '</ul>';
-				echo '<div class="search-form-editor-panel" id="search-to-menu">';
-					$settings_fields = IS_Settings_Fields::getInstance();
-					$settings_fields->is_do_settings_sections( 'ivory_search' );
-				echo '</div>';
+
+				$settings_fields = IS_Settings_Fields::getInstance();
+
+				if ( 'menu-search'  == $tab ) {
+					$settings_fields->is_do_settings_sections( 'ivory_search', 'ivory_search_section' );
+				} else if ( 'settings' ==  $tab ) {
+					$settings_fields->is_do_settings_sections( 'ivory_search', 'ivory_search_settings' );
+				}
+
 			?>
 			</div><!-- #search-form-editor -->
 

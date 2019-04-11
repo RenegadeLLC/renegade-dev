@@ -23,8 +23,12 @@ function the_champ_login_button($widget = false){
 				}
 			}
 			$html .= '<div class="the_champ_login_container">';
+			$gdprOptIn = '';
 			if(isset($theChampLoginOptions['gdpr_enable'])){
-				$html .= '<div class="heateor_ss_sl_optin_container"><label><input type="checkbox" class="heateor_ss_social_login_optin" value="1" />'. str_replace($theChampLoginOptions['ppu_placeholder'], '<a href="'. $theChampLoginOptions['privacy_policy_url'] .'" target="_blank">'. $theChampLoginOptions['ppu_placeholder'] .'</a>', wp_strip_all_tags($theChampLoginOptions['privacy_policy_optin_text'])) .'</label></div>';
+				$gdprOptIn = '<div class="heateor_ss_sl_optin_container"><label><input type="checkbox" class="heateor_ss_social_login_optin" value="1" />'. str_replace($theChampLoginOptions['ppu_placeholder'], '<a href="'. $theChampLoginOptions['privacy_policy_url'] .'" target="_blank">'. $theChampLoginOptions['ppu_placeholder'] .'</a>', wp_strip_all_tags($theChampLoginOptions['privacy_policy_optin_text'])) .'</label></div>';
+			}
+			if(isset($theChampLoginOptions['gdpr_enable']) && $theChampLoginOptions['gdpr_placement'] == 'above'){
+				$html .= $gdprOptIn;
 			}
 			$html .= '<ul class="the_champ_login_ul">';
 			if(isset($theChampLoginOptions['providers']) && is_array($theChampLoginOptions['providers']) && count($theChampLoginOptions['providers']) > 0){
@@ -48,7 +52,12 @@ function the_champ_login_button($widget = false){
 					$html .= '<ss style="display:block" class="theChampLoginSvg theChamp'. ucfirst($provider) .'LoginSvg"></ss></i></li>';
 				}
 			}
-			$html .= '</ul></div>';
+			$html .= '</ul>';
+			if(isset($theChampLoginOptions['gdpr_enable']) && $theChampLoginOptions['gdpr_placement'] == 'below'){
+				$html .= '<div style="clear:both"></div>';
+				$html .= $gdprOptIn;
+			}
+			$html .= '</div>';
 			if(!$widget){
 				$html .= '</div><div style="clear:both; margin-bottom: 6px"></div>';
 			}
@@ -194,7 +203,7 @@ function the_champ_create_user($profileData, $verification = false){
 		'first_name' => $firstName,
 		'last_name' => $lastName,
 		'description' => isset($profileData['bio']) && $profileData['bio'] != '' ? $profileData['bio'] : '',
-		'user_url' => isset($profileData['link']) && $profileData['link'] != '' ? $profileData['link'] : '',
+		'user_url' => $profileData['provider'] != 'facebook' && isset($profileData['link']) && $profileData['link'] != '' ? $profileData['link'] : '',
 		'role' => get_option('default_role')
 	);
 	if(heateor_ss_is_plugin_active('theme-my-login/theme-my-login.php')){
@@ -211,7 +220,7 @@ function the_champ_create_user($profileData, $verification = false){
 				'first_name' => $firstName,
 				'last_name' => $lastName,
 				'description' => isset($profileData['bio']) && $profileData['bio'] != '' ? $profileData['bio'] : '',
-				'user_url' => isset($profileData['link']) && $profileData['link'] != '' ? $profileData['link'] : '',
+				'user_url' => $profileData['provider'] != 'facebook' && isset($profileData['link']) && $profileData['link'] != '' ? $profileData['link'] : '',
 				'role' => get_option('default_role')
 			);
 		}

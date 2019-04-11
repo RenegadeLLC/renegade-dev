@@ -248,17 +248,22 @@ function the_champ_update_css( $replace_color_option, $logo_color_option, $css_f
 	return false;
 }
 
+/**
+ * Show help links at "Plugins" page in admin area
+ */
 function the_champ_add_settings_link($links){
-    $addonsLink = '<a href="https://www.heateor.com/add-ons" target="_blank">' . __('Add-Ons', 'super-socializer') . '</a>';
-    $supportLink = '<a href="http://support.heateor.com" target="_blank">' . __('Support Documentation', 'super-socializer') . '</a>';
-    $settingsLink = '<a href="admin.php?page=heateor-ss-general-options">' . __('Settings', 'super-socializer') . '</a>';
-    // place it before other links
-	array_unshift( $links, $settingsLink );
-	$links[] = $addonsLink;
-	$links[] = $supportLink;
+	if(is_array($links)){
+	    $addonsLink = '<br/><a href="https://www.heateor.com/add-ons" target="_blank">' . __('Add-Ons', 'super-socializer') . '</a>';
+	    $supportLink = '<a href="http://support.heateor.com" target="_blank">' . __('Support Documentation', 'super-socializer') . '</a>';
+	    $settingsLink = '<a href="admin.php?page=heateor-ss-general-options">' . __('Settings', 'super-socializer') . '</a>';
+	    // place it before other links
+		array_unshift( $links, $settingsLink );
+		$links[] = $addonsLink;
+		$links[] = $supportLink;
+	}
 	return $links;
 }
-add_filter( 'plugin_action_links_super-socializer/super_socializer.php', 'the_champ_add_settings_link');
+add_filter('plugin_action_links_super-socializer/super_socializer.php', 'the_champ_add_settings_link');
 
 /**
  * Return ajax response
@@ -555,7 +560,10 @@ function the_champ_account_linking(){
                         }
                         $icons_container = '<div class="the_champ_login_container">';
                         if(isset($theChampLoginOptions['gdpr_enable'])){
-							$icons_container .= '<div class="heateor_ss_sl_optin_container"><label><input type="checkbox" class="heateor_ss_social_login_optin" value="1" />'. str_replace($theChampLoginOptions['ppu_placeholder'], '<a href="'. $theChampLoginOptions['privacy_policy_url'] .'" target="_blank">'. $theChampLoginOptions['ppu_placeholder'] .'</a>', wp_strip_all_tags($theChampLoginOptions['privacy_policy_optin_text'])) .'</label></div>';
+							$gdprOptIn = '<div class="heateor_ss_sl_optin_container"><label><input type="checkbox" class="heateor_ss_social_login_optin" value="1" />'. str_replace($theChampLoginOptions['ppu_placeholder'], '<a href="'. $theChampLoginOptions['privacy_policy_url'] .'" target="_blank">'. $theChampLoginOptions['ppu_placeholder'] .'</a>', wp_strip_all_tags($theChampLoginOptions['privacy_policy_optin_text'])) .'</label></div>';
+						}
+						if(isset($theChampLoginOptions['gdpr_enable']) && $theChampLoginOptions['gdpr_placement'] == 'above'){
+							$icons_container .= $gdprOptIn;
 						}
                         $icons_container .= '<ul class="the_champ_login_ul">';
 						$existingProviders = array();
@@ -597,7 +605,12 @@ function the_champ_account_linking(){
 								}
 								$icons_container .= '<div class="theChampLoginSvg theChamp'. ucfirst($provider) .'LoginSvg"></div></i></li>';
 							}
-							$icons_container .= '</ul></div>';
+							$icons_container .= '</ul>';
+							if(isset($theChampLoginOptions['gdpr_enable']) && $theChampLoginOptions['gdpr_placement'] == 'below'){
+								$icons_container .= '<div style="clear:both"></div>';
+								$icons_container .= $gdprOptIn;
+							}
+							$icons_container .= '</div>';
 							$html .= $icons_container;
 	                        $html .= '</td>
 	                        </tr>';

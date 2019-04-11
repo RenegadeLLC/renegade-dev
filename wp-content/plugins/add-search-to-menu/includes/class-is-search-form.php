@@ -129,22 +129,6 @@ class IS_Search_Form {
 		return $search_form;
 	}
 
-	private static function get_unit_tag( $id = 0 ) {
-		static $global_count = 0;
-
-		$global_count += 1;
-
-		if ( in_the_loop() ) {
-			$unit_tag = sprintf( 'ivory-search-f%1$d-p%2$d-o%3$d',
-				absint( $id ), get_the_ID(), $global_count );
-		} else {
-			$unit_tag = sprintf( 'ivory-search-f%1$d-o%2$d',
-				absint( $id ), $global_count );
-		}
-
-		return $unit_tag;
-	}
-
 	public function __get( $name ) {
 		$message = __( '<code>%1$s</code> property of a <code>IS_Search_Form</code> object is <strong>no longer accessible</strong>. Use <code>%2$s</code> method instead.', 'ivory-search' );
 

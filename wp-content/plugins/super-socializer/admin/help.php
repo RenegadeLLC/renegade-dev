@@ -16,7 +16,7 @@
 	
 	<div style="margin-bottom: 21px">
 		<div class="inside" style="padding-top:10px">
-		<a href="https://www.heateor.com/donate/?action=Super+Socializer" style="text-decoration:none" target="_blank"><input type="button" style="background-color:#D51F1F" class="ss_demo" value="<?php _e( 'Donate Now', 'super-socializer' ) ?>" /></a>
+		<a href="https://www.heateor.com/donate/?action=Super+Socializer" style="text-decoration:none" target="_blank"><input type="button" class="ss_demo" style="background-color:#D51F1F;background: linear-gradient(#2e9fff, #2481d0);" value="<?php _e( 'Donate Now', 'super-socializer' ) ?>" /></a>
 		</div>
 	</div>
 

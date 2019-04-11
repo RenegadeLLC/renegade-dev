@@ -103,6 +103,11 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 		locale: "en-US",
 		bookmarklet_url: "viber://forward?text="+postTitle+" "+postUrl
 	  },
+	  Threema: {
+		title: "Threema",
+		locale: "en-US",
+		bookmarklet_url: "threema://compose?text="+postTitle+" "+postUrl
+	  },
 	  Telegram: {
 		title: "Telegram",
 		locale: "en-US",
@@ -521,6 +526,11 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 		title: "Slashdot",
 		locale: "en-US",
 		redirect_url: "//slashdot.org/submission?url=" + postUrl,
+	  },
+	  StockTwits: {
+		title: "StockTwits",
+		locale: "en-US",
+		redirect_url: "https://stocktwits.com/widgets/share?body=" + postTitle + " " + postUrl,
 	  },
 	  Svejo: {
 		title: "Svejo",

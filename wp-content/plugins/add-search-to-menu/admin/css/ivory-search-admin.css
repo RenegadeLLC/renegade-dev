@@ -358,18 +358,6 @@ h1.wp-heading-inline {
 	width: 100%;
 }
 
-#search-form-editor > div {
-	display: none;
-}
-
-#search-form-editor + p.submit {
-	display: none;
-}
-
-#search-form-editor.ui-tabs + p.submit {
-	display: block;
-}
-
 #search-form-editor-tabs {
 	left: -210px;
 	position: absolute;
@@ -389,8 +377,8 @@ h1.wp-heading-inline {
 }
 
 #search-form-editor-tabs li:hover,
-#search-form-editor-tabs li.ui-tabs-active,
-#search-form-editor-tabs li.ui-tabs-active:hover {
+#search-form-editor-tabs li.active,
+#search-form-editor-tabs li.active:hover {
 	background-color: #3985C4;
 }
 
@@ -407,7 +395,7 @@ h1.wp-heading-inline {
 }
 
 #search-form-editor-tabs li:hover a,
-#search-form-editor-tabs li.ui-tabs-active a {
+#search-form-editor-tabs li.active a {
 	color: #FFF;
 }
 
@@ -421,7 +409,7 @@ h1.wp-heading-inline {
 	right: 5px;
 }
 
-#search-form-editor-tabs li.ui-tabs-active a::after,
+#search-form-editor-tabs li.active a::after,
 #search-form-editor-tabs li:hover a::after {
 	color: #FFF;
 }
@@ -457,6 +445,7 @@ h1.wp-heading-inline {
 .search-form-editor-box {
 	background-color: #f1f1f1;
 	padding: 16px;
+	width: auto;
 }
 
 h4.panel-desc {
@@ -473,7 +462,7 @@ h4.panel-desc {
 	text-decoration: none;
 }
 
-.form-table h3 {
+#search-body .form-table h3 {
 	clear: both;
 	cursor: pointer;
 	background-color: #1390cc;
@@ -482,6 +471,12 @@ h4.panel-desc {
 	font-size: 1em;
 	border-radius: 3px 3px 0 0;
 	margin: 1.5em 0 0;
+}
+
+#search-body .search-form-editor-panel {
+	background: none;
+	border: 0;
+	color: #444;
 }
 
 .form-table h3 .actions {
@@ -600,7 +595,17 @@ h4.panel-desc {
 .col-wrapper {
 	float: left;
 	margin: 0 20px 15px 0;
+	position: relative;
 	width: 190px;
+}
+
+.col-wrapper .spinner {
+	display: inline-block;
+	visibility: visible;
+	position: absolute;
+	bottom: 35%;
+	right: 45%;
+	z-index: 999999;
 }
 
 #search-form-editor .col-wrapper:nth-of-type(3n+0) {
@@ -646,11 +651,18 @@ h4.panel-desc {
 
 .col-wrapper.after,
 .col-wrapper.before {
-    width: auto;
+	width: auto;
 }
 
 .col-wrapper.before {
-    margin-right: 0;
+	margin-right: 0;
+}
+
+.load-all {
+	text-align: center;
+	font-weight: 800;
+	color: #6994d8;
+	cursor: pointer;
 }
 
 @media screen and ( max-width: 450px ) {

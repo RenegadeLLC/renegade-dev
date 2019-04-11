@@ -25,6 +25,7 @@ function build_slideshow($navigation_color){
 
            
             $slideHTML = '';
+            
             $slideHTML .= '<div class="slide-ct slide-off';
             if($slidenum == 1):
            //     $slideHTML .= ' active';
@@ -33,9 +34,15 @@ function build_slideshow($navigation_color){
             $slideID = 'slide-' . $slidenum;
             array_push($slide_links, $slideID);
             
-
-            $slideHTML .= '" id="' . $slideID . '">';
-
+            
+            $slideHTML .= '" id="' . $slideID . '"';
+            $slide_background_color = get_field('slide_background_color', $post);
+            $slide_background_image = get_field('slide_background_image', $post);
+            $slideHTML .= ' style="background-color:' . $slide_background_color . ' !important;"';
+            $slideHTML .= '>';
+            if($slide_background_image):
+                $slideHTML .= '<div class="slide-background" style="background-image:url(' . $slide_background_image . '); background-repeat:no-repeat;"></div>';
+            endif;
             if(have_rows('slide_element', $post)):
                 while(have_rows('slide_element', $post)):
                     the_row();
@@ -76,13 +83,13 @@ function build_slideshow($navigation_color){
                             }
 
                             if($text_block_align == 'Top Left'){
-                                $slideHTML .= ' top: 24px; left: 24px;';
+                                $slideHTML .= ' top: 0%; left: 0%;';
                             }elseif($text_block_align == 'Top Right'){
-                                $slideHTML .= ' top: 24px; right: 24px;';
+                                $slideHTML .= ' top: 0%; right: 0%;';
                             }elseif($text_block_align == 'Bottom Left'){
-                                $slideHTML .= ' bottom: 24px; left: 24px;';
+                                $slideHTML .= ' bottom: 0%; left: 0%;';
                             }elseif($text_block_align == 'Bottom Right'){
-                                $slideHTML .= ' bottom: 24px; right: 24px;';
+                                $slideHTML .= ' bottom: 0%; right: 0%;';
                             }
                             
                         endif;

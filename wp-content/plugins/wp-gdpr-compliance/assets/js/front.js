@@ -88,7 +88,7 @@
             days = (days) ? days : 365;
             var date = new Date();
             date.setTime(date.getTime() + 24 * days * 60 * 60 * 1e3);
-            document.cookie = 'wpgdprc-consent=' + encodeURIComponent(data) + '; expires=' + date.toGMTString() + '; path=/';
+            document.cookie = 'wpgdprc-consent-' + wpgdprcData.consentVersion +'=' + encodeURIComponent(data) + '; expires=' + date.toGMTString() + '; path=/';
         },
         /**
          * @param name
@@ -285,7 +285,7 @@
                             security: ajaxSecurity,
                             data: {
                                 type: 'delete_request',
-                                session: wpgdprcData.session,
+                                token: wpgdprcData.token,
                                 settings: JSON.parse($this.dataset.wpgdprc)
                             }
                         };
@@ -307,7 +307,7 @@
         };
 
     document.addEventListener('DOMContentLoaded', function () {
-        if (_readCookie('wpgdprc-consent') === null) {
+        if (_readCookie('wpgdprc-consent-' + wpgdprcData.consentVersion) === null) {
             initConsentBar();
         }
         initConsentModal();

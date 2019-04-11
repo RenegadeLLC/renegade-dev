@@ -206,7 +206,7 @@ function the_champ_prepare_sharing_html( $postUrl, $sharingType = 'horizontal', 
 					$style,
 					$innerStyle . ( $shareCount[$provider] || ($issetStartingShareCount && $shareCounts != '&nbsp;') ? $innerStyleConditional : '' ),
 					$liClass,
-					str_replace( '%network%', $provider, $issetStartingShareCount ? str_replace( '>&nbsp;', ' ss_st_count="' . $sharingMeta[$provider . '_' . $sharingType . '_count'] . '"' . ( $shareCounts == '&nbsp;' ? '>&nbsp;' : ' style="visibility:visible;' . ( $innerStyleConditional ? 'display:block;' : '' ) . '">' . heateor_ss_round_off_counts( $shareCount[$provider] + $sharingMeta[$provider . '_' . $sharingType . '_count'] ) ) , $counterPlaceholderValue ) : str_replace( '>&nbsp;', $shareCount[$provider] ? ' style="visibility:visible;' . ( $innerStyleConditional ? 'display:block;' : '' ) . '">' . heateor_ss_round_off_counts( $shareCount[$provider] ) : '>&nbsp;', $counterPlaceholderValue ) ),
+					str_replace( '%network%', $provider, $issetStartingShareCount ? str_replace( '>&nbsp;', ' ss_st_count="' . $sharingMeta[$provider . '_' . $sharingType . '_count'] . '"' . ( $shareCounts == '&nbsp;' ? '>&nbsp;' : ' style="visibility:visible;' . ( $innerStyleConditional ? 'display:block;' : '' ) . '">' . heateor_ss_round_off_counts( intval( $shareCount[$provider] ) + $sharingMeta[$provider . '_' . $sharingType . '_count'] ) ) , $counterPlaceholderValue ) : str_replace( '>&nbsp;', $shareCount[$provider] ? ' style="visibility:visible;' . ( $innerStyleConditional ? 'display:block;' : '' ) . '">' . heateor_ss_round_off_counts( intval( $shareCount[$provider] ) ) : '>&nbsp;', $counterPlaceholderValue ) ),
 					ucfirst( str_replace( '_', ' ', $provider ) )
 				),
 				$sharingNetworks[$provider]
@@ -870,19 +870,6 @@ function the_champ_sharing_count(){
 		the_champ_ajax_response(array('status' => 0, 'message' => __('Providers not selected')));
 	}
 
-	$tweetCountService = 'newsharecounts';
-	if ( isset( $theChampSharingOptions['tweet_count_service'] ) ) {
-		$tweetCountService = $theChampSharingOptions['tweet_count_service'];
-	} elseif ( isset( $theChampSharingOptions['vertical_tweet_count_service'] ) ) {
-		$tweetCountService = $theChampSharingOptions['vertical_tweet_count_service'];
-	}
-
-	if ( $tweetCountService == 'opensharecount' ) {
-		$twitterCountApi = 'http://opensharecount.com/count.json?url=';
-	} elseif ( $tweetCountService == 'newsharecounts' ) {
-		$twitterCountApi = 'http://public.newsharecounts.com/count.json?url=';
-	}
-
 	$responseData = array();
 	$ajaxResponse = array();
 	if(in_array('facebook', $sharingNetworks)){
@@ -927,16 +914,16 @@ function the_champ_sharing_count(){
 			foreach($sharingNetworks as $provider){
 				switch($provider){
 					case 'twitter':
-						$url = $twitterCountApi . $targetUrl;
+						$url = "https://counts.twitcount.com/counts.php?url=" . $targetUrl;
 						break;
 					case 'linkedin':
-						$url = 'http://www.linkedin.com/countserv/count/share?url='. $targetUrl .'&format=json';
+						$url = 'https://www.linkedin.com/countserv/count/share?url='. $targetUrl .'&format=json';
 						break;
 					case 'reddit':
-						$url = 'http://www.reddit.com/api/info.json?url='. $targetUrl;
+						$url = 'https://www.reddit.com/api/info.json?url='. $targetUrl;
 						break;
 					case 'pinterest':
-						$url = 'http://api.pinterest.com/v1/urls/count.json?callback=theChamp&url='. $targetUrl;
+						$url = 'https://api.pinterest.com/v1/urls/count.json?callback=theChamp&url='. $targetUrl;
 						break;
 					case 'buffer':
 						$url = 'https://api.bufferapp.com/1/links/shares.json?url='. $targetUrl;

@@ -28,12 +28,14 @@ class Action {
                                     wp_safe_redirect(Helper::getPluginAdminUrl('consents', array('notice' => 'wpgdprc-consent-not-found')));
                                     exit;
                                 }
-                                break;
+	                            Helper::resetCookieBar();
+	                            break;
                             case 'create' :
                                 $consent = new Consent();
                                 $consent->setSiteId(get_current_blog_id());
                                 $id = $consent->save();
                                 if (!empty($id)) {
+                                    Helper::resetCookieBar();
                                     wp_safe_redirect(add_query_arg(
                                         array('notice' => 'wpgdprc-consent-added'),
                                         Consent::getActionUrl($id)
@@ -138,9 +140,13 @@ class Action {
     }
 
     public function addConsentBar() {
-        $output = '<div class="wpgdprc wpgdprc-consent-bar" style="display: none;">';
+    	$consentBarColor = get_option(WP_GDPR_C_PREFIX . '_settings_consents_bar_color');
+    	$consentBarTextColor = get_option(WP_GDPR_C_PREFIX . '_settings_consents_bar_text_color');
+    	$consentBarButtonColor = get_option(WP_GDPR_C_PREFIX . '_settings_consents_bar_button_color_primary');
+    	$consentBarButtonTextColor = get_option(WP_GDPR_C_PREFIX . '_settings_consents_bar_button_color_secondary');
+        $output = '<div class="wpgdprc wpgdprc-consent-bar" style="display: none; background: ' . $consentBarColor .'">';
         $output .= '<div class="wpgdprc-consent-bar__container">';
-        $output .= '<div class="wpgdprc-consent-bar__content">';
+        $output .= '<div class="wpgdprc-consent-bar__content" style="color: ' . $consentBarTextColor .';">';
         $output .= '<div class="wpgdprc-consent-bar__column">';
         $output .= '<div class="wpgdprc-consent-bar__notice">';
         $output .= apply_filters('wpgdprc_the_content', Consent::getBarExplanationText());
@@ -154,7 +160,7 @@ class Action {
         $output .= '</div>';
         $output .= '<div class="wpgdprc-consent-bar__column">';
         $output .= sprintf(
-            '<button class="wpgdprc-button wpgdprc-consent-bar__button">%s</button>',
+            '<button class="wpgdprc-button wpgdprc-consent-bar__button" style="background: ' . $consentBarButtonColor .'; color: ' . $consentBarButtonTextColor . ';">%s</button>',
             __('Accept', WP_GDPR_C_SLUG)
         );
         $output .= '</div>';
@@ -165,6 +171,8 @@ class Action {
     }
 
     public function addConsentModal() {
+	    $consentModalButtonColor = get_option(WP_GDPR_C_PREFIX . '_settings_consents_bar_button_color_secondary');
+	    $consentModalButtonTextColor = get_option(WP_GDPR_C_PREFIX . '_settings_consents_bar_button_color_primary');
         $consentIds = (array)Helper::getConsentIdsByCookie();
         $consents = Consent::getInstance()->getList(array(
             'active' => array('value' => 1)
@@ -227,7 +235,7 @@ class Action {
             }
             $output .= '<footer class="wpgdprc-consent-modal__footer">';
             $output .= sprintf(
-                '<a class="wpgdprc-button wpgdprc-button--secondary" href="javascript:void(0);">%s</a>',
+                '<a class="wpgdprc-button wpgdprc-button--secondary" href="javascript:void(0);" style="background: ' . $consentModalButtonColor . '; color: ' . $consentModalButtonTextColor . ';">%s</a>',
                 __('Save my settings', WP_GDPR_C_SLUG)
             );
             $output .= '</footer>'; // .wpgdprc-consent-modal__footer

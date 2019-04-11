@@ -15,7 +15,7 @@
 			if ( $( this ).parent().hasClass( 'dropdown' ) ) {
 				$( this ).parent().find( 'form' ).fadeToggle();
 			} else if ( $( this ).parent().hasClass( 'sliding' ) ) {
-				$( this ).parent().find( 'form' ).animate( { width: '300' } );
+				$( this ).parent().find( 'form' ).animate( { width: '310' } );
 				$( this ).parent().find( 'form input[type="search"], form input[type="text"]' ).focus();
 				$( this ).parent().addClass( 'open' );
 			} else if ( $( this ).parent().hasClass( 'full-width-menu' ) ) {
@@ -45,18 +45,20 @@
 		return false;
 	} );
 
-	$( window ).click( function() {
-		if ( $( '.is-menu' ).hasClass( 'open' ) ) {
-			$( '.is-menu form' ).animate(
-				{ width: '0' },
-				400,
-				function() {
-					$( '.is-menu' ).removeClass( 'active-search' );
-					$( '.is-menu' ).removeClass( 'open' );
-				}
-			);
-		} else if ( $( '.is-menu' ).hasClass( 'dropdown' ) ) {
-			$( '.is-menu form' ).fadeOut();
+	$( window ).click( function( e ) {
+		if ( 0 === e.button ) {
+			if ( $( '.is-menu' ).hasClass( 'open' ) ) {
+				$( '.is-menu form' ).animate(
+					{ width: '0' },
+					400,
+					function() {
+						$( '.is-menu' ).removeClass( 'active-search' );
+						$( '.is-menu' ).removeClass( 'open' );
+					}
+				);
+			} else if ( $( '.is-menu' ).hasClass( 'dropdown' ) ) {
+				$( '.is-menu form' ).fadeOut();
+			}
 		}
 	});
 } )( jQuery );

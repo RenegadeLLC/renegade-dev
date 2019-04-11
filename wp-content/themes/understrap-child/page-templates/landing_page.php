@@ -209,7 +209,7 @@ $pageHTML = '';
                             $add_section_bottom_border = get_sub_field('add_section_bottom_border');
 
                             if($add_section_bottom_border == 'Yes'){
-                                $pageHTML .= '<div class="container"><div class="section-sep"></div></div>';
+                                $pageHTML .= '<div class="section-sep" style="margin:0 40px;"></div>';
                             }
                         endwhile; //END CONTENT SECTIONS WHILE
 

@@ -8,42 +8,35 @@
 
 	$( function() {
 
-		var active_tab = ivory_search.activeTab;
-
-		if ( $( '#ivory_search_options' ).length ) {
-
-			if ( location.href.indexOf( 'active-tab=' ) > -1 ) {
-				active_tab = ivory_search.getParameterByName( 'active-tab', ivory_search.getCookie( 'active-url' ) );
-			} else {
-				var active_tab_cookie = ivory_search.getCookie( 'active-tab' );
-				active_tab = ( "" !== active_tab_cookie ) ? active_tab_cookie : ivory_search.activeTab;
-			}
-
-		}
-
-		$( '#search-form-editor' ).tabs( {
-			active: active_tab,
-			activate: function( event, ui ) {
-				$( '#active-tab' ).val( ui.newTab.index() );
-
-				// If key exists updates the value
-				var newUrl = location.href;
-				if ( location.href.indexOf( 'active-tab=' ) > -1 ) {
-				    newUrl = location.href.replace( /active-tab=\w*\d*/, "active-tab=" + ui.newTab.index() );
-				// If not, append
-				} else {
-				     newUrl = location.href + "&active-tab=" + ui.newTab.index();
-				}
-
-				history.pushState( null, null, newUrl );
-
-				if ( $( '#ivory_search_options' ).length ) {
-					document.cookie = 'active-url=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
-					document.cookie = 'active-tab=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
-					document.cookie = 'active-url=' + newUrl + ';path=/';
-					document.cookie = 'active-tab=' + ui.newTab.index() + ';path=/';
-				}
-			}
+		$( window ).load( function() {
+			$( '.col-wrapper .load-all' ).on( 'click', function() {
+				var post_id = $('#post_ID').val();
+				var post_type = $(this).attr('id');
+				var this_load = $(this);
+				var inc_exc = $('.search-form-editor-panel').attr('id');
+				$(this).parent().append('<span class="spinner"></span>');
+				$.ajax( {
+					type : "post",
+					url: ivory_search.ajaxUrl,
+					data: {
+						action: 'display_posts',
+						post_id: post_id,
+						post_type: post_type,
+						inc_exc: inc_exc
+					},
+					success: function( response ) {
+						$(this_load).parent().find('select').find('option').remove().end().append(response );
+						if ( $(this_load).parent().find('select option:selected').length ) {
+							$(this_load).parent().find('.col-title span').html( '<strong>'+$(this_load).parent().find('.col-title').text()+'</strong>');
+						}
+						$(this_load).parent().find('.spinner').remove();
+						$(this_load).remove();
+					},
+					error: function (request, error) {
+						alert( " The posts could not be loaded. Because: " + error );
+					}
+				} );
+			} );
 		} );
 
 		$('.form-table .actions a.expand').click( function() {
@@ -68,7 +61,7 @@
 			icons: false,
 		} );
 
-		$('#search-body option').mousedown(function(e) {
+		$('#search-body select[multiple] option').mousedown(function(e) {
 			if ($(this).attr('selected')) {
 				$(this).removeAttr('selected');
 				return false;
@@ -162,32 +155,6 @@
 			}
 		} );
 	} );
-
-	ivory_search.getCookie = function(cname) {
-	    var name = cname + "=";
-	    var decodedCookie = decodeURIComponent(document.cookie);
-	    var ca = decodedCookie.split(';');
-	    for(var i = 0; i <ca.length; i++) {
-		var c = ca[i];
-		while (c.charAt(0) == ' ') {
-		    c = c.substring(1);
-		}
-		if (c.indexOf(name) == 0) {
-		    return c.substring(name.length, c.length);
-		}
-	    }
-	    return "";
-	}
-
-	ivory_search.getParameterByName = function( name, url ) {
-	    if (!url) url = window.location.href;
-	    name = name.replace(/[\[\]]/g, "\\$&");
-	    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-		results = regex.exec(url);
-	    if (!results) return null;
-	    if (!results[2]) return '';
-	    return decodeURIComponent(results[2].replace(/\+/g, " "));
-	}
 
 	ivory_search.titleHint = function() {
 		var $title = $( '#title' );

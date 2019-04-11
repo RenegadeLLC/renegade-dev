@@ -1,6 +1,10 @@
 <?php defined('ABSPATH') or die("Cheating........Uh!!"); ?>
 <div id="fb-root"></div>
-
+<div>
+	<?php
+	echo sprintf(__('You can appreciate the effort put in this free plugin by rating it <a href="%s" target="_blank">here</a>', 'super-socializer'), 'https://wordpress.org/support/view/plugin-reviews/super-socializer');
+	?>
+</div>
 <div class="metabox-holder columns-2" style="padding-bottom:8px" id="post-body">
 	<form id="the_champ_form" action="options.php" method="post">
 		<?php settings_fields( 'the_champ_sharing_options' ); ?>
@@ -30,7 +34,7 @@
 
 		<div style="clear:both"></div>
 		<div>
-		<a href="https://www.heateor.com/recover-social-share-counts" target="_blank"><input type="button" value="<?php _e('Recover Social Share Counts Lost After Moving to SSL/Https', 'super-socializer') ?>" class="ss_demo" /></a>
+		<a href="https://www.heateor.com/recover-social-share-counts" target="_blank"><input type="button" value="<?php _e('Recover Social Share Counts Lost After Moving to SSL/Https', 'super-socializer') ?> >>>" class="ss_demo" style="width:55%" /></a>
 		</div>
 		<div style="clear:both"></div>
 
@@ -801,7 +805,7 @@
 
 						<?php
 						$likeButtons = array('facebook_share', 'facebook_like', 'facebook_recommend', 'twitter_tweet', 'google_plusone', 'google_plus_share', 'linkedin_share', 'pinterest_pin', 'buffer_share', 'xing_share', 'yummly_share', 'reddit_badge');
-						$sharingNetworks = array('facebook', 'twitter', 'linkedin', 'google_plus', 'print', 'email', 'yahoo', 'reddit', 'digg', 'delicious', 'float_it', 'tumblr', 'vkontakte', 'pinterest', 'xing', 'whatsapp', 'instagram', 'yummly', 'buffer', 'AIM', 'Amazon_Wish_List', 'AOL_Mail', 'App.net', 'Baidu', 'Balatarin', 'BibSonomy', 'Bitty_Browser', 'Blinklist', 'Blogger_Post', 'BlogMarks', 'Bookmarks.fr', 'Box.net', 'BuddyMarks', 'Care2_News', 'CiteULike', 'Comment', 'Copy_Link', 'Diary.Ru', 'Diaspora', 'diHITT', 'Diigo', 'Douban', 'Draugiem', 'DZone', 'Evernote', 'Facebook_Messenger', 'Fark', 'Flipboard', 'Folkd', 'GentleReader', 'Google_Bookmarks', 'Google_Classroom', 'Google_Gmail', 'Hacker_News', 'Hatena', 'Instapaper', 'Jamespot', 'Kakao', 'Kik', 'Kindle_It', 'Known', 'Line', 'LiveJournal', 'Mail.Ru', 'Mendeley', 'Meneame', 'mix', 'Mixi', 'MySpace', 'Netlog', 'Netvouz', 'NewsVine', 'NUjij', 'Odnoklassniki', 'Oknotizie', 'Outlook.com', 'Papaly', 'Pinboard', 'Plurk', 'Pocket', 'Polyvore', 'PrintFriendly', 'Protopage_Bookmarks', 'Pusha', 'Qzone', 'Rediff MyPage', 'Refind', 'Renren', 'Segnalo', 'Sina Weibo', 'SiteJot', 'Skype', 'Slashdot', 'SMS', 'StockTwits', 'Stumpedia', 'Svejo', 'Symbaloo_Feeds', 'Telegram', 'Trello', 'Tuenti', 'Twiddla', 'TypePad_Post', 'Viadeo', 'Viber', 'Wanelo', 'Webnews', 'WordPress', 'Wykop', 'Yahoo_Mail', 'Yahoo_Messenger', 'Yoolink', 'YouMob');
+						$sharingNetworks = array('facebook', 'twitter', 'linkedin', 'google_plus', 'print', 'email', 'yahoo', 'reddit', 'digg', 'delicious', 'float_it', 'tumblr', 'vkontakte', 'pinterest', 'xing', 'whatsapp', 'instagram', 'yummly', 'buffer', 'AIM', 'Amazon_Wish_List', 'AOL_Mail', 'App.net', 'Baidu', 'Balatarin', 'BibSonomy', 'Bitty_Browser', 'Blinklist', 'Blogger_Post', 'BlogMarks', 'Bookmarks.fr', 'Box.net', 'BuddyMarks', 'Care2_News', 'CiteULike', 'Comment', 'Copy_Link', 'Diary.Ru', 'Diaspora', 'diHITT', 'Diigo', 'Douban', 'Draugiem', 'DZone', 'Evernote', 'Facebook_Messenger', 'Fark', 'Flipboard', 'Folkd', 'GentleReader', 'Google_Bookmarks', 'Google_Classroom', 'Google_Gmail', 'Hacker_News', 'Hatena', 'Instapaper', 'Jamespot', 'Kakao', 'Kik', 'Kindle_It', 'Known', 'Line', 'LiveJournal', 'Mail.Ru', 'Mendeley', 'Meneame', 'mix', 'Mixi', 'MySpace', 'Netlog', 'Netvouz', 'NewsVine', 'NUjij', 'Odnoklassniki', 'Oknotizie', 'Outlook.com', 'Papaly', 'Pinboard', 'Plurk', 'Pocket', 'Polyvore', 'PrintFriendly', 'Protopage_Bookmarks', 'Pusha', 'Qzone', 'Rediff MyPage', 'Refind', 'Renren', 'Segnalo', 'Sina Weibo', 'SiteJot', 'Skype', 'Slashdot', 'SMS', 'StockTwits', 'Stumpedia', 'Svejo', 'Symbaloo_Feeds', 'Telegram', 'Threema', 'Trello', 'Tuenti', 'Twiddla', 'TypePad_Post', 'Viadeo', 'Viber', 'Wanelo', 'Webnews', 'WordPress', 'Wykop', 'Yahoo_Mail', 'Yahoo_Messenger', 'Yoolink', 'YouMob');
 						?>
 						
 						<tr>
@@ -1043,29 +1047,7 @@
 							<input id="the_champ_counts" name="the_champ_sharing[horizontal_counts]" type="checkbox" <?php echo isset( $theChampSharingOptions['horizontal_counts'] ) ? 'checked = "checked"' : '';?> value="1" />
 							<br/>
 							<span style="font-size:12px"><?php _e( 'Share counts are supported for Facebook, Twitter, Linkedin, Buffer, Reddit, Pinterest, Odnoklassniki and Vkontakte', 'super-socializer' ) ?></span>
-							</td>
-						</tr>
-						
-						<?php
-						$tweetCountService = 'newsharecounts';
-						if ( isset( $theChampSharingOptions['tweet_count_service'] ) ) {
-							$tweetCountService = $theChampSharingOptions['tweet_count_service'];
-						} elseif ( isset( $theChampSharingOptions['vertical_tweet_count_service'] ) ) {
-							$tweetCountService = $theChampSharingOptions['vertical_tweet_count_service'];
-						}
-						?>
-
-						<tr id="the_champ_twitter_share_count" <?php echo isset( $theChampSharingOptions['horizontal_counts'] ) ? '' : 'style="display:none"' ?>>
-							<th>
-							</th>
-							<td>
-							<input id="the_champ_newsharecounts" name="the_champ_sharing[tweet_count_service]" type="radio" <?php echo $tweetCountService == 'newsharecounts' ? 'checked = "checked"' : '';?> value="newsharecounts" /><label for="the_champ_newsharecounts"><?php echo sprintf( __( 'Use <a href="%s" target="_blank">NewShareCounts</a> to show Twitter share counts', 'super-socializer'), 'http://newsharecounts.com' ) ?></label>
-							<br/>
-							<span class="the_champ_help_content" style="display:block"><?php echo sprintf( __( 'For this to work, you have to enter your website url %s and sign in using Twitter at <a href="%s" target="_blank">their website</a>', 'super-socializer'), esc_url(home_url()), 'http://newsharecounts.com' ) ?></span>
-							<br/>
-							<input id="the_champ_opensharecount" name="the_champ_sharing[tweet_count_service]" type="radio" <?php echo $tweetCountService == 'opensharecount' ? 'checked = "checked"' : '';?> value="opensharecount" /><label for="the_champ_opensharecount"><?php echo sprintf( __( 'Use <a href="%s" target="_blank">OpenShareCount</a> to show Twitter share counts', 'super-socializer'), 'http://opensharecount.com' ) ?></label>
-							<br/>
-							<span class="the_champ_help_content" style="display:block"><?php echo sprintf( __( 'For this to work, you have to sign up and register your website url %s at <a href="%s" target="_blank">their website</a>', 'super-socializer'), esc_url(home_url()), 'http://opensharecount.com' ) ?></span>
+							<span class="the_champ_help_content" style="display:block"><strong><?php echo sprintf( __( 'To show Twitter share count, you have to click "Give me my Twitter counts back" button at <a href="%s" target="_blank">TwitCount.com</a> and register your website %s with them. No need to copy-paste any code from their website.', 'super-socializer' ), 'http://twitcount.com', home_url() ) ?></strong></span>
 							</td>
 						</tr>
 
@@ -1487,20 +1469,7 @@
 							<input id="the_champ_vertical_counts" name="the_champ_sharing[vertical_counts]" type="checkbox" <?php echo isset( $theChampSharingOptions['vertical_counts'] ) ? 'checked = "checked"' : '';?> value="1" />
 							<br/>
 							<span style="font-size:12px"><?php _e( 'Share counts are supported for Facebook, Twitter, Linkedin, Buffer, Reddit, Pinterest, Odnoklassniki and Vkontakte', 'super-socializer' ) ?></span>
-							</td>
-						</tr>
-						
-						<tr id="the_champ_twitter_vertical_share_count" <?php echo isset( $theChampSharingOptions['vertical_counts'] ) ? '' : 'style="display:none"' ?>>
-							<th>
-							</th>
-							<td>
-							<input id="the_champ_vertical_newsharecounts" name="the_champ_sharing[vertical_tweet_count_service]" type="radio" <?php echo $tweetCountService == 'newsharecounts' ? 'checked = "checked"' : '';?> value="newsharecounts" /><label for="the_champ_vertical_newsharecounts"><?php echo sprintf( __( 'Use <a href="%s" target="_blank">NewShareCounts</a> to show Twitter share counts', 'super-socializer'), 'http://newsharecounts.com' ) ?></label>
-							<br/>
-							<span class="the_champ_help_content" style="display:block"><?php echo sprintf( __( 'For this to work, you have to enter your website url %s and sign in using Twitter at <a href="%s" target="_blank">their website</a>', 'super-socializer'), esc_url(home_url()), 'http://newsharecounts.com' ) ?></span>
-							<br/>
-							<input id="the_champ_vertical_opensharecount" name="the_champ_sharing[vertical_tweet_count_service]" type="radio" <?php echo $tweetCountService == 'opensharecount' ? 'checked = "checked"' : '';?> value="opensharecount" /><label for="the_champ_vertical_opensharecount"><?php echo sprintf( __( 'Use <a href="%s" target="_blank">OpenShareCount</a> to show Twitter share counts', 'super-socializer'), 'http://opensharecount.com' ) ?></label>
-							<br/>
-							<span class="the_champ_help_content" style="display:block"><?php echo sprintf( __( 'For this to work, you have to sign up and register your website url %s at <a href="%s" target="_blank">their website</a>', 'super-socializer'), esc_url(home_url()), 'http://opensharecount.com' ) ?></span>
+							<span class="the_champ_help_content" style="display:block"><strong><?php echo sprintf( __( 'To show Twitter share count, you have to click "Give me my Twitter counts back" button at <a href="%s" target="_blank">TwitCount.com</a> and register your website %s with them. No need to copy-paste any code from their website.', 'super-socializer' ), 'http://twitcount.com', home_url() ) ?></strong></span>
 							</td>
 						</tr>
 
@@ -1938,15 +1907,19 @@
 					<h3><label><?php _e('FAQ', 'super-socializer' ) ?></label></h3>
 					<div class="inside faq">
 						<p><?php _e('<strong>Note:</strong> Plugin will not work on local server. You should have an online website for the plugin to function properly.', 'super-socializer'); ?></p>
+						<p><a href="http://support.heateor.com/why-is-sharer-not-showing-the-correct-image-title-and-other-meta-tags-content" target="_blank"><?php _e('Why is sharer not showing the correct image, title and other meta tags content?', 'super-socializer') ?></a></p>
 						<p>
 						<a href="javascript:void(0)"><?php _e('Why is Instagram icon redirecting to Instagram website?', 'super-socializer'); ?></a>
 						<div><?php _e('Instagram icon is there to send website visitors to the Instagram page of your choice. You can save the desired Instagram handle in "Instagram Username" option in "Standard Interface" and "Floating Interface" sections.', 'super-socializer'); ?></div>
+						</p>
+						<p>
+						<a href="javascript:void(0)"><?php _e('Why are Twitter shares not appearing even after registering at Twitcount.com?', 'super-socializer'); ?></a>
+						<div><?php _e("It takes some time for their service to track the shares made on Twitter from your website. If you still feel it's taking too long you can contact their support directly from their website.", 'super-socializer'); ?></div>
 						</p>
 						<p><a href="http://support.heateor.com/place-title-social-share-icons-row/" target="_blank"><?php _e('How to Place Title and Social Share Icons in the Same Row?', 'super-socializer' ) ?></a></p>
 						<p><a href="https://www.heateor.com/recover-social-share-counts/" target="_blank"><?php _e('How to restore Social Share counts lost after moving my website to SSL/Https?', 'super-socializer' ) ?></a></p>
 						<p><a href="http://support.heateor.com/browser-blocking-social-features/" target="_blank"><?php _e('Why is my browser blocking some features of the plugin?', 'super-socializer' ) ?></a></p>
 						<p><a href="http://support.heateor.com/color-share-icons-not-being-updated" target="_blank"><?php _e('Why the color of share icons is not being updated?', 'super-socializer') ?></a></p>
-						<p><a href="http://support.heateor.com/why-is-sharer-not-showing-the-correct-image-title-and-other-meta-tags-content" target="_blank"><?php _e('Why is sharer not showing the correct image, title and other meta tags content?', 'super-socializer' ) ?></a></p>
 						<p><a href="http://support.heateor.com/browser-blocking-social-features/" target="_blank"><?php _e('Why Facebook share counts are not appearing?', 'super-socializer' ) ?></a></p>
 						<p><a href="http://support.heateor.com/how-can-i-show-share-counts-of-my-website-rather-than-of-individual-pagepost/" target="_blank"><?php _e('How can I show share counts of my website rather than of individual pages/posts?', 'super-socializer' ) ?></a></p>
 						<p><a href="http://support.heateor.com/how-can-i-disable-social-sharing-on-particular-pagepost/" target="_blank"><?php _e('How can I disable sharing on particular page/post?', 'super-socializer' ) ?></a></p>
@@ -1972,6 +1945,11 @@
 		<p class="submit">
 			<input style="margin-left:8px" type="submit" name="save" class="button button-primary" value="<?php _e("Save Changes", 'super-socializer' ); ?>" />
 		</p>
+		<div>
+			<?php
+			echo sprintf(__('You can appreciate the effort put in this free plugin by rating it <a href="%s" target="_blank">here</a>', 'super-socializer'), 'https://wordpress.org/support/view/plugin-reviews/super-socializer');
+			?>
+		</div>
 	</form>
 	<div class="clear"></div>
 	<div class="stuffbox">

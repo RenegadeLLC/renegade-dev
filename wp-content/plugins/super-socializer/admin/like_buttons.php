@@ -1,7 +1,11 @@
 <?php defined('ABSPATH') or die("Cheating........Uh!!"); ?>
 
 <div id="fb-root"></div>
-
+<div>
+	<?php
+	echo sprintf(__('You can appreciate the effort put in this free plugin by rating it <a href="%s" target="_blank">here</a>', 'super-socializer'), 'https://wordpress.org/support/view/plugin-reviews/super-socializer');
+	?>
+</div>
 <div class="metabox-holder columns-2" id="post-body">
 	<form action="options.php" method="post">
 		<?php settings_fields('the_champ_counter_options'); ?>
@@ -821,6 +825,11 @@
 		<p class="submit">
 			<input style="margin-left:8px" type="submit" name="save" class="button button-primary" value="<?php _e("Save Changes", 'super-socializer'); ?>" />
 		</p>
+		<div>
+			<?php
+			echo sprintf(__('You can appreciate the effort put in this free plugin by rating it <a href="%s" target="_blank">here</a>', 'super-socializer'), 'https://wordpress.org/support/view/plugin-reviews/super-socializer');
+			?>
+		</div>
 		</form>
 		<div class="clear"></div>
 		<div class="stuffbox">

@@ -34,6 +34,8 @@ function build_feed(){
                         include($loop_templates.'content-newsletter.php');
                     elseif($post_type == 'post'):
                         include($loop_templates.'content-post.php');
+                    elseif($post_type == 'downloads'):
+                            include($loop_templates.'content-download.php');
                     elseif($post_type == 'videos'):
                         include($loop_templates.'content-video.php');
                     endif;
@@ -202,6 +204,8 @@ function build_feed(){
                             get_template_part( '/loop-templates/content', 'podcast' );
                         elseif($post_type == 'newsletters'):
                             get_template_part( '/loop-templates/content', 'newsletter' );
+                            elseif($post_type == 'downloads'):
+                                get_template_part( '/loop-templates/content', 'download' );
                         elseif($post_type == 'post'):
                             get_template_part( '/loop-templates/content', 'post' );
                         elseif($post_type == 'videos'):

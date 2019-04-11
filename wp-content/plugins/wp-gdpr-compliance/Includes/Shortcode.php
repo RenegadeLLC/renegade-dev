@@ -15,8 +15,8 @@ class Shortcode {
      */
     private static function getAccessRequestData() {
         $output = '';
-        $request = (isset($_REQUEST['wpgdprc'])) ? unserialize(base64_decode(esc_html($_REQUEST['wpgdprc']))) : false;
-        $request = (!empty($request)) ? AccessRequest::getInstance()->getByEmailAddressAndSessionId($request['email'], $request['sId']) : false;
+        $token = (isset($_REQUEST['wpgdprc'])) ? esc_html(urldecode($_REQUEST['wpgdprc'])) : false;
+        $request = ($token !== false) ? AccessRequest::getInstance()->getByToken($token) : false;
         if ($request !== false) {
             if (
                 SessionHelper::checkSession($request->getSessionId()) &&
@@ -99,7 +99,13 @@ class Shortcode {
                 );
             }
         } else {
-            $output .= __('This request is expired or doesn\'t exist.', WP_GDPR_C_SLUG);
+            $output .= sprintf(
+                '<div class="wpgdprc-message wpgdprc-message--error"><p>%s</p></div>',
+                sprintf(
+                    __('<strong>ERROR</strong>: %s', WP_GDPR_C_SLUG),
+                    __('This request is expired or doesn\'t exist.', WP_GDPR_C_SLUG)
+                )
+            );
         }
         return $output;
     }

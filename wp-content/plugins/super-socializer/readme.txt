@@ -1,10 +1,10 @@
 ﻿=== WordPress Social Share, Social Login and Social Comments Plugin - Super Socializer ===
-Contributors: Heateor, the_champ, Hungarian Translator: László Tavaszi http://kerekmese.hu, Chinese Translator: Alex Li plpkj.com, Portuguese Translator: Paulo Purkyt https://www.linkedin.com/in/ppurkyt, Italian Translator: FG3D (Freedom's Gate) https://fg3d.net, Spanish translator: Ignacio Iglesias http://trespies.com, Arabic Translator: http://www.ArabsSM.com, Russian/Ukrainian Translator: Nicholas Lagunov
+Contributors: Heateor, the_champ, Hungarian Translator: László Tavaszi http://kerekmese.hu, Chinese Translator: CalmSmile calmsmile.org, Portuguese Translator: Paulo Purkyt https://www.linkedin.com/in/ppurkyt, Italian Translator: FG3D (Freedom's Gate) https://fg3d.net, Spanish translator: Ignacio Iglesias http://trespies.com, Arabic Translator: http://www.ArabsSM.com, Russian/Ukrainian Translator: Nicholas Lagunov
 Donate link: https://www.heateor.com/donate?action=Super+Socializer
 Tags: social login, social share, social commenting, social comments, social plugin, profile data, social analytics, online identity, social profile storage, single sign-on, social media follow, facebook login, Twitch login
 Requires at least: 2.5.0
-Tested up to: 4.9.8
-Stable tag: 7.12.2
+Tested up to: 5.0.2
+Stable tag: 7.12.6
 License: GPLv2 or later
 
 The unique Social Plugin to let you integrate Social Login, Social Share, Social Comments and Social Media follow at your website
@@ -19,6 +19,7 @@ Integrate Social Login, Social Share and Social Comments at your website easiest
 
 = Feature list =
 * GDPR Compliant
+* Compatible with Gutenberg editor
 * Social Share from around 100 social networks
 * Social Media follow icons 
 * Share counts are supported for Facebook, Linkedin, Twitter, Buffer, Reddit, Pinterest, Odnoklassniki and Vkontakte
@@ -210,6 +211,29 @@ Yes, we can help you with it. Just drop an email at support[ at ]heateor[ dot ]c
 8. **Social Commenting**: Disqus Commenting selected
 
 == Changelog ==
+= 7.12.6 =
+* [New] Added Medium, Odnoklassniki and Vkontakte in social media follow icons widget
+* [Improvement] Added "aria-label" attribute in the hyperlinks for social media follow icons
+* [Improvement] Added rel="noopener" attribute in the hyperlink for Whatsapp share icon
+* [Improvement] Fixed some PHP notices being generated when enabling WordPress debugging
+
+= 7.12.5 =
+* [New] Added option to control the placement of GDPR opt-in (above or below the social login icons)
+
+= 7.12.4 =
+* [Bugfix] Added TwitCount.com service to get Twitter share counts working again
+* [Improvement] Improved Chinese translation
+
+= 7.12.3 =
+* [Bugfix] Pinterest shares disappeared due to changes in Pinterest API
+* [Bugfix] Follow Icons widget was breaking layout of webpage in a few cases
+* [Bugfix] Broken "Plugins" page in admin area on multisite installation in some cases
+* [Bugfix] StockTwits was not there with the other social networks appearing in the "More" share networks popup
+* [New] Added Threema
+* [Improvement] Improved StockTwits logo
+* [Improvement] Whatsapp icon was triggering share in the same browser tab instead of another tab
+* [Improvement] Code improvement
+
 = 7.12.2 =
 * [Bugfix] Facebook Login was giving error "Cross-site request forgery validation failed" in some cases
 * [Bugfix] Twitter login was not working for the Twitter apps created with the new Twitter developer dashboard
@@ -1623,3 +1647,26 @@ Yes, we can help you with it. Just drop an email at support[ at ]heateor[ dot ]c
 = 7.12.2 =
 * [Bugfix] Facebook Login was giving error "Cross-site request forgery validation failed" in some cases
 * [Bugfix] Twitter login was not working for the Twitter apps created with the new Twitter developer dashboard
+
+= 7.12.3 =
+* [Bugfix] Pinterest shares disappeared due to changes in Pinterest API
+* [Bugfix] Follow Icons widget was breaking layout of webpage in a few cases
+* [Bugfix] Broken "Plugins" page in admin area on multisite installation in some cases
+* [Bugfix] StockTwits was not there with the other social networks appearing in the "More" share networks popup
+* [New] Added Threema
+* [Improvement] Improved StockTwits logo
+* [Improvement] Whatsapp icon was triggering share in the same browser tab instead of another tab
+* [Improvement] Code improvement
+
+= 7.12.4 =
+* [Bugfix] Added TwitCount.com service to get Twitter share counts working again
+* [Improvement] Improved Chinese translation
+
+= 7.12.5 =
+* [New] Added option to control the placement of GDPR opt-in (above or below the social login icons)
+
+= 7.12.6 =
+* [New] Added Medium, Odnoklassniki and Vkontakte in social media follow icons widget
+* [Improvement] Added "aria-label" attribute in the hyperlinks for social media follow icons
+* [Improvement] Added rel="noopener" attribute in the hyperlink for Whatsapp share icon
+* [Improvement] Fixed some PHP notices being generated when enabling WordPress debugging

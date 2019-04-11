@@ -55,7 +55,7 @@ function create_podcast_post_type() {
 			//'register_meta_box_cb' => 'add_custom_meta_box',
 			'hierarchical' => true,
 			'rewrite' => array( 'slug' => 'resources-story-hub/podcasts/podcast', 'with_front'=> false ),
-			'supports' => array('excerpt', 'title', 'revisions', 'editor', 'tags', 'categories', 'comments', 'archives'),
+			'supports' => array('excerpt', 'title', 'revisions', 'editor', 'tags', 'categories', 'comments', 'archives', 'author'),
 			'has_archive' => true,
 	       'publicly_queryable'  => true
 			
@@ -259,3 +259,7 @@ function rpd_taxonomies() {
 }
 add_action( 'init', 'rpd_taxonomies' );
 
+function add_author_support_to_podcast_posts() {
+	add_post_type_support( 'podcasts', 'author' ); 
+ }
+ add_action( 'init', 'add_author_support_to_podcast_posts' );

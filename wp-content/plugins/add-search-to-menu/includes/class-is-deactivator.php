@@ -19,13 +19,12 @@ class IS_Deactivator {
 	 */
 	public static function deactivate() {
 
-		$old_opt = (array)get_option( 'add_search_to_menu' );
-		$new_opt = (array)get_option( 'ivory_search' );
-		$opt = array_merge( $old_opt, $new_opt );
+		$is = Ivory_Search::getInstance();
 
-		if ( isset( $opt['dismiss_admin_notices'] ) ) {
-			unset( $opt['dismiss_admin_notices'] );
-			update_option( 'ivory_search', $opt );
+		if ( isset( $is->opt['is_notices']['config'] ) ) {
+			$is_notices = get_option( 'is_notices', array() );
+			unset( $is_notices['is_notices']['config'] );
+			update_option( 'is_notices', $is_notices );
 		}
 	}
 }

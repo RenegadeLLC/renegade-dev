@@ -1,6 +1,10 @@
 <?php defined('ABSPATH') or die("Cheating........Uh!!"); ?>
 <div id="fb-root"></div>
-
+<div>
+	<?php
+	echo sprintf(__('You can appreciate the effort put in this free plugin by rating it <a href="%s" target="_blank">here</a>', 'super-socializer'), 'https://wordpress.org/support/view/plugin-reviews/super-socializer');
+	?>
+</div>
 <div class="metabox-holder columns-2" id="post-body">
 	<form action="options.php" method="post">
 		<?php settings_fields('the_champ_facebook_options'); ?>
@@ -186,7 +190,7 @@
 								<tr>
 									<td colspan="2">
 									<div>
-									<a href="https://www.heateor.com/add-ons" target="_blank"><input type="button" value="<?php _e('Enable Facebook Comments notification and moderation', 'super-socializer') ?>" class="ss_demo" /></a>
+									<a href="https://www.heateor.com/add-ons" target="_blank"><input type="button" value="<?php _e('Enable Facebook Comments notification and moderation', 'super-socializer') ?> >>>" class="ss_demo" /></a>
 									</div>
 									</td>
 								</tr>
@@ -230,7 +234,7 @@
 								<tr>
 									<td colspan="2">
 									<div>
-									<a href="https://www.heateor.com/facebook-comments-moderation" target="_blank"><input type="button" value="<?php _e('Show Recent Facebook Comments in a Widget', 'super-socializer') ?>" class="ss_demo" /></a>
+									<a href="https://www.heateor.com/facebook-comments-moderation" target="_blank"><input type="button" value="<?php _e('Show Recent Facebook Comments in a Widget', 'super-socializer') ?> >>>" class="ss_demo" /></a>
 									</div>
 									</td>
 								</tr>
@@ -310,14 +314,6 @@
 									<td colspan="2">
 									<div>
 									<?php _e('The order to use when displaying comments.', 'super-socializer') ?>
-									</div>
-									</td>
-								</tr>
-								
-								<tr>
-									<td colspan="2">
-									<div>
-									<a href="https://www.heateor.com/facebook-comments-moderation" target="_blank"><input type="button" value="<?php _e('Recover Facebook Comments Lost After Moving to SSL/Https', 'super-socializer') ?>" class="ss_demo" /></a>
 									</div>
 									</td>
 								</tr>
@@ -486,6 +482,11 @@
 		<p class="submit">
 			<input id="the_champ_enable_fblike" style="margin-left:8px" type="submit" name="save" class="button button-primary" value="<?php _e("Save Changes", 'super-socializer'); ?>" />
 		</p>
+		<div>
+			<?php
+			echo sprintf(__('You can appreciate the effort put in this free plugin by rating it <a href="%s" target="_blank">here</a>', 'super-socializer'), 'https://wordpress.org/support/view/plugin-reviews/super-socializer');
+			?>
+		</div>
 	</form>
 	<div class="clear"></div>
 	<div class="stuffbox">
