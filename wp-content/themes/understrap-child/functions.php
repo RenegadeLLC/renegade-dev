@@ -26,7 +26,6 @@ function theme_enqueue_styles() {
 
 // RENEGADE FUNCTIONS
 
-
 // Add page link attributes for posts page
 add_filter('next_posts_link_attributes', 'posts_link_attributes');
 add_filter('previous_posts_link_attributes', 'posts_link_attributes');
@@ -374,3 +373,19 @@ add_filter( 'get_the_archive_title', function ( $title ) {
     return $title;
 
 });
+
+// disable image attachment pages
+
+function myprefix_redirect_attachment_page() {
+	if ( is_attachment() ) {
+		global $post;
+		if ( $post && $post->post_parent ) {
+			wp_redirect( esc_url( get_permalink( $post->post_parent ) ), 301 );
+			exit;
+		} else {
+			wp_redirect( esc_url( home_url( '/' ) ), 301 );
+			exit;
+		}
+	}
+}
+add_action( 'template_redirect', 'myprefix_redirect_attachment_page' );

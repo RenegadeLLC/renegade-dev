@@ -41,6 +41,8 @@ endif;
 	?>
 
 	<?php wp_head(); ?>
+
+	<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us7.list-manage.com","uuid":"93c6aa44b752c7b548b819c32","lid":"49d52f3068","uniqueMethods":true}) })</script>
 </head>
 
 <body <?php body_class(); ?>>

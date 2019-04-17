@@ -99,5 +99,12 @@ function renegade_scripts() {
 	//SCROLLTO FOR GREENSOCK PLUGIN
 	wp_register_script('slider', $scriptdir . 'greensock_slider.js');
 	wp_enqueue_script('slider');
+
+	//FANCY BOX LIGHTBOX PLUGIN
+	wp_register_script('fancybox', $scriptdir . 'fancybox/jquery.fancybox.min.js');
+	wp_enqueue_script('fancybox');
+
+	wp_register_style('fancybox', $scriptdir . 'fancybox/jquery.fancybox.min.css');
+	wp_enqueue_style('fancybox');
 }
 ?>

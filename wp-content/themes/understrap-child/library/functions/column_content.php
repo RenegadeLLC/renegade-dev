@@ -133,6 +133,13 @@ function get_column_content($column_name, $column_width){
         $columnHTML .= '<div class="bt-fixed"><div class="bt-ct"><div class="bt">' . $link_text . '</a></div><!-- .bt --></div><!-- .bt-ct --></div><!-- .bt-fixed -->';
         $columnHTML .= '</div><!--.image-text-wrapper -->';
     endif;
+
+    if($content_type == 'Subscribe Form'):
+        $subscribe_form_shortcode = $column_content['subscribe_form_shortcode'];
+        $formHTML = build_subscribe_form($subscribe_form_shortcode, $headlineHTML);
+        $columnHTML .= $formHTML;
+    endif;
+    
     
     
     $columnHTML .= '</div><!-- .column-->';

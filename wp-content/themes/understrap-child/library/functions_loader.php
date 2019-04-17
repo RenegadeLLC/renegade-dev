@@ -9,6 +9,7 @@ require_once (FUNCTIONS. '/all_bios.php');
 require_once (FUNCTIONS. '/post_feed.php');
 require_once (FUNCTIONS. '/subscribe_form.php');
 require_once (FUNCTIONS. '/testimonials.php');
+require_once (FUNCTIONS. '/video_testimonials.php');
 require_once (FUNCTIONS. '/case_studies.php');
 require_once (FUNCTIONS. '/custom_content.php');
 require_once (FUNCTIONS. '/section_headline.php');

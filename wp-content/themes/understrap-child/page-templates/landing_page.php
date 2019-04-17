@@ -188,13 +188,19 @@ $pageHTML = '';
                                 $testimonialsHTML = build_testimonials();
                                 $pageHTML .= $testimonialsHTML;
 
+                            elseif ($content_section_type == 'Video Testimonials'):
+
+                                $pageHTML .= $headlineHTML;
+                                $videotestimonialsHTML = build_videotestimonials();
+                                $pageHTML .= $videotestimonialsHTML;
+
                             elseif ($content_section_type == 'Case Studies'):
 
                                 $pageHTML .= $headlineHTML;
                                 $casesHTML = build_case_studies();
                                 $pageHTML .= $casesHTML;
 
-                            elseif ($content_section_type == 'Slide'):
+                            elseif ($content_section_type == 'Slideshow'):
                                 
                                 $navigation_color = get_sub_field('navigation_color');
                                 $pageHTML .= $headlineHTML;

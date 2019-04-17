@@ -13,7 +13,7 @@
 #error-404-wrapper,
 .wrapper {
 	#content {
-		padding-top: 6.5rem;
+		padding-top: 3.5rem;
 		background-color: $white;
 		// .content-section:first-child {
 			// padding-top: 9rem;
@@ -257,8 +257,8 @@
 			margin-top: -75px;
 		}
 		.navbar-brand {
-			max-width: 140px;
-			width: 140px;
+			max-width: 250px;
+			width: 250px;
 			transition: all 0.4s ease-out;
 		}
 	}
@@ -351,14 +351,14 @@ body.logged-in.admin-bar {
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {  
 	.navbar-brand {
-		max-width: 100%;
+		max-width: 330px;
 	}
 }
  
 /* Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) { 
 	.navbar-brand {
-		max-width: 100%;
+		max-width: 330px;
 	}
 }
 
