@@ -28,7 +28,7 @@ function the_champ_login_notifications($loginOptions){
 			$errorHtml .= the_champ_error_message('Specify LinkedIn Client ID and Secret in <strong>Super Socializer</strong> > <strong>Social Login</strong> section in admin panel for LinkedIn Login to work');
 		}
 		if(in_array('google', $loginOptions['providers']) && (!isset($loginOptions['google_key']) || $loginOptions['google_key'] == '' || !isset($loginOptions['google_secret']) || $loginOptions['google_secret'] == '')){
-			$errorHtml .= the_champ_error_message('Specify GooglePlus Client ID and Secret in <strong>Super Socializer</strong> > <strong>Social Login</strong> section in admin panel for GooglePlus Login to work');
+			$errorHtml .= the_champ_error_message('Specify Google Client ID and Secret in <strong>Super Socializer</strong> > <strong>Social Login</strong> section in admin panel for Google Login to work');
 		}
 		if(in_array('vkontakte', $loginOptions['providers']) && (!isset($loginOptions['vk_key']) || $loginOptions['vk_key'] == '' || !isset($loginOptions['vk_secure_key']) || $loginOptions['vk_secure_key'] == '')){
 			$errorHtml .= the_champ_error_message('Specify Vkontakte Application ID and Secret Key in <strong>Super Socializer</strong> > <strong>Social Login</strong> section in admin panel for Vkontakte Login to work');
@@ -776,7 +776,7 @@ function the_champ_sharing_meta_setup(){
 		<?php
 		if(the_champ_social_sharing_enabled()){
 			global $theChampSharingOptions;
-			$validNetworks = array('facebook', 'twitter', 'linkedin', 'buffer', 'reddit', 'pinterest', 'vkontakte', 'Odnoklassniki');
+			$validNetworks = array('facebook', 'twitter', 'linkedin', 'buffer', 'reddit', 'pinterest', 'vkontakte', 'Odnoklassniki', 'Fintel');
 			if(isset($theChampSharingOptions['hor_enable']) && isset($theChampSharingOptions['horizontal_counts']) && isset($theChampSharingOptions['horizontal_re_providers']) && count($theChampSharingOptions['horizontal_re_providers']) > 0){
 				?>
 				<p>

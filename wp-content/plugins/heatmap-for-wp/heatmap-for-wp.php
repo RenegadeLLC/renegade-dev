@@ -1,9 +1,9 @@
-<?php 
+<?php
 /*
 Plugin Name: heatmap for WordPress
 Plugin URI: http://wordpress.org/plugins/heatmap-for-wp/
 Description: Real-time analytics and event tracking for your WordPress site (see https://heatmap.com)
-Version: 0.5.1
+Version: 0.5.2
 Author: HeatMap, Inc
 Author URI: https://heatmap.com
 License: GPL2
@@ -477,4 +477,3 @@ EXT_DEFAULT
 }
 
 heatmapWP::init();
-

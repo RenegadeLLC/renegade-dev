@@ -3,8 +3,8 @@ Contributors: Heateor, the_champ, Hungarian Translator: László Tavaszi http://
 Donate link: https://www.heateor.com/donate?action=Super+Socializer
 Tags: social login, social share, social commenting, social comments, social plugin, profile data, social analytics, online identity, social profile storage, single sign-on, social media follow, facebook login, Twitch login
 Requires at least: 2.5.0
-Tested up to: 5.0.2
-Stable tag: 7.12.6
+Tested up to: 5.1.1
+Stable tag: 7.12.21
 License: GPLv2 or later
 
 The unique Social Plugin to let you integrate Social Login, Social Share, Social Comments and Social Media follow at your website
@@ -20,9 +20,10 @@ Integrate Social Login, Social Share and Social Comments at your website easiest
 = Feature list =
 * GDPR Compliant
 * Compatible with Gutenberg editor
+* Compatible with myCRED (append myCRED referral ID at the end of the url being shared)
 * Social Share from around 100 social networks
 * Social Media follow icons 
-* Share counts are supported for Facebook, Linkedin, Twitter, Buffer, Reddit, Pinterest, Odnoklassniki and Vkontakte
+* Share counts are supported for Facebook, Linkedin, Twitter, Buffer, Reddit, Pinterest, Odnoklassniki, Fintel and Vkontakte
 * FREE icon customization options
 * Options to specify sharing icon shape - Square, Round and Rectangular
 * Options to specify sharing icon size - minimum 16 pixels, no upper limit
@@ -50,8 +51,8 @@ Integrate Social Login, Social Share and Social Comments at your website easiest
 * Auto-approve comments made by users logged in using Social Login
 * Use user's social profile avatar as profile picture at your website
 * Customizable login/post-registration redirection
-* Enable Facebook Like/Recommend, Google +1, Google Plus Share, Twitter Tweet, Yummly, Buffer, Xing buttons
-* Enable Social Comments - Facebook Comments, Google Plus Comments, Disqus Comments
+* Enable Facebook Like/Recommend, Twitter Tweet, Yummly, Buffer, Xing buttons
+* Enable Social Comments - Facebook Comments, Disqus Comments
 * Widgets and shortcodes for Social Share, Social Login, Social Comments and Like Buttons
 * Let your users link their social accounts to the account at your website
 * Compatible with BuddyPress, bbPress, WooCommerce
@@ -85,7 +86,7 @@ Detailed Overview:
 
 **Benefits**
 
-1. **Virality**: When people comment at your blog using their Facebook, Google, Disqus accounts, the comment not only shows up at your blog, but it also appears in their news feed. This puts your blog in front of new audience which further adds to the likelihood of you getting a new returning visitor.
+1. **Virality**: When people comment at your blog using their Facebook and Disqus accounts, the comment not only shows up at your blog, but it also appears in their news feed. This puts your blog in front of new audience which further adds to the likelihood of you getting a new returning visitor.
 
 2. **Higher Conversations**: When you know the person commenting on something, it's more likely that you will also type out your ideas there, unlike the situation when you don't know the person involved in the conversation.
 
@@ -93,7 +94,7 @@ Detailed Overview:
 
 4. **No Spam**: You can get rid off the spammers and users, commenting using their fake accounts.
 
-5. **Works for the lazy**: Most people are nowadays lazy. To get these people commenting on your blog, it will just require them to login to their Facebook, Google account (which almost everyone does after powering ON computer).
+5. **Works for the lazy**: Most people are nowadays lazy. To get these people commenting on your blog, it will just require them to login to their Facebook account (which almost everyone does after powering ON computer).
 
 
 = User Profile Data = Every time a user logs in, plugin fetches profile data of the user and store that in your WordPress database.
@@ -124,7 +125,6 @@ Detailed Overview:
 * <a target="_blank" href="https://super-socializer-wordpress.heateor.com">Plugin Demo</a>
 * <a target="_blank" href="https://www.facebook.com/SocializerChamp">Plugin Facebook fan page</a>
 * <a target="_blank" href="https://www.facebook.com/heateor">Our Facebook Page</a>
-* <a target="_blank" href="https://plus.google.com/+Heateor">Our GooglePlus Page</a>
 * <a target="_blank" href="https://twitter.com/heateor">Our Twitter Page</a>
 
 <a href="http://support.heateor.com">Support Documentation</a> | <a href="https://www.heateor.com/social-analytics-sharing">Social Analytics</a> | <a href="https://www.heateor.com/add-ons">Add-ons</a>
@@ -160,7 +160,7 @@ You can enable Social Login and Sharing anywhere in your website page/post conte
 
 == Frequently Asked Questions ==
 = What is this Social Login stuff and why would I need it? =
-Social Login enables your website users to login using their existing accounts on Social networks like Facebook, Twitter, LinkedIn, Google plus etc.
+Social Login enables your website users to login using their existing accounts on Social networks like Facebook, Twitter, LinkedIn, Google etc.
 
 **Benefits**
 
@@ -207,10 +207,94 @@ Yes, we can help you with it. Just drop an email at support[ at ]heateor[ dot ]c
 4. **Social Sharing**: Around 100 social networks in Social Sharing
 5. **Social Commenting**: WordPress Commenting selected
 6. **Social Commenting**: Facebook Commenting selected
-7. **Social Commenting**: GooglePlus Commenting selected
 8. **Social Commenting**: Disqus Commenting selected
 
 == Changelog ==
+= 7.12.21 =
+* [Bugfix] Fixed PHP notice being generated with social commenting enabled
+
+= 7.12.20 =
+* [Bugfix] Social shares for the homepage were reset to 0 after last update in some cases
+* [Bugfix] Minor bugfixes
+
+= 7.12.19 =
+* [Bugfix] Tumblr share stopped working
+* [Bugfix] Querystring parameter in the url was causing changes in the share counts for the webpage
+* [Improvement] Updated Facebook login logo according to Facebook branding guidelines
+* [Improvement] Line share now works with the devices that doesn't support Line app
+* [Improvement] Removed Google+ from social share and social media follow icons
+* [Improvement] Removed white background from the slider arrow below the floating share icons
+* [Improvement] Applied white background to the total shares in the horizontal floating sticky share bar
+* Removed Google+ Comments from Social Commenting
+
+= 7.12.18 =
+* [Bugfix] Google login stopped working after previous update
+
+= 7.12.17 =
+* [Bugfix] Using Linkedin OAuth 2.0 API to get Linkedin login working again
+* [Bugfix] Fixed "illegal string offset" PHP warning being generated from "inc/social_sharing.php" file
+* [Bugfix] Fixed "Division by zero" PHP error being generated from "super_socializer.php" file
+* [Improvement] Fixed the uneven margin around Facebook Like button
+
+= 7.12.16 =
+* [Improvement] Performance improvement
+
+= 7.12.15 =
+* [Bugfix] Center alignment for like buttons enabled from Super Socializer > Like Buttons page stopped working from version 7.12.10
+
+= 7.12.14 =
+* [Bugfix] Previous update was generating Javascript error when Whatsapp share icon was not enabled
+
+= 7.12.13 =
+* [Bugfix] Whatsapp share was not working in some cases with server cache enabled
+
+= 7.12.12 =
+* [New] Added Fintel.io social share icon
+* [New] Twitter sharer shows title from "Twitter Title" option of Yoast Premium SEO post meta options, if one is specified
+* [Bugfix] Undefined index: hor_counter_alignment error was being generated after last update
+
+= 7.12.11 =
+* [Bugfix] Rectangular share, tweet, like buttons became mis-aligned after last update
+
+= 7.12.10 =
+* [New] Added option to center align social login icons
+* [New] Added option to integrate social login icons with WooCommerce register form
+* [New] Added "redirect_url" attribute in <a href="http://support.heateor.com/social-login-shortcode-and-widget/">social login shortcode</a>
+* [Bugfix] Center alignment for standard share icons and like buttons was not working in some cases
+* [Bugfix] Enabling social share count was not taking effect for rectangular social share/like buttons
+* [Bugfix] Fixed mis-alignment of rectangular social share icons
+* [Bugfix] Xing share stopped working
+* [Bugfix] Whatsapp share was not working on Firefox and Safari browsers
+* [Improvement] Improved the look of slider arrow below the floating share bar
+
+= 7.12.9 =
+* [Improvement] Google+ Login at some places in the text needed to be replaced with Google Login
+
+= 7.12.8 =
+* [Improvement] Google+ Login (deprecated) is now Google Login
+* [Improvement] Updated the Facebook SDK to latest version
+* [New] Added option to hide the slider present below the floating share bar
+
+= 7.12.7 =
+* [New] Included MeWe in social share networks
+* [New] Included Xing in social media follow icons
+* [New] Included MeWe in social media follow icons
+* [Improvement] Added compatibility with Paired and Native modes of <a href="https://wordpress.org/plugins/amp">AMP</a> plugin
+* [Bugfix] Threema icon was appearing broken at AMP pages
+* Removed Yahoo Bookmarks
+* Removed Yahoo Messenger
+* Removed Delicious
+* Removed Polyvore
+* Removed Oknotizie
+* Removed Baidu
+* Removed DiHITT
+* Removed Netlog
+* Removed NewsVine
+* Removed NUjij
+* Removed Segnalo
+* Removed Stumpedia
+* Removed YouMob
+
 = 7.12.6 =
 * [New] Added Medium, Odnoklassniki and Vkontakte in social media follow icons widget
 * [Improvement] Added "aria-label" attribute in the hyperlinks for social media follow icons
@@ -1670,3 +1754,88 @@ Yes, we can help you with it. Just drop an email at support[ at ]heateor[ dot ]c
 * [Improvement] Added "aria-label" attribute in the hyperlinks for social media follow icons
 * [Improvement] Added rel="noopener" attribute in the hyperlink for Whatsapp share icon
 * [Improvement] Fixed some PHP notices being generated when enabling WordPress debugging
+
+= 7.12.7 =
+* [New] Included MeWe in social share networks
+* [New] Included Xing in social media follow icons
+* [New] Included MeWe in social media follow icons
+* [Improvement] Added compatibility with Paired and Native modes of <a href="https://wordpress.org/plugins/amp">AMP</a> plugin
+* [Bugfix] Threema icon was appearing broken at AMP pages
+* Removed Yahoo Bookmarks
+* Removed Yahoo Messenger
+* Removed Delicious
+* Removed Polyvore
+* Removed Oknotizie
+* Removed Baidu
+* Removed DiHITT
+* Removed Netlog
+* Removed NewsVine
+* Removed NUjij
+* Removed Segnalo
+* Removed Stumpedia
+* Removed YouMob
+
+= 7.12.8 =
+* [Improvement] Google+ Login (deprecated) is now Google Login
+* [Improvement] Updated the Facebook SDK to latest version
+* [New] Added option to hide the slider present below the floating share bar
+
+= 7.12.9 =
+* [Improvement] Google+ Login at some places in the text needed to be replaced with Google Login
+
+= 7.12.10 =
+* [New] Added option to center align social login icons
+* [New] Added option to integrate social login icons with WooCommerce register form
+* [New] Added "redirect_url" attribute in <a href="http://support.heateor.com/social-login-shortcode-and-widget/">social login shortcode</a>
+* [Bugfix] Center alignment for standard share icons and like buttons was not working in some cases
+* [Bugfix] Enabling social share count was not taking effect for rectangular social share/like buttons
+* [Bugfix] Fixed mis-alignment of rectangular social share icons
+* [Bugfix] Xing share stopped working
+* [Bugfix] Whatsapp share was not working on Firefox and Safari browsers
+* [Improvement] Improved the look of slider arrow below the floating share bar
+
+= 7.12.11 =
+* [Bugfix] Rectangular share, tweet, like buttons became mis-aligned after last update
+
+= 7.12.12 =
+* [New] Added Fintel.io social share icon
+* [New] Twitter sharer shows title from "Twitter Title" option of Yoast Premium SEO post meta options, if one is specified
+* [Bugfix] Undefined index: hor_counter_alignment error was being generated after last update
+
+= 7.12.13 =
+* [Bugfix] Whatsapp share was not working in some cases with server cache enabled
+
+= 7.12.14 =
+* [Bugfix] Previous update was generating Javascript error when Whatsapp share icon was not enabled
+
+= 7.12.15 =
+* [Bugfix] Center alignment for like buttons enabled from Super Socializer > Like Buttons page stopped working from version 7.12.10
+
+= 7.12.16 =
+* [Improvement] Performance improvement
+
+= 7.12.17 =
+* [Bugfix] Using Linkedin OAuth 2.0 API to get Linkedin login working again
+* [Bugfix] Fixed "illegal string offset" PHP warning being generated from "inc/social_sharing.php" file
+* [Bugfix] Fixed "Division by zero" PHP error being generated from "super_socializer.php" file
+* [Improvement] Fixed the uneven margin around Facebook Like button
+
+= 7.12.18 =
+* [Bugfix] Google login stopped working after previous update
+
+= 7.12.19 =
+* [Bugfix] Tumblr share stopped working
+* [Bugfix] Querystring parameter in the url was causing changes in the share counts for the webpage
+* [Improvement] Updated Facebook login logo according to Facebook branding guidelines
+* [Improvement] Line share now works with the devices that doesn't support Line app
+* [Improvement] Removed Google+ from social share and social media follow icons
+* [Improvement] Removed white background from the slider arrow below the floating share icons
+* [Improvement] Applied white background to the total shares in the horizontal floating sticky share bar
+* Removed Google+ Comments from Social Commenting
+
+= 7.12.20 =
+* [Bugfix] Social shares for the homepage were reset to 0 after last update in some cases
+* [Bugfix] Minor bugfixes
+
+= 7.12.21 =
+* [Bugfix] Fixed PHP notice being generated with social commenting enabled

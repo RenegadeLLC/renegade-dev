@@ -88,11 +88,14 @@ if(isset($theChampLoginOptions['enableAtComment']) && $theChampLoginOptions['ena
 		add_action('comment_form_top', 'the_champ_login_button');
 	}
 }
-if(isset($theChampLoginOptions['enable_before_wc']) && $theChampLoginOptions['enable_before_wc'] == 1){
+if(isset($theChampLoginOptions['enable_before_wc'])){
 	add_action( 'woocommerce_before_customer_login_form', 'the_champ_login_button' );
 }
-if(isset($theChampLoginOptions['enable_after_wc']) && $theChampLoginOptions['enable_after_wc'] == 1){
+if(isset($theChampLoginOptions['enable_after_wc'])){
 	add_action( 'woocommerce_login_form', 'the_champ_login_button' );
+}
+if(isset($theChampLoginOptions['enable_register_wc'])){
+	add_action( 'woocommerce_register_form', 'the_champ_login_button' );
 }
 if(isset($theChampLoginOptions['enable_wc_checkout']) && $theChampLoginOptions['enable_wc_checkout'] == 1){
 	add_action( 'woocommerce_checkout_before_customer_details', 'the_champ_login_button' );
@@ -456,15 +459,15 @@ function the_champ_sanitize_profile_data($profileData, $provider){
 		$temp['large_avatar'] = isset($profileData -> photo_urls -> size_original) && heateor_ss_validate_url($profileData -> photo_urls -> size_original) !== false ? trim($profileData -> photo_urls -> size_original) : '';
 	}elseif($provider == 'linkedin'){
 		$temp['id'] = isset($profileData['id']) ? sanitize_text_field($profileData['id']) : '';
-		$temp['email'] = isset($profileData['emailAddress']) ? sanitize_email($profileData['emailAddress']) : '';
+		$temp['email'] = isset($profileData['email']) ? sanitize_email($profileData['email']) : '';
 		$temp['name'] = '';
 		$temp['username'] = '';
 		$temp['first_name'] = isset($profileData['firstName']) ? $profileData['firstName'] : '';
 		$temp['last_name'] = isset($profileData['lastName']) ? $profileData['lastName'] : '';
-		$temp['bio'] = isset($profileData['headline']) ? sanitize_text_field($profileData['headline']) : '';
-		$temp['link'] = isset($profileData['publicProfileUrl']) && heateor_ss_validate_url($profileData['publicProfileUrl']) !== false ? trim($profileData['publicProfileUrl']) : '';
-		$temp['avatar'] = isset($profileData['pictureUrl']) && heateor_ss_validate_url($profileData['pictureUrl']) !== false ? trim($profileData['pictureUrl']) : '';
-		$temp['large_avatar'] = '';
+		$temp['bio'] = '';
+		$temp['link'] = '';
+		$temp['avatar'] = isset($profileData['smallAvatar']) && heateor_ss_validate_url($profileData['smallAvatar']) !== false ? trim($profileData['smallAvatar']) : '';
+		$temp['large_avatar'] = isset($profileData['largeAvatar']) && heateor_ss_validate_url($profileData['largeAvatar']) !== false ? trim($profileData['largeAvatar']) : '';
 	}elseif($provider == 'google'){
 		$temp['id'] = isset($profileData->id) ? sanitize_text_field($profileData->id) : '';
 		$temp['email'] = isset($profileData->email) ? sanitize_email($profileData->email) : '';

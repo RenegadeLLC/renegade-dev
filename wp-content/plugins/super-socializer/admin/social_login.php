@@ -11,7 +11,7 @@
 
 		<div class="stuffbox" style="width:98.7%">
 			<h3><label><?php _e('Master Control', 'super-socializer' );?></label></h3>
-			<div class="inside">
+			<div class="inside" style="padding:5px;">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="form-table editcomment menu_content_table">
 					<tr>
 						<th>
@@ -116,7 +116,7 @@
 							</div>
 							<div class="theChampHorizontalSharingProviderContainer">
 							<input id="the_champ_login_google" name="the_champ_login[providers][]" type="checkbox" <?php echo isset($theChampLoginOptions['providers']) && in_array('google', $theChampLoginOptions['providers']) ? 'checked = "checked"' : '';?> value="google" />
-							<label for="the_champ_login_google"><?php _e("Google+", 'super-socializer'); ?></label>
+							<label for="the_champ_login_google"><?php _e("Google", 'super-socializer'); ?></label>
 							</div>
 							<div class="theChampHorizontalSharingProviderContainer">
 							<input id="the_champ_login_vkontakte" name="the_champ_login[providers][]" type="checkbox" <?php echo isset($theChampLoginOptions['providers']) && in_array('vkontakte', $theChampLoginOptions['providers']) ? 'checked = "checked"' : '';?> value="vkontakte" />
@@ -170,7 +170,7 @@
 							<div>
 							<?php echo sprintf(__('Required for Facebook Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get Facebook App ID', 'super-socializer'), 'http://support.heateor.com/how-to-get-facebook-app-id/') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Site URL</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Site URL</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
 							</div>
@@ -192,7 +192,7 @@
 							<div>
 							<?php echo sprintf(__('Required for Facebook Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get Facebook App Secret', 'super-socializer'), 'http://support.heateor.com/how-to-get-facebook-app-id/') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Site URL</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Site URL</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
 							</div>
@@ -214,11 +214,11 @@
 							<div>
 							<?php echo sprintf(__('Required for Twitter Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get Twitter API Key', 'super-socializer'), 'http://support.heateor.com/how-to-get-twitter-api-key-and-secret/') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Website</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Website</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Callback URL</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Callback URL</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
 							</div>
@@ -240,11 +240,11 @@
 							<div>
 							<?php echo sprintf(__('Required for Twitter Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get Twitter API Secret', 'super-socializer'), 'http://support.heateor.com/how-to-get-twitter-api-key-and-secret/') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Website</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Website</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Callback URL</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Callback URL</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
 							</div>
@@ -266,9 +266,9 @@
 							<div>
 							<?php echo sprintf(__('Required for LinkedIn Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get LinkedIn Client ID', 'super-socializer'), 'http://support.heateor.com/how-to-get-linkedin-api-key/') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Website URL</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Redirect URLs</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
-							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
+							<strong style="color: #14ACDF"><?php echo esc_url(home_url()).'/?SuperSocializerAuth=Linkedin'; ?></strong>
 							</div>
 							</td>
 						</tr>
@@ -288,9 +288,9 @@
 							<div>
 							<?php echo sprintf(__('Required for LinkedIn Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get LinkedIn Client Secret', 'super-socializer'), 'http://support.heateor.com/how-to-get-linkedin-api-key/') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Website URL</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Redirect URLs</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
-							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
+							<strong style="color: #14ACDF"><?php echo esc_url(home_url()).'/?SuperSocializerAuth=Linkedin'; ?></strong>
 							</div>
 							</td>
 						</tr>
@@ -298,7 +298,7 @@
 						<tr>
 							<th>
 							<img id="the_champ_slgp_id_help" class="the_champ_help_bubble" src="<?php echo plugins_url('../images/info.png', __FILE__) ?>" />
-							<label for="the_champ_gplogin_key"><?php _e("Google+ Client ID", 'super-socializer'); ?></label>
+							<label for="the_champ_gplogin_key"><?php _e("Google Client ID", 'super-socializer'); ?></label>
 							</th>
 							<td>
 							<input id="the_champ_gplogin_key" name="the_champ_login[google_key]" type="text" value="<?php echo isset($theChampLoginOptions['google_key']) ? $theChampLoginOptions['google_key'] : '' ?>" />
@@ -308,9 +308,9 @@
 						<tr class="the_champ_help_content" id="the_champ_slgp_id_help_cont">
 							<td colspan="2">
 							<div>
-							<?php echo sprintf(__('Required for GooglePlus Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get GooglePlus Client ID', 'super-socializer'), 'http://support.heateor.com/how-to-get-google-plus-client-id/') ?>
+							<?php echo sprintf(__('Required for Google Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get Google Client ID', 'super-socializer'), 'http://support.heateor.com/how-to-get-google-plus-client-id/') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>AUTHORIZED REDIRECT URI</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>AUTHORIZED REDIRECT URI</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
 							</div>
@@ -320,7 +320,7 @@
 						<tr>
 							<th>
 							<img id="the_champ_slgp_secret_help" class="the_champ_help_bubble" src="<?php echo plugins_url('../images/info.png', __FILE__) ?>" />
-							<label for="the_champ_gplogin_secret"><?php _e("Google+ Client Secret", 'super-socializer'); ?></label>
+							<label for="the_champ_gplogin_secret"><?php _e("Google Client Secret", 'super-socializer'); ?></label>
 							</th>
 							<td>
 							<input id="the_champ_gplogin_secret" name="the_champ_login[google_secret]" type="text" value="<?php echo isset($theChampLoginOptions['google_secret']) ? $theChampLoginOptions['google_secret'] : '' ?>" />
@@ -330,9 +330,9 @@
 						<tr class="the_champ_help_content" id="the_champ_slgp_secret_help_cont">
 							<td colspan="2">
 							<div>
-							<?php echo sprintf(__('Required for GooglePlus Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get GooglePlus Client Secret', 'super-socializer'), 'http://support.heateor.com/how-to-get-google-plus-client-id/') ?>
+							<?php echo sprintf(__('Required for Google Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get Google Client Secret', 'super-socializer'), 'http://support.heateor.com/how-to-get-google-plus-client-id/') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>AUTHORIZED REDIRECT URI</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>AUTHORIZED REDIRECT URI</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
 							</div>
@@ -354,7 +354,7 @@
 							<div>
 							<?php echo sprintf(__('Required for Vkontakte Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get Vkontakte Application ID', 'super-socializer'), 'http://support.heateor.com/how-to-get-vkontakte-application-id/') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Site address</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Site address</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
 							</div>
@@ -376,7 +376,7 @@
 							<div>
 							<?php echo sprintf(__('Required for Vkontakte Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get Vkontakte Application ID', 'super-socializer'), 'http://support.heateor.com/how-to-get-vkontakte-application-id/') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Site address</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Site address</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
 							</div>
@@ -398,7 +398,7 @@
 							<div>
 							<?php echo sprintf(__('Required for Instagram Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get Instagram Client ID', 'super-socializer'), 'http://support.heateor.com/how-to-get-instagram-client-id/') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Website URL</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Website URL</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo esc_url(home_url()); ?></strong>
 							</div>
@@ -420,7 +420,7 @@
 							<div>
 							<?php echo sprintf(__('Required for Xing Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get Xing Consumer Key', 'super-socializer'), 'http://support.heateor.com/how-to-get-xing-consumer-key-and-secret/') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Callback domain</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Callback domain</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo (isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST']; ?></strong>
 							</div>
@@ -442,7 +442,7 @@
 							<div>
 							<?php echo sprintf(__('Required for Xing Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get Xing Consumer Secret', 'super-socializer'), 'http://support.heateor.com/how-to-get-xing-consumer-key-and-secret/') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Callback domain</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Callback domain</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo (isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://') . $_SERVER['HTTP_HOST']; ?></strong>
 							</div>
@@ -484,7 +484,7 @@
 							<div>
 							<?php echo sprintf(__('Required for Twitch Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get it', 'super-socializer'), 'http://support.heateor.com/how-to-enable-twitch-login-at-wordpress-website') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Redirect URI</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Redirect URI</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo esc_url(home_url()) . '/?SuperSocializerAuth=Twitch'; ?></strong>
 							</div>
@@ -506,7 +506,7 @@
 							<div>
 							<?php echo sprintf(__('Required for Twitch Social Login to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get it', 'super-socializer'), 'http://support.heateor.com/how-to-enable-twitch-login-at-wordpress-website') ?>
 							<br/>
-							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Redirect URI</strong> option at the link mentioned', 'super-socializer'); ?></span>
+							<span style="color: #14ACDF"><?php _e('Paste following url in <strong>Redirect URI</strong> option mentioned at the link', 'super-socializer'); ?></span>
 							<br/>
 							<strong style="color: #14ACDF"><?php echo esc_url(home_url()) . '/?SuperSocializerAuth=Twitch'; ?></strong>
 							</div>
@@ -545,6 +545,24 @@
 							</td>
 						</tr>
 						
+						<tr>
+							<th>
+							<img id="the_champ_sl_align_help" class="the_champ_help_bubble" src="<?php echo plugins_url('../images/info.png', __FILE__) ?>" />
+							<label for="the_champ_sl_align"><?php _e("Center align icons", 'super-socializer'); ?></label>
+							</th>
+							<td>
+							<input id="the_champ_sl_align" name="the_champ_login[center_align]" type="checkbox" <?php echo isset($theChampLoginOptions['center_align']) ? 'checked = "checked"' : '';?> value="1" />
+							</td>
+						</tr>
+						
+						<tr class="the_champ_help_content" id="the_champ_sl_align_help_cont">
+							<td colspan="2">
+							<div>
+							<?php _e('Center align social login icons', 'super-socializer') ?>
+							</div>
+							</td>
+						</tr>
+
 						<tr>
 							<th>
 							<img id="the_champ_sl_loginpage_help" class="the_champ_help_bubble" src="<?php echo plugins_url('../images/info.png', __FILE__) ?>" />
@@ -627,7 +645,7 @@
 							<tr>
 								<th>
 								<img id="the_champ_sl_wc_after_form_help" class="the_champ_help_bubble" src="<?php echo plugins_url('../images/info.png', __FILE__) ?>" />
-								<label for="the_champ_sl_wc_after_form"><?php _e("Enable after WooCommerce Customer Login Form", 'super-socializer'); ?></label>
+								<label for="the_champ_sl_wc_after_form"><?php _e("Enable at WooCommerce Customer Login Form", 'super-socializer'); ?></label>
 								</th>
 								<td>
 								<input id="the_champ_sl_wc_after_form" name="the_champ_login[enable_after_wc]" type="checkbox" <?php echo isset($theChampLoginOptions['enable_after_wc']) ? 'checked = "checked"' : '';?> value="1" />
@@ -637,7 +655,25 @@
 							<tr class="the_champ_help_content" id="the_champ_sl_wc_after_form_help_cont">
 								<td colspan="2">
 								<div>
-								<?php _e('Social Login Interface will get enabled after the customer login form at WooCommerce My Account page', 'super-socializer') ?>
+								<?php _e('Integrate Social Login Interface with the customer login form at WooCommerce My Account page', 'super-socializer') ?>
+								</div>
+								</td>
+							</tr>
+
+							<tr>
+								<th>
+								<img id="the_champ_sl_wc_register_form_help" class="the_champ_help_bubble" src="<?php echo plugins_url('../images/info.png', __FILE__) ?>" />
+								<label for="the_champ_sl_wc_register_form"><?php _e("Enable at WooCommerce Customer Register Form", 'super-socializer'); ?></label>
+								</th>
+								<td>
+								<input id="the_champ_sl_wc_register_form" name="the_champ_login[enable_register_wc]" type="checkbox" <?php echo isset($theChampLoginOptions['enable_register_wc']) ? 'checked = "checked"' : '';?> value="1" />
+								</td>
+							</tr>
+							
+							<tr class="the_champ_help_content" id="the_champ_sl_wc_after_form_help_cont">
+								<td colspan="2">
+								<div>
+								<?php _e('Integrate Social Login Interface with the customer register form at WooCommerce My Account page', 'super-socializer') ?>
 								</div>
 								</td>
 							</tr>
@@ -1187,7 +1223,7 @@
 				<div class="the_champ_left_column">
 				<div class="stuffbox">
 					<h3><label><?php _e('Shortcode & Widget', 'super-socializer');?></label></h3>
-					<div class="inside">
+					<div class="inside" style="padding-left:7px">
 						<p><a style="text-decoration:none" href="http://support.heateor.com/social-login-shortcode-and-widget/" target="_blank"><?php _e('Social Login Shortcode & Widget', 'super-socializer') ?></a></p>
 						<p><a style="text-decoration:none" href="http://support.heateor.com/social-linking-shortcode" target="_blank"><?php _e('Social Linking Shortcode', 'super-socializer') ?></a></p>
 					</div>
@@ -1201,13 +1237,14 @@
 				<div class="the_champ_left_column">
 				<div class="stuffbox">
 					<h3><label><?php _e('FAQ', 'super-socializer');?></label></h3>
-					<div class="inside faq">
+					<div class="inside faq" style="padding-left:7px">
 						<p><?php _e('<strong>Note:</strong> Plugin will not work on local server. You should have an online website for the plugin to function properly.', 'super-socializer'); ?></p>
 						<p>
 						<a href="javascript:void(0)"><?php _e('Why is social login not working?', 'super-socializer'); ?></a>
 						<div><?php _e('Make sure that App ID and Secret (Client ID and Secret) keys you have saved, belong to the same app', 'super-socializer'); ?></div>
 						</p>
-						<p><a href="https://wordpress.org/support/topic/refresh-after-login-needed/" target="_blank"><?php _e('Why the user is not appearing logged in even after Social Login until the webpage is refreshed manually?', 'super-socializer' ) ?></a></p>
+						<p><a href="https://wordpress.org/support/topic/social-login-not-working-with-cache-enabled/" target="_blank"><?php _e('Social Login not working with Varnish enabled', 'super-socializer') ?></a></p>
+						<p><a href="https://wordpress.org/support/topic/social-login-not-working-with-cache-enabled/" target="_blank"><?php _e('Why the user is not appearing logged in even after Social Login until the webpage is refreshed manually?', 'super-socializer' ) ?></a></p>
 						<p><a href="http://support.heateor.com/browser-blocking-social-features/" target="_blank"><?php _e('Why is my browser blocking some features of the plugin?', 'super-socializer' ) ?></a></p>
 					</div>
 				</div>
@@ -1229,11 +1266,11 @@
 		</form>
 		<div class="clear"></div>
 		<div class="stuffbox">
-			<h3><label><?php _e("Instagram Shoutout", 'super-socializer' ); ?></label></h3>
-			<div class="inside">
-			<p><?php _e( 'If you can send (to hello@heateor.com) how our plugin is helping your business, we can share it on Instagram. You can also send any relevant hashtags and people to mention in the Instagram post.', 'super-socializer' ) ?></p>
-			<p><?php _e( '<b>Example</b> - Blah-Blah Online Coaching teaches various programming language courses through their website. They have emerged as one of the most popular online coaching websites in the past year. Anyone can become proficient in programming language of their choice in a very easy way in no time.', 'super-socializer' ) ?></p>
-			<p><?php _e( '@blahblahonlinecoaching proudly use #SuperSocializer to enable social features at their website, such as - Social Login, Social Share and Social Commenting. Be sure to visit their website at blahblahonlinecoaching.com where you can browse a variety of programming language courses.', 'super-socializer' ) ?></p>
+			<h3><label><?php _e("Instagram Shoutout", 'super-socializer'); ?></label></h3>
+			<div class="inside" style="padding-left:10px">
+			<p><?php _e('If you can send (to hello@heateor.com) how our plugin is helping your business, we can share it on Instagram. You can also send any relevant hashtags and people to mention in the Instagram post.', 'super-socializer') ?></p>
+			<p><?php _e('<b>Example</b> - Blah-Blah Online Coaching teaches various programming language courses through their website. They have emerged as one of the most popular online coaching websites in the past year. Anyone can become proficient in programming language of their choice in a very easy way in no time.', 'super-socializer') ?></p>
+			<p><?php _e('@blahblahonlinecoaching proudly use #SuperSocializer to enable social features at their website, such as - Social Login, Social Share and Social Commenting. Be sure to visit their website at blahblahonlinecoaching.com where you can browse a variety of programming language courses.', 'super-socializer') ?></p>
 			</div>
 		</div>
 	</div>

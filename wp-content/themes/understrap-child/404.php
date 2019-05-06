@@ -48,7 +48,7 @@ $container = get_field('container_width', 'option');
                 <div class="row">
                     <div class="column col-md-12">
                         <div class="text-ct">
-                            <h2>Can we help you find what your looking for?</h2>
+                            <h2>Can we help you find what you're looking for?</h2>
                             <p><?php echo do_shortcode('[wpbsearch]') ?></p>
                         </div><!-- .text-ct -->
                     </div><!-- .column-->

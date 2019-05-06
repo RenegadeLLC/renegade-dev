@@ -2,8 +2,8 @@
 Contributors: heatmap
 Tags: analytics, heat map, heatmap, real time, realtime, tracking, click map, mouse map, statistics, funnel, conversion
 Requires at least: 3.1
-Tested up to: 5.0
-Stable tag: 0.5.1
+Tested up to: 5.1
+Stable tag: 0.5.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -68,6 +68,10 @@ Not a bit. Our tag is very small and fully asynchronous. Plus, we set up powerfu
 
 
 == Changelog ==
+
+= 0.5.2 =
+* Fixed mixed line endings
+* Tested on Wordpress 5.1
 
 = 0.5.1 =
 * heatmap.me is now heatmap.com

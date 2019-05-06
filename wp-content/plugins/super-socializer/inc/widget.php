@@ -10,7 +10,7 @@ class TheChampLoginWidget extends WP_Widget {
 			'TheChampLogin', //unique id 
 			__('Super Socializer - Login'), //title displayed at admin panel
 			array(  
-				'description' => __( 'Let your website users login/register using their favorite Social ID Provider, such as Facebook, Twitter, Google+, LinkedIn', 'super-socializer' )) 
+				'description' => __( 'Let your website users login/register using their favorite Social ID Provider, such as Facebook, Twitter, Google, LinkedIn', 'super-socializer' )) 
 			); 
 	}
 	
@@ -108,7 +108,7 @@ class TheChampSharingWidget extends WP_Widget {
 			'Super Socializer - Sharing (Standard Widget)', //title displayed at admin panel 
 			//Additional parameters 
 			array(
-				'description' => __( 'Standard sharing widget. Let your website users share content on popular Social networks like Facebook, Twitter, Tumblr, Google+ and many more', 'super-socializer' )) 
+				'description' => __( 'Standard sharing widget. Let your website users share content on popular Social networks like Facebook, Twitter, Tumblr, Whatsapp and many more', 'super-socializer' )) 
 			); 
 	}  
 
@@ -155,13 +155,21 @@ class TheChampSharingWidget extends WP_Widget {
 		}else{
 			$sharingUrl = get_permalink($post->ID);
 		}
+		$shareCountUrl = $sharingUrl;
+		if(isset($instance['target_url']) && $instance['target_url'] == 'default' && is_singular()){
+			$shareCountUrl = get_permalink($post->ID);
+		}
+		$customPostUrl = heateor_ss_apply_target_share_url_filter($sharingUrl, 'horizontal', !is_singular() ? true : false);
 
-		$sharingUrl = heateor_ss_apply_target_share_url_filter($sharingUrl, 'horizontal', !is_singular() ? true : false);
+		if($customPostUrl != $sharingUrl){
+			$sharingUrl = $customPostUrl;
+			$shareCountUrl = $sharingUrl;
+		}
 
 		$shareCountTransientId = heateor_ss_get_share_count_transient_id($sharingUrl);
 		$cachedShareCount = heateor_ss_get_cached_share_count($shareCountTransientId);
 
-		echo "<div class='the_champ_sharing_container the_champ_horizontal_sharing' " . ( the_champ_is_amp_page() ? '' : 'super-socializer-data-href="' . $sharingUrl . '"' ) . ($cachedShareCount === false || the_champ_is_amp_page() ? "" : "super-socializer-no-counts='1' ") .">";
+		echo "<div class='the_champ_sharing_container the_champ_horizontal_sharing' " . (the_champ_is_amp_page() ? '' : 'super-socializer-data-href="' . (isset($shareCountUrl) && $shareCountUrl ? $shareCountUrl : $sharingUrl) . '"') . ($cachedShareCount === false || the_champ_is_amp_page() ? "" : "super-socializer-no-counts='1' ") .">";
 		
 		echo $before_widget;
 		
@@ -278,7 +286,7 @@ class TheChampVerticalSharingWidget extends WP_Widget {
 			'Super Socializer - Sharing (Floating Widget)', //title displayed at admin panel 
 			//Additional parameters 
 			array(
-				'description' => __( 'Floating sharing widget. Let your website users share content on popular Social networks like Facebook, Twitter, Tumblr, Google+ and many more', 'super-socializer' )) 
+				'description' => __( 'Floating sharing widget. Let your website users share content on popular Social networks like Facebook, Twitter, Tumblr, Whatsapp and many more', 'super-socializer' )) 
 			); 
 	}  
 
@@ -326,7 +334,15 @@ class TheChampVerticalSharingWidget extends WP_Widget {
 			$sharingUrl = get_permalink($post->ID);
 		}
 
-		$sharingUrl = heateor_ss_apply_target_share_url_filter($sharingUrl, 'vertical', false);
+		$shareCountUrl = $sharingUrl;
+		if(isset($instance['target_url']) && $instance['target_url'] == 'default' && is_singular()){
+			$shareCountUrl = get_permalink($post->ID);
+		}
+		$customPostUrl = heateor_ss_apply_target_share_url_filter($sharingUrl, 'vertical', false);
+		if($customPostUrl != $sharingUrl){
+			$sharingUrl = $customPostUrl;
+			$shareCountUrl = $sharingUrl;
+		}
 
 		$ssOffset = 0;
 		if(isset($instance['alignment']) && isset($instance[$instance['alignment'] . '_offset'])){
@@ -336,7 +352,7 @@ class TheChampVerticalSharingWidget extends WP_Widget {
 		$shareCountTransientId = heateor_ss_get_share_count_transient_id($sharingUrl);
 		$cachedShareCount = heateor_ss_get_cached_share_count($shareCountTransientId);
 
-		echo "<div class='the_champ_sharing_container the_champ_vertical_sharing" . ( isset( $theChampSharingOptions['hide_mobile_sharing'] ) ? ' the_champ_hide_sharing' : '' ) . ( isset( $theChampSharingOptions['bottom_mobile_sharing'] ) ? ' the_champ_bottom_sharing' : '' ) . "' " . ( the_champ_is_amp_page() ? "" : "ss-offset='". $ssOffset ."' " ) . "style='width:" . ((isset($theChampSharingOptions['vertical_sharing_size']) ? $theChampSharingOptions['vertical_sharing_size'] : 35) + 4) . "px;".(isset($instance['alignment']) && $instance['alignment'] != '' && isset($instance[$instance['alignment'].'_offset']) ? $instance['alignment'].': '. ( $instance[$instance['alignment'].'_offset'] == '' ? 0 : $instance[$instance['alignment'].'_offset'] ) .'px;' : '').(isset($instance['top_offset']) ? 'top: '. ( $instance['top_offset'] == '' ? 0 : $instance['top_offset'] ) .'px;' : '') . (isset($instance['vertical_bg']) && $instance['vertical_bg'] != '' ? 'background-color: '.$instance['vertical_bg'] . ';' : '-webkit-box-shadow:none;box-shadow:none;') . "' " . ( the_champ_is_amp_page() ? '' : 'super-socializer-data-href="' . $sharingUrl . '"' ) . ($cachedShareCount === false || the_champ_is_amp_page() ? "" : "super-socializer-no-counts='1' ") .">";
+		echo "<div class='the_champ_sharing_container the_champ_vertical_sharing" . ( isset( $theChampSharingOptions['hide_mobile_sharing'] ) ? ' the_champ_hide_sharing' : '' ) . ( isset( $theChampSharingOptions['bottom_mobile_sharing'] ) ? ' the_champ_bottom_sharing' : '' ) . "' " . ( the_champ_is_amp_page() ? "" : "ss-offset='". $ssOffset ."' " ) . "style='width:" . ((isset($theChampSharingOptions['vertical_sharing_size']) ? $theChampSharingOptions['vertical_sharing_size'] : 35) + 4) . "px;".(isset($instance['alignment']) && $instance['alignment'] != '' && isset($instance[$instance['alignment'].'_offset']) ? $instance['alignment'].': '. ( $instance[$instance['alignment'].'_offset'] == '' ? 0 : $instance[$instance['alignment'].'_offset'] ) .'px;' : '').(isset($instance['top_offset']) ? 'top: '. ( $instance['top_offset'] == '' ? 0 : $instance['top_offset'] ) .'px;' : '') . (isset($instance['vertical_bg']) && $instance['vertical_bg'] != '' ? 'background-color: '.$instance['vertical_bg'] . ';' : '-webkit-box-shadow:none;box-shadow:none;') . "' " . ( the_champ_is_amp_page() ? '' : 'super-socializer-data-href="' . (isset($shareCountUrl) && $shareCountUrl ? $shareCountUrl : $sharingUrl) . '"' ) . ($cachedShareCount === false || the_champ_is_amp_page() ? "" : "super-socializer-no-counts='1' ") .">";
 		
 		if(isset($theChampSharingOptions['use_shortlinks']) && function_exists('wp_get_shortlink')){
 			$sharingUrl = wp_get_shortlink();
@@ -463,7 +479,7 @@ class TheChampCounterWidget extends WP_Widget {
 			'Super Socializer - Like Buttons (Standard Widget)', //title displayed at admin panel 
 			//Additional parameters 
 			array(
-				'description' => __( 'Standard like buttons widget. Let your website users share/like content on popular Social networks like Facebook, Twitter, Google+ and many more', 'super-socializer' )
+				'description' => __( 'Standard like buttons widget. Let your website users share/like content on popular Social networks like Facebook, Twitter, Pinterest and many more', 'super-socializer' )
 			)
 		); 
 	}  
@@ -612,7 +628,7 @@ class TheChampVerticalCounterWidget extends WP_Widget {
 			'Super Socializer - Like Buttons (Floating Widget)', //title displayed at admin panel 
 			//Additional parameters 
 			array(
-				'description' => __( 'Floating like buttons widget. Let your website users share/like content on popular Social networks like Facebook, Twitter, Google+ and many more', 'super-socializer' )) 
+				'description' => __( 'Floating like buttons widget. Let your website users share/like content on popular Social networks like Facebook, Twitter, Pinterest and many more', 'super-socializer' )) 
 			); 
 	}  
 
@@ -828,9 +844,6 @@ class TheChampFollowWidget extends WP_Widget {
 		if ( $instance['github'] ) {
 			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Github" title="Github" class="theChampSharing theChampGithubBackground"><a target="_blank" aria-label="Github" href="'. $instance['github'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampGithubSvg"></ss></a></i></li>';
 		}
-		if ( $instance['google'] ) {
-			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Google+" title="Google+" class="theChampSharing theChampGoogleplusBackground"><a target="_blank" aria-label="Google+" href="'. $instance['google'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampGoogleplusSvg"></ss></a></i></li>';
-		}
 		if ( $instance['linkedin'] ) {
 			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Linkedin" title="Linkedin" class="theChampSharing theChampLinkedinBackground"><a target="_blank" aria-label="Linkedin" href="'. $instance['linkedin'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampLinkedinSvg"></ss></a></i></li>';
 		}
@@ -839,6 +852,9 @@ class TheChampFollowWidget extends WP_Widget {
 		}
 		if ( $instance['medium'] ) {
 			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Medium" title="Medium" class="theChampSharing theChampMediumBackground"><a target="_blank" aria-label="Medium" href="'. $instance['medium'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampMediumSvg"></ss></a></i></li>';
+		}
+		if ( $instance['mewe'] ) {
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="MeWe" title="MeWe" class="theChampSharing theChampMeWeBackground"><a target="_blank" aria-label="MeWe" href="'. $instance['mewe'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampMeWeSvg"></ss></a></i></li>';
 		}
 		if ( $instance['odnoklassniki'] ) {
 			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Odnoklassniki" title="Odnoklassniki" class="theChampSharing theChampOdnoklassnikiBackground"><a target="_blank" aria-label="Odnoklassniki" href="'. $instance['odnoklassniki'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampOdnoklassnikiSvg"></ss></a></i></li>';
@@ -854,6 +870,9 @@ class TheChampFollowWidget extends WP_Widget {
 		}
 		if ( $instance['vkontakte'] ) {
 			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Vkontakte" title="Vkontakte" class="theChampSharing theChampVkontakteBackground"><a target="_blank" aria-label="Vkontakte" href="'. $instance['vkontakte'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampVkontakteSvg"></ss></a></i></li>';
+		}
+		if ( $instance['xing'] ) {
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Xing" title="Xing" class="theChampSharing theChampXingBackground"><a target="_blank" aria-label="Xing" href="'. $instance['xing'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampXingSvg"></ss></a></i></li>';
 		}
 		if ( $instance['youtube'] ) {
 			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Youtube" title="Youtube" class="theChampSharing theChampYoutubeBackground"><a target="_blank" aria-label="Youtube" href="'. $instance['youtube'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampYoutubeSvg"></ss></a></i></li>';
@@ -884,15 +903,16 @@ class TheChampFollowWidget extends WP_Widget {
 		$instance['flickr'] = $new_instance['flickr'];
 		$instance['foursquare'] = $new_instance['foursquare'];
 		$instance['github'] = $new_instance['github'];
-		$instance['google'] = $new_instance['google'];
 		$instance['linkedin'] = $new_instance['linkedin'];
 		$instance['linkedin_company'] = $new_instance['linkedin_company'];
 		$instance['medium'] = $new_instance['medium'];
+		$instance['mewe'] = $new_instance['mewe'];
 		$instance['odnoklassniki'] = $new_instance['odnoklassniki'];
 		$instance['snapchat'] = $new_instance['snapchat'];
 		$instance['tumblr'] = $new_instance['tumblr'];
 		$instance['vimeo'] = $new_instance['vimeo'];
 		$instance['vkontakte'] = $new_instance['vkontakte'];
+		$instance['xing'] = $new_instance['xing'];
 		$instance['youtube'] = $new_instance['youtube'];
 		$instance['youtube_channel'] = $new_instance['youtube_channel'];
 		$instance['rss_feed'] = $new_instance['rss_feed'];
@@ -905,7 +925,7 @@ class TheChampFollowWidget extends WP_Widget {
 	/** Widget options in admin panel */ 
 	public function form( $instance ) { 
 		/* Set up default widget settings. */ 
-		$defaults = array( 'title' => '', 'size' => '32', 'icon_shape' => 'round', 'facebook' => '', 'twitter' => '', 'instagram' => '', 'pinterest' => '', 'behance' => '', 'flickr' => '', 'foursquare' => '', 'github' => '', 'google' => '', 'linkedin' => '', 'linkedin_company' => '', 'medium' => '', 'odnoklassniki' => '', 'snapchat' => '', 'tumblr' => '', 'vimeo' => '', 'vkontakte' => '', 'youtube' => '', 'youtube_channel' => '', 'rss_feed' => '', 'before_widget_content' => '', 'after_widget_content' => '' );  
+		$defaults = array( 'title' => '', 'size' => '32', 'icon_shape' => 'round', 'facebook' => '', 'twitter' => '', 'instagram' => '', 'pinterest' => '', 'behance' => '', 'flickr' => '', 'foursquare' => '', 'github' => '', 'linkedin' => '', 'linkedin_company' => '', 'medium' => '', 'mewe' => '', 'odnoklassniki' => '', 'snapchat' => '', 'tumblr' => '', 'vimeo' => '', 'vkontakte' => '', 'xing' => '', 'youtube' => '', 'youtube_channel' => '', 'rss_feed' => '', 'before_widget_content' => '', 'after_widget_content' => '' );  
 
 		foreach( $instance as $key => $value ) {  
 			if ( is_string( $value ) ) {
@@ -951,9 +971,6 @@ class TheChampFollowWidget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'github' ); ?>"><?php _e( 'Github URL:', 'super-socializer' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'github' ); ?>" name="<?php echo $this->get_field_name( 'github' ); ?>" type="text" value="<?php echo $instance['github']; ?>" /><br/>
 			<span>https://github.com/ID</span><br/><br/>
-			<label for="<?php echo $this->get_field_id( 'google' ); ?>"><?php _e( 'Google+ URL:', 'super-socializer' ); ?></label> 
-			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'google' ); ?>" name="<?php echo $this->get_field_name( 'google' ); ?>" type="text" value="<?php echo $instance['google']; ?>" /><br/>
-			<span>https://plus.google.com/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'linkedin' ); ?>"><?php _e( 'LinkedIn URL:', 'super-socializer' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'linkedin' ); ?>" name="<?php echo $this->get_field_name( 'linkedin' ); ?>" type="text" value="<?php echo $instance['linkedin']; ?>" /><br/>
 			<span>https://www.linkedin.com/in/ID</span><br/><br/>
@@ -963,6 +980,9 @@ class TheChampFollowWidget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'medium' ); ?>"><?php _e( 'Medium URL:', 'super-socializer' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'medium' ); ?>" name="<?php echo $this->get_field_name( 'medium' ); ?>" type="text" value="<?php echo $instance['medium']; ?>" /><br/>
 			<span>https://medium.com/@ID</span><br/><br/>
+			<label for="<?php echo $this->get_field_id( 'mewe' ); ?>"><?php _e( 'MeWe URL:', 'super-socializer' ); ?></label> 
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'mewe' ); ?>" name="<?php echo $this->get_field_name( 'mewe' ); ?>" type="text" value="<?php echo $instance['mewe']; ?>" /><br/>
+			<span>https://mewe.com/profile/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'odnoklassniki' ); ?>"><?php _e( 'Odnoklassniki URL:', 'super-socializer' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'odnoklassniki' ); ?>" name="<?php echo $this->get_field_name( 'odnoklassniki' ); ?>" type="text" value="<?php echo $instance['odnoklassniki']; ?>" /><br/>
 			<span>https://ok.ru/profile/ID</span><br/><br/>
@@ -978,6 +998,9 @@ class TheChampFollowWidget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'vkontakte' ); ?>"><?php _e( 'Vkontakte URL:', 'super-socializer' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'vkontakte' ); ?>" name="<?php echo $this->get_field_name( 'vkontakte' ); ?>" type="text" value="<?php echo $instance['vkontakte']; ?>" /><br/>
 			<span>https://vk.com/ID</span><br/><br/>
+			<label for="<?php echo $this->get_field_id( 'xing' ); ?>"><?php _e( 'Xing URL:', 'super-socializer' ); ?></label> 
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'xing' ); ?>" name="<?php echo $this->get_field_name( 'xing' ); ?>" type="text" value="<?php echo $instance['xing']; ?>" /><br/>
+			<span>https://www.xing.com/profile/ID</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'youtube' ); ?>"><?php _e( 'Youtube URL:', 'super-socializer' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'youtube' ); ?>" name="<?php echo $this->get_field_name( 'youtube' ); ?>" type="text" value="<?php echo $instance['youtube']; ?>" /><br/>
 			<span>https://www.youtube.com/user/ID</span><br/><br/>

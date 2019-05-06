@@ -374,7 +374,7 @@ add_filter( 'get_the_archive_title', function ( $title ) {
 
 });
 
-// disable image attachment pages
+// DISABLE IMAGE ATTACHMENT PAGES
 
 function myprefix_redirect_attachment_page() {
 	if ( is_attachment() ) {
@@ -389,3 +389,21 @@ function myprefix_redirect_attachment_page() {
 	}
 }
 add_action( 'template_redirect', 'myprefix_redirect_attachment_page' );
+
+//HIDE TAG PAGES
+
+add_filter( 'register_taxonomy_args', 'my_tags_disable', 10, 3 );
+
+function my_tags_disable( $args, $name, $object_type ) {
+    // if it's no the "tag" taxonomy, don't make changes
+    if ( 'post_tag' !== $name ) {
+        return $args;
+    }
+
+    // override the specific arguments to remove the archive from the front-end
+    $args['public'] = FALSE;
+    $args['publicly_queryable'] = FALSE;
+
+    // return the modified arguments
+    return $args;
+}

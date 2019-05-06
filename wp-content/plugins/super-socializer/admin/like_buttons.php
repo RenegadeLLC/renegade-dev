@@ -12,7 +12,7 @@
 		
 		<div class="stuffbox" style="width:98.7%">
 			<h3><label><?php _e('Master Control', 'super-socializer' );?></label></h3>
-			<div class="inside">
+			<div class="inside" style="padding:5px;">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="form-table editcomment menu_content_table">
 					<tr>
 						<th>
@@ -129,7 +129,7 @@
 							<td>
 							<ul id="the_champ_sc_rearrange">
 							<?php
-							$counterProviders = array('facebook_share', 'facebook_like', 'facebook_recommend', 'twitter_tweet', 'linkedin_share', 'google_plusone', 'googleplus_share', 'pinterest_pin_it', 'xing', 'reddit', 'yummly', 'buffer');
+							$counterProviders = array('facebook_share', 'facebook_like', 'facebook_recommend', 'twitter_tweet', 'linkedin_share', 'pinterest_pin_it', 'xing', 'reddit', 'yummly', 'buffer');
 							// show selected providers
 							if(isset($theChampCounterOptions['horizontal_providers']) && is_array($theChampCounterOptions['horizontal_providers'])){
 								foreach($theChampCounterOptions['horizontal_providers'] as $selected){
@@ -795,7 +795,7 @@
 				<div class="the_champ_left_column">
 				<div class="stuffbox">
 					<h3><label><?php _e('Shortcode & Widget', 'super-socializer');?></label></h3>
-					<div class="inside">
+					<div class="inside" style="padding-left:7px">
 						<p><a style="text-decoration:none" href="http://support.heateor.com/like-buttons-shortcode-and-widget/" target="_blank"><?php _e('Like Buttons Shortcode & Widget', 'super-socializer') ?></a></p>
 					</div>
 				</div>
@@ -808,7 +808,7 @@
 				<div class="the_champ_left_column">
 				<div class="stuffbox">
 					<h3><label><?php _e('FAQ', 'super-socializer' ) ?></label></h3>
-					<div class="inside faq">
+					<div class="inside faq" style="padding-left:8px">
 						<p><a href="http://support.heateor.com/why-is-there-so-much-space-between-like-buttons" target="_blank"><?php _e( 'Why is there so much space between like buttons?', 'super-socializer' ) ?></a></p>
 						<p><a href="http://support.heateor.com/why-is-floating-share-like-button-not-appearing-at-homepage" target="_blank"><?php _e( 'Why are floating sharing/like buttons not appearing at homepage?', 'super-socializer' ) ?></a></p>
 						<p><a href="http://support.heateor.com/place-title-social-share-icons-row/" target="_blank"><?php _e('How to Place Title and Social Share Icons in the Same Row?', 'super-socializer' ) ?></a></p>
@@ -833,11 +833,11 @@
 		</form>
 		<div class="clear"></div>
 		<div class="stuffbox">
-			<h3><label><?php _e("Instagram Shoutout", 'super-socializer' ); ?></label></h3>
-			<div class="inside">
-			<p><?php _e( 'If you can send (to hello@heateor.com) how our plugin is helping your business, we can share it on Instagram. You can also send any relevant hashtags and people to mention in the Instagram post.', 'super-socializer' ) ?></p>
-			<p><?php _e( '<b>Example</b> - Blah-Blah Online Coaching teaches various programming language courses through their website. They have emerged as one of the most popular online coaching websites in the past year. Anyone can become proficient in programming language of their choice in a very easy way in no time.', 'super-socializer' ) ?></p>
-			<p><?php _e( '@blahblahonlinecoaching proudly use #SuperSocializer to enable social features at their website, such as - Social Login, Social Share and Social Commenting. Be sure to visit their website at blahblahonlinecoaching.com where you can browse a variety of programming language courses.', 'super-socializer' ) ?></p>
+			<h3><label><?php _e("Instagram Shoutout", 'super-socializer'); ?></label></h3>
+			<div class="inside" style="padding-left:10px">
+			<p><?php _e( 'If you can send (to hello@heateor.com) how our plugin is helping your business, we can share it on Instagram. You can also send any relevant hashtags and people to mention in the Instagram post.', 'super-socializer') ?></p>
+			<p><?php _e( '<b>Example</b> - Blah-Blah Online Coaching teaches various programming language courses through their website. They have emerged as one of the most popular online coaching websites in the past year. Anyone can become proficient in programming language of their choice in a very easy way in no time.', 'super-socializer') ?></p>
+			<p><?php _e( '@blahblahonlinecoaching proudly use #SuperSocializer to enable social features at their website, such as - Social Login, Social Share and Social Commenting. Be sure to visit their website at blahblahonlinecoaching.com where you can browse a variety of programming language courses.', 'super-socializer') ?></p>
 			</div>
 		</div>
 </div>

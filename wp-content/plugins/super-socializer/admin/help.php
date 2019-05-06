@@ -4,11 +4,9 @@
 		<h3><label><?php _e('About', 'super-socializer');?></label><label style="float:right"><?php _e('Version', 'super-socializer');?> <?php echo get_option('the_champ_ss_version'); ?></label></h3>
 		<div class="inside">
 		<p><strong>Super Socializer</strong> <?php _e('by', 'super-socializer') ?> <strong><a href="//www.heateor.com" target="_blank">Heateor</a></strong></p>
-		<p><?php _e('We are a creative team with unique ideas in mind and service in heart. We love what we do. For more info join us at', 'super-socializer') ?></p>
 		<div style="height:32px">
 			<a href="//www.facebook.com/heateor" target="_blank" title="Facebook"><img style="box-shadow:1px 1px 10px 1px #888888" class="theChampLoginButton theChampFacebookButton" /></a>
 			<a href="//twitter.com/heateor" target="_blank" title="Twitter"><img style="box-shadow:1px 1px 10px 1px #888888" class="theChampLoginButton theChampTwitterButton" ></a>
-			<a href="//plus.google.com/+Heateor" title="GooglePlus" target="_blank"><img style="box-shadow:1px 1px 10px 1px #888888" class="theChampLoginButton theChampGoogleButton" ></a>
 			<a href="https://www.instagram.com/Heateor" title="Instagram" target="_blank"><div style="display:block;width:32px;height:32px;box-shadow:1px 1px 10px 1px #888888;float:left;background-color:#527FA4"><div class="theChampSharingSvg theChampInstagramSvg"></div></div></a>
 		</div>
 		</div>

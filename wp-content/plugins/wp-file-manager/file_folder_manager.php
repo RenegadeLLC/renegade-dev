@@ -4,7 +4,7 @@
   Plugin URI: https://wordpress.org/plugins/wp-file-manager
   Description: Manage your WP files.
   Author: mndpsingh287
-  Version: 3.8
+  Version: 4.6
   Author URI: https://profiles.wordpress.org/mndpsingh287
   License: GPLv2
  **/
@@ -33,10 +33,10 @@ if (!class_exists('mk_file_folder_manager')):
             */
             add_action('wp_ajax_mk_filemanager_verify_email', array(&$this, 'mk_filemanager_verify_email_callback'));
             add_action('wp_ajax_verify_filemanager_email', array(&$this, 'verify_filemanager_email_callback'));
-            // php syntax
-            add_action('wp_ajax_mk_check_filemanager_php_syntax', array(&$this, 'mk_check_filemanager_php_syntax_callback'));
-            add_action('wp_ajax_nopriv_mk_check_filemanager_php_syntax', array(&$this, 'mk_check_filemanager_php_syntax_callback'));
-            add_action('admin_init', array(&$this, 'remove_fm_temp_file'));
+            /*
+            Media Upload
+            */
+            add_action('wp_ajax_mk_file_folder_manager_media_upload', array(&$this, 'mk_file_folder_manager_media_upload'));
         }
 
         /* Verify Email*/
@@ -104,7 +104,7 @@ if (!class_exists('mk_file_folder_manager')):
                 update_option('filemanager_email_verified_'.$current_user->ID, 'yes');
                 echo '<p>Email Verified Successfully. Redirecting please wait.</p>';
                 echo '<script>';
-                echo 'setTimeout(function(){window.location.href="https://filemanager.webdesi9.com?utm_redirect=wp" }, 2000);';
+                echo 'setTimeout(function(){window.location.href="https://filemanagerpro.io?utm_redirect=wp" }, 2000);';
                 echo '</script>';
             }
             die;
@@ -152,15 +152,19 @@ if (!class_exists('mk_file_folder_manager')):
                          'verified' => $verified,
                 );
             $str = http_build_query($info);
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, $this->SERVER);
-            curl_setopt($curl, CURLOPT_POST, 1);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); // save to returning 1
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $str);
-            $result = curl_exec($curl);
-            $data = json_decode($result, true);
+            $args = array(
+                'body' => $str,
+                'timeout' => '5',
+                'redirection' => '5',
+                'httpversion' => '1.0',
+                'blocking' => true,
+                'headers' => array(),
+                'cookies' => array(),
+            );
 
-            return $data;
+            $response = wp_remote_post($this->SERVER, $args);
+
+            return $response;
         }
 
         /* File Manager text Domain */
@@ -186,7 +190,7 @@ if (!class_exists('mk_file_folder_manager')):
             /* Only for admin */
             add_submenu_page('wp_file_manager', __('Settings', 'wp-file-manager'), __('Settings', 'wp-file-manager'), 'manage_options', 'wp_file_manager_settings', array(&$this, 'wp_file_manager_settings'));
             /* Only for admin */
-            add_submenu_page('wp_file_manager', __('Root Directory', 'wp-file-manager'), __('Root Directory', 'wp-file-manager'), 'manage_options', 'wp_file_manager_root', array(&$this, 'wp_file_manager_root'));
+            add_submenu_page('wp_file_manager', __('Preferences', 'wp-file-manager'), __('Preferences', 'wp-file-manager'), 'manage_options', 'wp_file_manager_root', array(&$this, 'wp_file_manager_root'));
             /* Only for admin */
             add_submenu_page('wp_file_manager', __('System Properties', 'wp-file-manager'), __('System Properties', 'wp-file-manager'), 'manage_options', 'wp_file_manager_properties', array(&$this, 'wp_file_manager_properties'));
             /* Only for admin */
@@ -281,7 +285,6 @@ if (!class_exists('mk_file_folder_manager')):
                     wp_enqueue_style('theme-latest', plugins_url('lib/themes/'.$wp_fm_theme.'/css/theme.css', __FILE__));
                 }
             } else {
-                wp_enqueue_style('theme-latest', plugins_url('lib/themes/default/css/theme.css', __FILE__));
             }
             endif;
         }
@@ -330,24 +333,24 @@ if (!class_exists('mk_file_folder_manager')):
             $nonce = $_REQUEST['_wpnonce'];
             if (wp_verify_nonce($nonce, 'wp-file-manager')) {
                 require 'lib/php/autoload.php';
-				 if (isset($settings['fm_enable_trash']) && $settings['fm_enable_trash'] == '1') {
-					$mkTrash =  array(
+                if (isset($settings['fm_enable_trash']) && $settings['fm_enable_trash'] == '1') {
+                    $mkTrash = array(
                             'id' => '1',
                             'driver' => 'Trash',
                             'path' => WP_FILE_MANAGER_PATH.'lib/files/.trash/',
                             'tmbURL' => site_url().'/lib/files/.trash/.tmb/',
-							'winHashFix'    => DIRECTORY_SEPARATOR !== '/',
-                            'uploadDeny' => array(''),          
+                            'winHashFix' => DIRECTORY_SEPARATOR !== '/',
+                            'uploadDeny' => array(''),
                             'uploadAllow' => array(''),
                             'uploadOrder' => array('deny', 'allow'),
                             'accessControl' => 'access',
-							'attributes' => $mk_restrictions,
+                            'attributes' => $mk_restrictions,
                         );
-					$mkTrashHash = 't1_Lw';
-				 } else {
-					$mkTrash = array();
-					$mkTrashHash = ''; 
-				 }
+                    $mkTrashHash = 't1_Lw';
+                } else {
+                    $mkTrash = array();
+                    $mkTrashHash = '';
+                }
                 $opts = array(
                        'debug' => false,
                        'roots' => array(
@@ -356,15 +359,15 @@ if (!class_exists('mk_file_folder_manager')):
                             'path' => $path,
                             'URL' => site_url(),
                             'trashHash' => $mkTrashHash,
-							'winHashFix'    => DIRECTORY_SEPARATOR !== '/',
-                            'uploadDeny' => array(), 
-                            'uploadAllow' => array('image', 'text/plain'), 
+                            'winHashFix' => DIRECTORY_SEPARATOR !== '/',
+                            'uploadDeny' => array(),
+                            'uploadAllow' => array('image', 'text/plain'),
                             'uploadOrder' => array('deny', 'allow'),
                             'accessControl' => 'access',
                             'acceptedName' => 'validName',
-                            'disabled' => array('help', 'preference'),
+                            //'disabled' => array('help', 'preference'),
                             'attributes' => $mk_restrictions,
-                        ),                       
+                        ),
                         $mkTrash,
                     ),
                 );
@@ -467,7 +470,7 @@ if (!class_exists('mk_file_folder_manager')):
                           'magyar' => 'hu',
                           'Indonesian' => 'id',
                           'Italiano' => 'it',
-                          'Japanese' => 'jp',
+                          'Japanese' => 'ja',
                           'Korean' => 'ko',
                           'Dutch' => 'nl',
                           'Norwegian' => 'no',
@@ -520,49 +523,62 @@ if (!class_exists('mk_file_folder_manager')):
             echo 'window.location.href="'.$url.'"';
             echo '</script>';
         }
-
-        /* Remove Fm Temp File */
-        public function remove_fm_temp_file()
-        {
-            $upload_dir = wp_upload_dir();
-            $fm_temp = $upload_dir['basedir'].'/fm_temp.php';
-            if (file_exists($fm_temp)) {
-                unlink($fm_temp);
-            }
-        }
-
-        /* Check php Syntax Errors */
-        public function mk_check_filemanager_php_syntax_callback()
-        {
-            $filename = isset($_POST['filename']) ? sanitize_file_name($_POST['filename']) : '';
-            $fileMime = isset($_POST['filemime']) ? sanitize_mime_type($_POST['filemime']) : '';
-            $code = stripslashes($_POST['code']);
-            if (is_user_logged_in() && $fileMime == 'text/x-php') {
-                $current_user = wp_get_current_user();
-                $upload_dir = wp_upload_dir();
-                if (isset($current_user->user_login) && !empty($upload_dir['basedir'])) {
-                    $fm_temp = $upload_dir['basedir'].'/fm_temp.php';
-                    $handle = fopen($fm_temp, 'w');
-                    fwrite($handle, $code);
-                    $check = shell_exec('php -l '.$fm_temp);
-                    if (strpos($check, 'No syntax errors') === false) {
-                        echo str_replace($fm_temp, '<strong>'.$filename.'</strong>', $check);
-                    } else {
-                        echo '1';
-                    }
-                }
-            } else {
-                echo '1';
-            }
-            die;
-        }
-		/*
+        /*
          * Admin - Assets
         */
         public function fm_custom_assets()
         {
             wp_enqueue_style('fm_custom_style', plugins_url('/css/fm_custom_style.css', __FILE__));
         }
+        /* 
+        * Media Upload
+        */
+        public function mk_file_folder_manager_media_upload() {	
+			$uploadedfiles = isset($_POST['uploadefiles']) ? $_POST['uploadefiles'] : '';
+			  if(!empty($uploadedfiles)) {
+				 $files = '';
+				 $fileCount = 1;
+				 foreach($uploadedfiles as $uploadedfile) {					 
+				 /* Start - Uploading Image to Media Lib */
+				   $this->upload_to_media_library($uploadedfile);
+				 /* End - Uploading Image to Media Lib */
+				 }
+			  }
+			  die;
+        }
+       /* Upload Images to Media Library */
+		 public function upload_to_media_library($image_url) {
+            $allowed_exts = array('jpg','jpe','jpeg','gif','png','svg','pdf','zip');
+            $url = $image_url;
+            preg_match('/[^\?]+\.(jpg|jpe|jpeg|gif|png|pdf|zip)/i', $url, $matches);
+             if(in_array($matches[1], $allowed_exts)) {
+			// Need to require these files
+					if ( !function_exists('media_handle_upload') ) {
+						require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+						require_once(ABSPATH . "wp-admin" . '/includes/file.php');
+						require_once(ABSPATH . "wp-admin" . '/includes/media.php');
+					}
+					
+					$tmp = download_url( $url );
+					$post_id = 0;
+					$desc = "";
+					$file_array = array();     
+					$file_array['name'] = basename($matches[0]);					
+					// If error storing temporarily, unlink
+					if ( is_wp_error( $tmp ) ) {
+						@unlink($file_array['tmp_name']);
+						$file_array['tmp_name'] = '';
+					} else {
+						$file_array['tmp_name'] = $tmp;
+					}
+					$id = media_handle_sideload( $file_array, $post_id, $desc );
+					if ( is_wp_error($id) ) {
+						@unlink($file_array['tmp_name']);
+						return $id;
+                    }
+            }
+		 }
+
     }
     $filemanager = new mk_file_folder_manager();
     global $filemanager;

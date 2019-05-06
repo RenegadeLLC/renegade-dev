@@ -1,3 +1,4 @@
+function heateorSsDetermineWhatsappShareAPI(a){if(a)return-1!=navigator.userAgent.indexOf("Mobi")?"api.whatsapp.com":"web.whatsapp.com";var p=jQuery("i.theChampWhatsappBackground a").attr("href");return void 0!==p?-1!=navigator.userAgent.indexOf("Mobi")?(jQuery("i.theChampWhatsappBackground a").attr("href",p.replace("web.whatsapp.com","api.whatsapp.com")),"api.whatsapp.com"):(jQuery("i.theChampWhatsappBackground a").attr("href",p.replace("api.whatsapp.com","web.whatsapp.com")),"web.whatsapp.com"):""}
 /**
  * Show more sharing services popup
  */
@@ -15,11 +16,6 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 		title: "Twitter",
 		locale: "en-US",
 		redirect_url: "http://twitter.com/intent/tweet?text=" + (twitterTitle ? twitterTitle : postTitle) + " " + postUrl,
-	  },
-	  google: {
-		title: "Google plus",
-		locale: "en-US",
-		redirect_url: "https://plus.google.com/share?url=" + postUrl,
 	  },
 	  linkedin: {
 		title: "Linkedin",
@@ -73,11 +69,6 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 		locale: "en-US",
 		redirect_url: "https://papaly.com/api/share.html?url="+postUrl+"&title="+postTitle
 	  },
-	  Polyvore: {
-		title: "Polyvore",
-		locale: "en-US",
-		bookmarklet_url: "javascript:(function(){function e(a){var c=window;if(c.PolyvoreClipper){c.PolyvoreClipper.run()}else{var b=a.createElement(\'script\');c._polyvoreMode=\'prod\';c._polyvoreHost=\'www.polyvore.com\';b.src=\'http://akwww.polyvorecdn.com/rsrc/clipper.js?\'+Math.floor((new Date()).getTime()/86400000);a.body.appendChild(b)}}try{e(document)}catch(g){}for(var f=0;f<frames.length;++f){var i=frames[f];try{if(i.frameElement.tagName==\'IFRAME\'){continue}if(i.innerWidth<400||i.innerHeight<400){continue}e(i.document)}catch(j){}}})();"
-	  },
 	  Refind: {
 		title: "Refind",
 		locale: "en-US",
@@ -113,20 +104,10 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 		locale: "en-US",
 		redirect_url: "https://telegram.me/share/url?url="+postUrl+"&text="+postTitle
 	  },
-	  yahoo_bookmarks: {
-		title: "Yahoo",
-		locale: "en-US",
-		redirect_url: "http://bookmarks.yahoo.com/toolbar/savebm?u=" + postUrl + "&t=" + postTitle,
-	  },
 	  email: {
 		title: "Email",
 		locale: "en-US",
 		redirect_url: "mailto:?subject=" + postTitle + "&body=Link: " + postUrl,
-	  },
-	  delicious: {
-		title: "Delicious",
-		locale: "en-US",
-		redirect_url: "http://delicious.com/save?url=" + postUrl + "&title=" + postTitle,
 	  },
 	  reddit: {
 		title: "Reddit",
@@ -171,7 +152,7 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 	  tumblr: {
 		title: "Tumblr",
 		locale: "en-US",
-		redirect_url: "http://www.tumblr.com/share?v=3&u=" + postUrl + "&t=" + postTitle,
+		redirect_url: "https://www.tumblr.com/widgets/share/tool?posttype=link&canonicalUrl=" + postUrl + "&title=" + postTitle + "&caption=",
 		bookmarklet_url: "javascript:var d=document,w=window,e=w.getSelection,k=d.getSelection,x=d.selection,s=(e?e():(k)?k():(x?x.createRange().text:0)),f='http://www.tumblr.com/share',l=d.location,e=encodeURIComponent,p='?v=3&u='+e(l.href) +'&t='+e(d.title) +'&s='+e(s),u=f+p;try{if(!/^(.*\\.)?tumblr[^.]*$/.test(l.host))throw(0);tstbklt();}catch(z){a =function(){if(!w.open(u,'t','toolbar=0,resizable=0,status=1,width=450,height=430'))l.href=u;};if(/Firefox/.test(navigator.userAgent))setTimeout(a,0);else a();}void(0);"
 	  },
 	  vk: {
@@ -199,7 +180,7 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 	  whatsapp: {
 		title: "Whatsapp",
 		locale: "en-US",
-		redirect_url: "https://api.whatsapp.com/send?text=" + postTitle + " " + postUrl,
+		redirect_url: "https://" + heateorSsDetermineWhatsappShareAPI(true) + "/send?text=" + postTitle + " " + postUrl,
 	  },
 	  diigo: {
 		title: "Diigo",
@@ -247,20 +228,10 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 		locale: "en-US",
 		redirect_url: "http://share.aim.com/share/?url=" + postUrl + "&title=" + postTitle,
 	  },
-	  stumpedia: {
-		title: "Stumpedia",
-		locale: "en-US",
-		redirect_url: "http://www.stumpedia.com/submit?url=" + postUrl + "&title=" + postTitle,
-	  },
 	  viadeo: {
 		title: "Viadeo",
 		locale: "en-US",
 		redirect_url: "http://www.viadeo.com/shareit/share/?url=" + postUrl + "&title=" + postTitle,
-	  },
-	  yahoo_messenger: {
-		title: "Yahoo Messenger",
-		locale: "en-US",
-		redirect_url: "ymsgr:sendim?m=" + postUrl,
 	  },
 	  pinboard_in: {
 		title: "Pinboard",
@@ -302,6 +273,11 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 		locale: "en-US",
 		redirect_url: "http://cgi.fark.com/cgi/fark/submit.pl?new_url=" + postUrl,
 	  },
+	  fintel: {
+		title: "Fintel",
+		locale: "en-US",
+		redirect_url: "https://fintel.io/submit?url=" + postUrl,
+	  },
 	  yummly: {
 		title: "Yummly",
 		locale: "en-US",
@@ -311,11 +287,6 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 		title: "App.net",
 		locale: "en-US",
 		redirect_url: "https://account.app.net/login/",
-	  },
-	  baidu: {
-		title: "Baidu",
-		locale: "en-US",
-		redirect_url: "http://cang.baidu.com/do/add?it=" + postTitle + "&iu=" + postUrl,
 	  },
 	  balatarin: {
 		title: "Balatarin",
@@ -367,11 +338,6 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 		locale: "en-US",
 		redirect_url: "http://www.diary.ru/?newpost&title=" + postTitle + "&text=" + postUrl,
 	  },
-	  diHITT: {
-		title: "diHITT",
-		locale: "en-US",
-		redirect_url: "http://www.dihitt.com/submit?url=" + postUrl + "&title=" + postTitle,
-	  },
 	  dzone: {
 		title: "DZone",
 		locale: "en-US",
@@ -410,7 +376,7 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 	  Line: {
 		title: "Line",
 		locale: "en-US",
-		redirect_url: "line://msg/text/" + postTitle + "! " + postUrl,
+		redirect_url: "https://social-plugins.line.me/lineit/share?url=" + postUrl,
 	  },
 	  LiveJournal: {
 		title: "LiveJournal",
@@ -432,6 +398,11 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 		locale: "en-US",
 		redirect_url: "https://www.meneame.net/submit.php?url=" + postUrl,
 	  },
+	  MeWe: {
+		title: "MeWe",
+		locale: "en-US",
+		redirect_url: "https://mewe.com/share?link=" + postUrl,
+	  },
 	  Mix: {
 		title: "Mix",
 		locale: "en-US",
@@ -447,35 +418,15 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 		locale: "en-US",
 		redirect_url: "https://myspace.com/post?u=" + encodeURIComponent(postUrl) + "&t=" + postTitle + "&l=3&c=" + postTitle,
 	  },
-	  Netlog: {
-		title: "Netlog",
-		locale: "en-US",
-		redirect_url: "http://www.netlog.com/go/manage/links/view=save&origin=external&url=" + postUrl + "&title=" + postTitle + "&description=",
-	  },
 	  Netvouz: {
 		title: "Netvouz",
 		locale: "en-US",
 		redirect_url: "http://www.netvouz.com/action/submitBookmark?url=" + postUrl + "&title=" + postTitle + "&popup=no&description=",
 	  },
-	  NewsVine: {
-		title: "NewsVine",
-		locale: "en-US",
-		redirect_url: "http://www.newsvine.com/_tools/seed?popoff=0&u=" + postUrl + "&h=" + postTitle,
-	  },
-	  NUjij: {
-		title: "NUjij",
-		locale: "en-US",
-		redirect_url: "http://www.nujij.nl/nieuw-bericht.2051051.lynkx?title=" + postTitle + "&url=" + postUrl + "&bericht=&topic=",
-	  },
 	  Odnoklassniki: {
 		title: "Odnoklassniki",
 		locale: "en-US",
 		redirect_url: "https://connect.ok.ru/dk?cmd=WidgetSharePreview&st.cmd=WidgetSharePreview&st.shareUrl=" + postUrl + "&st.client_id=-1",
-	  },
-	  Oknotizie: {
-		title: "Oknotizie",
-		locale: "en-US",
-		redirect_url: "//oknotizie.virgilio.it/post?url=" + postUrl + "&title=" + postTitle,
 	  },
 	  Outlook_com: {
 		title: "Outlook.com",
@@ -506,11 +457,6 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 		title: "Renren",
 		locale: "en-US",
 		redirect_url: "//www.connect.renren.com/share/sharer?url=" + postUrl + "&title=" + postTitle,
-	  },
-	  Segnalo: {
-		title: "Segnalo",
-		locale: "en-US",
-		redirect_url: "http://segnalo.virgilio.it/post.html.php?url=" + postUrl + "&title=" + postTitle,
 	  },
 	  Sina_Weibo: {
 		title: "Sina Weibo",
@@ -562,15 +508,15 @@ function theChampMoreSharingPopup(elem, postUrl, postTitle, twitterTitle){
 		locale: "en-US",
 		redirect_url: "//www.wykop.pl/dodaj?url=" + postUrl + "&title=" + postTitle,
 	  },
+	  Xing: {
+		title: "Xing",
+		locale: "en-US",
+		redirect_url: "https://www.xing.com/spi/shares/new?cb=0&url=" + postUrl,
+	  },
 	  Yoolink: {
 		title: "Yoolink",
 		locale: "en-US",
 		redirect_url: "//yoolink.to/addorshare?url_value=" + postUrl + "&title=" + postTitle,
-	  },
-	  YouMob: {
-		title: "YouMob",
-		locale: "en-US",
-		redirect_url: "//youmob.com/startmob.aspx?cookietest=true&mob=" + postUrl,
 	  }
 	}
 	var theChampMoreSharingServicesHtml = '<button id="the_champ_sharing_popup_close" class="close-button separated"><img src="'+ theChampCloseIconPath +'" /></button><div id="the_champ_sharing_more_content" data-href="'+ decodeURIComponent(shareContainer.getAttribute('class').indexOf('the_champ_horizontal_sharing') != -1 ? heateorSsHorSharingShortUrl : heateorSsVerticalSharingShortUrl) +'"><div class="filter"><input type="text" onkeyup="theChampFilterSharing(this.value.trim())" placeholder="Search" class="search"></div><div class="all-services"><ul class="mini">';
@@ -821,6 +767,7 @@ function theChampCapitaliseFirstLetter(e) {
 }
 
 jQuery(function(){
+	var heateorSsWhatsappJSAPI = heateorSsDetermineWhatsappShareAPI(false);
 	var classes = ['the_champ_vertical_sharing', 'the_champ_vertical_counter'];
 	for(var i = 0; i < classes.length; i++){
 		if(jQuery('.' + classes[i]).length){

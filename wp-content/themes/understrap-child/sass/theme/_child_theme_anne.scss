@@ -189,12 +189,14 @@ div.asp_m.asp_m_1 {
 	text-decoration: none;
 }
 
-.section-headline-text {}
+.section-headline-text {
+}
 
 .section-headline-ct {
 	display: block;
 	position: relative;
 	overflow: hidden;
+
 }
 
 .section-headline-ct>img {
@@ -562,6 +564,7 @@ ul.social-icons li:last-of-type {
 	background-size: 100% 100%;
 	color: #000;
 }
+/****** MAILCHIMP FORM STYLES *********/
 
 .mc4wp-form-basic button,
 .mc4wp-form-basic input[type=submit],
@@ -583,6 +586,23 @@ ul.social-icons li:last-of-type {
 	color:#000 !important;
 }
 
+/************ WP FORMS STYLES *********/
+
+/* Field container */
+div.wpforms-container-full .wpforms-form .wpforms-field-mailchimp{
+	padding: 4px 0 !important;
+	clear: both;
+}
+
+.wpforms-field-label-inline{
+	font-weight:300 !important;
+}
+
+.wpforms-form button[type=submit]{
+	background-color:#000 !important;
+	color:#fff !important;
+	font-size:1.5em !important;
+}
 
 .col-xs-15,
 .col-sm-15,

@@ -113,13 +113,13 @@ $the_theme = wp_get_theme();
 					<div class="site-info">
 					<div class="footer-left">
 	<?php if($footer_logo):?>
-					<a href=""><img src="<?php echo $footer_logo; ?>" width="124" alt="">	</a><br>
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>"><img src="<?php echo $footer_logo; ?>" width="124" alt="">	</a><br>
 	<?php endif;?>
 	
 	<?php if($footer_address):?>
 	<div class="footer-address"><?php echo $footer_address; 
 	if($footer_phone_number): ?><br>
-	<strong><a href="tel:"<?php echo $footer_phone_number; ?>" style="color:<?php echo $footer_link_color; ?>;"><?php echo $footer_phone_number; ?></a></strong>
+	<strong><a href="tel:<?php echo $footer_phone_number; ?>"<?php echo $footer_phone_number; ?>" style="color:<?php echo $footer_link_color; ?>;"><?php echo $footer_phone_number; ?></a></strong>
 	<?php endif;?>
 	
 	</div><!--  .footer-address -->

@@ -5,7 +5,7 @@ function build_videotestimonials(){
     $videotestimonialsHTML = '';
     $videotestimonialsHTML .= '<div class="row video-testimonials">';
 
-    
+    // $videotestimonialsHTML .= '<div class="card-columns section-video-testimonials">';
     
     if( have_rows('client_video_testimonial_items') ):  
         while ( have_rows('client_video_testimonial_items') ) : the_row();
@@ -70,7 +70,7 @@ function build_videotestimonials(){
                             $video = get_sub_field('video');
                             $video_title = get_sub_field('video_title');
                             $videoURL = get_sub_field('video_url');
-                            $video_description = get_sub_field('video_description');
+                            //$video_description = get_sub_field('video_description');
 
 
                             $col_grid_container;
@@ -95,13 +95,13 @@ function build_videotestimonials(){
                             //$videotestimonialsHTML .= '<div class="col-lg-4 col-md-4 col-sm-12 client-video-ct">';
                             $videotestimonialsHTML .= $col_grid_container;
 
-                            $videotestimonialsHTML .= '<div class="card">';
+                            $videotestimonialsHTML .= '<div class="card video-testimonial">';
                             $videotestimonialsHTML .= '<div class="entry-content">';
                            
                             
-                            $videotestimonialsHTML .= '<a data-fancybox href="' . $videoURL . '&rel=0">';
+                            $videotestimonialsHTML .= '<a data-fancybox href="' . $videoURL . '">';
                             if( $video_thumbnail):
-                                $videotestimonialsHTML .=  '<img src=" ' . $video_thumbnail . '" alt="' . $first_name . ' ' . $last_name . ' - ' . $client_name . 'Testimonial Renegade">';
+                                $videotestimonialsHTML .=  '<div class="img-ct"><img src=" ' . $video_thumbnail . '" alt="' . $first_name . ' ' . $last_name . ' - ' . $client_name . 'Testimonial Renegade"></div>';
                             endif;
                             
                             $videotestimonialsHTML .= '<div class="card-body">';
@@ -115,22 +115,22 @@ function build_videotestimonials(){
                         
 
                             if($first_name && $last_name):
-                                $videotestimonialsHTML .= $first_name . ' ' . $last_name . '<br>';
+                                $videotestimonialsHTML .= '<div class="name">' . $first_name . ' ' . $last_name . '</div><!-- .name -->';
                             endif;
                             if($job_title):
-                                $videotestimonialsHTML .= $job_title . ', ';
+                                $videotestimonialsHTML .= '<div class="job-title">' . $job_title . '</div><!-- .job-title -->';
                             endif;
 
                             if($client_name):
-                                $videotestimonialsHTML .= $client_name;
+                                $videotestimonialsHTML .= '<div class="company">' . $client_name . '</div><!-- .company -->';
                             endif;
 
                             if($video_description):
-                                $videotestimonialsHTML .= '<div class="video-description">' . $video_description . '</div>';
+                                //$videotestimonialsHTML .= '<div class="video-description">' . $video_description . '</div>';
                             endif;
 
                             //PUT VIDEO TESTIMONIAL CONTENT LOOP HERE
-                            $videotestimonialsHTML .= '</div><!-- .card-body --></div><!-- .card --></div><!-- client-video-ct -->';
+                            $videotestimonialsHTML .= '</a></div><!-- .card-text --></div><!-- .card-body --></div><!-- .card --></div><!-- .entry-content --></div><!-- client-video-ct -->';
                         endwhile;
                       
                     endif;
