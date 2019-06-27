@@ -1,5 +1,6 @@
 ( function( $ ) {
 	'use strict';
+
 	$( document ).ready( function() {
 
 		$( '.is-menu a' ).on( 'click', function( e ) {
@@ -43,6 +44,10 @@
 	$( '.is-menu form input[type="search"], .is-menu form input[type="text"]' ).on( 'click', function( e ) {
 		 e.stopPropagation();
 		return false;
+	} );
+
+	$( 'form.is-search-form, form.search-form' ).on( 'hover', function( e ) {
+            $( this ).append( $( this ).next( ".is-link-container" ).remove() );
 	} );
 
 	$( window ).click( function( e ) {

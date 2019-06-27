@@ -5,17 +5,21 @@ defined('ABSPATH') or die("Cheating........Uh!!");
  */
 
 /**
- * Render sharing interface html.
+ * Render sharing interface html
  */
 function the_champ_prepare_sharing_html( $postUrl, $sharingType = 'horizontal', $displayCount, $totalShares, $shareCountTransientId, $standardWidget = false ) {
 	
 	global $post, $theChampSharingOptions;
 
-	if ( NULL === $post ) {
+	if ( NULL === $post || ! is_object( $post ) ) {
         $post = get_post( $shareCountTransientId );
 	}
 
-	if ( ( $sharingType == 'vertical' && !is_singular() ) || $standardWidget ) {
+	if ( ! is_object( $post ) ) {
+        return '';
+	}
+
+	if ( ( $sharingType == 'vertical' && ! is_singular() ) || $standardWidget ) {
 		$postTitle = get_bloginfo( 'name' ) . " - " . get_bloginfo( 'description' );
 		if ( is_category() ) {
 			$postTitle = esc_attr( wp_strip_all_tags( stripslashes( single_cat_title( '', false ) ), true ) );
@@ -247,6 +251,27 @@ function the_champ_prepare_sharing_html( $postUrl, $sharingType = 'horizontal', 
 		$html .= '<div style="clear:both"></div>';
 	}
 	return $html;
+}
+
+/**
+ * Fetch Facebook access token
+ */
+function heateor_ss_fetch_fb_access_token(){
+	global $theChampSharingOptions, $theChampLoginOptions;
+	$fbAppId = '';
+	$fbAppSecret = '';
+	if(isset($theChampLoginOptions['enable']) && $theChampLoginOptions['fb_key'] && $theChampLoginOptions['fb_secret'] && in_array('facebook', $theChampLoginOptions['providers'])){
+		$fbAppId = $theChampLoginOptions['fb_key'];
+		$fbAppSecret = $theChampLoginOptions['fb_secret'];
+	}elseif($theChampSharingOptions['fb_key'] && $theChampSharingOptions['fb_secret']){
+		$fbAppId = $theChampSharingOptions['fb_key'];
+		$fbAppSecret = $theChampSharingOptions['fb_secret'];
+	}
+	if($fbAppId && $fbAppSecret){
+		return $fbAppId .'|'. $fbAppSecret;
+	}
+
+	return false;
 }
 
 /**
@@ -488,9 +513,10 @@ function the_champ_render_sharing($content){
 	}
 
 	global $post;
-	if(!$post){
-		return $content;
+	if(!is_object($post)){
+        return $content;
 	}
+	
 	// hook to bypass sharing
 	$disable = apply_filters('the_champ_bypass_sharing', $post, $content);
 	// if $disable value is 1, return content without sharing interface
@@ -892,9 +918,7 @@ function the_champ_sharing_count(){
 
 	$responseData = array();
 	$ajaxResponse = array();
-	if(in_array('facebook', $sharingNetworks)){
-		$ajaxResponse['facebook'] = 1;
-	}
+	
 	$multiplier = 60;
 	if ( $theChampSharingOptions['share_count_cache_refresh_count'] != '' ) {
 		switch ( $theChampSharingOptions['share_count_cache_refresh_unit'] ) {
@@ -933,8 +957,15 @@ function the_champ_sharing_count(){
 			$shareCountTransient = array();
 			foreach($sharingNetworks as $provider){
 				switch($provider){
+					case 'facebook':
+						$url = '';
+						$fbAccessToken = heateor_ss_fetch_fb_access_token();
+						if($fbAccessToken){
+							$url = "https://graph.facebook.com/?access_token=". $fbAccessToken ."&fields=engagement&id=". $targetUrl;
+						}
+						break;
 					case 'twitter':
-						$url = "https://counts.twitcount.com/counts.php?url=" . $targetUrl;
+						$url = "https://counts.twitcount.com/counts.php?url=". $targetUrl;
 						break;
 					case 'linkedin':
 						$url = 'https://www.linkedin.com/countserv/count/share?url='. $targetUrl .'&format=json';
@@ -955,13 +986,14 @@ function the_champ_sharing_count(){
 						$url = 'https://connect.ok.ru/dk?st.cmd=extLike&tp=json&ref='. $targetUrl;
 						break;
 					case 'Fintel':
-						$url = 'https://fintel.io/api/pageStats?url='. $target_url;
+						$url = 'https://fintel.io/api/pageStats?url='. $targetUrl;
 						break;
 					default:
 						$url = '';
 				}
 				if($url == ''){ continue; }
 				$response = wp_remote_get($url,  array('timeout' => 15, 'user-agent'  => 'Super-Socializer'));
+				
 				if(!is_wp_error($response) && isset($response['response']['code']) && 200 === $response['response']['code']){
 					$body = wp_remote_retrieve_body($response);
 					if($provider == 'pinterest'){
@@ -971,8 +1003,15 @@ function the_champ_sharing_count(){
 						$body = json_decode($body);
 					}
 					switch($provider){
+						case 'facebook':
+							if(!empty($body->engagement) && isset($body->engagement->share_count)){
+								$shareCountTransient['facebook'] = (isset($body->engagement->reaction_count) ? $body->engagement->reaction_count : 0) + (isset($body->engagement->comment_count) ? $body->engagement->comment_count : 0) + $body->engagement->share_count;
+							}else{
+								$shareCountTransient['facebook'] = 0;
+							}
+							break;
 						case 'twitter':
-							if (!empty($body -> count)){
+							if(!empty($body -> count)){
 								$shareCountTransient['twitter'] = $body -> count;
 							}else{
 								$shareCountTransient['twitter'] = 0;

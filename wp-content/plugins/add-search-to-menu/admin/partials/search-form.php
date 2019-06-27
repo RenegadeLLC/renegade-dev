@@ -100,7 +100,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 			</div><!-- #post-body-content -->
 			<div id="search-form-editor">
 			<?php
-
 				$editor = new IS_Search_Editor( $post );
 				$panels = array();
 
@@ -113,6 +112,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 						'excludes' => array(
 							'title' => __( 'Excludes', 'ivory-search' ),
 							'callback' => 'excludes_panel',
+						),
+						'customize' => array(
+							'title' => __( 'Customize', 'ivory-search' ),
+							'callback' => 'customize_panel',
+						),
+						'ajax' => array(
+							'title' => __( 'AJAX', 'ivory-search' ),
+							'callback' => 'ajax_panel',
 						),
 						'options' => array(
 							'title' => __( 'Options', 'ivory-search' ),
@@ -149,7 +156,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php $this->save_button( $post_id ); ?>
 					</div>
 					<?php
-						if ( ! $post->initial() && 'Default Search Form' !== $post->title() ) :
+						if ( ! $post->initial() && ( 'Default Search Form' !== $post->title() || defined( 'DELETE_DEFAULT_SEARCH_FORM' ) ) ) :
 							$delete_nonce = wp_create_nonce( 'is-delete-search-form_' . $post_id );
 					?>
 					<div id="delete-action">

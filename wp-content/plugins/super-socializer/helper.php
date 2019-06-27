@@ -85,7 +85,7 @@ function the_champ_social_login_page(){
  */
 function the_champ_social_sharing_page(){
 	// social sharing options
-	global $theChampSharingOptions, $theChampIsBpActive;
+	global $theChampSharingOptions, $theChampLoginOptions, $theChampIsBpActive;
 	if(!isset($theChampSharingOptions['horizontal_sharing_size'])){
 		$theChampSharingOptions['horizontal_sharing_size'] = 30;
 	}

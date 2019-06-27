@@ -58,16 +58,34 @@ class IS_Loader {
 	 * Loads plugin functionality.
 	 */
 	function load() {
+            if ( ! $this->is_wp_is_json_request() ) {
 		$this->set_locale();
 
 		$this->admin_public_hooks();
 
-		if ( is_admin() ) {
+		if ( is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			$this->admin_hooks();
-		} else {
+		} 
+                if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			$this->public_hooks();
 		}
+            }
 	}
+
+        /* Checks whether current request is a JSON request, or is expecting a JSON response. */
+        private function is_wp_is_json_request() {
+
+            if ( isset( $_SERVER['HTTP_ACCEPT'] ) && false !== strpos( $_SERVER['HTTP_ACCEPT'], 'application/json' ) ) {
+                return true;
+            }
+
+            if ( isset( $_SERVER['CONTENT_TYPE'] ) && 'application/json' === $_SERVER['CONTENT_TYPE'] ) {
+                return true;
+            }
+
+            return false;
+
+        }
 
 	/**
 	 * Defines the locale for this plugin for internationalization.
@@ -91,7 +109,9 @@ class IS_Loader {
 	private function admin_public_hooks() {
 		$admin_public = IS_Admin_Public::getInstance();
 		add_action( 'init', array( $admin_public, 'init' ) );
-		add_action( 'widgets_init', array( $admin_public, 'widgets_init' ) );
+		add_action( 'widgets_init', array( $admin_public, 'widgets_init' ) );		
+		add_action( 'customize_register', array( $admin_public, 'customize_register' ) );
+		add_filter( 'upload_mimes', array( $admin_public, 'add_custom_mime_types' ) );
 	}
 
 	/**
@@ -104,8 +124,8 @@ class IS_Loader {
 
 		add_action( 'all_admin_notices', array( $admin, 'all_admin_notices' ) );
 		add_action( 'admin_footer', array( $admin, 'admin_footer' ), 100 );
-
 		add_action( 'plugin_action_links', array( $admin, 'plugin_action_links' ), 10, 2 );
+                add_filter( 'plugin_row_meta', array( $admin, 'plugin_row_meta' ), 10, 2 );
 		add_action( 'admin_menu', array( $admin, 'admin_menu' ) );
 		add_action( 'wp_ajax_nopriv_display_posts', array( $admin, 'display_posts' ) );
 		add_action( 'wp_ajax_display_posts', array( $admin, 'display_posts' ) );
@@ -127,16 +147,15 @@ class IS_Loader {
 		$public = IS_Public::getInstance();
 
 		add_action( 'init', array( $public, 'init' ) );
-		add_filter( 'get_search_form', array( $public, 'get_search_form' ), 99 );
+		add_filter( 'get_search_form', array( $public, 'get_search_form' ), 9999999 );
 
-		if ( isset( $this->opt['disable'] ) ) {
-			return;
+                if ( isset( $this->opt['disable'] ) ) {
+                    return;
 		}
 
 		add_action( 'wp_enqueue_scripts', array( $public, 'wp_enqueue_scripts' ) );
 		add_filter( 'query_vars', array( $public, 'query_vars' ) );
-
-		add_filter( 'body_class', array( $public, 'is_body_classes' ) );
+                add_filter( 'body_class', array( $public, 'is_body_classes' ) );
 
 		$header_menu_search = isset( $this->opt['add_search_to_menu_display_in_header'] ) ? $this->opt['add_search_to_menu_display_in_header'] : 0;
 		$header_menu_search = isset( $this->opt['header_menu_search'] ) ? $this->opt['header_menu_search'] : $header_menu_search;
@@ -145,18 +164,22 @@ class IS_Loader {
 		$display_in_mobile_menu = $header_menu_search && wp_is_mobile() ? true : false;
 
 		if ( $display_in_mobile_menu || $site_cache ) {
-			add_filter( 'wp_head', array( $public, 'header_menu_search' ), 99 );
+			add_action( 'wp_head', array( $public, 'header_menu_search' ), 9999999 );
 		}
 
 		if ( ! $display_in_mobile_menu || $site_cache ) {
-			add_filter( 'wp_nav_menu_items', array( $public, 'wp_nav_menu_items' ), 99, 2 );
+			add_filter( 'wp_nav_menu_items', array( $public, 'wp_nav_menu_items' ), 9999999, 2 );
 		}
 
-		add_filter( 'posts_distinct_request', array( $public, 'posts_distinct_request' ) );
-		add_filter( 'posts_join' , array( $public, 'posts_join' ) );
-		add_filter( 'posts_search', array( $public, 'posts_search' ), 501, 2 );
-		add_action( 'pre_get_posts', array( $public, 'pre_get_posts' ) );
+		add_filter( 'posts_distinct_request', array( $public, 'posts_distinct_request' ), 9999999, 2 );
+		add_filter( 'posts_join' , array( $public, 'posts_join' ), 9999999, 2 );
+		add_filter( 'posts_search', array( $public, 'posts_search' ), 9999999, 2 );
+		add_action( 'pre_get_posts', array( $public, 'pre_get_posts' ), 9999999 );
 		add_action( 'wp_footer', array( $public, 'wp_footer' ) );
-		add_action( 'wp_head', array( $public, 'wp_head' ) );
+		add_action( 'wp_head', array( $public, 'wp_head' ), 9999999 );
+
+                $ajax = IS_Ajax::getInstance();
+		add_action( 'wp_ajax_is_ajax_load_posts', array( $ajax, 'ajax_load_posts' ) );
+		add_action( 'wp_ajax_nopriv_is_ajax_load_posts', array( $ajax, 'ajax_load_posts' ) );
 	}
 }

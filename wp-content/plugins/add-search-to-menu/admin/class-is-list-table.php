@@ -53,8 +53,8 @@ class IS_List_Table extends WP_List_Table {
 
 		$args = array(
 			'posts_per_page' => $per_page,
-			'orderby'		 => 'title',
-			'order'			 => 'ASC',
+			'orderby'		 => 'Date',
+			'order'			 => 'DESC',
 			'offset'		 => ( $this->get_pagenum() - 1 ) * $per_page,
 		);
 
@@ -84,6 +84,14 @@ class IS_List_Table extends WP_List_Table {
 
 		$total_items = IS_Search_Form::count();
 		$total_pages = ceil( $total_items / $per_page );
+
+                if ( 1 == $total_items && ! isset( $_GET['s'] )  ) {
+                    if ( isset( $this->items[0] ) && $this->items[0]->id() ) {
+                        $redirect_to = esc_url( menu_page_url( 'ivory-search', false ) ) . '&post='.$this->items[0]->id().'&action=edit';
+			wp_safe_redirect( $redirect_to );
+			exit();
+                    }
+                }
 
 		$this->set_pagination_args( array(
 			'total_items' => $total_items,

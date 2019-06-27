@@ -1,15 +1,15 @@
 === Ivory Search - WordPress Search Plugin ===
 Contributors: ivorysearch, vinod dalvi
 Donate link: https://ivorysearch.com/pricing/
-Tags: search, woocommerce search, image search, search shortcode,  exclude from search, search widget, search menu, search plugin, custom search, search by post type, search by category, relevant search, search forms
+Tags: search, woocommerce search, image search, ajax search, search shortcode, live search,  exclude from search, search widget, search menu, search plugin, custom search, search by post type, search by category, relevant search, search forms
 Requires at least: 3.9
-Tested up to: 5.1
+Tested up to: 5.2
 Requires PHP: 5.2.4
-Stable tag: 4.2.1
+Stable tag: 4.3.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The WordPress Search plugin to power your WordPress site custom search. Helping you build a better search. Includes WooCommerce Search support!
+Advanced WordPress custom search plugin. Includes Search Form Customizer, WooCommerce Search, AJAX Search & Live Search support!
 
 == Description ==
 
@@ -35,6 +35,10 @@ Feel free to ask it using [Contact Form](https://ivorysearch.com/contact/).
 ###Key Features
 
 <ul>
+<li> Search WooCommerce products.</li>
+<li> Search images, files and attachments.</li>
+<li> Customize search form using customizer.</li>
+<li> Search using AJAX search.</li>
 <li> Create unlimited number of search forms.</li>
 <li> Configure each search forms separately.</li>
 <li> Configure search form to search specific content.</li>
@@ -42,6 +46,19 @@ Feel free to ask it using [Contact Form](https://ivorysearch.com/contact/).
 <li> Display Search Forms anywhere on your site.</li>
 <li> Supports multilingual search.</li>
 <li> Integrates with popular plugins such as WooCommerce, Polylang, bbPress, WPML etc.</li>
+</ul>
+
+###AJAX Search or Live Search
+<ul>
+<li> Convert any search form including default search form to AJAX search form.</li>
+<li> Search posts, pages, WooCommerce products, images, files or any custom post type using AJAX search.</li>
+<li> Exclude any specific content from AJAX search.</li>
+</ul>
+
+###Search Form Customizer
+<ul>
+<li> Use customizer to change search form colors and its text.</li>
+<li> Choose any search form style from various search forms.</li>
 </ul>
 
 ###Search Specific Content
@@ -98,7 +115,6 @@ Feel free to ask it using [Contact Form](https://ivorysearch.com/contact/).
 <li> Order posts in ascending or descending order of date, relevance, id, author, title, type, name, comment count, menu order or entirely random. [Premium]</li>
 <li> Display or hide sticky posts at the top of the search results page.</li>
 <li> Display an error page or list all posts for empty search queries.</li>
-<li> Option to search or not search post types excluded from search using exclude_from_search.</li>
 <li> Display search forms only to site administrators while testing, before going live.</li>
 <li> Disable an individual search form or disable searching site wide.</li>
 <li> Configure stop words which are excluded from search.</li>
@@ -176,6 +192,17 @@ Yes we do. We try our best to help free users with customisation requests and we
 
 == Changelog ==
 
+= 4.3.2 =
+* Improved - Plugin admin area functionality.
+
+= 4.3.1 =
+* Added - DISABLE_IS_LOAD_ALL constant.
+* Fixed - query_vars, wp_is_json_request & wp_doing_ajax issues.
+* Removed - Add New sub menu & display post type in the search query URL options.
+
+= 4.3 =
+* Added AJAX search and search form customizer functionalities.
+
 = 4.2.1 =
 * Updated - freemius SDK.
 * Fixed - new search form saving issue.
@@ -250,11 +277,3 @@ Yes we do. We try our best to help free users with customisation requests and we
 
 = 1.0 =
 * Initial release.
-
-== Upgrade Notice ==
-
-= 4.0 =
-* This is a major update.
-* Renamed plugin from "Add Search To Menu" to "Ivory Search".
-* Changed old settings page from Settings -> Add Search To Menu to Ivory Search -> Settings
-* Developed lot of options to enhance search functionality.

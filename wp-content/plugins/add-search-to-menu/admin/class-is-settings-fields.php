@@ -105,7 +105,7 @@ class IS_Settings_Fields
                 echo  '<h3 scope="row">' . $field['title'] ;
             }
             
-            echo  '<span class="actions"><span class="indicator ' . $field['id'] . '"></span><a class="expand" href="#">' . esc_html__( 'Expand All', 'ivory-search' ) . '</a><a class="collapse" href="#" style="display:none;">' . esc_html__( 'Collapse All', 'ivory-search' ) . '</a></span></h3><div>' ;
+            echo  '<span class="actions"><a class="expand" href="#">' . esc_html__( 'Expand All', 'ivory-search' ) . '</a><a class="collapse" href="#" style="display:none;">' . esc_html__( 'Collapse All', 'ivory-search' ) . '</a></span></h3><div>' ;
             call_user_func( $field['callback'], $field['args'] );
             echo  '</div>' ;
         }
@@ -291,14 +291,21 @@ class IS_Settings_Fields
             $check_value = '';
             foreach ( $menus as $location => $description ) {
                 
-                if ( $this->ivory_search ) {
-                    $check_value = ( isset( $this->opt['menus'][$location] ) ? $this->opt['menus'][$location] : 0 );
-                } else {
-                    $check_value = ( isset( $this->opt['add_search_to_menu_locations'][$location] ) ? $this->opt['add_search_to_menu_locations'][$location] : 0 );
+                if ( has_nav_menu( $location ) ) {
+                    
+                    if ( $this->ivory_search ) {
+                        $check_value = ( isset( $this->opt['menus'][$location] ) ? $this->opt['menus'][$location] : 0 );
+                    } else {
+                        $check_value = ( isset( $this->opt['add_search_to_menu_locations'][$location] ) ? $this->opt['add_search_to_menu_locations'][$location] : 0 );
+                    }
+                    
+                    $html .= '<p><label for="is_menus' . esc_attr( $location ) . '"><input type="checkbox" class="ivory_search_locations" id="is_menus' . esc_attr( $location ) . '" name="is_menu_search[menus][' . esc_attr( $location ) . ']" value="' . esc_attr( $location ) . '" ' . checked( $location, $check_value, false ) . '/>';
+                    $html .= '<span class="toggle-check-text"></span> ' . esc_html( $description ) . '</label></p>';
                 }
-                
-                $html .= '<p><label for="is_menus' . esc_attr( $location ) . '"><input type="checkbox" class="ivory_search_locations" id="is_menus' . esc_attr( $location ) . '" name="is_menu_search[menus][' . esc_attr( $location ) . ']" value="' . esc_attr( $location ) . '" ' . checked( $location, $check_value, false ) . '/>';
-                $html .= '<span class="toggle-check-text"></span> ' . esc_html( $description ) . '</label></p>';
+            
+            }
+            if ( '' === $check_value ) {
+                $html = '<span class="notice-is-info">' . sprintf( __( 'Please assign menu to navigation menu location in the %sMenus screen%s.', 'ivory-search' ), '<a target="_blank" href="' . admin_url( 'nav-menus.php' ) . '">', '</a>' ) . '</span>';
             }
         } else {
             $html = __( 'Navigation menu location is not registered on the site.', 'ivory-search' );
@@ -342,8 +349,8 @@ class IS_Settings_Fields
             }
             $html .= '</select>';
             
-            if ( $check_value && get_post_type( $check_value ) ) {
-                $html .= '<a href="' . esc_url( menu_page_url( 'ivory-search', false ) ) . '&post=' . $check_value . '&action=edit">  ' . esc_html__( "Edit", 'ivory-search' ) . '</a>';
+            if ( $check_value ) {
+                $html .= '<a href="' . esc_url( menu_page_url( 'ivory-search', false ) ) . '&post=' . $check_value . '&action=edit">  ' . esc_html__( "Edit Search Form", 'ivory-search' ) . '</a>';
             } else {
                 $html .= '<a href="' . esc_url( menu_page_url( 'ivory-search-new', false ) ) . '">  ' . esc_html__( "Create New", 'ivory-search' ) . '</a>';
             }
@@ -638,6 +645,7 @@ class IS_Settings_Fields
                 $html .= '<br /><label for="not_load_files[' . esc_attr( $key ) . ']" style="font-size: 10px;">' . esc_html__( "If checked, you have to add following plugin files code into your child theme JavaScript file.", 'ivory-search' ) . '</label>';
                 $html .= '<br /><a style="font-size: 13px;" target="_blank" href="' . plugins_url( '/public/js/ivory-search.js', IS_PLUGIN_FILE ) . '"/a>' . plugins_url( '/public/js/ivory-search.js', IS_PLUGIN_FILE ) . '</a>';
                 $html .= '<br /><a style="font-size: 13px;" target="_blank" href="' . plugins_url( '/public/js/is-highlight.js', IS_PLUGIN_FILE ) . '"/a>' . plugins_url( '/public/js/is-highlight.js', IS_PLUGIN_FILE ) . '</a>';
+                $html .= '<br /><a style="font-size: 13px;" target="_blank" href="' . plugins_url( '/public/js/ivory-ajax-search.js', IS_PLUGIN_FILE ) . '"/a>' . plugins_url( '/public/js/ivory-ajax-search.js', IS_PLUGIN_FILE ) . '</a>';
             }
         
         }

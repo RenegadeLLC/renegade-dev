@@ -98,20 +98,6 @@
 
 		ivory_search.titleHint();
 
-		$('#search-form-editor .ind-status').each(function(){
-			var ind_class = $(this).attr('class').split(' ')[1];
-			if ( ind_class !== null ) {
-				$('.form-table h3 .indicator.'+ind_class).fadeIn();
-			}
-		} );
-
-		$('#search-form-editor').on('keyup change paste', 'input, select, textarea', function( e ){
-			var ind_class = $(e.target).attr("class");
-			if ( ind_class !== null ) {
-				$('.form-table h3 .indicator.'+ind_class).fadeOut().fadeIn();
-			}
-		} );
-
 		var changed = false;
 
 		$(document).on("submit", "form", function(event){
@@ -204,5 +190,112 @@
 			$( this ).unbind( e );
 		} );
 	};
+
+	function toggle_description_inputs() {
+		if( $( '#_is_ajax-show_description' ).is(':checked') ) {
+			$( '._is_ajax-description_source_wrap, ._is_ajax-description_length_wrap' ).removeClass('is-field-disabled').show();
+		} else {
+			$( '._is_ajax-description_source_wrap, ._is_ajax-description_length_wrap' ).addClass('is-field-disabled').hide();
+		}
+	}
+
+	toggle_description_inputs();
+	$( '._is_ajax-description_wrap .check-radio' ).on( 'click', function() {
+		toggle_description_inputs();
+	} );
+
+	function toggle_details_box_fields() {
+		if( $( '#_is_ajax-show_details_box' ).is(':checked') && ( ( $( '#_is_ajax-show_matching_categories' ).is(':checked') || $( '#_is_ajax-show_matching_tags' ).is(':checked') ) ) ) {
+			$( '._is_ajax-product_list_wrap, ._is_ajax-order_by_wrap, ._is_ajax-order_wrap' ).removeClass('is-field-disabled').show();
+		} else {
+			$( '._is_ajax-product_list_wrap, ._is_ajax-order_by_wrap, ._is_ajax-order_wrap' ).addClass('is-field-disabled').hide();
+		}
+	}
+        toggle_details_box_fields();
+	$( '#_is_ajax-show_details_box, #_is_ajax-show_matching_categories, #_is_ajax-show_matching_tags' ).on( 'click', function() {
+                    toggle_details_box_fields();
+	} );
+
+	function toggle_show_more_result_textbox_fields() {
+		if( $( '#_is_ajax-show_more_result' ).is(':checked') ) {
+			$( '._is_ajax-more_result_text_wrap' ).removeClass('is-field-disabled').show();
+		} else {
+			$( '._is_ajax-more_result_text_wrap' ).addClass('is-field-disabled').hide();
+		}
+	}
+	toggle_show_more_result_textbox_fields();
+	$( '._is_ajax-show_more_result_wrap .check-radio' ).on( 'click', function() {
+		toggle_show_more_result_textbox_fields();
+	} );
+
+	function toggle_show_view_all_textbox_fields() {
+		if( $( '#_is_ajax-view_all_results' ).is(':checked') ) {
+			$( '._is_ajax-view_all_text_wrap' ).removeClass('is-field-disabled').show();
+		} else {
+			$( '._is_ajax-view_all_text_wrap' ).addClass('is-field-disabled').hide();
+		}
+	}
+	toggle_show_view_all_textbox_fields();
+	$( '._is_ajax-view_all_results_wrap .check-radio' ).on( 'click', function() {
+		toggle_show_view_all_textbox_fields();
+	} );
+
+	function toggle_more_result_fields() {
+		if( $( '#_is_ajax-show_more_result' ).is(':checked') ) {
+			$( '._is_ajax-more_result_text_wrap' ).removeClass('is-field-disabled').show();
+		} else {
+			$( '._is_ajax-more_result_text_wrap' ).addClass('is-field-disabled').hide();
+		}
+	}
+	toggle_more_result_fields();
+	$( '._is_ajax-show_more_result_wrap .check-radio' ).on( 'click', function() {
+		toggle_more_result_fields();
+	} );
+
+	// Enable AJAX.
+	function toggle_enable_ajax() {
+		if( $( '#_is_ajax-enable_ajax' ).is(':checked') ) {
+			$( '.form-table-panel-ajax .is-field-wrap' ).removeClass('is-field-disabled');
+		} else {
+			$( '.form-table-panel-ajax .is-field-wrap' ).addClass('is-field-disabled');
+		}
+	}
+
+	toggle_enable_ajax();
+	
+	$( '#_is_ajax-enable_ajax' ).on( 'click', function() {
+		toggle_enable_ajax();
+	} );
+
+	$( '.form-table-panel-ajax .is-field-disabled-message .message' ).on( 'click', function() {
+		$('#_is_ajax-enable_ajax').prop('checked', true);
+		toggle_enable_ajax();
+	} );
+
+	// Enable Customize Fields.
+	function toggle_enable_customize() {
+		if( $( '#_is_customize-enable_customize' ).is(':checked') ) {
+			$( '.form-table-panel-customize .is-field-wrap' ).removeClass('is-field-disabled');
+		} else {
+			$( '.form-table-panel-customize .is-field-wrap' ).addClass('is-field-disabled');
+		}
+	}
+
+	toggle_enable_customize();
+	
+	$( '#_is_customize-enable_customize' ).on( 'click', function() {
+		toggle_enable_customize();
+                window.setTimeout(function () {
+                alert( 'Please save the changes.' );
+                }, 300);
+	} );
+
+	$( '.form-table-panel-customize .is-field-disabled-message .message' ).on( 'click', function() {
+		$('#_is_customize-enable_customize').prop('checked', true);
+		toggle_enable_customize();
+                window.setTimeout(function () {
+                alert( 'Please save the changes.' );
+                }, 300);
+	} );
 
 } )( jQuery );

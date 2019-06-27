@@ -2,8 +2,8 @@
 /**
  * Plugin Name: Ivory Search
  * Plugin URI:  https://ivorysearch.com
- * Description: The WordPress Search plugin to power your WordPress site custom search. Helping you build a better search. Includes WooCommerce Search support!
- * Version:     4.2.1
+ * Description: The WordPress Search plugin that includes Search Form Customizer, WooCommerce Search, Image Search, Search Shortcode, AJAX Search & Live Search support!
+ * Version:     4.3.2
  * Author:      Ivory Search
  * Author URI:  https://ivorysearch.com/
  * License:     GPL2+
@@ -12,7 +12,7 @@
  * Text Domain: ivory-search
  *
  * 
- * WC tested up to: 3.5.4
+ * WC tested up to: 3.6.4
  *
  * Ivory Search is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -107,9 +107,12 @@ final class Ivory_Search {
 	 * Defines Ivory Search Constants.
 	 */
 	private function define_constants() {
-		define( 'IS_VERSION', '4.2' );
-		define( 'IS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+
+		define( 'IS_VERSION', '4.3.1' );
 		define( 'IS_PLUGIN_FILE', __FILE__ );
+		define( 'IS_PLUGIN_BASE', plugin_basename( IS_PLUGIN_FILE ) );
+		define( 'IS_PLUGIN_DIR', plugin_dir_path( IS_PLUGIN_FILE ) );
+		define( 'IS_PLUGIN_URI', plugins_url( '/', IS_PLUGIN_FILE ) );
 
 		if ( ! defined( 'IS_ADMIN_READ_CAPABILITY' ) ) {
 			define( 'IS_ADMIN_READ_CAPABILITY', 'edit_posts' );
@@ -129,11 +132,13 @@ final class Ivory_Search {
 			require_once $file;
 		}
 
-		if ( is_admin() ) {
+		if ( is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			foreach( glob( IS_PLUGIN_DIR.'admin/' . "*.php" ) as $file ) {
 				require_once $file;
 			}
-		} else {
+		}
+
+                if ( ! is_admin() || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
 			foreach( glob( IS_PLUGIN_DIR.'public/' . "*.php" ) as $file ) {
 				require_once $file;
 			}
@@ -154,7 +159,7 @@ final class Ivory_Search {
 	 */
 	function start() {
 		$is_loader = IS_Loader::getInstance( $this->opt );
-		$is_loader->load();		
+		$is_loader->load();
 	}
 }
 

@@ -42,7 +42,7 @@ $rp_contact_link = get_field('rp_contact_link');
 		$people_html .= '<section class="row people-content">';
 		$people_html .= '<aside class="col-md-4">';
 		if($rp_email_address):
-			$people_html .= '<div class="email" ><a href='. $rp_email_address . '> Contact ' . $rp_first_name . '</a></div>';
+			$people_html .= '<div class="email" ><a href="mailto:'. $rp_email_address . '"> Contact ' . $rp_first_name . '</a></div>';
 		endif;
 		if($rp_social_channel):
 			$people_html .= '<div class="social ' . $rp_social_channel . '" ><a href='. $rp_social_channel_url . '> Follow ' . $rp_first_name . '</a></div>';

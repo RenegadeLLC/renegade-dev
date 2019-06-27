@@ -37,6 +37,10 @@
 		<a href="https://www.heateor.com/recover-social-share-counts" target="_blank"><input type="button" value="<?php _e('Recover Social Share Counts Lost After Moving to SSL/Https', 'super-socializer') ?> >>>" class="ss_demo" style="width:55%" /></a>
 		</div>
 		<div style="clear:both"></div>
+		
+		<div id="setting-error-settings_updated" class="error settings-error notice is-dismissible below-h2" <?php echo !(isset($theChampLoginOptions['enable']) && $theChampLoginOptions['fb_key'] && $theChampLoginOptions['fb_secret'] && in_array('facebook', $theChampLoginOptions['providers'])) && (((in_array('facebook', $theChampSharingOptions['vertical_re_providers']) && (isset($theChampSharingOptions['vertical_counts']) || isset($theChampSharingOptions['vertical_total_shares']))) || (in_array('facebook', $theChampSharingOptions['horizontal_re_providers']) && (isset($theChampSharingOptions['horizontal_counts']) || isset($theChampSharingOptions['horizontal_total_shares'])))) && (!$theChampSharingOptions['fb_key'] || !$theChampSharingOptions['fb_secret'])) ? '' : 'style = "display: none"';?>> 
+			<?php echo '<p><strong>' . __('Save Facebook App Id and Secret in the "Miscellaneous" section for Facebook share count to work', 'super-socializer') . '</strong></p><button type="button" class="notice-dismiss"><span class="screen-reader-text">' . __('Dismiss this notice', 'super-socializer') . '</span></button>'; ?>
+		</div>
 
 		<div class="menu_div" id="tabs" <?php echo isset($theChampSharingOptions['enable']) ? '' : 'style="display:none"' ?>>
 
@@ -763,7 +767,7 @@
 						}
 						?>
 
-						<tbody id="the_champ_instagram_options" <?php echo !in_array('instagram', $theChampSharingOptions['horizontal_re_providers']) ? 'style = "display: none"' : '';?> >
+						<tbody id="the_champ_instagram_options" <?php echo !isset($theChampSharingOptions['horizontal_re_providers']) || !in_array('instagram', $theChampSharingOptions['horizontal_re_providers']) ? 'style = "display: none"' : '';?> >
 							<tr>
 								<th>
 								<img id="the_champ_instagram_username_help" class="the_champ_help_bubble" src="<?php echo plugins_url('../images/info.png', __FILE__) ?>" />
@@ -783,7 +787,7 @@
 							</tr>
 						</tbody>
 
-						<tbody id="the_champ_comment_options" <?php echo ! in_array( 'Comment', $theChampSharingOptions['horizontal_re_providers'] ) ? 'style = "display: none"' : '';?> >
+						<tbody id="the_champ_comment_options" <?php echo !isset($theChampSharingOptions['horizontal_re_providers']) || ! in_array( 'Comment', $theChampSharingOptions['horizontal_re_providers'] ) ? 'style = "display: none"' : '';?> >
 							<tr>
 								<th>
 								<img id="the_champ_comment_container_id_help" class="the_champ_help_bubble" src="<?php echo plugins_url( '../images/info.png', __FILE__ ) ?>" />
@@ -818,6 +822,8 @@
 						<tr>
 							<td colspan="2">
 							<script>
+							// facebook app id and secret options toggle variables
+							var heateorSsHorizontalFacebookShareEnabled = <?php echo in_array('facebook', $theChampSharingOptions['horizontal_re_providers']) ? 'true' : 'false'; ?>, heateorSsVerticalFacebookShareEnabled = <?php echo in_array('facebook', $theChampSharingOptions['vertical_re_providers']) ? 'true' : 'false'; ?>, heateorSsFacebookAppSecretSaved = <?php echo isset($theChampLoginOptions['enable']) && $theChampLoginOptions['fb_key'] && $theChampLoginOptions['fb_secret'] && in_array('facebook', $theChampLoginOptions['providers']) ? 'true' : 'false'; ?>;
 							<?php
 							$horSharingStyle = 'width:' . ( $theChampSharingOptions['horizontal_sharing_shape'] != 'rectangle' ? $theChampSharingOptions['horizontal_sharing_size'] : $theChampSharingOptions['horizontal_sharing_width'] ) . 'px;height:' . $line_height . 'px;';
 							$horDeliciousRadius = '';
@@ -1037,11 +1043,11 @@
 							</div>
 							</td>
 						</tr>
-						
+
 						<tr>
 							<th>
 							<img id="the_champ_count_help" class="the_champ_help_bubble" src="<?php echo plugins_url('../images/info.png', __FILE__) ?>" />
-							<label for="the_champ_counts"><?php _e("Show share counts", 'super-socializer' ); ?></label>
+							<label for="the_champ_counts"><?php _e("Show share counts", 'super-socializer'); ?></label>
 							</th>
 							<td>
 							<input id="the_champ_counts" name="the_champ_sharing[horizontal_counts]" type="checkbox" <?php echo isset( $theChampSharingOptions['horizontal_counts'] ) ? 'checked = "checked"' : '';?> value="1" />
@@ -1085,14 +1091,14 @@
 							<label for="the_champ_hmore"><?php _e("Enable 'More' icon", 'super-socializer' ); ?></label>
 							</th>
 							<td>
-							<input id="the_champ_hmore" name="the_champ_sharing[horizontal_more]" type="checkbox" <?php echo isset( $theChampSharingOptions['horizontal_more'] ) ? 'checked = "checked"' : '';?> value="1" />
+							<input id="the_champ_hmore" name="the_champ_sharing[horizontal_more]" type="checkbox" <?php echo isset($theChampSharingOptions['horizontal_more']) ? 'checked = "checked"' : '';?> value="1" />
 							</td>
 						</tr>
 						
 						<tr class="the_champ_help_content" id="the_champ_hmore_help_cont">
 							<td colspan="2">
 							<div>
-							<?php _e('If enabled, "More" icon will be displayed after selected sharing icons which shows additional sharing networks in popup', 'super-socializer' ) ?>
+							<?php _e('If enabled, "More" icon will be displayed after selected sharing icons which shows additional sharing networks in popup', 'super-socializer') ?>
 							</div>
 							</td>
 						</tr>
@@ -1155,7 +1161,7 @@
 							</td>
 						</tr>
 						
-						<tbody id="the_champ_vertical_instagram_options" <?php echo !in_array('instagram', $theChampSharingOptions['vertical_re_providers']) ? 'style = "display: none"' : '';?> >
+						<tbody id="the_champ_vertical_instagram_options" <?php echo !isset($theChampSharingOptions['vertical_re_providers']) || !in_array('instagram', $theChampSharingOptions['vertical_re_providers']) ? 'style = "display: none"' : '';?> >
 							<tr>
 								<th>
 								<img id="the_champ_vertical_instagram_username_help" class="the_champ_help_bubble" src="<?php echo plugins_url('../images/info.png', __FILE__) ?>" />
@@ -1175,7 +1181,7 @@
 							</tr>
 						</tbody>
 
-						<tbody id="the_champ_vertical_comment_options" <?php echo ! in_array( 'Comment', $theChampSharingOptions['vertical_re_providers'] ) ? 'style = "display: none"' : '';?> >
+						<tbody id="the_champ_vertical_comment_options" <?php echo !isset($theChampSharingOptions['vertical_re_providers']) || !in_array('Comment', $theChampSharingOptions['vertical_re_providers']) ? 'style = "display: none"' : '';?> >
 							<tr>
 								<th>
 								<img id="the_champ_vertical_comment_container_id_help" class="the_champ_help_bubble" src="<?php echo plugins_url( '../images/info.png', __FILE__ ) ?>" />
@@ -1476,7 +1482,7 @@
 						<tr class="the_champ_help_content" id="the_champ_vertical_count_help_cont">
 							<td colspan="2">
 							<div>
-							<?php _e('If enabled, share counts are displayed above sharing icons.', 'super-socializer' ) ?>
+							<?php _e('If enabled, share counts are displayed above sharing icons.', 'super-socializer') ?>
 							<img width="550" src="<?php echo plugins_url('../images/snaps/ss_vertical_sharing_count.png', __FILE__); ?>" />
 							</div>
 							</td>
@@ -1485,7 +1491,7 @@
 						<tr>
 							<th>
 							<img id="the_champ_total_vertical_shares_help" class="the_champ_help_bubble" src="<?php echo plugins_url('../images/info.png', __FILE__) ?>" />
-							<label for="the_champ_total_vertical_shares"><?php _e("Show total shares", 'super-socializer' ); ?></label>
+							<label for="the_champ_total_vertical_shares"><?php _e("Show total shares", 'super-socializer'); ?></label>
 							</th>
 							<td>
 							<input id="the_champ_total_vertical_shares" name="the_champ_sharing[vertical_total_shares]" type="checkbox" <?php echo isset( $theChampSharingOptions['vertical_total_shares'] ) ? 'checked = "checked"' : '';?> value="1" />
@@ -1495,7 +1501,7 @@
 						<tr class="the_champ_help_content" id="the_champ_total_vertical_shares_help_cont">
 							<td colspan="2">
 							<div>
-							<?php _e('If enabled, total shares will be displayed with sharing icons', 'super-socializer' ) ?>
+							<?php _e('If enabled, total shares will be displayed with sharing icons', 'super-socializer') ?>
 							<img width="550" src="<?php echo plugins_url('../images/snaps/ss_vertical_total_shares.png', __FILE__); ?>" />
 							</div>
 							</td>
@@ -1507,7 +1513,7 @@
 							<label for="the_champ_vmore"><?php _e("Enable 'More' icon", 'super-socializer' ); ?></label>
 							</th>
 							<td>
-							<input id="the_champ_vmore" name="the_champ_sharing[vertical_more]" type="checkbox" <?php echo isset( $theChampSharingOptions['vertical_more'] ) ? 'checked = "checked"' : '';?> value="1" />
+							<input id="the_champ_vmore" name="the_champ_sharing[vertical_more]" type="checkbox" <?php echo isset($theChampSharingOptions['vertical_more']) ? 'checked = "checked"' : '';?> value="1" />
 							</td>
 						</tr>
 						
@@ -1607,15 +1613,62 @@
 			<div class="menu_containt_div" id="tabs-4">
 				<div class="clear"></div>
 				<div class="the_champ_left_column">
+				
+				<div class="stuffbox" id="heateor_ss_fb_share_count_options" <?php echo !(isset($theChampLoginOptions['enable']) && $theChampLoginOptions['fb_key'] && $theChampLoginOptions['fb_secret'] && in_array('facebook', $theChampLoginOptions['providers'])) && ((in_array('facebook', $theChampSharingOptions['vertical_re_providers'])) || (in_array('facebook', $theChampSharingOptions['horizontal_re_providers']))) ? '' : 'style = "display: none"';?>>
+					<h3><label><?php _e('Facebook Share Count', 'super-socializer');?></label></h3>
+					<div class="inside">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="form-table editcomment menu_content_table">
+						<tr>
+							<td colspan="2"><strong><?php _e('Note', 'super-socializer') ?>:</strong> <?php _e('Required only to track Facebook share count', 'super-socializer') ?></td>
+						</tr>
+
+						<tr>
+							<th>
+							<img id="the_champ_fb_key_help" class="the_champ_help_bubble" src="<?php echo plugins_url('../images/info.png', __FILE__) ?>" />
+							<label for="the_champ_fb_key"><?php _e("Facebook App ID", 'super-socializer'); ?></label>
+							</th>
+							<td>
+							<input id="the_champ_fb_key" name="the_champ_sharing[fb_key]" type="text" value="<?php echo $theChampSharingOptions['fb_key'] ?>" />
+							</td>
+						</tr>
+						
+						<tr class="the_champ_help_content" id="the_champ_fb_key_help_cont">
+							<td colspan="2">
+							<div>
+							<?php echo sprintf(__('Required for Facebook share count to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get Facebook App ID', 'super-socializer'), 'http://support.heateor.com/how-to-get-facebook-app-id/') ?>
+							</div>
+							</td>
+						</tr>
+
+						<tr>
+							<th>
+							<img id="the_champ_fb_secret_help" class="the_champ_help_bubble" src="<?php echo plugins_url('../images/info.png', __FILE__) ?>" />
+							<label for="the_champ_fblogin_secret"><?php _e("Facebook App Secret", 'super-socializer'); ?></label>
+							</th>
+							<td>
+							<input id="the_champ_fblogin_secret" name="the_champ_sharing[fb_secret]" type="text" value="<?php echo $theChampSharingOptions['fb_secret'] ?>" />
+							</td>
+						</tr>
+						
+						<tr class="the_champ_help_content" id="the_champ_fb_secret_help_cont">
+							<td colspan="2">
+							<div>
+							<?php echo sprintf(__('Required for Facebook share count to work. Please follow the documentation at <a href="%s" target="_blank">this link</a> to get Facebook App Secret', 'super-socializer'), 'http://support.heateor.com/how-to-get-facebook-app-id/') ?>
+							</div>
+							</td>
+						</tr>
+					</table>
+					</div>
+				</div>
 
 				<div class="stuffbox">
-					<h3><label><?php _e('Url shortener', 'super-socializer' );?></label></h3>
+					<h3><label><?php _e('Url shortener', 'super-socializer');?></label></h3>
 					<div class="inside">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" class="form-table editcomment menu_content_table">
 						<tr>
 							<th>
 							<img id="the_champ_surl_enable_help" class="the_champ_help_bubble" src="<?php echo plugins_url('../images/info.png', __FILE__) ?>" />
-							<label for="the_champ_surl_enable"><?php _e("Use shortlinks already installed", 'super-socializer' ); ?></label>
+							<label for="the_champ_surl_enable"><?php _e("Use shortlinks already installed", 'super-socializer'); ?></label>
 							</th>
 							<td>
 							<input id="the_champ_surl_enable" name="the_champ_sharing[use_shortlinks]" type="checkbox" <?php echo isset( $theChampSharingOptions['use_shortlinks'] ) ? 'checked = "checked"' : '';?> value="1" />
@@ -1926,6 +1979,8 @@
 					<div class="inside faq" style="padding-left:8px">
 						<p><?php _e('<strong>Note:</strong> Plugin will not work on local server. You should have an online website for the plugin to function properly.', 'super-socializer'); ?></p>
 						<p><a href="http://support.heateor.com/why-is-sharer-not-showing-the-correct-image-title-and-other-meta-tags-content" target="_blank"><?php _e('Why is sharer not showing the correct image, title and other meta tags content?', 'super-socializer') ?></a></p>
+						<a href="javascript:void(0)"><?php _e('Why is Facebook share count not working?', 'super-socializer'); ?></a>
+						<div><?php _e('Save Facebook App Id and Secret in the "Miscellaneous" section for Facebook share count to work', 'super-socializer'); ?></div>
 						<p>
 						<a href="javascript:void(0)"><?php _e('Why is Instagram icon redirecting to Instagram website?', 'super-socializer'); ?></a>
 						<div><?php _e('Instagram icon is there to send website visitors to the Instagram page of your choice. You can save the desired Instagram handle in "Instagram Username" option in "Standard Interface" and "Floating Interface" sections.', 'super-socializer'); ?></div>

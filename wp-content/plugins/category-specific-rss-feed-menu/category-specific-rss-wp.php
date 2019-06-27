@@ -1,7 +1,7 @@
 <?php
 /*
   Plugin Name: Category Specific RSS Menu
-  Version: v2.0
+  Version: v2.1
   Plugin URI: https://www.tipsandtricks-hq.com/wordpress-plugin-for-category-specific-rss-feed-subscription-menu-325
   Author: Tips and Tricks HQ, Ruhul Amin
   Author URI: https://www.tipsandtricks-hq.com/
@@ -18,7 +18,7 @@ if (!defined('ABSPATH')){
 define('CAT_SPEC_RSS_FOLDER', dirname(plugin_basename(__FILE__)));
 define('CAT_SPEC_RSS_URL', get_option('siteurl') . '/wp-content/plugins/' . CAT_SPEC_RSS_FOLDER);
 
-$category_specific_rss_version = 2.0;
+$category_specific_rss_version = 2.1;
 
 include_once('csrss-misc-functions.php');
 include_once('simple_html_dom.php');
@@ -248,7 +248,7 @@ function category_specific_option_page() {
     if (isset($_POST['info_update'])) {
         echo '<div id="message" class="updated fade"><p><strong>';
 
-        update_option('rss_widget_title_name', (string) $_POST["rss_widget_title_name"]);
+        update_option('rss_widget_title_name', sanitize_text_field($_POST["rss_widget_title_name"]));
 
         update_option('cat_rss_all_cat', ($_POST['cat_rss_all_cat'] == '1') ? '1' : '-1' );
         update_option('cat_rss_all_aut', ($_POST['cat_rss_all_aut'] == '1') ? '1' : '-1' );
@@ -257,29 +257,29 @@ function category_specific_option_page() {
 
         update_option('cat_rss_custom', ($_POST['cat_rss_custom'] == '1') ? '1' : '-1' );
 
-        update_option('rss_category_1_name', (string) $_POST["rss_category_1_name"]);
-        update_option('rss_category_1_link', (string) $_POST["rss_category_1_link"]);
+        update_option('rss_category_1_name', sanitize_text_field($_POST["rss_category_1_name"]));
+        update_option('rss_category_1_link', sanitize_text_field($_POST["rss_category_1_link"]));
 
-        update_option('rss_category_2_name', (string) $_POST["rss_category_2_name"]);
-        update_option('rss_category_2_link', (string) $_POST["rss_category_2_link"]);
+        update_option('rss_category_2_name', sanitize_text_field($_POST["rss_category_2_name"]));
+        update_option('rss_category_2_link', sanitize_text_field($_POST["rss_category_2_link"]));
 
-        update_option('rss_category_3_name', (string) $_POST["rss_category_3_name"]);
-        update_option('rss_category_3_link', (string) $_POST["rss_category_3_link"]);
+        update_option('rss_category_3_name', sanitize_text_field($_POST["rss_category_3_name"]));
+        update_option('rss_category_3_link', sanitize_text_field($_POST["rss_category_3_link"]));
 
-        update_option('rss_category_4_name', (string) $_POST["rss_category_4_name"]);
-        update_option('rss_category_4_link', (string) $_POST["rss_category_4_link"]);
+        update_option('rss_category_4_name', sanitize_text_field($_POST["rss_category_4_name"]));
+        update_option('rss_category_4_link', sanitize_text_field($_POST["rss_category_4_link"]));
 
-        update_option('rss_category_5_name', (string) $_POST["rss_category_5_name"]);
-        update_option('rss_category_5_link', (string) $_POST["rss_category_5_link"]);
+        update_option('rss_category_5_name', sanitize_text_field($_POST["rss_category_5_name"]));
+        update_option('rss_category_5_link', sanitize_text_field($_POST["rss_category_5_link"]));
 
-        update_option('rss_category_6_name', (string) $_POST["rss_category_6_name"]);
-        update_option('rss_category_6_link', (string) $_POST["rss_category_6_link"]);
+        update_option('rss_category_6_name', sanitize_text_field($_POST["rss_category_6_name"]));
+        update_option('rss_category_6_link', sanitize_text_field($_POST["rss_category_6_link"]));
 
-        update_option('rss_category_7_name', (string) $_POST["rss_category_7_name"]);
-        update_option('rss_category_7_link', (string) $_POST["rss_category_7_link"]);
+        update_option('rss_category_7_name', sanitize_text_field($_POST["rss_category_7_name"]));
+        update_option('rss_category_7_link', sanitize_text_field($_POST["rss_category_7_link"]));
 
-        update_option('rss_category_8_name', (string) $_POST["rss_category_8_name"]);
-        update_option('rss_category_8_link', (string) $_POST["rss_category_8_link"]);
+        update_option('rss_category_8_name', sanitize_text_field($_POST["rss_category_8_name"]));
+        update_option('rss_category_8_link', sanitize_text_field($_POST["rss_category_8_link"]));
 
         echo 'Options Updated!';
         echo '</strong></p></div>';
@@ -287,9 +287,10 @@ function category_specific_option_page() {
     ?>
 
     <div class=wrap>
-        <div id="poststuff"><div id="post-body">
-
-                <h2>Category Specific RSS Menu v <?php echo $category_specific_rss_version; ?></h2>
+        
+        <h2>Category Specific RSS Menu v <?php echo $category_specific_rss_version; ?></h2>
+        
+        <div id="poststuff"><div id="post-body">                
 
                 <p>For detailed documentation, information and updates, please visit the plugin page using the following link:<br />
                     <a href="https://www.tipsandtricks-hq.com/wordpress-plugin-for-category-specific-rss-feed-subscription-menu-325" target="_blank">https://www.tipsandtricks-hq.com</a></p>
@@ -298,7 +299,7 @@ function category_specific_option_page() {
                     <input type="hidden" name="info_update" id="info_update" value="true" />
 
                     <div class="postbox">
-                        <h3><label for="title">Usage Details</label></h3>
+                        <h3 class="hndle"><label for="title">Usage Details</label></h3>
                         <div class="inside">
                             <p>You can use this plugin to add category specific RSS items into your posts, pages, sidebars.</p>
                             <p>First, select some options from the following section. Then use one of the following methods to show the RSS feed menu on you site's front-end.</p>
@@ -310,7 +311,7 @@ function category_specific_option_page() {
                         </div></div>
 
                     <div class="postbox">
-                        <h3><label for="title">Category Specific RSS Menu Options</label></h3>
+                        <h3 class="hndle"><label for="title">Category Specific RSS Menu Options</label></h3>
                         <div class="inside">
 
                             <strong>Category Specific RSS Widget Title</strong>

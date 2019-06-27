@@ -60,14 +60,6 @@ class IS_Public
     function wp_enqueue_scripts()
     {
         global  $wp_query ;
-        if ( ($this->ivory_search || !isset( $this->opt['do_not_load_plugin_files']['plugin-css-file'] )) && !isset( $this->opt['not_load_files']['css'] ) ) {
-            wp_enqueue_style(
-                'ivory-search-styles',
-                plugins_url( '/public/css/ivory-search.css', IS_PLUGIN_FILE ),
-                array(),
-                IS_VERSION
-            );
-        }
         
         if ( ($this->ivory_search || !isset( $this->opt['do_not_load_plugin_files']['plugin-js-file'] )) && !isset( $this->opt['not_load_files']['js'] ) ) {
             wp_enqueue_script(
@@ -77,6 +69,17 @@ class IS_Public
                 IS_VERSION,
                 true
             );
+            wp_register_script(
+                'ivory-ajax-search-scripts',
+                plugins_url( '/public/js/ivory-ajax-search.js', IS_PLUGIN_FILE ),
+                array( 'jquery' ),
+                IS_VERSION,
+                true
+            );
+            wp_localize_script( 'ivory-ajax-search-scripts', 'IvoryAjaxVars', array(
+                'ajaxurl'    => admin_url( 'admin-ajax.php' ),
+                'ajax_nonce' => wp_create_nonce( 'is_ajax_nonce' ),
+            ) );
             if ( is_search() && isset( $wp_query->query_vars['_is_settings']['highlight_terms'] ) && 0 !== $wp_query->found_posts ) {
                 wp_enqueue_script(
                     'is-highlight',
@@ -90,13 +93,6 @@ class IS_Public
         
         
         if ( is_search() && isset( $wp_query->query_vars['_is_settings']['highlight_terms'] ) && 0 !== $wp_query->found_posts ) {
-            wp_enqueue_script(
-                'is-highlight',
-                plugins_url( '/public/js/is-highlight.js', IS_PLUGIN_FILE ),
-                array( 'jquery' ),
-                IS_VERSION,
-                true
-            );
             $areas = array(
                 '#groups-dir-list',
                 '#members-dir-list',
@@ -146,40 +142,23 @@ class IS_Public
      */
     function search_form_shortcode( $atts )
     {
-        if ( isset( $this->opt['disable'] ) ) {
-            return '';
-        }
         if ( is_feed() ) {
             return '[ivory-search]';
+        }
+        if ( isset( $this->opt['disable'] ) ) {
+            return;
         }
         $atts = shortcode_atts( array(
             'id'    => 0,
             'title' => '',
         ), $atts, 'ivory-search' );
         $id = (int) $atts['id'];
-        $title = trim( $atts['title'] );
-        
-        if ( !($search_form = IS_Search_Form::get_instance( $id )) ) {
-            $page = get_page_by_title( $title, OBJECT, IS_Search_Form::post_type );
-            if ( $page ) {
-                $search_form = IS_Search_Form::get_instance( $page->ID );
-            }
-        }
-        
-        
+        $search_form = IS_Search_Form::get_instance( $id );
         if ( !$search_form ) {
             return '[ivory-search 404 "Not Found"]';
-        } else {
-            $settings = $search_form->prop( '_is_settings' );
-            if ( isset( $settings['disable'] ) ) {
-                return '';
-            }
-            if ( isset( $settings['demo'] ) && !current_user_can( 'administrator' ) ) {
-                return '';
-            }
         }
-        
-        return $search_form->form_html( $atts );
+        $form = $search_form->form_html( $atts );
+        return $form;
     }
     
     /**
@@ -196,29 +175,11 @@ class IS_Public
         $page = get_page_by_path( 'default-search-form', OBJECT, 'is_search_form' );
         
         if ( !empty($page) ) {
-            $is_id = $page->ID;
-            $is_fields = get_post_meta( $is_id );
+            $search_form = IS_Search_Form::get_instance( $page->ID );
             
-            if ( !empty($is_fields) ) {
-                
-                if ( isset( $is_fields['_is_settings'] ) ) {
-                    $temp = maybe_unserialize( $is_fields['_is_settings'][0] );
-                    if ( isset( $temp['disable'] ) ) {
-                        return '';
-                    }
-                    if ( isset( $temp['demo'] ) && !current_user_can( 'administrator' ) ) {
-                        return '';
-                    }
-                }
-                
-                
-                if ( isset( $is_fields['_is_includes'] ) ) {
-                    $temp = maybe_unserialize( $is_fields['_is_includes'][0] );
-                    if ( isset( $temp['post_type_qs'] ) && 'none' !== $temp['post_type_qs'] ) {
-                        $form = preg_replace( '/<\\/form>/', '<input type="hidden" name="post_type" value="' . $temp['post_type_qs'] . '" /></form>', $form );
-                    }
-                }
-            
+            if ( $search_form ) {
+                $atts['id'] = (int) $page->ID;
+                $form = $search_form->form_html( $atts, 'n' );
             }
         
         }
@@ -236,20 +197,7 @@ class IS_Public
      */
     function get_menu_search_form( $echo = true )
     {
-        /**
-         * Fires before the search form is retrieved, at the start of get_search_form().
-         */
-        do_action( 'pre_get_menu_search_form' );
-        remove_filter( 'get_search_form', array( IS_Public::getInstance(), 'get_search_form' ), 99 );
-        $form = get_search_form( false );
-        add_filter( 'get_search_form', array( IS_Public::getInstance(), 'get_search_form' ), 99 );
-        /**
-         * Filters the HTML output of the search form.
-         *
-         * @param string $form The search form HTML output.
-         */
-        $result = apply_filters( 'get_menu_search_form', $form );
-        $result = preg_replace( '/<\\/form>/', '<input type="hidden" name="id" value="m" /></form>', $result );
+        $result = '';
         $menu_search_form = ( isset( $this->opt['menu_search_form'] ) ? $this->opt['menu_search_form'] : 0 );
         
         if ( !$menu_search_form ) {
@@ -261,35 +209,16 @@ class IS_Public
         
         
         if ( $menu_search_form ) {
-            $is_fields = get_post_meta( $menu_search_form );
+            $search_form = IS_Search_Form::get_instance( $menu_search_form );
             
-            if ( !empty($is_fields) ) {
-                
-                if ( isset( $is_fields['_is_includes'] ) ) {
-                    $temp = maybe_unserialize( $is_fields['_is_includes'][0] );
-                    if ( isset( $temp['post_type_qs'] ) && 'none' !== $temp['post_type_qs'] ) {
-                        $result = preg_replace( '/<\\/form>/', '<input type="hidden" name="post_type" value="' . $temp['post_type_qs'] . '" /></form>', $result );
-                    }
-                }
-                
-                
-                if ( isset( $is_fields['_is_settings'] ) ) {
-                    $temp = maybe_unserialize( $is_fields['_is_settings'][0] );
-                    if ( isset( $temp['disable'] ) ) {
-                        return '';
-                    }
-                    if ( isset( $temp['demo'] ) && !current_user_can( 'administrator' ) ) {
-                        return '';
-                    }
-                }
-            
+            if ( $search_form ) {
+                $atts['id'] = $menu_search_form;
+                $display_id = ( 'Default Search Form' === $search_form->title() ? 'n' : '' );
+                $result = $search_form->form_html( $atts, $display_id );
             }
         
         }
         
-        if ( null === $result ) {
-            $result = $form;
-        }
         
         if ( $echo ) {
             echo  $result ;
@@ -437,25 +366,21 @@ class IS_Public
      */
     function pre_get_posts( $query )
     {
-        if ( is_admin() || !$query->is_main_query() || !$query->is_search() ) {
+        if ( !$query->is_search() ) {
             return;
         }
-        global  $wp_query ;
-        $q = $wp_query->query_vars;
-        $is_id = get_query_var( 'id' );
+        $is_id = '';
         
-        if ( 'm' === $is_id ) {
-            $check_value = ( isset( $this->opt['menu_search_form'] ) ? $this->opt['menu_search_form'] : 0 );
-            
-            if ( !$check_value ) {
-                $page = get_page_by_path( 'default-search-form', OBJECT, 'is_search_form' );
-                if ( !empty($page) ) {
-                    $is_id = $page->ID;
-                }
+        if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+            $is_id = ( isset( $_POST['id'] ) ? absint( $_POST['id'] ) : '-1' );
+        } else {
+            if ( is_admin() || !$query->is_main_query() ) {
+                return;
             }
-        
+            $is_id = get_query_var( 'id' );
         }
         
+        $q = $query->query_vars;
         
         if ( '' === $is_id ) {
             if ( isset( $this->opt['default_search'] ) ) {
@@ -470,11 +395,11 @@ class IS_Public
         
         if ( '' !== $is_id && is_numeric( $is_id ) ) {
             
-            if ( isset( $this->opt['stopwords'] ) && '' !== $q['s'] ) {
+            if ( isset( $this->opt['stopwords'] ) && (isset( $q['s'] ) && '' !== $q['s']) ) {
                 $stopwords = explode( ',', $this->opt['stopwords'] );
                 $stopwords = array_map( 'trim', $stopwords );
                 $q['s'] = preg_replace( '/\\b(' . implode( '|', $stopwords ) . ')\\b/', '', $q['s'] );
-                $wp_query->query_vars['s'] = trim( preg_replace( '/\\s\\s+/', ' ', str_replace( "\n", " ", $q['s'] ) ) );
+                $query->query_vars['s'] = trim( preg_replace( '/\\s\\s+/', ' ', str_replace( "\n", " ", $q['s'] ) ) );
             }
             
             $is_fields = get_post_meta( $is_id );
@@ -483,7 +408,7 @@ class IS_Public
                     
                     if ( isset( $val[0] ) && '' !== $val[0] ) {
                         $temp = maybe_unserialize( $val[0] );
-                        $wp_query->query_vars[$key] = $temp;
+                        $query->query_vars[$key] = $temp;
                         switch ( $key ) {
                             case '_is_includes':
                                 
@@ -573,17 +498,17 @@ class IS_Public
                                                 case 'post__not_in':
                                                 case 'ignore_sticky_posts':
                                                     $values = array();
-                                                    if ( isset( $wp_query->query_vars['_is_excludes']['ignore_sticky_posts'] ) ) {
+                                                    if ( isset( $query->query_vars['_is_excludes']['ignore_sticky_posts'] ) ) {
                                                         $values = get_option( 'sticky_posts' );
                                                     }
-                                                    if ( isset( $wp_query->query_vars['_is_excludes']['post__not_in'] ) ) {
-                                                        $values = array_merge( $values, array_values( $wp_query->query_vars['_is_excludes']['post__not_in'] ) );
+                                                    if ( isset( $query->query_vars['_is_excludes']['post__not_in'] ) ) {
+                                                        $values = array_merge( $values, array_values( $query->query_vars['_is_excludes']['post__not_in'] ) );
                                                     }
                                                     $query->set( 'post__not_in', $values );
                                                     break;
                                                 case 'tax_query':
                                                     
-                                                    if ( !isset( $wp_query->query_vars['tax_query'] ) ) {
+                                                    if ( !isset( $query->query_vars['tax_query'] ) ) {
                                                         $tax_args = array();
                                                         foreach ( $inc_val as $tax_key => $tax_val ) {
                                                             
@@ -630,7 +555,7 @@ class IS_Public
                                                     $query->set( $inc_key, $inc_val );
                                                     break;
                                                 case 'move_sticky_posts':
-                                                    if ( !$query->is_paged() && !isset( $wp_query->query_vars['_is_excludes']['ignore_sticky_posts'] ) ) {
+                                                    if ( !$query->is_paged() && !isset( $query->query_vars['_is_excludes']['ignore_sticky_posts'] ) ) {
                                                         add_filter(
                                                             'the_posts',
                                                             function ( $posts ) {
@@ -664,9 +589,9 @@ class IS_Public
                                                 case 'empty_search':
                                                     // If 's' request variable is set but empty
                                                     
-                                                    if ( isset( $wp_query->query_vars['s'] ) && empty($wp_query->query_vars['s']) ) {
-                                                        $wp_query->is_home = false;
-                                                        $wp_query->is_404 = true;
+                                                    if ( isset( $query->query_vars['s'] ) && empty($query->query_vars['s']) ) {
+                                                        $query->is_home = false;
+                                                        $query->is_404 = true;
                                                     }
                                                     
                                                     break;
@@ -691,10 +616,9 @@ class IS_Public
      * 
      * @return string $distinct
      */
-    function posts_distinct_request( $distinct )
+    function posts_distinct_request( $distinct, $query )
     {
-        global  $wp_query ;
-        if ( !is_admin() && !empty($wp_query->query_vars['s']) ) {
+        if ( (!is_admin() || defined( 'DOING_AJAX' ) && DOING_AJAX) && !empty($query->query_vars['s']) ) {
             return 'DISTINCT';
         }
         return $distinct;
@@ -703,11 +627,11 @@ class IS_Public
     /**
      * Filters the search SQL that is used in the WHERE clause of WP_Query.
      */
-    function posts_search( $search, $wp_query )
+    function posts_search( $search, $query )
     {
-        $q = $wp_query->query_vars;
+        $q = $query->query_vars;
         
-        if ( empty($q['search_terms']) || is_admin() || !isset( $q['_is_includes'] ) ) {
+        if ( empty($q['search_terms']) || is_admin() && !(defined( 'DOING_AJAX' ) && DOING_AJAX) || !isset( $q['_is_includes'] ) ) {
             return $search;
             // skip processing
         }
@@ -732,7 +656,7 @@ class IS_Public
                     array_push( $q['search_terms'], $key );
                 }
             }
-            $wp_query->query_vars['search_terms'] = $q['search_terms'];
+            $query->query_vars['search_terms'] = $q['search_terms'];
         }
         
         global  $wpdb ;
@@ -742,15 +666,15 @@ class IS_Public
         
         if ( isset( $q['_is_settings']['fuzzy_match'] ) && '2' !== $q['_is_settings']['fuzzy_match'] ) {
             $like = 'REGEXP';
-            $f = "[[:<:]]";
-            $l = "[[:>:]]";
+            $f = "(^|[[:space:]])";
+            $l = "([[:space:]]|\$)";
         }
         
         $searchand = '';
         $search = " AND ( ";
         $OR = '';
-        foreach ( (array) $q['search_terms'] as $term ) {
-            $term = $f . $wpdb->esc_like( $term ) . $l;
+        foreach ( (array) $q['search_terms'] as $term2 ) {
+            $term = $f . $wpdb->esc_like( $term2 ) . $l;
             $OR = '';
             $search .= "{$searchand} (";
             
@@ -863,7 +787,7 @@ class IS_Public
                 $search .= " OR {$wpdb->posts}.post_type IN ('" . join( "', '", array_map( 'esc_sql', $tax_post_type ) ) . "')";
             }
             $search .= ")";
-            $wp_query->query_vars['tax_query'] = '';
+            $query->query_vars['tax_query'] = '';
         }
         
         
@@ -885,11 +809,14 @@ class IS_Public
     /**
      * Filters the JOIN clause of the query.
      */
-    function posts_join( $join )
+    function posts_join( $join, $query )
     {
-        global  $wp_query, $wpdb ;
-        $q = $wp_query->query_vars;
-        if ( empty($q['s']) || !isset( $q['_is_includes'] ) ) {
+        global  $wpdb ;
+        if ( empty($wpdb) || !isset( $query->query_vars ) ) {
+            return $join;
+        }
+        $q = $query->query_vars;
+        if ( empty($q['s']) || !isset( $q['_is_includes'] ) || is_admin() && !(defined( 'DOING_AJAX' ) && DOING_AJAX) ) {
             return $join;
         }
         if ( isset( $q['_is_includes']['search_comment'] ) ) {

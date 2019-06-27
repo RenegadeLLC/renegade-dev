@@ -123,4 +123,23 @@ class IS_Help {
 		</span>
 	<?php	
 	}
+
+	public static function is_woocommerce_inactive() {
+		if ( class_exists( 'WooCommerce' ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	public static function woocommerce_inactive_field_notice( $echo = true ) {
+
+		$message = __( 'Activate WooCommerce plugin to use this option.', 'ivory-search' );
+
+		if( $echo ) {
+			echo '<span class="notice-is-info"> ' . esc_html( $message ) . '</span>';
+		} else {
+			return '<span class="notice-is-info">' . esc_html( $message ) . '</span>';
+		}
+	}
 }

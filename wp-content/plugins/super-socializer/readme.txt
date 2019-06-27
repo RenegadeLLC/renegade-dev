@@ -3,8 +3,8 @@ Contributors: Heateor, the_champ, Hungarian Translator: László Tavaszi http://
 Donate link: https://www.heateor.com/donate?action=Super+Socializer
 Tags: social login, social share, social commenting, social comments, social plugin, profile data, social analytics, online identity, social profile storage, single sign-on, social media follow, facebook login, Twitch login
 Requires at least: 2.5.0
-Tested up to: 5.1.1
-Stable tag: 7.12.21
+Tested up to: 5.2.2
+Stable tag: 7.12.30
 License: GPLv2 or later
 
 The unique Social Plugin to let you integrate Social Login, Social Share, Social Comments and Social Media follow at your website
@@ -14,7 +14,7 @@ Integrate Social Login, Social Share and Social Comments at your website easiest
 
 **Note:**
 1. Plugin will not work on local server. You should have an online website for the plugin to function properly.
-2. If you want to integrate only Facebook Comments, you should install <a target="_blank" href="https://wordpress.org/plugins/fancy-facebook-comments/">Fancy Facebook Comments</a>
+2. If you want to integrate only Facebook Comments, you should install <a target="_blank" href="https://wordpress.org/plugins/fancy-facebook-comments/">Fancy Comments</a>
 3. If you want to integrate only Social Share, you should install <a target="_blank" href="https://wordpress.org/plugins/sassy-social-share">Sassy Social Share</a>
 
 = Feature list =
@@ -210,6 +210,38 @@ Yes, we can help you with it. Just drop an email at support[ at ]heateor[ dot ]c
 8. **Social Commenting**: Disqus Commenting selected
 
 == Changelog ==
+= 7.12.30 [25 June 2019] =
+* [Bugfix] Previous update was breaking social sharing
+
+= 7.12.29 [25 June 2019] =
+* [Bugfix] Fixed the typo "Tigger" in "Advanced Configuration" section at social login options page
+
+= 7.12.28 [25 June 2019] =
+* [New] Option to trigger social login popup in the same browser tab instead of a popup window
+* [Bugfix] Webpage urls with "?SuperSocializerAuth=LiveJournal" appended were appearing in "Google webmaster tools errors" in some cases
+
+= 7.12.27 [5 June 2019] =
+* [Bugfix] Minor bugfixing
+* [Bugfix] Facebook App ID and Facebook App Secret options were not appearing at Super Socializer > Social Sharing options page if Facebook share icon was enabled via shortcode or widget
+
+= 7.12.26 [2 June 2019] =
+* [Bugfix] Facebook App ID and Facebook App Secret options were not appearing in the Miscellaneous section in some cases
+
+= 7.12.25 =
+* [Bugfix] Facebook share count was not working in some cases
+
+= 7.12.24 =
+* [New] Added Telegram in social media follow icons
+* [Bugfix] Performance improvement
+
+= 7.12.23 =
+* [Bugfix] Share counts were reduced significantly in some cases after last update
+
+= 7.12.22 =
+* [Bugfix] Facebook shares were not working because of the expiration of Facebook API v2.8
+* [Bugfix] Fintel share count was not working
+* [Improvement] Share counts are loading faster
+
 = 7.12.21 =
 * [Bugfix] Fixed PHP notice being generated with social commenting enabled
 
@@ -1839,3 +1871,35 @@ Yes, we can help you with it. Just drop an email at support[ at ]heateor[ dot ]c
 
 = 7.12.21 =
 * [Bugfix] Fixed PHP notice being generated with social commenting enabled
+
+= 7.12.22 =
+* [Bugfix] Facebook shares were not working because of the expiration of Facebook API v2.8
+* [Bugfix] Fintel share count was not working
+* [Improvement] Share counts are loading faster
+
+= 7.12.23 =
+* [Bugfix] Share counts were reduced significantly in some cases after last update
+
+= 7.12.24 =
+* [New] Added Telegram in social media follow icons
+* [Bugfix] Performance improvement
+
+= 7.12.25 =
+* [Bugfix] Facebook share count was not working in some cases
+
+= 7.12.26 [2 June 2019] =
+* [Bugfix] Facebook App ID and Facebook App Secret options were not appearing in the Miscellaneous section in some cases
+
+= 7.12.27 [5 June 2019] =
+* [Bugfix] Minor bugfixing
+* [Bugfix] Facebook App ID and Facebook App Secret options were not appearing at Super Socializer > Social Sharing options page if Facebook share icon was enabled via shortcode or widget
+
+= 7.12.28 [25 June 2019] =
+* [New] Option to trigger social login popup in the same browser tab instead of a popup window
+* [Bugfix] Webpage urls with "?SuperSocializerAuth=LiveJournal" appended were appearing in "Google webmaster tools errors" in some cases
+
+= 7.12.29 [25 June 2019] =
+* [Bugfix] Fixed the typo "Tigger" in "Advanced Configuration" section at social login options page
+
+= 7.12.30 [25 June 2019] =
+* [Bugfix] Previous update was breaking social sharing

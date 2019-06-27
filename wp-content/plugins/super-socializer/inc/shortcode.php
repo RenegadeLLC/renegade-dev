@@ -23,6 +23,11 @@ function the_champ_sharing_shortcode($params){
 			return;
 		}
 		global $post;
+
+		if(!is_object($post)){
+	        return;
+		}
+
 		$customUrl = apply_filters('heateor_ss_custom_share_url', '', $post);
 		if($customUrl){
 			$targetUrl = $customUrl;
@@ -34,16 +39,16 @@ function the_champ_sharing_shortcode($params){
 			$targetUrl = esc_url(home_url());
 			$postId = 0;
 		}elseif(!is_singular() && $type == 'vertical'){
-			$targetUrl = html_entity_decode(esc_url(the_champ_get_http().$_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]));
+			$targetUrl = html_entity_decode(esc_url(the_champ_get_http().$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]));
 			$postId = 0;
 		}elseif(isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING']){
-			$targetUrl = html_entity_decode(esc_url(the_champ_get_http().$_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]));
+			$targetUrl = html_entity_decode(esc_url(the_champ_get_http().$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]));
 			$postId = $post -> ID;
 		}elseif(get_permalink($post -> ID)){
 			$targetUrl = get_permalink($post -> ID);
 			$postId = $post -> ID;
 		}else{
-			$targetUrl = html_entity_decode(esc_url(the_champ_get_http().$_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]));
+			$targetUrl = html_entity_decode(esc_url(the_champ_get_http().$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]));
 			$postId = 0;
 		}
 		$shareCountUrl = $targetUrl;
@@ -118,6 +123,10 @@ function the_champ_counter_shortcode($params){
 			return;
 		}
 		global $post;
+		if(!is_object($post)){
+	        return;
+		}
+		
 		$customUrl = apply_filters('heateor_ss_custom_share_url', '', $post);
 		if($customUrl){
 			$targetUrl = $customUrl;

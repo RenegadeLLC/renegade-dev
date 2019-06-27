@@ -78,7 +78,7 @@ class IS_Admin
         );
         
         if ( $this->custom_admin_pointers_check() ) {
-            add_action( 'admin_print_footer_scripts', array( $this, 'custom_admin_pointers_footer' ) );
+            add_action( 'admin_print_footer_scripts', array( $this, 'custom_admin_pointers_footer' ), 999999 );
             wp_enqueue_script( 'wp-pointer' );
             wp_enqueue_style( 'wp-pointer' );
         }
@@ -104,6 +104,7 @@ class IS_Admin
 	     <script type="text/javascript">
 	     /* <![CDATA[ */
 	     ( function($) {
+                 $( window ).load( function() {
 		<?php 
         foreach ( $admin_pointers as $pointer => $array ) {
             
@@ -137,6 +138,7 @@ class IS_Admin
         
         }
         ?>
+                } );
 	     } )(jQuery);
 	     /* ]]> */
 	     </script>
@@ -174,12 +176,34 @@ class IS_Admin
     function plugin_action_links( $links, $file )
     {
         
-        if ( false !== strpos( $file, 'add-search-to-menu' ) ) {
-            $mylinks = array( '<a href="https://ivorysearch.com/support">' . esc_html__( 'Support', 'ivory-search' ) . '</a>' );
+        if ( IS_PLUGIN_BASE === $file ) {
+            $mylinks = array( '<a href="' . esc_url( menu_page_url( 'ivory-search', false ) ) . '">' . esc_html__( 'Settings', 'ivory-search' ) . '</a>' );
             $links = array_merge( $mylinks, $links );
         }
         
         return $links;
+    }
+    
+    /**
+     * Show row meta on the plugin screen.
+     *
+     * @param mixed $links Plugin Row Meta.
+     * @param mixed $file  Plugin Base file.
+     *
+     * @return array
+     */
+    function plugin_row_meta( $links, $file )
+    {
+        
+        if ( IS_PLUGIN_BASE === $file ) {
+            $row_meta = array(
+                'docs'    => '<a href="https://ivorysearch.com/documentation/" aria-label="' . esc_attr__( 'View Ivory Search documentation', 'ivory-search' ) . '">' . esc_html__( 'Docs', 'ivory-search' ) . '</a>',
+                'support' => '<a href="https://ivorysearch.com/support" aria-label="' . esc_attr__( 'Visit plugin customer support', 'ivory-search' ) . '">' . esc_html__( 'Support', 'ivory-search' ) . '</a>',
+            );
+            return array_merge( $links, $row_meta );
+        }
+        
+        return (array) $links;
     }
     
     /**
@@ -212,7 +236,7 @@ class IS_Admin
                 if ( !isset( $this->opt['is_notices']['config'] ) || !$this->opt['is_notices']['config'] ) {
                     $url = ( is_network_admin() ? network_site_url() : site_url( '/' ) );
                     echo  '<div class="notice ivory-search"><p>' . sprintf(
-                        __( 'Thank you for using <strong>Ivory Search</strong> plugin. Please configure its <a href="%1$s">search form</a> and get support on <a href="%2$s" target="_blank">support forum</a> or <a href="%3$s" target="_blank">contact us</a>.', 'ivory-search' ),
+                        __( 'Thank you for using <strong>Ivory Search</strong> plugin. You can configure its <a href="%1$s">settings</a> and get support on <a href="%2$s" target="_blank">support forum</a> or <a href="%3$s" target="_blank">contact us</a>.', 'ivory-search' ),
                         $url . 'wp-admin/admin.php?page=ivory-search',
                         'https://ivorysearch.com/support/',
                         'https://ivorysearch.com/contact/'
@@ -254,7 +278,7 @@ class IS_Admin
     }
     
     /**
-     * Displays posts in the list using AJAX.
+     * Displays posts in the admin plugin options list using AJAX.
      */
     function display_posts()
     {
@@ -310,7 +334,7 @@ class IS_Admin
 		.is-notice { margin:20px 0; border:none; padding:0; overflow:hidden; background:#e6e9ec; max-width:900px; }
 		.is-notice-dismiss { display:block; float:right; color:#999; line-height:1; margin:0 0 0 15px; text-decoration:none; }
 		.is-notice-image { float:left; margin:10px; width:90px; height:90px; background:url(<?php 
-        echo  esc_url( plugins_url( 'assets/logo.jpg', __FILE__ ) ) ;
+        echo  esc_url( plugins_url( 'assets/logo.png', __FILE__ ) ) ;
         ?>) no-repeat center; background-size:cover; }
 		.is-notice-body { margin:0 0 0 110px; padding:15px; background:#fff; }
 		.is-notice-title { font-size:16px; font-weight:bold; margin:0 0 5px; }
@@ -341,33 +365,30 @@ class IS_Admin
             wp_redirect( remove_query_arg( 'is_dismiss' ) );
         }
         
-        if ( !get_option( 'is_install', false ) ) {
-            update_option( 'is_install', date( 'Y-m-d' ) );
-        }
         
-        if ( !empty($GLOBALS['pagenow']) && ('admin.php' === $GLOBALS['pagenow'] || 'options.php' === $GLOBALS['pagenow']) ) {
-            $settings_fields = new IS_Settings_Fields( $this->opt );
-            $settings_fields->register_settings_fields();
-        }
+        if ( empty($GLOBALS['pagenow']) || 'plugins.php' != $GLOBALS['pagenow'] ) {
+            if ( !get_option( 'is_install', false ) ) {
+                update_option( 'is_install', date( 'Y-m-d' ) );
+            }
+            
+            if ( !empty($GLOBALS['pagenow']) && ('admin.php' === $GLOBALS['pagenow'] || 'options.php' === $GLOBALS['pagenow']) ) {
+                $settings_fields = new IS_Settings_Fields( $this->opt );
+                $settings_fields->register_settings_fields();
+            }
+            
+            /* Creates default search form */
+            $search_form = get_page_by_path( 'default-search-form', OBJECT, IS_Search_Form::post_type );
+            
+            if ( NULL == $search_form ) {
+                $args['id'] = -1;
+                $args['title'] = 'Default Search Form';
+                $args['_is_locale'] = 'en_US';
+                $args['_is_includes'] = '';
+                $args['_is_excludes'] = '';
+                $args['_is_settings'] = '';
+                $this->save_form( $args );
+            }
         
-        /* Creates default search form */
-        $search_form = get_page_by_title( 'Default Search Form', OBJECT, IS_Search_Form::post_type );
-        
-        if ( NULL === $search_form ) {
-            $args['id'] = -1;
-            $args['title'] = 'Default Search Form';
-            $args['_is_locale'] = 'en_US';
-            $args['_is_includes'] = array(
-                'post_type'      => array(
-                'post' => 'post',
-                'page' => 'page',
-            ),
-                'search_title'   => 1,
-                'search_content' => 1,
-            );
-            $args['_is_excludes'] = '';
-            $args['_is_settings'] = '';
-            $this->save_form( $args );
         }
     
     }
@@ -461,14 +482,28 @@ class IS_Admin
             array( $this, 'search_forms_page' )
         );
         add_action( 'load-' . $edit, array( $this, 'load_admin_search_form' ) );
-        $addnew = add_submenu_page(
-            'ivory-search',
-            __( 'Add New Search Form', 'ivory-search' ),
-            __( 'Add New', 'ivory-search' ),
-            'manage_options',
-            'ivory-search-new',
-            array( $this, 'new_search_form_page' )
-        );
+        $addnew = '';
+        
+        if ( isset( $_GET['page'] ) && 'ivory-search-new' == $_GET['page'] ) {
+            $addnew = add_submenu_page(
+                'ivory-search',
+                __( 'Add New Search Form', 'ivory-search' ),
+                __( 'Add New', 'ivory-search' ),
+                'manage_options',
+                'ivory-search-new',
+                array( $this, 'new_search_form_page' )
+            );
+        } else {
+            $addnew = add_submenu_page(
+                '',
+                __( 'Add New Search Form', 'ivory-search' ),
+                __( 'Add New', 'ivory-search' ),
+                'manage_options',
+                'ivory-search-new',
+                array( $this, 'new_search_form_page' )
+            );
+        }
+        
         add_action( 'load-' . $addnew, array( $this, 'load_admin_search_form' ) );
         $settings = add_submenu_page(
             'ivory-search',
@@ -584,9 +619,12 @@ class IS_Admin
             $args = $_REQUEST;
             $args['id'] = $id;
             $args['title'] = ( isset( $_POST['post_title'] ) ? $_POST['post_title'] : null );
+            $args['title'] = ( null != $args['title'] && 'default search form' == strtolower( $args['title'] ) ? $args['title'] . ' ( Duplicate )' : $args['title'] );
             $args['_is_locale'] = ( isset( $_POST['is_locale'] ) ? $_POST['is_locale'] : null );
             $args['_is_includes'] = ( isset( $_POST['_is_includes'] ) ? $_POST['_is_includes'] : '' );
             $args['_is_excludes'] = ( isset( $_POST['_is_excludes'] ) ? $_POST['_is_excludes'] : '' );
+            $args['_is_ajax'] = ( isset( $_POST['_is_ajax'] ) ? $_POST['_is_ajax'] : '' );
+            $args['_is_customize'] = ( isset( $_POST['_is_customize'] ) ? $_POST['_is_customize'] : '' );
             $args['_is_settings'] = ( isset( $_POST['_is_settings'] ) ? $_POST['_is_settings'] : '' );
             $args['tab'] = ( isset( $_POST['tab'] ) ? $_POST['tab'] : 'includes' );
             $properties = array();
@@ -681,15 +719,10 @@ class IS_Admin
                 $args['id'] = $id;
                 $args['title'] = ( isset( $_POST['post_title'] ) ? $_POST['post_title'] : null );
                 $args['_is_locale'] = null;
-                $args['_is_includes'] = array(
-                    'post_type'      => array(
-                    'post' => 'post',
-                    'page' => 'page',
-                ),
-                    'search_title'   => 1,
-                    'search_content' => 1,
-                );
+                $args['_is_includes'] = '';
                 $args['_is_excludes'] = '';
+                $args['_is_ajax'] = '';
+                $args['_is_customize'] = '';
                 $args['_is_settings'] = '';
                 $search_form = $this->save_form( $args );
                 $query['post'] = $id;
@@ -795,13 +828,15 @@ class IS_Admin
     function save_form( $args = '', $context = 'save' )
     {
         $args = wp_parse_args( $args, array(
-            'id'           => -1,
-            'title'        => null,
-            '_is_locale'   => null,
-            '_is_includes' => null,
-            '_is_excludes' => null,
-            '_is_settings' => null,
-            'tab'          => null,
+            'id'            => -1,
+            'title'         => null,
+            '_is_locale'    => null,
+            '_is_includes'  => null,
+            '_is_excludes'  => null,
+            '_is_ajax'      => null,
+            '_is_customize' => null,
+            '_is_settings'  => null,
+            'tab'           => null,
         ) );
         $args['id'] = (int) $args['id'];
         $search_form = '';
@@ -822,14 +857,33 @@ class IS_Admin
             $search_form->set_locale( $args['_is_locale'] );
         }
         $properties = $search_form->get_properties();
+        
         if ( null === $args['tab'] || 'includes' === $args['tab'] ) {
+            if ( '' == $args['_is_includes'] ) {
+                $args['_is_includes'] = array(
+                    'post_type'      => get_post_types( array(
+                    'public'              => true,
+                    'exclude_from_search' => false,
+                ) ),
+                    'search_title'   => 1,
+                    'search_content' => 1,
+                    'search_excerpt' => 1,
+                );
+            }
             $properties['_is_includes'] = $this->sanitize_includes( $args['_is_includes'] );
         }
+        
         if ( null === $args['tab'] || 'excludes' === $args['tab'] ) {
             $properties['_is_excludes'] = $this->sanitize_excludes( $args['_is_excludes'] );
         }
         if ( null === $args['tab'] || 'options' === $args['tab'] ) {
             $properties['_is_settings'] = $this->sanitize_settings( $args['_is_settings'] );
+        }
+        if ( null === $args['tab'] || 'ajax' === $args['tab'] ) {
+            $properties['_is_ajax'] = $this->sanitize_settings( $args['_is_ajax'] );
+        }
+        if ( null === $args['tab'] || 'customize' === $args['tab'] ) {
+            $properties['_is_customize'] = $this->sanitize_settings( $args['_is_customize'] );
         }
         $search_form->set_properties( $properties );
         do_action(

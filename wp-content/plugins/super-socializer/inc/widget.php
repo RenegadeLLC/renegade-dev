@@ -228,7 +228,7 @@ class TheChampSharingWidget extends WP_Widget {
 	/** Widget edit form at admin panel */ 
 	public function form( $instance ) { 
 		/* Set up default widget settings. */ 
-		$defaults = array( 'title' => 'Share the joy', 'show_counts' => 0, 'total_shares' => 0, 'target_url' => 'default', 'target_url_custom' => '', 'before_widget_content' => '', 'after_widget_content' => '' );
+		$defaults = array( 'title' => 'Share the joy', 'show_counts' => '', 'total_shares' => '', 'target_url' => 'default', 'target_url_custom' => '', 'before_widget_content' => '', 'after_widget_content' => '', 'hide_for_logged_in' => '' );
 
 		foreach( $instance as $key => $value ) {  
 			if ( is_string( $value ) ) {
@@ -399,7 +399,7 @@ class TheChampVerticalSharingWidget extends WP_Widget {
 	/** Widget edit form at admin panel */ 
 	public function form( $instance ) { 
 		/* Set up default widget settings. */ 
-		$defaults = array('alignment' => 'left', 'show_counts' => 0, 'total_shares' => 0, 'left_offset' => '40', 'right_offset' => '0', 'target_url' => 'default', 'target_url_custom' => '', 'top_offset' => '100', 'vertical_bg' => '');
+		$defaults = array('alignment' => 'left', 'show_counts' => '', 'total_shares' => '', 'left_offset' => '40', 'right_offset' => '0', 'target_url' => 'default', 'target_url_custom' => '', 'top_offset' => '100', 'vertical_bg' => '', 'hide_for_logged_in' => '');
 
 		foreach( $instance as $key => $value ) {  
 			if ( is_string( $value ) ) {
@@ -862,6 +862,9 @@ class TheChampFollowWidget extends WP_Widget {
 		if ( $instance['snapchat'] ) {
 			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Snapchat" title="Snapchat" class="theChampSharing theChampSnapchatBackground"><a target="_blank" aria-label="Snapchat" href="'. $instance['snapchat'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampSnapchatSvg"></ss></a></i></li>';
 		}
+		if ( $instance['telegram'] ) {
+			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Telegram" title="Telegram" class="theChampSharing theChampTelegramBackground"><a target="_blank" aria-label="Telegram" href="'. $instance['telegram'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampTelegramSvg"></ss></a></i></li>';
+		}
 		if ( $instance['tumblr'] ) {
 			$html .= '<li class="theChampSharingRound"><i style="'. $iconStyle .'" alt="Tumblr" title="Tumblr" class="theChampSharing theChampTumblrBackground"><a target="_blank" aria-label="Tumblr" href="'. $instance['tumblr'] .'" rel="noopener"><ss style="display:block" class="theChampSharingSvg theChampTumblrSvg"></ss></a></i></li>';
 		}
@@ -909,6 +912,7 @@ class TheChampFollowWidget extends WP_Widget {
 		$instance['mewe'] = $new_instance['mewe'];
 		$instance['odnoklassniki'] = $new_instance['odnoklassniki'];
 		$instance['snapchat'] = $new_instance['snapchat'];
+		$instance['telegram'] = $new_instance['telegram'];
 		$instance['tumblr'] = $new_instance['tumblr'];
 		$instance['vimeo'] = $new_instance['vimeo'];
 		$instance['vkontakte'] = $new_instance['vkontakte'];
@@ -925,7 +929,7 @@ class TheChampFollowWidget extends WP_Widget {
 	/** Widget options in admin panel */ 
 	public function form( $instance ) { 
 		/* Set up default widget settings. */ 
-		$defaults = array( 'title' => '', 'size' => '32', 'icon_shape' => 'round', 'facebook' => '', 'twitter' => '', 'instagram' => '', 'pinterest' => '', 'behance' => '', 'flickr' => '', 'foursquare' => '', 'github' => '', 'linkedin' => '', 'linkedin_company' => '', 'medium' => '', 'mewe' => '', 'odnoklassniki' => '', 'snapchat' => '', 'tumblr' => '', 'vimeo' => '', 'vkontakte' => '', 'xing' => '', 'youtube' => '', 'youtube_channel' => '', 'rss_feed' => '', 'before_widget_content' => '', 'after_widget_content' => '' );  
+		$defaults = array( 'title' => '', 'size' => '32', 'icon_shape' => 'round', 'facebook' => '', 'twitter' => '', 'instagram' => '', 'pinterest' => '', 'behance' => '', 'flickr' => '', 'foursquare' => '', 'github' => '', 'linkedin' => '', 'linkedin_company' => '', 'medium' => '', 'mewe' => '', 'odnoklassniki' => '', 'snapchat' => '', 'telegram' => '', 'tumblr' => '', 'vimeo' => '', 'vkontakte' => '', 'xing' => '', 'youtube' => '', 'youtube_channel' => '', 'rss_feed' => '', 'before_widget_content' => '', 'after_widget_content' => '' );  
 
 		foreach( $instance as $key => $value ) {  
 			if ( is_string( $value ) ) {
@@ -989,6 +993,9 @@ class TheChampFollowWidget extends WP_Widget {
 			<label for="<?php echo $this->get_field_id( 'snapchat' ); ?>"><?php _e( 'Snapchat URL:', 'super-socializer' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'snapchat' ); ?>" name="<?php echo $this->get_field_name( 'snapchat' ); ?>" type="text" value="<?php echo $instance['snapchat']; ?>" /><br/>
 			<span>https://www.snapchat.com/add/ID</span><br/><br/>
+			<label for="<?php echo $this->get_field_id( 'telegram' ); ?>"><?php _e( 'Telegram URL:', 'super-socializer' ); ?></label> 
+			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'telegram' ); ?>" name="<?php echo $this->get_field_name( 'telegram' ); ?>" type="text" value="<?php echo $instance['telegram']; ?>" /><br/>
+			<span>https://t.me/username</span><br/><br/>
 			<label for="<?php echo $this->get_field_id( 'tumblr' ); ?>"><?php _e( 'Tumblr URL:', 'super-socializer' ); ?></label> 
 			<input style="width: 95%" class="widefat" id="<?php echo $this->get_field_id( 'tumblr' ); ?>" name="<?php echo $this->get_field_name( 'tumblr' ); ?>" type="text" value="<?php echo $instance['tumblr']; ?>" /><br/>
 			<span>https://ID.tumblr.com</span><br/><br/>

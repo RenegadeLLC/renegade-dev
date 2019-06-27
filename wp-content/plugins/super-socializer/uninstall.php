@@ -19,7 +19,8 @@ if(isset($theChampGeneralOptions['delete_options'])){
 		'widget_thechamphorizontalsharing',
 		'widget_thechampverticalsharing',
 		'widget_thechamphorizontalcounter',
-		'widget_thechampverticalcounter'
+		'widget_thechampverticalcounter',
+		'heateor_ss_fb_access_token'
 	);
 	// For Multisite
 	if(function_exists('is_multisite') && is_multisite()){

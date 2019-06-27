@@ -243,9 +243,35 @@ function theChampVerticalCounterPreview(val){
         });
     }
 }
+
+function heateorSsToggleFbShareCountOptions() {
+    if((heateorSsHorizontalFacebookShareEnabled || heateorSsVerticalFacebookShareEnabled) && !heateorSsFacebookAppSecretSaved){
+        jQuery('#heateor_ss_fb_share_count_options').css('display', 'block');
+    }else{
+        jQuery('#heateor_ss_fb_share_count_options').css('display', 'none');
+    }
+}
+
 "function" != typeof String.prototype.trim && (String.prototype.trim = function() {
     return this.replace(/^\s+|\s+$/g, "")
 }), jQuery(document).ready(function() {
+    // facebook share count option
+    jQuery('input#the_champ_facebook').click(function(){
+        if(jQuery(this).is(':checked')){
+            heateorSsHorizontalFacebookShareEnabled = true;
+        }else{
+            heateorSsHorizontalFacebookShareEnabled = false;
+        }
+        heateorSsToggleFbShareCountOptions();
+    });
+    jQuery('input#the_champ_vertical_sharing_facebook').click(function(){
+        if(jQuery(this).is(':checked')){
+            heateorSsVerticalFacebookShareEnabled = true;
+        }else{
+            heateorSsVerticalFacebookShareEnabled = false;
+        }
+        heateorSsToggleFbShareCountOptions();
+    });
     // instagram username option
     jQuery('input#the_champ_instagram').click(function(){
         if(jQuery(this).is(':checked')){
