@@ -28,7 +28,7 @@
   "homepage": "https://renegade.com/",
   "dependencies": {
     "bootstrap": "4.1.2",
-    "browser-sync": "^2.23.6",
+    "browser-sync": "^2.27.10",
     "del": "^3.0.0",
     "font-awesome": "^4.7.0",
     "gulp": "3.9.1",
